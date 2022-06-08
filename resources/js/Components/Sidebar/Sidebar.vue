@@ -71,6 +71,41 @@
 
                 <!-- Divider -->
                 <hr class="my-4 md:min-w-full" />
+                <!-- Heading -->
+                <h6
+                    class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
+                >
+                    Rekrutmen
+                </h6>
+                <!-- Navigation -->
+
+                <ul
+                    class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4"
+                >
+                    <li class="items-center">
+                        <Link
+                            class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                            to="/login"
+                        >
+                            <i
+                                class="fas fa-fingerprint text-blueGray-300 mr-2 text-sm"
+                            ></i>
+                            Periode Asprak
+                        </Link>
+                    </li>
+
+                    <li class="items-center">
+                        <router-link
+                            class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
+                            to="/auth/register"
+                        >
+                            <i
+                                class="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"
+                            ></i>
+                            Register
+                        </router-link>
+                    </li>
+                </ul>
             </div>
         </div>
     </nav>
@@ -80,6 +115,7 @@
 <script>
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";
 import UserDropdown from "@/components/Dropdowns/UserDropdown.vue";
+import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
     data() {
