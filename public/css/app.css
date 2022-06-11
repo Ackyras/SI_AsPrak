@@ -699,6 +699,9 @@ select {
 .pointer-events-none {
   pointer-events: none;
 }
+.static {
+  position: static;
+}
 .fixed {
   position: fixed;
 }
@@ -741,6 +744,9 @@ select {
 .z-10 {
   z-index: 10;
 }
+.float-right {
+  float: right;
+}
 .float-left {
   float: left;
 }
@@ -752,6 +758,9 @@ select {
 }
 .m-2 {
   margin: 0.5rem;
+}
+.m-0 {
+  margin: 0px;
 }
 .mx-auto {
   margin-left: auto;
@@ -1300,6 +1309,9 @@ select {
 }
 .p-3 {
   padding: 0.75rem;
+}
+.p-0 {
+  padding: 0px;
 }
 .px-4 {
   padding-left: 1rem;

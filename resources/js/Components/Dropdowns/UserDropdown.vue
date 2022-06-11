@@ -45,22 +45,25 @@
         Something else here
       </a>
       <div class="h-0 my-2 border border-solid border-blueGray-100" />
-      <a
-        href="javascript:void(0);"
+      <button
+        @click="logout"
         class="text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"
       >
-        Seprated link
-      </a>
+        Logout
+      </button>
     </div>
   </div>
 </template>
 
 <script>
 import { createPopper } from "@popperjs/core";
+import {Link} from '@inertiajs/inertia-vue3';
+import axios from 'axios';
 
 import image from "@/assets/img/team-1-800x800.jpg";
 
 export default {
+  components: {Link},
   data() {
     return {
       dropdownPopoverShow: false,
@@ -68,6 +71,10 @@ export default {
     };
   },
   methods: {
+    logout: () => {
+      axios.post('/logout')
+      .then(data=> window.location.href = "/");
+    },
     toggleDropdown: function (event) {
       event.preventDefault();
       if (this.dropdownPopoverShow) {
