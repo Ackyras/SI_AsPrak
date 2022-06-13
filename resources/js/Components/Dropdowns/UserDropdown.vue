@@ -71,7 +71,8 @@ export default {
     };
   },
   methods: {
-    logout: () => {
+    logout: (event) => {
+      event.preventDefault();
       axios.post('/logout')
       .then(data=> window.location.href = "/");
     },

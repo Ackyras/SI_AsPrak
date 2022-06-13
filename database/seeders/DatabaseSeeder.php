@@ -26,5 +26,12 @@ class DatabaseSeeder extends Seeder
             'email' => 'user@user',
             'is_admin' => 0
         ]);
+
+        \App\Models\Period::create([ "name" => "Ganjil 2018/2019", ]);
+        \App\Models\Period::create([ "name" => "Genap 2018/2019", ]);
+        \App\Models\Period::create([ "name" => "Ganjil 2019/2020", ]);
+        \App\Models\Period::create([ "name" => "Genap 2019/2020", ]);
+        \App\Models\Period::create([ "name" => "Ganjil 2020/2021", ]);
+        \App\Models\Period::create([ "name" => "Genap 2020/2021", ]);
     }
 }

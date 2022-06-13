@@ -27,7 +27,7 @@
 </div>
 <!-- /.login-box -->
 
-<script src="{{ asset('js/app.js') }}"></script>
+<script src="{{ asset('js/admin/index.js') }}"></script>
 <!-- Bootstrap 4 -->
 <script src="{{ asset('js/bootstrap.bundle.min.js') }}"></script>
 <!-- AdminLTE App -->

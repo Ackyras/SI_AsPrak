@@ -23,9 +23,9 @@
     @inertia
 
     @env ('local')
-    <script src="http://localhost:8080/js/bundle.js"></script>
+        <script src="http://localhost:8080/js/bundle.js"></script>
     @endenv
+    <script src="https://kit.fontawesome.com/6f7572d348.js" crossorigin="anonymous"></script>
 </body>
-<script src="https://kit.fontawesome.com/6f7572d348.js" crossorigin="anonymous"></script>
 
 </html>
