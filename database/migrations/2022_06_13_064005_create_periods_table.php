@@ -16,6 +16,8 @@ return new class extends Migration
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->dateTime('registration_start');
+            $table->dateTime('registration_end');
             $table->timestamps();
         });
     }
