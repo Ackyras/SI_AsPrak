@@ -4,42 +4,85 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Period;
-use Illuminate\Http\Request;
+use App\Http\Requests\StorePeriodRequest;
+use App\Http\Requests\UpdatePeriodRequest;
 
 class PeriodController extends Controller
 {
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function index()
     {
+        //
         $periods = Period::all();
         return view('admin.DataMaster.Periods.index', compact('periods'));
     }
 
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function create()
     {
         //
     }
 
-    public function store(Request $request)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \App\Http\Requests\StorePeriodRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(StorePeriodRequest $request)
     {
         //
     }
 
-    public function show($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Period  $period
+     * @return \Illuminate\Http\Response
+     */
+    public function show(Period $period)
     {
         //
     }
-    
-    public function edit($id)
+
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param  \App\Models\Period  $period
+     * @return \Illuminate\Http\Response
+     */
+    public function edit(Period $period)
     {
         //
     }
-    
-    public function update(Request $request, $id)
+
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \App\Http\Requests\UpdatePeriodRequest  $request
+     * @param  \App\Models\Period  $period
+     * @return \Illuminate\Http\Response
+     */
+    public function update(UpdatePeriodRequest $request, Period $period)
     {
         //
     }
-    
-    public function destroy($id)
+
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  \App\Models\Period  $period
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy(Period $period)
     {
         //
     }
