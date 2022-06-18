@@ -4,7 +4,13 @@
     <div class="p-2">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title font-weight-bold">Data Mata Kuliah Periode {{ $period->name }}</h2>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h2 class="card-title font-weight-bold">Data Mata Kuliah Periode {{ $period->name }}</h2>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#subjectFormModal">
+                        <i class="fas fa-plus mr-2"></i>
+                        Mata Kuliah Baru
+                    </button>
+                </div>
             </div>
             
             <div class="card-body">
@@ -24,7 +30,11 @@
                             <td>4</td>
                             <td>22 Februari, 2022</td>
                             <td>22 Februari, 2022</td>
-                            <td> <a href="#">Detail</a> </td>
+                            <td>
+                                <button class="">Detail</button>
+                                <button class="">Edit</button>
+                                <button class="">Hapus</button>
+                            </td>
                         </tr>
                         <tr class="even">
                             <td tabindex="0">DEF</td>
@@ -142,6 +152,46 @@
                         </tr>
                     </tfoot>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Subject Modal -->
+    <div class="modal fade" id="subjectFormModal" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="subjectFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title font-weight-bold" id="subjectFormModalLabel">Mata Kuliah Baru</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <form action="">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Nama mata kuliah</label>
+                            <input type="text" id="name" name="name" class="form-control" required autocomplete="off" placeholder="Nama mata kuliah">
+                        </div>
+                        <div class="form-group">
+                            <label for="number_of_lab_assitant">Kuota asisten praktikum</label>
+                            <input type="text" id="number_of_lab_assitant" name="number_of_lab_assitant" class="form-control" required autocomplete="off" placeholder="(masukkan angka)">
+                        </div>
+                        <div class="form-group">
+                            <label for="exam_start">Tanggal mulai ujian</label>
+                            <input type="datetime-local" id="exam_start" name="exam_start" class="form-control" required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="exam_end">Tanggal selesai ujian</label>
+                            <input type="datetime-local" id="exam_end" name="exam_end" class="form-control" required autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>

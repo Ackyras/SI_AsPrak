@@ -27,7 +27,7 @@
                 </a>
                 <ul class="nav py-2 bg-secondary rounded collapse" id="datamasterdropdown">
                     <li class="nav-item">
-                        <a href="{{ route('admin.data.master.periods.index') }}" class="nav-link {{ request()->routeIs('admin.data.master.periods.*') ? 'bg-white' : 'bg-secondary' }}">
+                        <a href="{{ route('admin.data.master.period.index') }}" class="nav-link {{ request()->routeIs('admin.data.master.periods.*') ? 'bg-white' : 'bg-secondary' }}">
                             <i class="far fa-calendar nav-icon"></i>
                             <p>Periode</p>
                         </a>

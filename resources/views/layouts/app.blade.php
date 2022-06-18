@@ -17,6 +17,8 @@
     <link rel="stylesheet" href="{{ asset('css/table/dataTables.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/table/responsive.bootstrap4.min.css') }}">
     <link rel="stylesheet" href="{{ asset('css/table/buttons.bootstrap4.min.css') }}">
+
+    <link rel="stylesheet" href="{{ asset('css/others/sweetalert2.min.css') }}">
     
     @yield('styles')
 </head>
@@ -202,6 +204,8 @@
     <script src="{{ asset('js/table/buttons.flash.min.js') }}"></script>
     <script src="{{ asset('js/table/buttons.html5.min.js') }}"></script>
     <script src="{{ asset('js/table/buttons.print.min.js') }}"></script>
+
+    <script src="{{ asset('js/others/sweetalert2.all.min.js') }}"></script>
 
     @yield('scripts')
 </body>

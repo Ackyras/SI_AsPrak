@@ -22,7 +22,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('data-master')->as('data.master.')->group(function () {
-        Route::resource('periods',        PeriodController::class);
+        Route::resource('period',        PeriodController::class);
         // Route::resource('subjects',        SubjectController::class)->except('show');
         // Route::resource('witels',       AssitantController::class)->except('show');
         // Route::resource('permissions',  ArchiveController::class)->only('index');

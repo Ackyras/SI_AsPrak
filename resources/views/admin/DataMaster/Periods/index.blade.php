@@ -4,7 +4,13 @@
     <div class="p-2">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title font-weight-bold">Data Periode Penerimaan Asisten Praktikum</h2>
+                <div class="d-flex align-items-center justify-content-between">
+                    <h2 class="card-title font-weight-bold">Data Periode Penerimaan Asisten Praktikum</h2>
+                    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#periodFormModal">
+                        <i class="fas fa-plus mr-2"></i>
+                        Periode Baru
+                    </button>
+                </div>
             </div>
             
             <div class="card-body">
@@ -14,7 +20,7 @@
                             <th tabindex="0" aria-controls="period_table" rowspan="1" colspan="1">Periode</th>
                             <th tabindex="0" aria-controls="period_table" rowspan="1" colspan="1">Mulai Pendaftaran</th>
                             <th tabindex="0" aria-controls="period_table" rowspan="1" colspan="1">Akhir Pendaftaran</th>
-                            <th tabindex="0" aria-controls="period_table" rowspan="1" colspan="1">Aksi</th>
+                            <th tabindex="0" aria-controls="period_table" rowspan="1" colspan="1" style="width: 165px">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -23,7 +29,59 @@
                                 <td tabindex="0">{{ $period->name }}</td>
                                 <td>{{ \Carbon\Carbon::parse($period->registration_start)->format('j F, Y') }}</td>
                                 <td>{{ \Carbon\Carbon::parse($period->registration_end)->format('j F, Y') }}</td>
-                                <td> <a href="{{ route('admin.data.master.periods.show', $period) }}">Detail</a> </td>
+                                <td>
+                                    <div class="d-flex align-items-center justify-content-between border">
+                                        <a class="btn btn-sm btn-success" href="{{ route('admin.data.master.period.show', $period) }}">Detail</a>
+                                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#periodEditFormModal{{ $period->id }}">Edit</button>
+                                        <!-- Edit Period Modal -->
+                                        <div class="modal fade" id="periodEditFormModal{{ $period->id }}" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="periodEditFormModalLabel{{ $period->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title font-weight-bold" id="periodEditFormModalLabel{{ $period->id }}">Ubah Periode</h3>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="name">Nama periode</label>
+                                                                <input type="text" id="name" name="name" class="form-control" required autocomplete="off" value="{{ $period->name }}" placeholder="Ganjil 20XX/20XX">
+                                                            </div>
+                                                        </div>
+
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary">SIMPAN PERUBAHAN</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="btn btn-sm btn-danger" data-toggle="modal" data-target="#confirmDeletePeriodModal{{ $period->id }}">Hapus</button>
+                                        <!-- Edit Period Modal -->
+                                        <div class="modal fade" id="confirmDeletePeriodModal{{ $period->id }}" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="confirmDeletePeriodModalLabel{{ $period->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title font-weight-bold" id="confirmDeletePeriodModalLabel{{ $period->id }}">Hapus Periode</h3>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h5>Yakin untuk menghapus periode '{{ $period->name }}'?</h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">BATALKAN</button>
+                                                        <button type="button" class="btn btn-danger">HAPUS DATA</button>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
                             </tr>
                         @endforeach
                     </tbody>
@@ -36,6 +94,34 @@
                         </tr>
                     </tfoot>
                 </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- Add Period Modal -->
+    <div class="modal fade" id="periodFormModal" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="periodFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title font-weight-bold" id="periodFormModalLabel">Periode Baru</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <form action="">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Nama periode</label>
+                            <input type="text" id="name" name="name" class="form-control" required autocomplete="off" placeholder="Ganjil 20XX/20XX">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
+                    </div>
+                </form>
             </div>
         </div>
     </div>
