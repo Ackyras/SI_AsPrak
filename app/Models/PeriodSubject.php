@@ -9,6 +9,8 @@ class PeriodSubject extends Model
 {
     use HasFactory;
 
+    protected $table = 'period_subject';
+
     protected $fillable = [
         'period_id',
         'subject_id',

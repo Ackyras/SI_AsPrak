@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests;
+namespace App\Http\Requests\Period;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StorePeriodRequest extends FormRequest
+class UpdatePeriodRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,7 +24,9 @@ class StorePeriodRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name'                  =>  'required',
+            'registration_start'    =>  ['required', 'date', 'before:registration_end'],
+            'registration_end'      =>  ['required', 'date', 'after:registration_start'],
         ];
     }
 }
