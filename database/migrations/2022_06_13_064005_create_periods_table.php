@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('name');
             $table->dateTime('registration_start');
             $table->dateTime('registration_end');
+            $table->boolean('is_active')->default(true);
             $table->timestamps();
         });
     }

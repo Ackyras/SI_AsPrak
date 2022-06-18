@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Period;
-use App\Http\Requests\StorePeriodRequest;
-use App\Http\Requests\UpdatePeriodRequest;
+use App\Http\Requests\Period\StorePeriodRequest;
+use App\Http\Requests\Period\UpdatePeriodRequest;
 
 class PeriodController extends Controller
 {
@@ -23,6 +23,30 @@ class PeriodController extends Controller
     public function store(StorePeriodRequest $request)
     {
         //
+        $validated = $request->validated();
+        $activePeriod = Period::where('is_active', true)->first();
+        if ($activePeriod) {
+            return to_route('admin.data.master.period.index')->with(
+                [
+                    'failed'   =>  'Masih ada periode yang belum ditutup, periode baru tidak dapat dibuka'
+                ]
+            );
+        }
+        $period = Period::create($validated);
+
+        if ($period) {
+            return to_route('admin.data.master.period.index')->with(
+                [
+                    'success'   =>  'Periode baru berhasil dibuka'
+                ]
+            );
+        }
+
+        return to_route('admin.data.master.period.index')->with(
+            [
+                'failed'   =>  'Periode baru gagal dibuka'
+            ]
+        );
     }
     
     public function show(Period $period)
@@ -39,6 +63,7 @@ class PeriodController extends Controller
     public function edit(Period $period)
     {
         //
+
     }
 
     /**
@@ -51,6 +76,30 @@ class PeriodController extends Controller
     public function update(UpdatePeriodRequest $request, Period $period)
     {
         //
+        $validated = $request->validated();
+        $activePeriod = Period::where('is_active', true)->first();
+        if ($activePeriod) {
+            return to_route('admin.data.master.period.index')->with(
+                [
+                    'failed'   =>  'Masih ada periode yang belum ditutup, periode baru tidak dapat dibuka'
+                ]
+            );
+        }
+        $period = Period::create($validated);
+
+        if ($period) {
+            return to_route('admin.data.master.period.index')->with(
+                [
+                    'success'   =>  'Periode baru berhasil dibuka'
+                ]
+            );
+        }
+
+        return to_route('admin.data.master.period.index')->with(
+            [
+                'failed'   =>  'Periode baru gagal dibuka'
+            ]
+        );
     }
 
     /**

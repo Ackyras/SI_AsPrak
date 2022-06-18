@@ -7,7 +7,8 @@
 
             <!-- DASHBOARD -->
             <li class="nav-item mb-3">
-                <a href="{{ route('admin.dashboard') }}" class="nav-link {{ request()->routeIs('admin.dashboard') ? 'bg-light' : '' }}">
+                <a href="{{ route('admin.dashboard') }}"
+                    class="nav-link {{ request()->routeIs('admin.dashboard') ? 'bg-light' : '' }}">
                     <i class="nav-icon fas fa-chart-bar"></i>
                     <p>
                         {{ __('Dashboard') }}
@@ -17,7 +18,8 @@
 
             <!-- DATA MASTER -->
             <li class="nav-item mb-3">
-                <a href="#datamasterdropdown" class="nav-link {{ request()->routeIs('admin.data.master.*') ? 'bg-light' : '' }}" 
+                <a href="#datamasterdropdown"
+                    class="nav-link {{ request()->routeIs('admin.data.master.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="datamasterdropdown">
                     <i class="nav-icon fas fa-table nav-icon"></i>
                     <p>
@@ -33,19 +35,22 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-book nav-icon"></i>
                             <p>Mata Kuliah</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-users nav-icon"></i>
                             <p>Asisten Praktikum</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-archive nav-icon"></i>
                             <p>Berkas</p>
                         </a>
@@ -55,7 +60,8 @@
 
             <!-- JADWAL -->
             <li class="nav-item mb-3">
-                <a href="#jadwaldropdown" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}" 
+                <a href="#jadwaldropdown"
+                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="jadwaldropdown">
                     <i class="nav-icon fas fa-clock nav-icon"></i>
                     <p>
@@ -65,13 +71,15 @@
                 </a>
                 <ul class="nav py-2 bg-secondary rounded collapse" id="jadwaldropdown">
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-tasks nav-icon"></i>
                             <p>Penerimaan</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-desktop nav-icon"></i>
                             <p>Praktikum</p>
                         </a>
@@ -81,7 +89,8 @@
 
             <!-- INFORMASI -->
             <li class="nav-item mb-3">
-                <a href="#informasidropdown" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}" 
+                <a href="#informasidropdown"
+                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="informasidropdown">
                     <i class="nav-icon fas fa-info-circle nav-icon"></i>
                     <p>
@@ -91,19 +100,22 @@
                 </a>
                 <ul class="nav py-2 bg-secondary rounded collapse" id="informasidropdown">
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-file-image nav-icon"></i>
                             <p>Poster</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-newspaper nav-icon"></i>
                             <p>Artikel</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-bullhorn nav-icon"></i>
                             <p>Pengumuman</p>
                         </a>
@@ -113,7 +125,8 @@
 
             <!-- SELEKSI BERKAS -->
             <li class="nav-item mb-3">
-                <a href="#seleksiberkasdropdown" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}" 
+                <a href="#seleksiberkasdropdown"
+                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksiberkasdropdown">
                     <i class="nav-icon fas fa-file-alt nav-icon"></i>
                     <p>
@@ -123,19 +136,22 @@
                 </a>
                 <ul class="nav py-2 bg-secondary rounded collapse" id="seleksiberkasdropdown">
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-list-alt nav-icon"></i>
                             <p>Form Seleksi</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-user-clock nav-icon"></i>
                             <p>Data Calon Asisten</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-user-check nav-icon"></i>
                             <p>Data Lolos Berkas</p>
                         </a>
@@ -145,7 +161,8 @@
 
             <!-- SELESKI TES -->
             <li class="nav-item mb-3">
-                <a href="#seleksitesdropdown" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}" 
+                <a href="#seleksitesdropdown"
+                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksitesdropdown">
                     <i class="nav-icon fas fa-pen-square nav-icon"></i>
                     <p>
@@ -155,19 +172,22 @@
                 </a>
                 <ul class="nav py-2 bg-secondary rounded collapse" id="seleksitesdropdown">
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-list-ol nav-icon"></i>
                             <p>Soal dan Kunci</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-th-list nav-icon"></i>
                             <p>Data Nilai Tes</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-clipboard-check nav-icon"></i>
                             <p>Data Lolos Tes</p>
                         </a>
@@ -177,7 +197,8 @@
 
             <!-- LAPORAN -->
             <li class="nav-item mb-3">
-                <a href="#laporandropdown" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}" 
+                <a href="#laporandropdown"
+                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="laporandropdown">
                     <i class="nav-icon fas fa-book-open nav-icon"></i>
                     <p>
@@ -187,13 +208,15 @@
                 </a>
                 <ul class="nav py-2 bg-secondary rounded collapse" id="laporandropdown">
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-user-friends nav-icon"></i>
                             <p>Asisten Diterima</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-list nav-icon"></i>
                             <p>Nilai Tes Assiten</p>
                         </a>
@@ -202,7 +225,8 @@
             </li>
 
             <li class="nav-item mb-3">
-                <a href="{{ route('admin.about') }}" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}">
+                <a href="{{ route('admin.about') }}"
+                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}">
                     <i class="nav-icon far fa-address-card"></i>
                     <p>
                         {{ __('About us') }}
