@@ -13,6 +13,10 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/css/bootstrap.min.css" integrity="sha384-zCbKRCUGaJDkqS1kPbPd7TveP5iyJE0EjAuZQTgFLD2ylzuqKfdKlfG/eSrtxUkn" crossorigin="anonymous">
     <!-- Theme style -->
     <link rel="stylesheet" href="{{ asset('css/adminlte.min.css') }}">
+    <!-- DataTable CSS -->
+    <link rel="stylesheet" href="{{ asset('css/table/dataTables.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/table/responsive.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ asset('css/table/buttons.bootstrap4.min.css') }}">
     
     @yield('styles')
 </head>
@@ -178,11 +182,26 @@
     {{-- <script src="{{ asset('js/jquery.slim.min.js') }}" ></script> --}}
 
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js" integrity="sha384-fQybjgWLrvvRgtW6bFlB7jaZrFsaBXjsOMm/tB9LTS58ONXgqbR9W8oWht/amnpF" crossorigin="anonymous"></script>
     <script src="{{ asset('js/admin/index.js') }}" ></script>
+
     <!-- AdminLTE App -->
     <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
     {{-- <script src="{{ asset('js/adminlte.min.js') }}"></script> --}}
+
+    <script src="{{ asset('js/table/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('js/table/autoFill.bootstrap4.min.js') }}"></script>
+    
+    <script src="{{ asset('js/table/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/table/dataTables.responsive.min.js') }}"></script>
+    <script src="{{ asset('js/table/responsive.bootstrap4.min.js') }}"></script>
+
+    <script src="{{ asset('js/table/dataTables.buttons.min.js') }}"></script>
+    <script src="{{ asset('js/table/buttons.bootstrap4.min.js') }}"></script>
+    <script src="{{ asset('js/table/buttons.colVis.min.js') }}"></script>
+    <script src="{{ asset('js/table/buttons.flash.min.js') }}"></script>
+    <script src="{{ asset('js/table/buttons.html5.min.js') }}"></script>
+    <script src="{{ asset('js/table/buttons.print.min.js') }}"></script>
 
     @yield('scripts')
 </body>
