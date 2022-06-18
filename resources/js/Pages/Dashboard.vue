@@ -1,23 +1,9 @@
 <template>
     <Authenticated>
-        <!-- <div>
-            <div class="flex flex-wrap">
-                <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
-                    <card-line-chart />
-                </div>
-                <div class="w-full xl:w-4/12 px-4">
-                    <card-bar-chart />
-                </div>
-            </div>
-            <div class="flex flex-wrap mt-4">
-                <div class="w-full xl:w-8/12 mb-12 xl:mb-0 px-4">
-                    <card-page-visits />
-                </div>
-                <div class="w-full xl:w-4/12 px-4">
-                    <card-social-traffic />
-                </div>
-            </div>
-        </div> -->
+        <div class="absolute rounded shadow top-[20px] md:top-[40px] inset-x-[16px] md:inset-x-[240px] bg-white p-6">
+            <!-- <barcode-scanner/> -->
+        </div>
+
     </Authenticated>
 </template>
 <script>
@@ -26,6 +12,7 @@ import CardBarChart from "@/components/Cards/CardBarChart.vue";
 import CardPageVisits from "@/components/Cards/CardPageVisits.vue";
 import CardSocialTraffic from "@/components/Cards/CardSocialTraffic.vue";
 import Authenticated from "@/Layouts/Authenticated";
+import BarcodeScanner from "@/Components/BarcodeScanner/BarcodeScanner.vue"
 export default {
     name: "dashboard-page",
     components: {
@@ -34,6 +21,7 @@ export default {
         CardPageVisits,
         CardSocialTraffic,
         Authenticated,
+        BarcodeScanner
     },
 };
 </script>
