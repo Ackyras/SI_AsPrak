@@ -1,25 +1,22 @@
 <template>
-    <nav
-        class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-10 py-4 px-6"
+    <nav class="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-50 py-4 px-6"
     >
-        <div
-            class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto"
-        >
+        <div class="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
             <!-- Toggler -->
-            <button
-                class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
+            <button class="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent"
                 type="button"
                 v-on:click="toggleCollapseShow('bg-white m-2 py-3 px-6')"
             >
                 <i class="fas fa-bars"></i>
             </button>
             <!-- Brand -->
-            <router-link
-                class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                to="/"
+            <button
+                class="md:block text-left md:pb-2 text-gray-700 hover:text-green-600 mr-0 inline-block whitespace-nowrap text-lg font-bold p-2"
+                type="button"
+                v-on:click="RedirectToHome"
             >
-                Vue Notus
-            </router-link>
+                SIAP Terpadu
+            </button>
             <!-- User -->
             <ul class="md:hidden items-center flex flex-wrap list-none">
                 <li class="inline-block relative">
@@ -31,21 +28,22 @@
             </ul>
             <!-- Collapse -->
             <div
-                class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded"
+                class="md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-4 absolute top-0 left-0 right-0 z-50 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded"
                 v-bind:class="collapseShow"
             >
                 <!-- Collapse header -->
                 <div
-                    class="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200"
+                    class="md:min-w-full md:hidden block mb-4"
                 >
                     <div class="flex flex-wrap">
                         <div class="w-6/12">
-                            <router-link
-                                class="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0"
-                                to="/"
+                            <button
+                                class="md:block text-left md:pb-2 text-gray-700 hover:text-green-600 mr-0 inline-block whitespace-nowrap text-lg font-bold p-2"
+                                type="button"
+                                v-on:click="RedirectToHome"
                             >
-                                Vue Notus
-                            </router-link>
+                                SIAP Terpadu
+                            </button>
                         </div>
                         <div class="w-6/12 flex justify-end">
                             <button
@@ -58,59 +56,51 @@
                         </div>
                     </div>
                 </div>
-                <!-- Form -->
-                <form class="mt-6 mb-4 md:hidden">
-                    <div class="mb-3 pt-0">
-                        <input
-                            type="text"
-                            placeholder="Search"
-                            class="border-0 px-3 py-2 h-12 border border-solid border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"
-                        />
-                    </div>
-                </form>
 
                 <!-- Divider -->
-                <hr class="my-4 md:min-w-full" />
-                <!-- Heading -->
+                <hr class="mb-4 md:min-w-full" />
+                <!-- Heading
                 <h6
                     class="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline"
                 >
                     Rekrutmen
-                </h6>
+                </h6> -->
                 <!-- Navigation -->
 
                 <ul
                     class="md:flex-col md:min-w-full flex flex-col list-none md:mb-4"
                 >
                     <li class="items-center">
-                        <Link
-                            class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                            to="/login"
-                        >
-                            <i
-                                class="fas fa-fingerprint text-blueGray-300 mr-2 text-sm"
-                            ></i>
-                            Periode Asprak
+                        <Link href="/" class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
+                            <i class="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>
+                            Tes Asisten Praktikum
                         </Link>
                     </li>
 
                     <li class="items-center">
-                        <router-link
-                            class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block"
-                            to="/auth/register"
-                        >
-                            <i
-                                class="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"
-                            ></i>
-                            Register
-                        </router-link>
+                        <Link href="/" class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
+                            <i class="fas fa-clock text-blueGray-300 mr-2 text-sm"></i>
+                            Jadwal Praktikum
+                        </Link>
+                    </li>
+
+                    <li class="items-center">
+                        <Link href="/" class="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block">
+                            <i class="fas fa-table text-blueGray-300 mr-2 text-sm"></i>
+                            Data Presensi Saya
+                        </Link>
+                    </li>
+
+                    <li class="items-center">
+                        <button>
+                            Scan Barcode
+                        </button>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
 </template>
-); }
 
 <script>
 import NotificationDropdown from "@/components/Dropdowns/NotificationDropdown.vue";
@@ -127,10 +117,14 @@ export default {
         toggleCollapseShow: function (classes) {
             this.collapseShow = classes;
         },
+        RedirectToHome: function(){
+            window.location.href = "/";
+        }
     },
     components: {
         NotificationDropdown,
         UserDropdown,
+        Link,
     },
 };
 </script>
