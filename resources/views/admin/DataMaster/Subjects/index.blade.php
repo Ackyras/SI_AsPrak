@@ -1,73 +1,3 @@
-@php
-    $subjects = array(
-        (object)[
-            "id"                => 1,
-            "name"              => "Algoritma Pemrograman 2",
-            "period_subject"    => (object)["name" => "Ganjil 2018/2019",] 
-        ],
-        (object)[
-            "id"                => 2,
-            "name"              => "Algoritma Pemrograman 1",
-            "period_subject"    => (object)["name" => "Genap 2018/2019",] 
-        ],
-        (object)[
-            "id"                => 3,
-            "name"              => "PKS 1",
-            "period_subject"    => (object)["name" => "Ganjil 2019/2020",] 
-        ],
-        (object)[
-            "id"                => 4,
-            "name"              => "PKS 2",
-            "period_subject"    => (object)["name" => "Genap 2019/2020",] 
-        ],
-        (object)[
-            "id"                => 5,
-            "name"              => "Algoritma dan Struktur Data",
-            "period_subject"    => (object)["name" => "Ganjil 2020/2021",] 
-        ],
-        (object)[
-            "id"                => 6,
-            "name"              => "Pemrograman Berbasis Objek",
-            "period_subject"    => (object)["name" => "Genap 2020/2021",] 
-        ],
-        (object)[
-            "id"                => 7,
-            "name"              => "Basis Data",
-            "period_subject"    => (object)["name" => "Ganjil 2021/2022",] 
-        ],
-        (object)[
-            "id"                => 8,
-            "name"              => "Manajemen Basis Data",
-            "period_subject"    => (object)["name" => "Genap 2021/2022",] 
-        ],
-        (object)[
-            "id"                => 9,
-            "name"              => "Dasar Rekayasa Perangkat Lunak",
-            "period_subject"    => (object)["name" => "Ganjil 2022/2023",] 
-        ],
-        (object)[
-            "id"                => 10,
-            "name"              => "Rekayasa Perangkat Lunak",
-            "period_subject"    => (object)["name" => "Genap 2022/2023",] 
-        ],
-        (object)[
-            "id"                => 11,
-            "name"              => "Manajemen Proyek Teknologi Informasi",
-            "period_subject"    => (object)["name" => "Ganjil 2023/2024",] 
-        ],
-        (object)[
-            "id"                => 12,
-            "name"              => "Proyek Teknologi Informasi",
-            "period_subject"    => (object)["name" => "Genap 2023/2024",] 
-        ],
-        (object)[
-            "id"                => 13,
-            "name"              => "Interaksi Manusia dan Komputer",
-            "period_subject"    => (object)["name" => "Ganjil 2024/2025",] 
-        ],
-    );
-@endphp
-
 @extends('layouts.app')
 
 @section('content')
@@ -145,8 +75,8 @@
 @endsection
 
 @section('scripts')
-    <script>
-        $(function () {
+<script>
+    $(function () {
             $('#subject_table').DataTable({
                 "paging"        : true,
                 "lengthChange"  : false,
@@ -158,5 +88,5 @@
                 "buttons"       : [ "copy", "excel", "csv", 'pdf', 'print', "colvis" ]
             }).buttons().container().appendTo('#subject_table_wrapper .col-md-6:eq(0)');
         });
-    </script>
+</script>
 @endsection

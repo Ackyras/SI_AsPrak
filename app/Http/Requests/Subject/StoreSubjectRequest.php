@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Period;
+namespace App\Http\Requests\Subject;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateSubjectForPeriodRequest extends FormRequest
+class StoreSubjectRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,7 +25,7 @@ class UpdateSubjectForPeriodRequest extends FormRequest
     {
         return [
             //
-            'subject_id'
+            'name'  =>  'required'
         ];
     }
 }

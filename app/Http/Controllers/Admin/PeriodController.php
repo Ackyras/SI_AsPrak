@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Period;
 use App\Http\Requests\Period\StorePeriodRequest;
 use App\Http\Requests\Period\UpdatePeriodRequest;
+use App\Http\Requests\Period\UpdateSubjectForPeriodRequest;
+use App\Models\Subject;
 
 class PeriodController extends Controller
 {
@@ -14,12 +16,12 @@ class PeriodController extends Controller
         $periods = Period::all();
         return view('admin.DataMaster.Periods.index', compact('periods'));
     }
-    
+
     public function create()
     {
         //
     }
-    
+
     public function store(StorePeriodRequest $request)
     {
         //
@@ -48,9 +50,10 @@ class PeriodController extends Controller
             ]
         );
     }
-    
+
     public function show(Period $period)
     {
+        $period->load('subjects');
         return view('admin.DataMaster.Periods.show', compact('period'));
     }
 
@@ -63,7 +66,9 @@ class PeriodController extends Controller
     public function edit(Period $period)
     {
         //
-
+        $period->load('subjects');
+        $subjects = Subject::all();
+        return view('admin.DataMaster.Periods.edit', compact('period', 'subjects'));
     }
 
     /**
@@ -111,5 +116,26 @@ class PeriodController extends Controller
     public function destroy(Period $period)
     {
         //
+        $period->deleteOrFail();
+        return back()->with(
+            [
+                'deleted'   =>  'Periode berhasil di hapus',
+            ]
+        );
+    }
+
+    public function addSubject(UpdateSubjectForPeriodRequest $request, Period $period)
+    {
+        $validated = $request->validated();
+        $period->subjects()->attach(
+            $validated['subject_id'],
+            [
+                $validated->except('subject_id')
+            ]
+        );
+    }
+    public function updateSubject(UpdateSubjectForPeriodRequest $request, Period $period, Subject $subject)
+    {
+        $validated = $request->validated();
     }
 }

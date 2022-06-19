@@ -14,7 +14,7 @@ class PeriodSubject extends Model
     protected $fillable = [
         'period_id',
         'subject_id',
-        'number_of_lab_asistant',
+        'number_of_lab_assistant',
         'exam_start',
         'exam_end',
     ];

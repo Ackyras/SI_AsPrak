@@ -12,7 +12,7 @@
                     </button>
                 </div>
             </div>
-            
+
             <div class="card-body">
                 <div id="period_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
                     <table id="period_table" class="table table-bordered table-hover dataTable dtr-inline collapsed" aria-describedby="period_table_info">
@@ -28,8 +28,8 @@
                             @foreach ($periods as $period)
                                 <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td tabindex="0">{{ $period->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($period->registration_start)->format('j F, Y') }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($period->registration_end)->format('j F, Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($period->registration_start)->format('j F, Y (H:i)') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($period->registration_end)->format('j F, Y (H:i)') }}</td>
                                     <td>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <a class="btn btn-sm btn-success" href="{{ route('admin.data.master.period.show', $period) }}">Detail</a>
@@ -110,7 +110,7 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                
+
                 <form action="">
                     @csrf
                     <div class="modal-body">
@@ -127,6 +127,7 @@
             </div>
         </div>
     </div>
+</div>
 @endsection
 
 @section('scripts')
@@ -134,8 +135,8 @@
         $(function () {
             $("#period_table").DataTable({
                 "paging"        : true,
-                "responsive"    : true, 
-                "lengthChange"  : false, 
+                "responsive"    : true,
+                "lengthChange"  : false,
                 "autoWidth"     : false,
                 "searching"     : true,
                 "ordering"      : false,
@@ -149,5 +150,5 @@
                 ]
             }).buttons().container().appendTo('#period_table_wrapper .col-md-6:eq(0)');
         });
-    </script>
+</script>
 @endsection
