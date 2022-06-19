@@ -30,14 +30,14 @@
                 <ul class="nav py-2 bg-secondary rounded collapse" id="datamasterdropdown">
                     <li class="nav-item">
                         <a href="{{ route('admin.data.master.period.index') }}"
-                            class="nav-link {{ request()->routeIs('admin.data.master.periods.*') ? 'bg-white' : 'bg-secondary' }}">
+                            class="nav-link {{ request()->routeIs('admin.data.master.period.*') ? 'bg-white' : 'bg-secondary' }}">
                             <i class="far fa-calendar nav-icon"></i>
                             <p>Periode</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="{{ route('admin.data.master.subject.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.data.master.subject.*') ? 'bg-white' : 'bg-secondary' }}">
                             <i class="fas fa-book nav-icon"></i>
                             <p>Mata Kuliah</p>
                         </a>
