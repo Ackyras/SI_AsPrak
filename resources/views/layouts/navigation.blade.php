@@ -72,7 +72,7 @@
                 </a>
                 <ul class="nav py-2 bg-secondary rounded collapse" id="jadwaldropdown">
                     <li class="nav-item">
-                        <a href="#"
+                        <a href="{{ route('admin.schedule.recruitment') }}"
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-tasks nav-icon"></i>
                             <p>Penerimaan</p>

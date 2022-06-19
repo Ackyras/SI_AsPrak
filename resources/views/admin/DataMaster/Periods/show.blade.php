@@ -147,7 +147,7 @@
                                                             <div class="modal-body">
                                                                 <div class="form-group">
                                                                     <label for="name">Nama mata kuliah</label>
-                                                                    <input type="text" id="name" name="name" class="form-control" required autocomplete="off" placeholder="Nama mata kuliah" value="{{ $subject->name }}">
+                                                                    <input type="text" id="name" name="name" class="form-control" required autocomplete="off" placeholder="Nama mata kuliah" value="{{ $subject->name }}" disabled>
                                                                 </div>
                                                                 <div class="form-group">
                                                                     <label for="number_of_lab_assistant">Kuota asisten praktikum</label>
@@ -233,7 +233,12 @@
                     <div class="modal-body">
                         <div class="form-group">
                             <label for="name">Nama mata kuliah</label>
-                            <input type="text" id="name" name="name" class="form-control" required autocomplete="off" placeholder="Nama mata kuliah">
+                            <select id="name" class="custom-select">
+                                <option selected disabled hidden>Pilih mata kuliah</option>
+                                @foreach ($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                @endforeach
+                            </select>
                         </div>
                         <div class="form-group">
                             <label for="number_of_lab_assistant">Kuota asisten praktikum</label>

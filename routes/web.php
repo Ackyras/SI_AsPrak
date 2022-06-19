@@ -23,10 +23,15 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('data-master')->as('data.master.')->group(function () {
-        Route::resource('period',        PeriodController::class);
-        Route::resource('subject',        SubjectController::class)->only('index');
+        Route::resource('period',           PeriodController::class);
+        Route::resource('subject',          SubjectController::class)->only('index');
         // Route::resource('assistant',       AssitantController::class)->except('show');
         // Route::resource('archive',  ArchiveController::class)->only('index');
+    });
+
+    Route::prefix('schedule')->as('schedule.')->group(function () {
+        // Ini cuma dipake sementara
+        Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
     });
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
