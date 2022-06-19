@@ -14,12 +14,12 @@ class PeriodController extends Controller
         $periods = Period::all();
         return view('admin.DataMaster.Periods.index', compact('periods'));
     }
-    
+
     public function create()
     {
         //
     }
-    
+
     public function store(StorePeriodRequest $request)
     {
         //
@@ -48,9 +48,10 @@ class PeriodController extends Controller
             ]
         );
     }
-    
+
     public function show(Period $period)
     {
+        $period->load('subjects');
         return view('admin.DataMaster.Periods.show', compact('period'));
     }
 
@@ -63,7 +64,8 @@ class PeriodController extends Controller
     public function edit(Period $period)
     {
         //
-
+        $period->load('subjects');
+        return view('admin.DataMaster.Periods.edit', compact('period'));
     }
 
     /**
@@ -111,5 +113,11 @@ class PeriodController extends Controller
     public function destroy(Period $period)
     {
         //
+        $period->deleteOrFail();
+        return back()->with(
+            [
+                'deleted'   =>  'Periode berhasil di hapus',
+            ]
+        );
     }
 }
