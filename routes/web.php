@@ -4,6 +4,7 @@ use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\Admin\PeriodController;
+use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataMasterController;
 use App\Http\Controllers\User\UserDashboardController;
@@ -23,9 +24,9 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
 
     Route::prefix('data-master')->as('data.master.')->group(function () {
         Route::resource('period',        PeriodController::class);
-        // Route::resource('subjects',        SubjectController::class)->except('show');
-        // Route::resource('witels',       AssitantController::class)->except('show');
-        // Route::resource('permissions',  ArchiveController::class)->only('index');
+        Route::resource('subject',        SubjectController::class)->only('index');
+        // Route::resource('assistant',       AssitantController::class)->except('show');
+        // Route::resource('archive',  ArchiveController::class)->only('index');
     });
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
