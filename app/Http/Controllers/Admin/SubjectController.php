@@ -3,13 +3,15 @@
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Subject;
 use Illuminate\Http\Request;
 
 class SubjectController extends Controller
 {
     public function index()
     {
-        return view('admin.DataMaster.Subjects.index');
+        $subjects = Subject::all();
+        return view('admin.DataMaster.Subjects.index', compact('subjects'));
     }
 
     /**
