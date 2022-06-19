@@ -28,8 +28,8 @@
                             @foreach ($periods as $period)
                                 <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                                     <td tabindex="0">{{ $period->name }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($period->registration_start)->format('j F, Y') }}</td>
-                                    <td>{{ \Carbon\Carbon::parse($period->registration_end)->format('j F, Y') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($period->registration_start)->format('j F, Y (H:i)') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($period->registration_end)->format('j F, Y (H:i)') }}</td>
                                     <td>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <a class="btn btn-sm btn-success" href="{{ route('admin.data.master.period.show', $period) }}">Detail</a>

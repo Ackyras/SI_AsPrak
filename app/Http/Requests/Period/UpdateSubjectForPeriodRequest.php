@@ -25,6 +25,7 @@ class UpdateSubjectForPeriodRequest extends FormRequest
     {
         return [
             //
+            'subject_id'
         ];
     }
 }
