@@ -7,14 +7,21 @@ use App\Http\Controllers\Admin\PeriodController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataMasterController;
+use App\Http\Controllers\Admin\RegistrarController;
 use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\Website\RegistrationController;
 use App\Models\Period;
 
 Route::get('/', function () {
     return view('home');
 })->name('home');
 
-Route::as('website')->group(function () {
+Route::as('website.')->group(function () {
+    Route::get('/', [RegistrationController::class, 'index'])->name('index');
+    Route::as('register.')->prefix('register')->group(function () {
+        // Route::get()
+    });
+
     // Tampilan jika seleksi belum dibuka
     // Route::group(function () {
     // });
