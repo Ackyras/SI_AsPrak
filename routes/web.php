@@ -51,6 +51,11 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         // Route::resource('archive',  ArchiveController::class)->only('index');
     });
 
+    Route::prefix('schedule')->as('schedule.')->group(function () {
+        // Ini cuma dipake sementara
+        Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
+    });
+
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile',   [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
     Route::put('profile',   [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');

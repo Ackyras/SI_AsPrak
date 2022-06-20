@@ -107,53 +107,71 @@ $subjects = array(
                     Mata Kuliah Baru
                 </button>
             </div>
-        </div>
-
-        <div class="card-body">
-            <div id="period_subject_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <table id="period_subject_table" class="table table-bordered table-hover dataTable dtr-inline collapsed"
-                    aria-describedby="period_subject_table_info">
-                    <thead>
-                        <tr>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
-                                colspan="1">Nama Mata Kuliah</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
-                                colspan="1">Kuota Asisten</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
-                                colspan="1">Tanggal Awal Ujian</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
-                                colspan="1">Tanggal Akhir Ujian</th>
-                            <th tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1"
-                                style="width: 95px; text-align: center">Aksi</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        @foreach ($period->subjects as $subject)
-                        <tr>
-                            <td tabindex="0">{{ $subject->name }}</td>
-                            <td>{{ $subject->pivot->number_of_lab_assistant }}</td>
-                            <td>{{ $subject->pivot->exam_start }}</td>
-                            <td>{{ $subject->pivot->exam_end }}</td>
-                            <td>
-                                <div class="d-flex align-items-center justify-content-between ">
-                                    <!-- Edit Subject Button -->
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#subjectEditFormModal{{ $subject->id }}">Edit</button>
-                                    <!-- Edit Subject Modal -->
-                                    <div class="modal fade" id="subjectEditFormModal{{ $subject->id }}" tabindex="-1"
-                                        data-backdrop="static" data-keyboard="false"
-                                        aria-labelledby="subjectEditFormModalLabel{{ $subject->id }}"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title font-weight-bold"
-                                                        id="subjectEditFormModalLabel{{ $subject->id }}">Ubah Mata
-                                                        Kuliah</h3>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
+            
+            <div class="card-body">
+                <div id="period_subject_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
+                    <table id="period_subject_table" class="table table-bordered table-hover dataTable dtr-inline collapsed" aria-describedby="period_subject_table_info">
+                        <thead>
+                            <tr>
+                                <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1">Nama Mata Kuliah</th>
+                                <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1">Kuota Asisten</th>
+                                <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1">Tanggal Awal Ujian</th>
+                                <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1">Tanggal Akhir Ujian</th>
+                                <th tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1" style="width: 95px; text-align: center">Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach ($subjects as $subject)
+                                <tr>
+                                    <td tabindex="0">{{ $subject->name }}</td>
+                                    <td>{{ $subject->number_of_lab_assistant }}</td>
+                                    <td>{{ $subject->exam_start }}</td>
+                                    <td>{{ $subject->exam_end }}</td>
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-between ">
+                                            <!-- Edit Subject Button -->
+                                            <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#subjectEditFormModal{{ $subject->id }}">Edit</button>
+                                            <!-- Edit Subject Modal -->
+                                            <div class="modal fade" id="subjectEditFormModal{{ $subject->id }}" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="subjectEditFormModalLabel{{ $subject->id }}" aria-hidden="true">
+                                                <div class="modal-dialog">
+                                                    <div class="modal-content">
+                                                        <div class="modal-header">
+                                                            <h3 class="modal-title font-weight-bold" id="subjectEditFormModalLabel{{ $subject->id }}">Ubah Mata Kuliah</h3>
+                                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                <span aria-hidden="true">&times;</span>
+                                                            </button>
+                                                        </div>
+                                                        <form action="">
+                                                            @csrf
+                                                            <div class="modal-body">
+                                                                <div class="form-group">
+                                                                    <label for="name">Nama mata kuliah</label>
+                                                                    <input type="text" id="name" name="name" class="form-control" required autocomplete="off" placeholder="Nama mata kuliah" value="{{ $subject->name }}" disabled>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="number_of_lab_assistant">Kuota asisten praktikum</label>
+                                                                    <input type="text" id="number_of_lab_assistant" name="number_of_lab_assistant" class="form-control" required autocomplete="off" placeholder="(masukkan angka)" value="{{ $subject->number_of_lab_assistant }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="exam_start">Tanggal mulai ujian</label>
+                                                                    {{-- <div>
+                                                                        <h5>{{ date("c", strtotime($subject->exam_start)) }}</h5>
+                                                                        <h5>{{ (new DateTime($subject->exam_start))->format('c') }}</h5>
+                                                                        <h5>{{ date('Y-m-d\TH:i:s', strtotime($subject->exam_start)) }}</h5>
+                                                                    </div> --}}
+                                                                    <input type="datetime-local" id="exam_start" name="exam_start" class="form-control" required autocomplete="off" value="{{ date('Y-m-d\TH:i:s', strtotime($subject->exam_start)) }}">
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="exam_end">Tanggal selesai ujian</label>
+                                                                    <input type="datetime-local" id="exam_end" name="exam_end" class="form-control" required autocomplete="off" value="{{ date('Y-m-d\TH:i:s', strtotime($subject->exam_end)) }}">
+                                                                </div>
+                                                            </div>
+                                        
+                                                            <div class="modal-footer">
+                                                                <button type="submit" class="btn btn-primary">SIMPAN PERUBAHAN</button>
+                                                            </div>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                                 <form action="{{ route('admin.data.master.period.update', $period, $subject) }}">
                                                     @csrf
@@ -255,16 +273,47 @@ $subjects = array(
     </div>
 </div>
 
-<!-- Add Subject Modal -->
-<div class="modal fade" id="subjectFormModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
-    aria-labelledby="subjectFormModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title font-weight-bold" id="subjectFormModalLabel">Mata Kuliah Baru</h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
+    <!-- Add Subject Modal -->
+    <div class="modal fade" id="subjectFormModal" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="subjectFormModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h3 class="modal-title font-weight-bold" id="subjectFormModalLabel">Mata Kuliah Baru</h3>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                
+                <form action="">
+                    @csrf
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="name">Nama mata kuliah</label>
+                            <select id="name" class="custom-select">
+                                <option selected disabled hidden>Pilih mata kuliah</option>
+                                @foreach ($subjects as $subject)
+                                    <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="number_of_lab_assistant">Kuota asisten praktikum</label>
+                            <input type="text" id="number_of_lab_assistant" name="number_of_lab_assistant" class="form-control" required autocomplete="off" placeholder="(masukkan angka)">
+                        </div>
+                        <div class="form-group">
+                            <label for="exam_start">Tanggal mulai ujian</label>
+                            <input type="datetime-local" id="exam_start" name="exam_start" class="form-control" required autocomplete="off">
+                        </div>
+                        <div class="form-group">
+                            <label for="exam_end">Tanggal selesai ujian</label>
+                            <input type="datetime-local" id="exam_end" name="exam_end" class="form-control" required autocomplete="off">
+                        </div>
+                    </div>
+
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">SIMPAN</button>
+                    </div>
+                </form>
             </div>
 
             <form action="">
