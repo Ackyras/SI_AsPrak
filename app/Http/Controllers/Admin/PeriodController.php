@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Period;
 use App\Http\Requests\Period\StorePeriodRequest;
+use App\Http\Requests\Period\StoreSubjectForPeriodRequest;
 use App\Http\Requests\Period\UpdatePeriodRequest;
 use App\Http\Requests\Period\UpdateSubjectForPeriodRequest;
 use App\Models\Subject;
@@ -54,7 +55,9 @@ class PeriodController extends Controller
     public function show(Period $period)
     {
         $period->load('subjects');
-        $allsubjects = Subject::all();
+        $allsubjects = Subject::whereDoesntHave('periods', function ($query) use ($period) {
+            $query->where('period_id', $period->id);
+        })->orderBy('name')->get();
         return view('admin.DataMaster.Periods.show', compact('period', 'allsubjects'));
     }
 
@@ -125,18 +128,28 @@ class PeriodController extends Controller
         );
     }
 
-    public function addSubject(UpdateSubjectForPeriodRequest $request, Period $period)
+    public function addSubject(StoreSubjectForPeriodRequest $request, Period $period)
     {
         $validated = $request->validated();
         $period->subjects()->attach(
             $validated['subject_id'],
+            $request->safe()->except('subject_id')
+        );
+        return back()->with(
             [
-                $validated->except('subject_id')
+                'success'   =>  'Mata Kuliah baru berhasil ditambahkan ke dalam periode' . $period->name,
             ]
         );
     }
     public function updateSubject(UpdateSubjectForPeriodRequest $request, Period $period, Subject $subject)
     {
         $validated = $request->validated();
+        $period->subjects()->updateExistingPivot($subject->id, $validated);
+
+        return back()->with(
+            [
+                'success'   =>  'Mata Kuliah berhasil diperbarui ke dalam periode' . $period->name,
+            ]
+        );
     }
 }

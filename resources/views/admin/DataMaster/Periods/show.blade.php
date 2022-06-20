@@ -195,34 +195,39 @@ $subjects = array(
                                                                 PERUBAHAN</button>
                                                         </div>
                                                     </form> --}}
-                                                    <form
-                                                        action="{{ route('admin.data.master.period.update', $period, $subject) }}">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.data.master.period.updateSubject', [$period, $subject]) }}">
                                                         @csrf
+                                                        @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="name">Nama mata kuliah</label>
-                                                                <input type="text" id="name" name="name" class="form-control"
-                                                                    required autocomplete="off" placeholder="Nama mata kuliah"
-                                                                    value="{{ $subject->name }}">
+                                                                <input type="text" id="name" name="name"
+                                                                    class="form-control" required autocomplete="off"
+                                                                    placeholder="Nama mata kuliah"
+                                                                    value="{{ $subject->name }}" readonly>
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="number_of_lab_assistant">Kuota asisten
                                                                     praktikum</label>
                                                                 <input type="text" id="number_of_lab_assistant"
-                                                                    name="number_of_lab_assistant" class="form-control" required
-                                                                    autocomplete="off" placeholder="(masukkan angka)"
+                                                                    name="number_of_lab_assistant" class="form-control"
+                                                                    required autocomplete="off"
+                                                                    placeholder="(masukkan angka)"
                                                                     value="{{ $subject->pivot->number_of_lab_assistant }}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="exam_start">Tanggal mulai ujian</label>
-                                                                <input type="datetime-local" id="exam_start" name="exam_start"
-                                                                    class="form-control" required autocomplete="off"
+                                                                <input type="datetime-local" id="exam_start"
+                                                                    name="exam_start" class="form-control" required
+                                                                    autocomplete="off"
                                                                     value="{{ date('Y-m-d\TH:i:s', strtotime($subject->pivot->exam_start)) }}">
                                                             </div>
                                                             <div class="form-group">
                                                                 <label for="exam_end">Tanggal selesai ujian</label>
-                                                                <input type="datetime-local" id="exam_end" name="exam_end"
-                                                                    class="form-control" required autocomplete="off"
+                                                                <input type="datetime-local" id="exam_end"
+                                                                    name="exam_end" class="form-control" required
+                                                                    autocomplete="off"
                                                                     value="{{ date('Y-m-d\TH:i:s', strtotime($subject->pivot->exam_end)) }}">
                                                             </div>
                                                         </div>
@@ -239,24 +244,29 @@ $subjects = array(
                                         <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
                                             data-target="#confirmDeleteSubjectModal{{ $subject->id }}">Hapus</button>
                                         <!-- Delete Subject Modal -->
-                                        <div class="modal fade" id="confirmDeleteSubjectModal{{ $subject->id }}" tabindex="-1"
-                                            data-backdrop="static" data-keyboard="false"
-                                            aria-labelledby="confirmDeleteSubjectModalLabel{{ $subject->id }}" aria-hidden="true">
+                                        <div class="modal fade" id="confirmDeleteSubjectModal{{ $subject->id }}"
+                                            tabindex="-1" data-backdrop="static" data-keyboard="false"
+                                            aria-labelledby="confirmDeleteSubjectModalLabel{{ $subject->id }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
                                                         <h3 class="modal-title font-weight-bold"
-                                                            id="confirmDeleteSubjectModalLabel{{ $subject->id }}">Hapus Mata
+                                                            id="confirmDeleteSubjectModalLabel{{ $subject->id }}">Hapus
+                                                            Mata
                                                             Kuliah</h3>
-                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h5>Yakin untuk menghapus mata kuliah '{{ $subject->name }}'?</h5>
+                                                        <h5>Yakin untuk menghapus mata kuliah '{{ $subject->name }}'?
+                                                        </h5>
                                                     </div>
                                                     <div class="modal-footer">
-                                                        <button type="button" class="btn btn-secondary" data-dismiss="modal">BATALKAN</button>
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">BATALKAN</button>
                                                         <button type="button" class="btn btn-danger">HAPUS DATA</button>
                                                     </div>
                                                 </div>
@@ -296,15 +306,16 @@ $subjects = array(
                 </button>
             </div>
 
-            <form action="">
+            <form method="POST" action="{{ route('admin.data.master.period.addSubject', $period) }}">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
-                        <label for="name">Nama mata kuliah</label>
-                        <select id="name" class="custom-select">
+                        <label for="subject_id">Nama mata kuliah</label>
+                        <select id="name" class="custom-select" name="subject_id">
                             <option selected disabled hidden>Pilih mata kuliah</option>
                             @forelse ($allsubjects as $subject)
-                                <option value="{{ $subject->id }}">{{ $subject->name }}</option>
+                            <option value="{{ $subject->id }}" {{ old('subject_id')==$subject->id ? 'selected':'' }} >{{
+                                $subject->name }}</option>
                             @empty
                             @endforelse
                         </select>
@@ -312,17 +323,18 @@ $subjects = array(
                     <div class="form-group">
                         <label for="number_of_lab_assistant">Kuota asisten praktikum</label>
                         <input type="text" id="number_of_lab_assistant" name="number_of_lab_assistant"
-                            class="form-control" required autocomplete="off" placeholder="(masukkan angka)">
+                            class="form-control" required value="{{ old('number_of_lab_assistant') }}"
+                            autocomplete="off" placeholder="(masukkan angka)">
                     </div>
                     <div class="form-group">
                         <label for="exam_start">Tanggal mulai ujian</label>
                         <input type="datetime-local" id="exam_start" name="exam_start" class="form-control" required
-                            autocomplete="off">
+                            value="{{ old('exam_start') }}" autocomplete="off">
                     </div>
                     <div class="form-group">
                         <label for="exam_end">Tanggal selesai ujian</label>
                         <input type="datetime-local" id="exam_end" name="exam_end" class="form-control" required
-                            autocomplete="off">
+                            value="{{ old('exam_end') }}" autocomplete="off">
                     </div>
                 </div>
 

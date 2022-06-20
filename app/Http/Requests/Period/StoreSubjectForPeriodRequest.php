@@ -13,7 +13,7 @@ class StoreSubjectForPeriodRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -25,6 +25,10 @@ class StoreSubjectForPeriodRequest extends FormRequest
     {
         return [
             //
+            'subject_id'                =>  'required',
+            'number_of_lab_assistant'   =>  'required',
+            'exam_start'                =>  ['required', 'date', 'after:exam_end'],
+            'exam_end'                  =>  ['required', 'date', 'before:exam_start'],
         ];
     }
 }

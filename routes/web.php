@@ -17,10 +17,10 @@ Route::get('/', function () {
 })->name('home');
 
 Route::as('website.')->group(function () {
-    Route::get('/', [RegistrationController::class, 'index'])->name('index');
-    Route::as('register.')->prefix('register')->group(function () {
-        // Route::get()
-    });
+    // Route::get('/', [RegistrationController::class, 'index'])->name('index');
+    // Route::as('register.')->prefix('register')->group(function () {
+    //     // Route::get()
+    // });
 
     // Tampilan jika seleksi belum dibuka
     // Route::group(function () {
@@ -48,8 +48,8 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::prefix('data-master')->as('data.master.')->group(function () {
-        Route::controller(Period::class)->as('period.')->group(function () {
-            Route::post('period/{period}/subject', 'addSubject')->name('addSubjcet');
+        Route::controller(PeriodController::class)->as('period.')->group(function () {
+            Route::post('period/{period}/subject', 'addSubject')->name('addSubject');
             Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
         });
         Route::resource('period',        PeriodController::class);

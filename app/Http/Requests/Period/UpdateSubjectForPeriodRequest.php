@@ -13,7 +13,7 @@ class UpdateSubjectForPeriodRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -25,7 +25,9 @@ class UpdateSubjectForPeriodRequest extends FormRequest
     {
         return [
             //
-            'subject_id'
+            'number_of_lab_assistant'   =>  'required',
+            'exam_start'                =>  ['required', 'date', 'before:exam_end'],
+            'exam_end'                  =>  ['required', 'date', 'after:exam_start'],
         ];
     }
 }
