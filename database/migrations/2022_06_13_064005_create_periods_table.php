@@ -19,6 +19,8 @@ return new class extends Migration
             $table->dateTime('registration_start');
             $table->dateTime('registration_end');
             $table->boolean('is_active')->default(true);
+            $table->boolean('is_open_for_selection')->default(false);
+            $table->boolean('is_selection_over')->default(false);
             $table->timestamps();
         });
     }

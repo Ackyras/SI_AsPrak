@@ -14,6 +14,24 @@ Route::get('/', function () {
     return view('home');
 })->name('home');
 
+Route::as('website')->group(function () {
+    // Tampilan jika seleksi belum dibuka
+    // Route::group(function () {
+    // });
+
+    // // Tampilan jika seleksi dibuka
+    // Route::middleware(['is_selection_open'])->group(function () {
+    // });
+
+    // // Tampilan jika lulus seleksi berkas
+    // Route::middleware(['is_pass_file_selection'])->group(function () {
+    // });
+
+    // // Tampilan ketika tes
+    // Route::middleware(['is_eligible_for_exam'])->group(function () {
+    // });
+});
+
 Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
 });
