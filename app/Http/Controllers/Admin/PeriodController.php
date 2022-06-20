@@ -54,9 +54,8 @@ class PeriodController extends Controller
     public function show(Period $period)
     {
         $period->load('subjects');
-        return view('admin.DataMaster.Periods.show', compact('period'))->with([
-            'success'   =>  'test',
-        ]);
+        $subjects = Subject::all();
+        return view('admin.DataMaster.Periods.show', compact('period', 'subjects'));
     }
 
     /**
