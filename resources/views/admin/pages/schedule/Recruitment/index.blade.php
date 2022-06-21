@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 
 @section('styles')
     <link rel="stylesheet" href="{{ asset('css/fullCalendar/main.min.css') }}">

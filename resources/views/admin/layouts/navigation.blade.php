@@ -45,6 +45,14 @@
                     <li class="nav-item">
                         <a href="#"
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                            {{-- <i class="fas fa-users nav-icon"></i> --}}
+                            <i class="fas fa-user-edit nav-icon"></i>
+                            <p>Pendaftar</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-users nav-icon"></i>
                             <p>Asisten Praktikum</p>
                         </a>

@@ -1,4 +1,4 @@
-@extends('layouts.guest')
+@extends('auth.master')
 
 @section('content')
     <div class="card-body login-card-body">

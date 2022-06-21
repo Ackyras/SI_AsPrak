@@ -12,12 +12,18 @@ use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\Website\RegistrationController;
 use App\Models\Period;
 
-Route::get('/', function () {
-    return view('home');
-})->name('home');
+// Route::get('/', function () {
+//     return view('home');
+// })->name('home');
 
 Route::as('website.')->group(function () {
-    // Route::get('/', [RegistrationController::class, 'index'])->name('index');
+    Route::get('/', function () {
+        return view('website.pages.home.index');
+    })->name('home');
+
+    Route::as('registration.')->group(function () {
+        Route::get('/registration', [RegistrationController::class, 'index'])->name('index');
+    });
     // Route::as('register.')->prefix('register')->group(function () {
     //     // Route::get()
     // });

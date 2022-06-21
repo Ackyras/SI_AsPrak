@@ -20,7 +20,8 @@ class RegistrationController extends Controller
     {
         $period = $this->period;
         $period->load('subjects');
-        return view('website.registration.index', compact('period'));
+        // ddd($period);
+        return view('website.pages.registration.index', compact('period'));
     }
 
     public function register()

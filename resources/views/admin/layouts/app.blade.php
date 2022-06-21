@@ -37,7 +37,7 @@
                     <a class="nav-link" data-widget="pushmenu" role="button"><i class="fas fa-bars"></i></a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
-                    <a href="{{ route('home') }}" class="nav-link">Home</a>
+                    <a href="{{ route('website.home') }}" class="nav-link">Home</a>
                 </li>
                 <li class="nav-item d-none d-sm-inline-block">
                     <a href="#" class="nav-link">Asisten Praktikum</a>
@@ -116,18 +116,18 @@
         <!-- Main Sidebar Container -->
         <aside class="main-sidebar sidebar-dark-primary elevation-4">
             <!-- Brand Logo -->
-            <a href="{{ route('home') }}" class="brand-link">
+            <a href="{{ route('website.home') }}" class="brand-link">
                 <img src="{{ asset('images/letter-s.png') }}" alt="SIAP Terpadu Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
                 <span class="brand-text font-weight-light">SIAP Terpadu</span>
             </a>
-            @include('layouts.navigation')
+            @include('admin.layouts.navigation')
         </aside>
 
         <!-- Content Wrapper. Contains page content -->
         <div class="content-wrapper">
             <div class="pt-2 px-2">
-                @include('layouts.components.alert')
+                @include('admin.components.alert')
             </div>
             @yield('content')
         </div>

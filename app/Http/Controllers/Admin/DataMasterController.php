@@ -9,6 +9,6 @@ class DataMasterController extends Controller
 {
     public function index()
     {
-        return view('admin.Schedule.Recruitment.index');
+        return view('admin.pages.schedule.recruitment.index');
     }
 }
