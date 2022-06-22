@@ -3,10 +3,11 @@
 use Inertia\Inertia;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\Admin\PeriodController;
+use App\Http\Controllers\Admin\Period\PeriodController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataMasterController;
+use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionController;
 use App\Http\Controllers\Admin\RegistrarController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\Website\RegistrationController;
@@ -51,6 +52,10 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::controller(PeriodController::class)->as('period.')->group(function () {
             Route::post('period/{period}/subject', 'addSubject')->name('addSubject');
             Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
+
+            Route::prefix('period/{period}/subject/{subject}')->as('subject.')->group(function () {
+                Route::resource('question', PeriodQuestionController::class);
+            });
         });
         Route::resource('period',        PeriodController::class);
         Route::resource('subject',        SubjectController::class)->only('index');

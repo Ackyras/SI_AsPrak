@@ -8,4 +8,21 @@ use Illuminate\Database\Eloquent\Model;
 class Question extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'text',
+        'type',
+        'score',
+        'period_subject_id',
+    ];
+
+    public function period_subject()
+    {
+        return $this->belongsTo(PeriodSubject::class);
+    }
+
+    public function choices()
+    {
+        return $this->hasMany(Choice::class);
+    }
 }

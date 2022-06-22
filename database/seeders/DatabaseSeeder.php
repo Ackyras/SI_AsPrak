@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\PeriodSubject;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -29,7 +30,8 @@ class DatabaseSeeder extends Seeder
 
         $this->call([
             SubjectSeeder::class,
-            PeriodSeeder::class
+            PeriodSeeder::class,
+            PeriodSubjectSeeder::class,
         ]);
     }
 }

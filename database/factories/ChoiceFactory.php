@@ -18,6 +18,8 @@ class ChoiceFactory extends Factory
     {
         return [
             //
+            'text'      =>  $this->faker->sentence(6, true),
+            'option'    =>  $this->faker->word(),
         ];
     }
 }

@@ -8,4 +8,16 @@ use Illuminate\Database\Eloquent\Model;
 class Choice extends Model
 {
     use HasFactory;
+
+    protected $fillable = [
+        'text',
+        'option',
+        'is_true',
+        'question_id',
+    ];
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
 }

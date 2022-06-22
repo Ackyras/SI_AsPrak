@@ -136,6 +136,9 @@ $subjects = array(
                                 <td>{{ $subject->pivot->exam_end }}</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-between ">
+                                        <a role="button"
+                                            href="{{route('admin.data.master.period.subject.question.index', [$period, $subject])}}"
+                                            class="btn btn-sm btn-warning">Detail</a>
                                         <!-- Edit Subject Button -->
                                         <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                             data-target="#subjectEditFormModal{{ $subject->id }}">Edit</button>
@@ -155,46 +158,6 @@ $subjects = array(
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    {{-- <form action="">
-                                                        @csrf
-                                                        <div class="modal-body">
-                                                            <div class="form-group">
-                                                                <label for="name">Nama mata kuliah</label>
-                                                                <input type="text" id="name" name="name"
-                                                                    class="form-control" required autocomplete="off"
-                                                                    placeholder="Nama mata kuliah"
-                                                                    value="{{ $subject->name }}" disabled>
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="number_of_lab_assistant">Kuota asisten
-                                                                    praktikum</label>
-                                                                <input type="text" id="number_of_lab_assistant"
-                                                                    name="number_of_lab_assistant" class="form-control"
-                                                                    required autocomplete="off"
-                                                                    placeholder="(masukkan angka)"
-                                                                    value="{{ $subject->number_of_lab_assistant }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exam_start">Tanggal mulai ujian</label>
-                                                                <input type="datetime-local" id="exam_start"
-                                                                    name="exam_start" class="form-control" required
-                                                                    autocomplete="off"
-                                                                    value="{{ date('Y-m-d\TH:i:s', strtotime($subject->exam_start)) }}">
-                                                            </div>
-                                                            <div class="form-group">
-                                                                <label for="exam_end">Tanggal selesai ujian</label>
-                                                                <input type="datetime-local" id="exam_end"
-                                                                    name="exam_end" class="form-control" required
-                                                                    autocomplete="off"
-                                                                    value="{{ date('Y-m-d\TH:i:s', strtotime($subject->exam_end)) }}">
-                                                            </div>
-                                                        </div>
-
-                                                        <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary">SIMPAN
-                                                                PERUBAHAN</button>
-                                                        </div>
-                                                    </form> --}}
                                                     <form method="POST"
                                                         action="{{ route('admin.data.master.period.updateSubject', [$period, $subject]) }}">
                                                         @csrf

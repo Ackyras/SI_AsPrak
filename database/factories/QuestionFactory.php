@@ -18,6 +18,8 @@ class QuestionFactory extends Factory
     {
         return [
             //
+            'text'          =>  $this->faker->sentences(3, true),
+            'score'         =>  5
         ];
     }
 }
