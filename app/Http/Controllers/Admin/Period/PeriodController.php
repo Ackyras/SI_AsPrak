@@ -15,7 +15,7 @@ class PeriodController extends Controller
     public function index()
     {
         $periods = Period::all();
-        return view('admin.DataMaster.Periods.index', compact('periods'));
+        return view('admin.pages.datamaster.periods.index', compact('periods'));
     }
 
     public function create()
@@ -58,7 +58,7 @@ class PeriodController extends Controller
         $allsubjects = Subject::whereDoesntHave('periods', function ($query) use ($period) {
             $query->where('period_id', $period->id);
         })->orderBy('name')->get();
-        return view('admin.DataMaster.Periods.show', compact('period', 'allsubjects'));
+        return view('admin.pages.datamaster.periods.show', compact('period', 'allsubjects'));
     }
 
     /**
@@ -72,7 +72,7 @@ class PeriodController extends Controller
         //
         $period->load('subjects');
         $subjects = Subject::all();
-        return view('admin.DataMaster.Periods.edit', compact('period', 'subjects'));
+        return view('admin.pages.datamaster.periods.edit', compact('period', 'subjects'));
     }
 
     /**

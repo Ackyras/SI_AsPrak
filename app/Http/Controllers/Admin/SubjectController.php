@@ -12,7 +12,7 @@ class SubjectController extends Controller
     public function index()
     {
         $subjects = Subject::all();
-        return view('admin.DataMaster.Subjects.index', compact('subjects'));
+        return view('admin.pages.datamaster.subjects.index', compact('subjects'));
     }
 
     /**
@@ -23,7 +23,7 @@ class SubjectController extends Controller
     public function create()
     {
         //
-        return view('admin.DataMaster.Subjects.create');
+        return view('admin.pages.datamaster.subjects.create');
     }
 
     /**
@@ -71,7 +71,7 @@ class SubjectController extends Controller
     public function edit(Subject $subject)
     {
         //
-        return view('admin.DataMaster.Subjects.edit', compact('subject'));
+        return view('admin.pages.datamaster.subjects.edit', compact('subject'));
     }
 
     /**
