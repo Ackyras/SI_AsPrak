@@ -9,7 +9,9 @@ use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\Admin\DataMasterController;
 use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionController;
 use App\Http\Controllers\Admin\RegistrarController;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\User\UserDashboardController;
+use App\Http\Controllers\Website\NewsController;
 use App\Http\Controllers\Website\RegistrationController;
 use App\Models\Period;
 
@@ -18,13 +20,26 @@ use App\Models\Period;
 // })->name('home');
 
 Route::as('website.')->group(function () {
-    Route::get('/', function () {
-        return view('website.pages.home.index');
-    })->name('home');
+    // Route::get('/', function () {
+    //     return view('website.pages.home.index');
+    // })->name('home');
 
-    Route::as('registration.')->group(function () {
-        Route::get('/registration', [RegistrationController::class, 'index'])->name('index');
+    Route::controller(HomeController::class)->group(function () {
+        Route::get('/', 'index')->name('home');
     });
+    Route::prefix('period/{period}')->group(function () {
+
+        Route::controller(NewsController::class)->prefix('news')->as('news.')->group(function () {
+
+            Route::get('registration', 'open_for_selection')->middleware('news_open_for_registration')->name('open_for_selection');
+            Route::get('file_selection', 'file_selection_over')->name('file_selection_over');
+            Route::get('final_result', 'exam_selection_over')->name('exam_selection_over');
+        });
+        Route::as('registration.')->group(function () {
+            Route::get('/registration', [RegistrationController::class, 'index'])->name('index');
+        });
+    });
+
     // Route::as('register.')->prefix('register')->group(function () {
     //     // Route::get()
     // });
