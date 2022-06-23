@@ -4,6 +4,8 @@ namespace App\Http;
 
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AuthGatesMiddleware;
+use App\Http\Middleware\News\ExamSelectionOver;
+use App\Http\Middleware\News\FileSelectionOver;
 use App\Http\Middleware\News\OpenForSelection;
 use App\Http\Middleware\Recruitment\ExamMiddleware;
 use App\Http\Middleware\Recruitment\PassFileSelectionMiddleware;
@@ -74,6 +76,8 @@ class Kernel extends HttpKernel
         'admin' => AuthGatesMiddleware::class,
         'user' => UserMiddleware::class,
         'news_open_for_registration'    =>  OpenForSelection::class,
+        'news_file_selection_is_over'   =>  FileSelectionOver::class,
+        'news_exam_selection_is_over'   =>  ExamSelectionOver::class,
         'is_selection_open'         =>  RegistrationOpenMiddleware::class,
         'is_eligible_for_exam'      =>  ExamMiddleware::class,
         'is_pass_file_selection'    =>  PassFileSelectionMiddleware::class
