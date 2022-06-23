@@ -13,6 +13,15 @@ class Period extends Model
         'name',
         'registration_start',
         'registration_end',
+        'is_active',
+        'is_active_date',
+        'is_open_for_selection',
+        'is_open_for_selection_date',
+        'is_file_selection_over',
+        'is_file_selection_over_date',
+        'is_exam_selection_over',
+        'is_exam_selection_over_date',
+        'selection_poster',
     ];
 
     public function registrars()
