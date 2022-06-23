@@ -19,8 +19,14 @@ return new class extends Migration
             $table->dateTime('registration_start');
             $table->dateTime('registration_end');
             $table->boolean('is_active')->default(true);
+            $table->dateTime('is_active_date')->nullable();
             $table->boolean('is_open_for_selection')->default(false);
-            $table->boolean('is_selection_over')->default(false);
+            $table->dateTime('is_open_for_selection_date')->nullable();
+            $table->string('selection_poster')->nullable();
+            $table->boolean('is_file_selection_over')->default(false);
+            $table->dateTime('is_file_selection_over_date')->nullable();
+            $table->boolean('is_exam_selection_over')->default(false);
+            $table->dateTime('is_exam_selection_over_date')->nullable();
             $table->timestamps();
         });
     }

@@ -27,6 +27,14 @@ class PeriodSeeder extends Seeder
                 'registration_start'    =>  Carbon::now(),
                 'registration_end'     =>   Carbon::now()->addDays(7),
                 'is_active'             =>  true,
+                'is_active_date'        =>  Carbon::now(),
+                'is_open_for_selection'     =>  true,
+                'is_open_for_selection_date'        =>  Carbon::now(),
+                'is_file_selection_over'        =>  true,
+                'is_file_selection_over_date'       =>  Carbon::now(),
+                'is_exam_selection_over'        =>  true,
+                'is_exam_selection_over_date'       =>  Carbon::now(),
+                'selection_poster'  =>  asset('images/Poster.jpeg'),
             ]
         );
         $subjects = Subject::inRandomOrder()->limit(5)->get();
