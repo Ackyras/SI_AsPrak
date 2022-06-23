@@ -24,13 +24,6 @@ class RegistrationController extends Controller
         return view('website.pages.registration.index', compact('period'));
     }
 
-    public function register()
-    {
-        $period = $this->period;
-        $period->load('subjects');
-        return view('website.registration.register', compact('period'));
-    }
-
     public function store(StoreRegistrarRequest $request, Period $period)
     {
         $period = $this->period;
