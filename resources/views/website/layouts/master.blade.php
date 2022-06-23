@@ -28,9 +28,7 @@
 
     @include('website.layouts.navigation')
 
-    {{-- <div class="absolute top-12 lg:top-14 w-full min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-3.5rem)] bg-[url('/images/bgpattern.jpg')] bg-contain bg-repeat p-[10px] lg:py-[16px]"> --}}
     <div class="absolute top-12 lg:top-14 w-full min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-3.5rem)] bg-emerald-200 p-[10px] lg:py-[16px]">
-        {{-- <div class="absolute index-0 bg-white opacity-95"></div> --}}
         @yield('content')
     </div>
 
