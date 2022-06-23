@@ -32,8 +32,8 @@ Route::as('website.')->group(function () {
         Route::controller(NewsController::class)->prefix('news')->as('news.')->group(function () {
 
             Route::get('registration', 'open_for_selection')->middleware('news_open_for_registration')->name('open_for_selection');
-            Route::get('file_selection', 'file_selection_over')->name('file_selection_over');
-            Route::get('final_result', 'exam_selection_over')->name('exam_selection_over');
+            Route::get('file_selection', 'file_selection_over')->middleware('news_file_selection_is_over')->name('file_selection_over');
+            Route::get('final_result', 'exam_selection_over')->middleware('news_exam_selection_is_over')->name('exam_selection_over');
         });
         Route::as('registration.')->group(function () {
             Route::get('/registration', [RegistrationController::class, 'index'])->name('index');
