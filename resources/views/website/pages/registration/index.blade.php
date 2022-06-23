@@ -1,97 +1,97 @@
 @php
-$subjects = array(
-(object)[
-"id" => 1,
-"name" => "Algoritma Pemrograman 2",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 2,
-"name" => "Algoritma Pemrograman 1",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 3,
-"name" => "PKS 1",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 4,
-"name" => "PKS 2",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 5,
-"name" => "Algoritma dan Struktur Data",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 6,
-"name" => "Pemrograman Berbasis Objek",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 7,
-"name" => "Basis Data",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 8,
-"name" => "Manajemen Basis Data",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 9,
-"name" => "Dasar Rekayasa Perangkat Lunak",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 10,
-"name" => "Rekayasa Perangkat Lunak",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 11,
-"name" => "Manajemen Proyek Teknologi Informasi",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 12,
-"name" => "Proyek Teknologi Informasi",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 13,
-"name" => "Interaksi Manusia dan Komputer",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-);
+    $subjects = array(
+        (object)[
+        "id" => 1,
+        "name" => "Algoritma Pemrograman 2",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 2,
+        "name" => "Algoritma Pemrograman 1",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 3,
+        "name" => "PKS 1",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 4,
+        "name" => "PKS 2",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 5,
+        "name" => "Algoritma dan Struktur Data",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 6,
+        "name" => "Pemrograman Berbasis Objek",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 7,
+        "name" => "Basis Data",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 8,
+        "name" => "Manajemen Basis Data",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 9,
+        "name" => "Dasar Rekayasa Perangkat Lunak",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 10,
+        "name" => "Rekayasa Perangkat Lunak",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 11,
+        "name" => "Manajemen Proyek Teknologi Informasi",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 12,
+        "name" => "Proyek Teknologi Informasi",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+        (object)[
+        "id" => 13,
+        "name" => "Interaksi Manusia dan Komputer",
+        "number_of_lab_assistant" => 4,
+        "exam_start" => "2022/02/15 00:00:00",
+        "exam_end" => "2022/02/22 23:59:00",
+        ],
+    );
 @endphp
 @extends('website.layouts.master')
 
@@ -108,36 +108,77 @@ $subjects = array(
             <!-- NAMA -->
             <div class="mb-4">
                 <label class="block w-full text-gray-500 mb-2 text-lg font-semibold" for="name">Nama Lengkap</label>
-                <input
-                    class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
-                    type="text" name="name" id="name" autocomplete="off" required />
+                <div class="relative">
+                    <input
+                        class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
+                        type="text" name="name" id="name" autocomplete="off" required />
+                    <div id="nameAllowed" class="hidden absolute top-0 right-0 text-emerald-400 m-1 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div id="nameError" class="hidden absolute top-0 right-0 text-red-400 m-1 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+                <p id="nameErrorMsg" class="hidden mt-1 w-fit py-1 px-2 rounded-sm text-xs font-thin border-[1px] text-red-600 bg-red-50 border-red-400"></p>
             </div>
             <!-- NIM -->
             <div class="mb-4">
                 <label class="block w-full text-gray-500 mb-2 text-lg font-semibold" for="nim">Nomor Induk
                     Mahasiswa</label>
-                <input
-                    class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
-                    type="text" name="nim" id="nim" autocomplete="off" required />
+                <div class="relative">
+                    <input
+                        class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
+                        type="text" name="nim" id="nim" autocomplete="off" required />
+                    <div id="nimAllowed" class="hidden absolute top-0 right-0 text-emerald-400 m-1 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div id="nimError" class="hidden absolute top-0 right-0 text-red-400 m-1 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+                <p id="nimErrorMsg" class="hidden mt-1 w-fit py-1 px-2 rounded-sm text-xs font-thin border-[1px] text-red-600 bg-red-50 border-red-400"></p>
             </div>
             <!-- EMAIL -->
             <div class="mb-4">
-                <label class="block w-full text-gray-500 mb-2 text-lg font-semibold" for="email">Alamat Email <sub>(Anda
-                        akan mendapat kabar melalui email ITERA)</sub></label>
-                <input
-                    class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
-                    type="email" name="email" id="email" autocomplete="off" required />
+                <label class="block w-full text-gray-500 mb-2" for="email">
+                    <p class="text-lg font-semibold">Alamat Email</p>
+                    <p class="text-xs lg:text-sm font-thin">Gunakan alamat email ITERA untuk memudahkan kami mengirim informasi kepada anda</p>
+                </label>
+                <div class="relative">
+                    <input
+                        class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
+                        type="email" name="email" id="email" autocomplete="off" required />
+                    <div id="emailAllowed" class="hidden absolute top-0 right-0 text-emerald-400 m-1 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                    <div id="emailError" class="hidden absolute top-0 right-0 text-red-400 m-1 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z" clip-rule="evenodd" />
+                        </svg>
+                    </div>
+                </div>
+                <p id="emailErrorMsg" class="hidden mt-1 w-fit py-1 px-2 rounded-sm text-xs font-thin border-[1px] text-red-600 bg-red-50 border-red-400"></p>
             </div>
             <!-- SUBJECT -->
             <div class="mb-4">
-                <p class="block w-full text-gray-500 text-lg font-semibold mb-2">Pilihan Mata Kuliah</p>
-                <div class="px-2">
+                <p class="block w-full text-gray-500 text-lg font-semibold">Pilihan Mata Kuliah</p>
+                <div class="px-2 mt-2">
                     @foreach ($period->subjects as $subject)
-                    <input type="checkbox" id="subject[]" name="subject[]" value="{{ $subject->id }}"
+                    <input type="checkbox" id="subject_{{ $subject->id }}" name="subject[]" value="{{ $subject->id }}"
                         class="subject-checkbox hidden">
-                    <label for="subject[]" class="flex items-center gap-2 mb-2">
-                        <div id="cbcontainer[]" class="p-0.5 border-2 border-white">
-                            <div id="cbchecklist[]" class="text-white border-2 border-emerald-600 bg-white">
+                    <label for="subject_{{ $subject->id }}" class="flex items-center gap-2 mb-2">
+                        <div id="cbcontainer_{{ $subject->id }}" class="p-0.5 border-2 border-white">
+                            <div id="cbchecklist_{{ $subject->id }}" class="text-white border-2 border-emerald-600 bg-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path fill-rule="evenodd"
@@ -146,12 +187,15 @@ $subjects = array(
                                 </svg>
                             </div>
                         </div>
-                        <p id="subjectname[]" class="text-base text-gray-500">
+                        <p id="subjectname_{{ $subject->id }}" class="text-base text-gray-500">
                             {{ $subject->name }}
                         </p>
                     </label>
                     @endforeach
                 </div>
+                <p id="subjectErrorMsg" class="hidden mt-1 w-fit py-1 px-2 rounded-sm text-xs font-thin border-[1px] text-red-600 bg-red-50 border-red-400">
+                    Anda hanya dapat memilih <span class="font-semibold">maksimal 3</span> mata kuliah
+                </p>
             </div>
             <!-- CV -->
             <div class="mb-4">
@@ -303,11 +347,84 @@ $subjects = array(
         }
 
         $(document).ready(function () {
+            // NAMA
+            $("#name").focusout(function (e) { 
+                e.preventDefault();
+
+                let name = document.getElementById("name").value;
+                $("#nameAllowed").addClass("hidden");
+                $("#nameError").addClass("hidden");
+                $("#nameErrorMsg").addClass("hidden");
+
+                if (name.length <= 0){
+                    $("#nameError").removeClass("hidden");
+                    $("#nameErrorMsg").text("Nama tidak boleh kosong");
+                    $("#nameErrorMsg").removeClass("hidden");
+                }else{
+                    $("#nameAllowed").removeClass("hidden");
+                }
+                
+            });
+
+            // NIM
+            $("#nim").focusout(function (e) { 
+                e.preventDefault();
+
+                let nimRegex = /^([\d]{8,9})$/;
+
+                let nim = document.getElementById("nim").value;
+                $("#nimAllowed").addClass("hidden");
+                $("#nimError").addClass("hidden");
+                $("#nimErrorMsg").addClass("hidden");
+
+                if ( nim.length <= 0 ){
+                    $("#nimError").removeClass("hidden");
+                    $("#nimErrorMsg").text("NIM tidak boleh kosong");
+                    $("#nimErrorMsg").removeClass("hidden");
+                }else if( nim.length > 9 || !(nim.match(nimRegex)) ){
+                    $("#nimError").removeClass("hidden");
+                    $("#nimErrorMsg").text("NIM tidak valid");
+                    $("#nimErrorMsg").removeClass("hidden");
+                }
+                else{
+                    $("#nimAllowed").removeClass("hidden");
+                }
+                
+            });
+
+            // EMAIL
+            $("#email").focusout(function (e) { 
+                e.preventDefault();
+
+                let emailRegex =  /^([a-z]{3,})\.([\d]{8,9})@student\.itera\.ac\.id$/;
+
+                let email = document.getElementById("email").value;
+                $("#emailAllowed").addClass("hidden");
+                $("#emailError").addClass("hidden");
+                $("#emailErrorMsg").addClass("hidden");
+
+                if ( email.length <= 0 ){
+                    $("#emailError").removeClass("hidden");
+                    $("#emailErrorMsg").text("Email tidak boleh kosong");
+                    $("#emailErrorMsg").removeClass("hidden");
+                }else if( !(email.match(emailRegex)) ){
+                    $("#emailError").removeClass("hidden");
+                    $("#emailErrorMsg").text("Gunakan email ITERA yang valid");
+                    $("#emailErrorMsg").removeClass("hidden");
+                }
+                else{
+                    $("#emailAllowed").removeClass("hidden");
+                }
+                
+            });
+
             // CHECKBOX PILIH MATA KULIAH
             const limit = 3;
             $('input.subject-checkbox').on('change', function(evt) {
+                $("#subjectErrorMsg").addClass("hidden");
                 if($(this).siblings(':checked').length >= limit) {
                     this.checked = false;
+                    $("#subjectErrorMsg").removeClass("hidden");
                 }
                 let id = $(this).attr('id').split('_')[1];
                 if(this.checked){
