@@ -34,7 +34,8 @@ class PeriodSeeder extends Seeder
                 'is_file_selection_over_date'       =>  Carbon::now(),
                 'is_exam_selection_over'        =>  true,
                 'is_exam_selection_over_date'       =>  Carbon::now(),
-                'selection_poster'  =>  asset('images/Poster.jpeg'),
+                // 'selection_poster'  =>  asset('images/Poster.jpeg'),
+                'selection_poster'  =>  'images/Poster.jpeg',
             ]
         );
         $subjects = Subject::inRandomOrder()->limit(5)->get();
