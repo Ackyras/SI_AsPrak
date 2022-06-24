@@ -242,14 +242,24 @@
 
             <div class="card-body">
                 <div id="period_subject_registrar_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                    <div class="w-25 mb-3">
-                        <select class="custom-select" id="subjectFilter">
-                            <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
-                            @foreach ($subjects as $subject)
-                                <option>{{ $subject->name }}</option>
-                            @endforeach
-                        </select>
-                    </div>
+                    {{-- <div class="d-flex mb-3"> --}}
+                        <div class="w-25 mb-3">
+                            <select class="custom-select" id="subjectFilter">
+                                <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
+                                @foreach ($subjects as $subject)
+                                    <option>{{ $subject->name }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        {{-- <div class="w-25">
+                            <select class="custom-select" id="nameFilter">
+                                <option value="" class="font-weight-bold">Filter Nama</option>
+                                @foreach ($period_subject_registrars as $psr)
+                                    <option>{{ $psr->registrar->name }}</option>
+                                @endforeach
+                            </select>
+                        </div> --}}
+                    {{-- </div> --}}
                     <table id="period_subject_registrar_table" class="table table-bordered table-hover dataTable dtr-inline collapsed"
                         aria-describedby="period_subject_registrar_table_info">
                         <thead>
@@ -282,14 +292,55 @@
                                     </td>
                                     <td class="text-align: center;">
                                         @if ($psr->is_pass_file)
-                                            <button type="button" class="btn btn-sm btn-block btn-success">Lulus</button>
+                                            <button type="button" class="btn btn-sm btn-block btn-success" data-toggle="modal"
+                                                data-target="#IPFSEFM{{ $psr->id }}"
+                                            >
+                                                Lulus
+                                            </button>
                                         @else
-                                            <button type="button" class="btn btn-sm btn-block btn-danger">Tidak Lulus</button>
+                                            <button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal"
+                                                data-target="#IPFSEFM{{ $psr->id }}"
+                                            >
+                                                Tidak Lulus
+                                            </button>
                                         @endif
+                                        <div class="modal fade" id="IPFSEFM{{ $psr->id }}" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="IPFSEFMLabel{{ $psr->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title font-weight-bold" id="IPFSEFMLabel{{ $psr->id }}">
+                                                            Ubah Status Kelulusan
+                                                        </h3>
+                                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form action="">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            @if ($psr->is_pass_file)
+                                                                <h5>
+                                                                    Anda akan mengubah status Kelululusan <span class="font-weight-bold">{{ $psr->registrar->name }}</span>
+                                                                    dari <span class="badge badge-success">Lulus</span> menjadi <span class="badge badge-danger">Tidak Lulus</span>.
+                                                                </h5>
+                                                                <h5>Simpan perubahan ini?</h5>
+                                                            @else
+                                                                <h5>
+                                                                    Anda akan mengubah status Kelululusan <span class="font-weight-bold">{{ $psr->registrar->name }}</span>
+                                                                    dari <span class="badge badge-danger">Tidak Lulus</span> menjadi <span class="badge badge-success">Lulus</span>.
+                                                                </h5>
+                                                                <h5>Simpan perubahan ini?</h5>
+                                                            @endif
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary">SIMPAN
+                                                                PERUBAHAN</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </td>
-                                    {{-- <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                        <button type="button" class="btn btn-info">Transkrip</button>
-                                    </div> --}}
                                     {{-- <td>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <a class="btn btn-sm btn-success"
@@ -443,6 +494,9 @@
             $('#subjectFilter').on('change', function(){
                 $('#period_subject_registrar_table').dataTable().fnFilter(this.value);
             });
+            // $('#nameFilter').on('change', function(){
+            //     $('#period_subject_registrar_table').dataTable().fnFilter(this.value);
+            // });
         });
     </script>
 @endsection
