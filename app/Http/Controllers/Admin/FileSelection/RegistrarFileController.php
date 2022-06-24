@@ -1,17 +1,15 @@
 <?php
 
-namespace App\Http\Controllers\Admin;
+namespace App\Http\Controllers\Admin\FileSelection;
 
 use App\Http\Controllers\Controller;
-use App\Models\Registrar;
-use App\Http\Requests\Registrar\StoreRegistrarRequest;
-use App\Http\Requests\Registrar\UpdateRegistrarRequest;
+use Illuminate\Http\Request;
 
-class RegistrarController extends Controller
+class RegistrarFileController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.datamaster.registrar.index');
+        return view('admin.pages.fileselection.registrarfile.index');
     }
 
     /**
@@ -27,10 +25,10 @@ class RegistrarController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreRegistrarRequest  $request
+     * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreRegistrarRequest $request)
+    public function store(Request $request)
     {
         //
     }
@@ -38,10 +36,10 @@ class RegistrarController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Registrar  $registrar
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show(Registrar $registrar)
+    public function show($id)
     {
         //
     }
@@ -49,10 +47,10 @@ class RegistrarController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Registrar  $registrar
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function edit(Registrar $registrar)
+    public function edit($id)
     {
         //
     }
@@ -60,11 +58,11 @@ class RegistrarController extends Controller
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateRegistrarRequest  $request
-     * @param  \App\Models\Registrar  $registrar
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateRegistrarRequest $request, Registrar $registrar)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -72,10 +70,10 @@ class RegistrarController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Registrar  $registrar
+     * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Registrar $registrar)
+    public function destroy($id)
     {
         //
     }

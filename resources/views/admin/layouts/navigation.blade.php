@@ -43,13 +43,46 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
-                            {{-- <i class="fas fa-users nav-icon"></i> --}}
+                        <a href="{{ route('admin.data.master.registrar.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.data.master.registrar.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-user-edit nav-icon"></i>
                             <p>Pendaftar</p>
                         </a>
                     </li>
+                    {{-- <li class="nav-item">
+                        <a href="#seleksiberkasdropdown"
+                            class="nav-link {{ request()->routeIs('admin.data.master.file.selection*') ? 'bg-light' : '' }}"
+                            data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksiberkasdropdown">
+                            <i class="nav-icon fas fa-table nav-icon"></i>
+                            <p class="text-light">
+                                Seleksi Berkas
+                                <i class="fas fa-angle-left right text-light"></i>
+                            </p>
+                        </a>
+                        <ul class="nav py-2 bg-secondary rounded collapse" id="seleksiberkasdropdown">
+                            <li class="nav-item">
+                                <a href="#"
+                                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                                    <i class="fas fa-list-alt nav-icon"></i>
+                                    <p>Form Seleksi</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#"
+                                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                                    <i class="fas fa-user-clock nav-icon"></i>
+                                    <p>Data Calon Asisten</p>
+                                </a>
+                            </li>
+                            <li class="nav-item">
+                                <a href="#"
+                                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                                    <i class="fas fa-user-check nav-icon"></i>
+                                    <p>Data Lolos Berkas</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </li> --}}
                     <li class="nav-item">
                         <a href="#"
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
@@ -62,6 +95,78 @@
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-archive nav-icon"></i>
                             <p>Berkas</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- SELEKSI BERKAS -->
+            <li class="nav-item mb-3">
+                <a href="#seleksiberkasdropdown"
+                    class="nav-link {{ request()->routeIs('admin.file.selection.*') ? 'bg-light' : '' }}"
+                    data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksiberkasdropdown">
+                    <i class="nav-icon fas fa-file-alt nav-icon"></i>
+                    <p>
+                        Seleksi Berkas
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav py-2 bg-secondary rounded collapse" id="seleksiberkasdropdown">
+                    <li class="nav-item">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="fas fa-list-alt nav-icon"></i>
+                            <p>Form Seleksi</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.file.selection.registrar-file.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.file.selection.registrar-file.*') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="fas fa-user-clock nav-icon"></i>
+                            <p>Data Calon Asisten</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="fas fa-user-check nav-icon"></i>
+                            <p>Data Lolos Berkas</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
+            <!-- SELESKI TES -->
+            <li class="nav-item mb-3">
+                <a href="#seleksitesdropdown"
+                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
+                    data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksitesdropdown">
+                    <i class="nav-icon fas fa-pen-square nav-icon"></i>
+                    <p>
+                        Seleksi Tes
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="nav py-2 bg-secondary rounded collapse" id="seleksitesdropdown">
+                    <li class="nav-item">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="fas fa-list-ol nav-icon"></i>
+                            <p>Soal dan Kunci</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="fas fa-th-list nav-icon"></i>
+                            <p>Data Nilai Tes</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="#"
+                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="fas fa-clipboard-check nav-icon"></i>
+                            <p>Data Lolos Tes</p>
                         </a>
                     </li>
                 </ul>
@@ -127,78 +232,6 @@
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-bullhorn nav-icon"></i>
                             <p>Pengumuman</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- SELEKSI BERKAS -->
-            <li class="nav-item mb-3">
-                <a href="#seleksiberkasdropdown"
-                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
-                    data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksiberkasdropdown">
-                    <i class="nav-icon fas fa-file-alt nav-icon"></i>
-                    <p>
-                        Seleksi Berkas
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="seleksiberkasdropdown">
-                    <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
-                            <i class="fas fa-list-alt nav-icon"></i>
-                            <p>Form Seleksi</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
-                            <i class="fas fa-user-clock nav-icon"></i>
-                            <p>Data Calon Asisten</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
-                            <i class="fas fa-user-check nav-icon"></i>
-                            <p>Data Lolos Berkas</p>
-                        </a>
-                    </li>
-                </ul>
-            </li>
-
-            <!-- SELESKI TES -->
-            <li class="nav-item mb-3">
-                <a href="#seleksitesdropdown"
-                    class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
-                    data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksitesdropdown">
-                    <i class="nav-icon fas fa-pen-square nav-icon"></i>
-                    <p>
-                        Seleksi Tes
-                        <i class="fas fa-angle-left right"></i>
-                    </p>
-                </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="seleksitesdropdown">
-                    <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
-                            <i class="fas fa-list-ol nav-icon"></i>
-                            <p>Soal dan Kunci</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
-                            <i class="fas fa-th-list nav-icon"></i>
-                            <p>Data Nilai Tes</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
-                            <i class="fas fa-clipboard-check nav-icon"></i>
-                            <p>Data Lolos Tes</p>
                         </a>
                     </li>
                 </ul>
