@@ -1,19 +1,20 @@
 <?php
 
 use Inertia\Inertia;
+use App\Models\Period;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
-use App\Http\Controllers\Admin\Period\PeriodController;
+use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Website\NewsController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\DashboardController;
-use App\Http\Controllers\Admin\DataMasterController;
-use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionController;
 use App\Http\Controllers\Admin\RegistrarController;
-use App\Http\Controllers\HomeController;
+use App\Http\Controllers\Admin\DataMasterController;
 use App\Http\Controllers\User\UserDashboardController;
-use App\Http\Controllers\Website\NewsController;
+use App\Http\Controllers\Admin\Period\PeriodController;
 use App\Http\Controllers\Website\RegistrationController;
-use App\Models\Period;
+use App\Http\Controllers\Admin\FileSelection\RegistrarFileController;
+use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionController;
 
 // Route::get('/', function () {
 //     return view('home');
@@ -79,9 +80,9 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
                 Route::resource('question', PeriodQuestionController::class);
             });
         });
-        Route::resource('period',        PeriodController::class);
-        Route::resource('subject',        SubjectController::class)->only('index');
-        Route::resource('registrar', RegistrarController::class);
+        Route::resource('period',           PeriodController::class);
+        Route::resource('subject',          SubjectController::class)->only('index');
+        Route::resource('registrar',        RegistrarController::class);
         // Route::resource('assistant',       AssitantController::class)->except('show');
         // Route::resource('archive',  ArchiveController::class)->only('index');
     });
@@ -89,6 +90,10 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::prefix('schedule')->as('schedule.')->group(function () {
         // Ini cuma dipake sementara
         Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
+    });
+
+    Route::prefix('file-selection')->as('file.selection.')->group(function () {
+        Route::resource('registrar-file',           RegistrarFileController::class);
     });
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');

@@ -43,19 +43,19 @@
         </p>
     </div>
     @forelse ($periods as $period)
-        <div class="mb-4 flex justify-between items-center border-b-2 border-emerald-600 text-gray-700 pb-2">
+        <div class="mb-4 flex justify-between items-center border-b-2 border-emerald-400 text-gray-700 pb-2">
             <p id="periodNameNews_{{ $period->id }}" class="cursor-pointer flex items-center period-name">
-                <span class="text-base lg:text-xl font-bold lg:tracking-wide">
+                <span class="text-base text-gray-600 lg:text-xl font-bold lg:tracking-wide">
                     {{ $period->name }}
                 </span>
                 <br>
                 <span class="w-fit text-[8px] lg:text-xs ml-2 py-0.5 px-1 rounded border-[1px] font-bold leading-3
-                    {{ $period->is_active ? 'text-blue-50 bg-blue-600 border-blue-600' : 'text-slate-50 bg-slate-600 border-slate-600' }}"
+                    {{ $period->is_active ? 'text-blue-50 bg-blue-600 border-blue-600' : 'text-slate-50 bg-slate-400 border-slate-400' }}"
                 >
                     {{ $period->is_active ? 'AKTIF' : 'TIDAK AKTIF' }}
                 </span>
             </p>
-            <div id="periodOpenNews_{{ $period->id }}" class="cursor-pointer text-gray-700 open-period-news">
+            <div id="periodOpenNews_{{ $period->id }}" class="cursor-pointer text-gray-600 open-period-news">
                 <svg xmlns="http://www.w3.org/2000/svg" class="h-6 lg:h-8 w-6 lg:w-8" viewBox="0 0 20 20" fill="currentColor">
                     <path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd" />
                 </svg>
