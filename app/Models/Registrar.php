@@ -19,6 +19,11 @@ class Registrar extends Model
         'period_id',
     ];
 
+    public function user()
+    {
+        return $this->belongsTo(User::class);
+    }
+
     public function period()
     {
         return $this->belongsTo(Period::class);
