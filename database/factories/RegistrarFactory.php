@@ -21,8 +21,8 @@ class RegistrarFactory extends Factory
             //
             'name'          =>  $this->faker->name(),
             'nim'           =>  $this->faker->randomNumber(9, true),
-            'cv'            =>  'dummy/dummy.pdf',
-            'khs'           =>  'dummy/dummy.pdf',
+            'cv'            =>  'dummy/CV.pdf',
+            'khs'           =>  'dummy/KHS.pdf',
             'transkrip'     =>  'dummy/dummy.pdf',
         ];
     }

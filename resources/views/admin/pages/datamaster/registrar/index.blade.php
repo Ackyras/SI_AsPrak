@@ -1,107 +1,107 @@
 {{-- @php
-$registrars = array(
-(object)[
-'id' => 1,
-'name' => 'Pace Kimak',
-'nim' => '118140088',
-'subjects' => array(
-(object)[
-'id' => 1,
-'name' => 'Filsafat Islam',
-'is_pass_file' => true,
-'is_pass_exam' => false
-],
-(object)[
-'id' => 2,
-'name' => 'Filsafat Hindu',
-'is_pass_file' => false,
-'is_pass_exam' => false
-],
-(object)[
-'id' => 3,
-'name' => 'Filsafat Budha',
-'is_pass_file' => true,
-'is_pass_exam' => false
-],
-),
-],
-(object)[
-'id' => 2,
-'name' => 'Pace Peler',
-'nim' => '118140090',
-'subjects' => array(
-(object)[
-'id' => 4,
-'name' => 'Filsafat Es',
-'is_pass_file' => true,
-'is_pass_exam' => false
-],
-),
-],
-(object)[
-'id' => 3,
-'name' => 'Erdy Gaya Manalu',
-'nim' => '118140069',
-'subjects' => array(
-(object)[
-'id' => 5,
-'name' => 'Kristen Berjaya',
-'is_pass_file' => true,
-'is_pass_exam' => false
-],
-(object)[
-'id' => 6,
-'name' => 'Kristen Itu Indah',
-'is_pass_file' => true,
-'is_pass_exam' => false
-],
-(object)[
-'id' => 7,
-'name' => 'Kristen Agama Nabi',
-'is_pass_file' => false,
-'is_pass_exam' => false
-],
-),
-],
-(object)[
-'id' => 4,
-'name' => 'Markus Togi Fedrian Rivaldi Sinaga',
-'nim' => '118140037',
-'subjects' => array(
-(object)[
-'id' => 1,
-'name' => 'Filsafat Islam',
-'is_pass_file' => false,
-'is_pass_exam' => false
-],
-(object)[
-'id' => 2,
-'name' => 'Filsafat Hindu',
-'is_pass_file' => false,
-'is_pass_exam' => false
-],
-(object)[
-'id' => 3,
-'name' => 'Filsafat Budha',
-'is_pass_file' => true,
-'is_pass_exam' => false
-],
-),
-],
-(object)[
-'id' => 5,
-'name' => 'Erick Thohir',
-'nim' => '118140037',
-'subjects' => array(
-(object)[
-'id' => 2,
-'name' => 'Filsafat Hindu',
-'is_pass_file' => true,
-'is_pass_exam' => false
-],
-),
-],
-);
+    $registrars = array(
+    (object)[
+    'id' => 1,
+    'name' => 'Pace Kimak',
+    'nim' => '118140088',
+    'subjects' => array(
+    (object)[
+    'id' => 1,
+    'name' => 'Filsafat Islam',
+    'is_pass_file' => true,
+    'is_pass_exam' => false
+    ],
+    (object)[
+    'id' => 2,
+    'name' => 'Filsafat Hindu',
+    'is_pass_file' => false,
+    'is_pass_exam' => false
+    ],
+    (object)[
+    'id' => 3,
+    'name' => 'Filsafat Budha',
+    'is_pass_file' => true,
+    'is_pass_exam' => false
+    ],
+    ),
+    ],
+    (object)[
+    'id' => 2,
+    'name' => 'Pace Peler',
+    'nim' => '118140090',
+    'subjects' => array(
+    (object)[
+    'id' => 4,
+    'name' => 'Filsafat Es',
+    'is_pass_file' => true,
+    'is_pass_exam' => false
+    ],
+    ),
+    ],
+    (object)[
+    'id' => 3,
+    'name' => 'Erdy Gaya Manalu',
+    'nim' => '118140069',
+    'subjects' => array(
+    (object)[
+    'id' => 5,
+    'name' => 'Kristen Berjaya',
+    'is_pass_file' => true,
+    'is_pass_exam' => false
+    ],
+    (object)[
+    'id' => 6,
+    'name' => 'Kristen Itu Indah',
+    'is_pass_file' => true,
+    'is_pass_exam' => false
+    ],
+    (object)[
+    'id' => 7,
+    'name' => 'Kristen Agama Nabi',
+    'is_pass_file' => false,
+    'is_pass_exam' => false
+    ],
+    ),
+    ],
+    (object)[
+    'id' => 4,
+    'name' => 'Markus Togi Fedrian Rivaldi Sinaga',
+    'nim' => '118140037',
+    'subjects' => array(
+    (object)[
+    'id' => 1,
+    'name' => 'Filsafat Islam',
+    'is_pass_file' => false,
+    'is_pass_exam' => false
+    ],
+    (object)[
+    'id' => 2,
+    'name' => 'Filsafat Hindu',
+    'is_pass_file' => false,
+    'is_pass_exam' => false
+    ],
+    (object)[
+    'id' => 3,
+    'name' => 'Filsafat Budha',
+    'is_pass_file' => true,
+    'is_pass_exam' => false
+    ],
+    ),
+    ],
+    (object)[
+    'id' => 5,
+    'name' => 'Erick Thohir',
+    'nim' => '118140037',
+    'subjects' => array(
+    (object)[
+    'id' => 2,
+    'name' => 'Filsafat Hindu',
+    'is_pass_file' => true,
+    'is_pass_exam' => false
+    ],
+    ),
+    ],
+    );
 @endphp --}}
 
 @extends('admin.layouts.app')
@@ -145,7 +145,7 @@ $registrars = array(
                                 @if ($period_subject->pivot->is_pass_file_selection)
                                 <span class="badge badge-success">{{ $period_subject->subject->name }}</span>
                                 @else
-                                <span class="badge badge-danger">{{ $period_subject->subject->name }}</span>
+                                <span class="badge badge-secondary">{{ $period_subject->subject->name }}</span>
                                 @endif
                                 @endforeach
                             </td>
@@ -154,7 +154,7 @@ $registrars = array(
                                 @if ($period_subject->pivot->is_pass_exam_selection)
                                 <span class="badge badge-success">{{ $period_subject->subject->name }}</span>
                                 @else
-                                <span class="badge badge-danger">{{ $period_subject->subject->name }}</span>
+                                <span class="badge badge-secondary">{{ $period_subject->subject->name }}</span>
                                 @endif
                                 @endforeach
                             </td>
@@ -173,7 +173,7 @@ $registrars = array(
                 <div class="pb-3">
                     <p>Keterangan :
                         <span class="badge badge-success">Lulus</span>
-                        <span class="badge badge-danger">Belum/Tidak Lulus</span>
+                        <span class="badge badge-secondary">Belum/Tidak Lulus</span>
                     </p>
                 </div>
             </div>
