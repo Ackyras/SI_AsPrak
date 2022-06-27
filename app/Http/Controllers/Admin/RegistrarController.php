@@ -12,7 +12,9 @@ class RegistrarController extends Controller
 {
     public function index()
     {
-        return view('admin.pages.datamaster.registrar.index');
+        $registrars = Registrar::with('period_subjects.subject')->get();
+        // dd($registrars[0]);
+        return view('admin.pages.datamaster.registrar.index', compact('registrars'));
     }
 
     /**
