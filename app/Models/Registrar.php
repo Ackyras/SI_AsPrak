@@ -12,7 +12,6 @@ class Registrar extends Model
     protected $fillable = [
         'name',
         'username',
-        'password',
         'nim',
         'cv',
         'khs',
@@ -23,5 +22,15 @@ class Registrar extends Model
     public function period()
     {
         return $this->belongsTo(Period::class);
+    }
+
+    public function period_subjects()
+    {
+        return $this->belongsToMany(PeriodSubject::class)->withPivot(
+            [
+                'is_pass_file_selection',
+                'is_pass_exam_selection'
+            ]
+        );
     }
 }

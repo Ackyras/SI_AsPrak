@@ -21,7 +21,6 @@ return new class extends Migration
             $table->string('cv');
             $table->string('khs');
             $table->string('transkrip');
-            $table->string('password');
             $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete();
             $table->timestamps();
         });

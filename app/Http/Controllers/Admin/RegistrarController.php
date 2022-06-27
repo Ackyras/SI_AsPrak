@@ -4,8 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Registrar;
-use App\Http\Requests\StoreRegistrarRequest;
-use App\Http\Requests\UpdateRegistrarRequest;
+use App\Http\Requests\Registrar\StoreRegistrarRequest;
+use App\Http\Requests\Registrar\UpdateRegistrarRequest;
+use Illuminate\Support\Facades\Storage;
 
 class RegistrarController extends Controller
 {

@@ -37,6 +37,7 @@ Route::as('website.')->group(function () {
         });
         Route::as('registration.')->group(function () {
             Route::get('/registration', [RegistrationController::class, 'index'])->name('index');
+            Route::post('/registration', [RegistrationController::class, 'store'])->name('store');
         });
     });
 
@@ -80,6 +81,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         });
         Route::resource('period',        PeriodController::class);
         Route::resource('subject',        SubjectController::class)->only('index');
+        Route::resource('registrar', RegistrarController::class);
         // Route::resource('assistant',       AssitantController::class)->except('show');
         // Route::resource('archive',  ArchiveController::class)->only('index');
     });

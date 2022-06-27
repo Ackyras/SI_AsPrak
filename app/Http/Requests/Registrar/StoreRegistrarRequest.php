@@ -13,7 +13,7 @@ class StoreRegistrarRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -25,6 +25,13 @@ class StoreRegistrarRequest extends FormRequest
     {
         return [
             //
+            'name'          =>  'required',
+            'email'         =>  'required|email',
+            'nim'           =>  'required|numeric',
+            'cv'            =>  'required|file',
+            'khs'           =>  'required|file',
+            'transkrip'     =>  'required|file',
+            'subject.*'     =>  'required|max:3'
         ];
     }
 }

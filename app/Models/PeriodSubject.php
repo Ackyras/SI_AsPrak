@@ -39,4 +39,14 @@ class PeriodSubject extends Model
     {
         return $this->belongsTo(Period::class);
     }
+
+    public function registrars()
+    {
+        return $this->belongsToMany(Registrar::class)->withPivot(
+            [
+                'is_pass_file_selection',
+                'is_pass_exam_selection'
+            ]
+        );
+    }
 }
