@@ -21,6 +21,7 @@ return new class extends Migration
             $table->foreignId('period_subject_id')->references('id')->on('period_subject')->cascadeOnDelete();
             $table->foreignIdFor(Registrar::class)->constrained()->cascadeOnDelete();
             $table->boolean('is_pass_file_selection')->default(false);
+            $table->boolean('is_take_exam_selection')->default(false);
             $table->boolean('is_pass_exam_selection')->default(false);
             $table->timestamps();
         });
