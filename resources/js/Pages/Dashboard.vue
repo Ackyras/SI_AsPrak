@@ -1,8 +1,9 @@
 <template>
     <Authenticated>
-        <div class="absolute rounded shadow top-[20px] md:top-[40px] inset-x-[16px] md:inset-x-[240px] bg-white p-6">
-            <!-- <barcode-scanner/> -->
-        </div>
+        <!-- <div class="absolute rounded shadow top-[20px] md:top-[40px] inset-x-[16px] md:inset-x-[240px] bg-white p-6">
+            <barcode-scanner/>
+        </div> -->
+        <div class="min-h-[1000px] border-3 border-purple-500"></div>
 
     </Authenticated>
 </template>
