@@ -4,7 +4,12 @@
     <div class="px-4 md:px-10 mx-auto w-full">
       
       <!-- INFO MESSAGE IF NOT PASS EXAM SELECTION YET -->
-      <div class="px-4 mb-4">
+      <div class="px-4 mb-4"
+        v-bind:class="{
+            'block'      : isWaiting,
+            'hidden'     : !isWaiting,
+        }"
+      >
         <div class="flex gap-2 items-center bg-amber-100 rounded p-2 drop-shadow">
           <span class="text-amber-400">
             <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5 md:h-6 md:w-6" viewBox="0 0 20 20" fill="currentColor">
@@ -26,13 +31,6 @@
       <div class="grid grid-cols-1 md:grid-cols-3 px-4 gap-4 mb-4">
         <card-exam-status v-for="data in psr" :subject-data="data"/>
       </div>
-
-      
-      <!-- <ul>
-          <li v-for="data in psr">
-              {{ data.period_subject.subject.name }}
-          </li>
-      </ul> -->
 
     </div>
   </div>
