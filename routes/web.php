@@ -36,7 +36,7 @@ Route::as('website.')->group(function () {
             Route::get('file_selection', 'file_selection_over')->middleware('news_file_selection_is_over')->name('file_selection_over');
             Route::get('final_result', 'exam_selection_over')->middleware('news_exam_selection_is_over')->name('exam_selection_over');
         });
-        Route::as('registration.')->group(function () {
+        Route::as('registration.')->middleware('is_period_active')->group(function () {
             Route::get('/registration', [RegistrationController::class, 'index'])->name('index');
             Route::post('/registration', [RegistrationController::class, 'store'])->name('store');
         });

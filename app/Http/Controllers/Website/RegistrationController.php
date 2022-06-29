@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Storage;
 class RegistrationController extends Controller
 {
     //
+    public $period;
 
     public function __construct()
     {
@@ -32,33 +33,34 @@ class RegistrationController extends Controller
         $period = $this->period;
         $validated = $request->validated();
         // dd($validated);
-        $oldRegistrar = Registrar::where('nim', $validated['nim'])->with('period_subjects')->first();
-        foreach ($validated['subject'] as $key => $value) {
-            echo $value;
-        }
-        dd($validated);
+        $oldRegistrar = Registrar::query()
+            ->with('period_subjects')
+            ->where('nim', $request->nim)
+            ->first();
+        // dd($oldRegistrar);
+        // dd($oldRegistrar->period_subjects->contains($this->period->id));
         if ($oldRegistrar) {
-            return to_route('website.registration.index', $period)->with(['success' => 'Anda sudah tidak dapat mengajukan pendaftaran']);
+            return to_route('website.registration.index', $period)->with(['failed' => 'Anda sudah tidak dapat mengajukan pendaftaran']);
         }
         $cv = $request->file('cv');
-        $cvFileName = $validated['nim'] . '_cv_' . $cv->getClientOriginalName();
+        $cvFileName = $validated['nim'] . '_cv_' . $cv->hashName() . $cv->extension();
 
         $storecv = Storage::disk('local')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
             $cv,
             $cvFileName
         );
-        $cv = $request->file('cv');
-        $cvFileName = $validated['nim'] . '_cv_' . $cv->getClientOriginalName();
-        // dd($cvFileName);
+        $transkrip = $request->file('transkrip');
+        $transkripFileName = $validated['nim'] . '_transkrip_' . $transkrip->hashName() . $transkrip->extension();
+        // dd($transkripFileName);
 
-        $storecv = Storage::disk('local')->putFileAs(
+        $storetranskrip = Storage::disk('local')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
             $cv,
             $cvFileName
         );
         $khs = $request->file('khs');
-        $khsFileName = $validated['nim'] . '_khs_' . $khs->getClientOriginalName();
+        $khsFileName = $validated['nim'] . '_khs_' . $khs->hashName() . $cv->extension();
         // dd($khsFileName);
 
         $storekhs = Storage::disk('local')->putFileAs(
@@ -67,7 +69,7 @@ class RegistrationController extends Controller
             $khsFileName
         );
         $transkrip = $request->file('transkrip');
-        $transkripFileName = $validated['nim'] . '_transkrip_' . $transkrip->getClientOriginalName();
+        $transkripFileName = $validated['nim'] . '_transkrip_' . $transkrip->hashName() . $cv->extension();
         // dd($transkripFileName);
 
         $storetranskrip = Storage::disk('local')->putFileAs(
@@ -79,7 +81,12 @@ class RegistrationController extends Controller
         $validated['khs'] = $storekhs;
         $validated['transkrip'] = $storetranskrip;
 
+
         $registrar = Registrar::create($validated);
+        dd($validated['subjcect']);
+        $registrar->period_subjects()->sync(
+            $validated['subject']
+        );
         return to_route('website.registration.index', $period)->with(['success' => 'Anda berhasil mendaftar']);
         // return view('website.registration.register', compact('period'));
     }

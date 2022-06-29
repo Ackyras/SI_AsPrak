@@ -2,6 +2,7 @@
 
 namespace App\Http\Middleware\Period;
 
+use App\Models\Period;
 use Closure;
 use Illuminate\Http\Request;
 
@@ -16,7 +17,15 @@ class ActivePeriodMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        
+        $periodid = $request->route()->parameter('period');
+        $period = Period::find($periodid);
+        if (!$period->is_active) {
+            return to_route('website.home')->with(
+                [
+                    'redirected'    =>  'Pengumuman akhir seleksi asisten praktikum ' . $period->name . ' belum diumumkan',
+                ]
+            );
+        }
         return $next($request);
     }
 }
