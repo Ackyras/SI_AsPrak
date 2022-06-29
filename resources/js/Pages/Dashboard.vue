@@ -1,10 +1,10 @@
 <template>
-    <Authenticated :psr_data="period_subject_registrar">
+    <Authenticated :psr_data="user.period_subjects">
         <div class="min-h-[1000px] border-3 border-purple-500">
             <p>{{ user.name }}</p>
             <ul>
-                <li v-for="psr in period_subject_registrar">
-                    {{ psr.period_subject.subject.name }}
+                <li v-for="period_subject in user.period_subjects">
+                    {{ period_subject.subject.name }}
                 </li>
             </ul>
         </div>
@@ -27,10 +27,9 @@ export default {
         // CardSocialTraffic,
         // BarcodeScanner
     },
-    props:{
+    props: {
         user: Object,
-        period_subject_registrar: Object
-    }
+    },
 };
 </script>
 <!-- <div class="absolute rounded shadow top-[20px] md:top-[40px] inset-x-[16px] md:inset-x-[240px] bg-white p-6">
