@@ -1,98 +1,3 @@
-@php
-$subjects = array(
-(object)[
-"id" => 1,
-"name" => "Algoritma Pemrograman 2",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 2,
-"name" => "Algoritma Pemrograman 1",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 3,
-"name" => "PKS 1",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 4,
-"name" => "PKS 2",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 5,
-"name" => "Algoritma dan Struktur Data",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 6,
-"name" => "Pemrograman Berbasis Objek",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 7,
-"name" => "Basis Data",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 8,
-"name" => "Manajemen Basis Data",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 9,
-"name" => "Dasar Rekayasa Perangkat Lunak",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 10,
-"name" => "Rekayasa Perangkat Lunak",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 11,
-"name" => "Manajemen Proyek Teknologi Informasi",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 12,
-"name" => "Proyek Teknologi Informasi",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-(object)[
-"id" => 13,
-"name" => "Interaksi Manusia dan Komputer",
-"number_of_lab_assistant" => 4,
-"exam_start" => "2022/02/15 00:00:00",
-"exam_end" => "2022/02/22 23:59:00",
-],
-);
-@endphp
 @extends('website.layouts.master')
 
 @section('content')
@@ -101,6 +6,15 @@ $subjects = array(
         <p class="text-2xl lg:text-3xl text-center text-emerald-600 font-serif font-bold tracking-wider">Form
             Pendaftaran <br class="lg:hidden">Asisten Praktikum</p>
     </div>
+    @if ($errors->any())
+    <div class="alert alert-danger" role="alert">
+        <ul>
+            @foreach ($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
     <form action="{{ route('website.registration.store', [$period]) }}" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="mb-6" x-data="{
@@ -193,11 +107,11 @@ $subjects = array(
                 <p class="block w-full text-gray-500 text-lg font-semibold">Pilihan Mata Kuliah</p>
                 <div class="px-2 mt-2">
                     @foreach ($period->subjects as $subject)
-                    <input type="checkbox" id="subject_{{ $subject->id }}" name="subject[]" value="{{ $subject->id }}"
-                        class="subject-checkbox hidden">
-                    <label for="subject_{{ $subject->id }}" class="flex items-center gap-2 mb-2">
-                        <div id="cbcontainer_{{ $subject->id }}" class="p-0.5 border-2 border-white">
-                            <div id="cbchecklist_{{ $subject->id }}"
+                    <input type="checkbox" id="subject_{{ $subject->pivot->id }}" name="subject[]"
+                        value="{{ $subject->pivot->id }}" class="subject-checkbox hidden">
+                    <label for="subject_{{ $subject->pivot->id }}" class="flex items-center gap-2 mb-2">
+                        <div id="cbcontainer_{{ $subject->pivot->id }}" class="p-0.5 border-2 border-white">
+                            <div id="cbchecklist_{{ $subject->pivot->id }}"
                                 class="text-white border-2 border-emerald-600 bg-white">
                                 <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
                                     fill="currentColor">
@@ -207,7 +121,7 @@ $subjects = array(
                                 </svg>
                             </div>
                         </div>
-                        <p id="subjectname_{{ $subject->id }}" class="text-base text-gray-500">
+                        <p id="subjectname_{{ $subject->pivot->id }}" class="text-base text-gray-500">
                             {{ $subject->name }}
                         </p>
                     </label>
