@@ -17,8 +17,8 @@ class ActivePeriodMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $periodid = $request->route()->parameter('period');
-        $period = Period::find($periodid);
+        $period = $request->route()->parameter('period');
+        // dd($period);
         if (!$period->is_active) {
             return to_route('website.home')->with(
                 [
