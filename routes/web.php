@@ -93,7 +93,9 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     });
 
     Route::prefix('file-selection')->as('file.selection.')->group(function () {
-        Route::resource('registrar-file',           RegistrarFileController::class);
+        Route::resource('registrar-file',           RegistrarFileController::class)->parameters([
+            'registrar-file' => 'psr'
+        ]);
     });
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
