@@ -188,6 +188,8 @@
     </div>
     <!-- ./wrapper -->
 
+    @yield('modals')
+
     <!-- REQUIRED SCRIPTS -->
     {{-- <script src="{{ asset('js/jquery.slim.min.js') }}"></script> --}}
 
