@@ -13,16 +13,15 @@ use Illuminate\Support\Facades\Storage;
 class RegistrationController extends Controller
 {
     //
-    public $period;
+    // public $period;
 
-    public function __construct()
-    {
-        $this->period = Period::where('is_active', true)->first();
-    }
+    // public function __construct()
+    // {
+    //     $this->period = Period::where('is_active', true)->first();
+    // }
 
-    public function index()
+    public function index(Period $period)
     {
-        $period = $this->period;
         $period->load('subjects');
         // ddd($period);
         return view('website.pages.registration.index', compact('period'));
@@ -30,7 +29,6 @@ class RegistrationController extends Controller
 
     public function store(StoreRegistrarRequest $request, Period $period)
     {
-        $period = $this->period;
         $validated = $request->validated();
         // dd($validated);
         $oldRegistrar = Registrar::query()
@@ -83,10 +81,9 @@ class RegistrationController extends Controller
 
 
         $registrar = Registrar::create($validated);
-        dd($validated['subjcect']);
-        $registrar->period_subjects()->sync(
-            $validated['subject']
-        );
+        foreach ($validated['subject'] as $subject) {
+            $registrar->period_subjects()->attach($subject);
+        }
         return to_route('website.registration.index', $period)->with(['success' => 'Anda berhasil mendaftar']);
         // return view('website.registration.register', compact('period'));
     }
