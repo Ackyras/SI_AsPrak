@@ -16,7 +16,7 @@
                     <select class="custom-select" id="subjectFilter">
                         <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
                         @foreach ($subjects as $subject)
-                            <option value="'{{ $subject->name }}'">{{ $subject->name }}</option>
+                        <option value="'{{ $subject->name }}'">{{ $subject->name }}</option>
                         @endforeach
                     </select>
                 </div>
@@ -47,25 +47,25 @@
                                 $psr->period_subject->subject->name }} </td>
                             <td>
                                 <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal" data-target="#showFileModal"
-                                        data-title="CV {{ $psr->registrar->name }}" data-file="{{ $psr->registrar->cv }}">
-                                        {{-- onclick="ShowFileModalFn('CV {{ $psr->registrar->name }}', '{{ $psr->registrar->cv }}')"> --}}
+                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal"
+                                        data-target="#showFileModal" data-title="CV {{ $psr->registrar->name }}"
+                                        data-file="{{ $psr->registrar->cv }}">
                                         CV
                                     </button>
-                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal" data-target="#showFileModal"
-                                        data-title="KHS {{ $psr->registrar->name }}" data-file="{{ $psr->registrar->khs }}">
-                                        {{-- onclick="ShowFileModalFn('KHS {{ $psr->registrar->name }}', '{{ $psr->registrar->khs }}')"> --}}
+                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal"
+                                        data-target="#showFileModal" data-title="KHS {{ $psr->registrar->name }}"
+                                        data-file="{{ $psr->registrar->khs }}">
                                         KHS
                                     </button>
-                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal" data-target="#showFileModal"
-                                        data-title="Transkrip {{ $psr->registrar->name }}" data-file="{{ $psr->registrar->transkrip }}">
-                                        {{-- onclick="ShowFileModalFn('Transkrip {{ $psr->registrar->name }}', '{{ $psr->registrar->transkrip }}')"> --}}
+                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal"
+                                        data-target="#showFileModal" data-title="Transkrip {{ $psr->registrar->name }}"
+                                        data-file="{{ $psr->registrar->transkrip }}">
                                         Transkrip
                                     </button>
                                 </div>
                             </td>
                             <td class="text-align: center;">
-                                @if ($psr->is_pass_file)
+                                @if ($psr->is_pass_file_selection)
                                 <button type="button" class="btn btn-sm btn-block btn-success" data-toggle="modal"
                                     data-target="#IPFSEFM{{ $psr->id }}">
                                     Lulus
@@ -91,10 +91,13 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form action="">
+                                            <form
+                                                action="{{ route('admin.file.selection.registrar-file.update', $psr) }}"
+                                                method="POST">
                                                 @csrf
+                                                @method('PUT')
                                                 <div class="modal-body">
-                                                    @if ($psr->is_pass_file)
+                                                    @if ($psr->is_pass_file_selection)
                                                     <h5>
                                                         Anda akan mengubah status Kelululusan <span
                                                             class="font-weight-bold">{{ $psr->registrar->name }}</span>
