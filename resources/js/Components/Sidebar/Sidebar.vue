@@ -1,5 +1,5 @@
 <template>
-    <nav class="shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-64 z-50 py-2 px-6 md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden">
+    <nav class="shadow-xl bg-white flex flex-wrap items-center justify-between relative z-50 py-2 px-6 md:w-64 md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden">
         <div class="px-0 flex flex-wrap items-center justify-between w-full mx-auto md:flex-col md:items-stretch md:min-h-full md:flex-nowrap">
             <!-- SIDEBAR TOGGLER -->
             <button type="button" v-on:click="toggleCollapseShow('bg-white m-2 py-3 px-6')"

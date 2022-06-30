@@ -45,21 +45,21 @@
                 </div>
             </div>
             <!-- SUBJECTS' EXAM STATUS -->
-            <div class="grid grid-cols-1 md:grid-cols-3 px-4 gap-4 mb-4">
-                <card-exam-status v-for="data in psr" :subject-data="data" />
-            </div>
+            <!-- <div class="grid grid-cols-1 md:grid-cols-3 px-4 gap-4 mb-4">
+                <card-exams-info v-for="data in psr" :subject-data="data" />
+            </div> -->
         </div>
     </div>
 </template>
 
 <script>
-import CardExamStatus from "@/components/Cards/CardExamStatus.vue";
+import CardExamsInfo from "@/components/Cards/CardExamsInfo.vue";
 import CardStats from "@/components/Cards/CardStats.vue";
 import { Link } from "@inertiajs/inertia-vue3";
 
 export default {
     components: {
-        CardExamStatus,
+        CardExamsInfo,
         CardStats,
         Link,
     },

@@ -1,6 +1,6 @@
 <template>
     <Authenticated :psr_data="user.period_subjects">
-        <div class="">
+        <div class="min-h-[100vh-8.25rem-2px] md:min-h-[100vh-8.75rem]">
             <p class="px-4 my-3 text-lg text-center md:text-left uppercase tracking-wide text-emerald-600 font-bold">Ujian {{ period_subject.subject.name }}</p>
             
             <div class="mb-4 md:px-4 lg:px-[8rem]">
