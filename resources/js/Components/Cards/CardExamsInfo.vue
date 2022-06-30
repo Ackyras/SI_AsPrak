@@ -86,7 +86,7 @@
             </p>
         </div>
 
-        <Link
+        <Link :href="route('user.take.exam',subjectData.id)"
             class="flex gap-2 w-full py-2 px-3 border-t-[1px] items-center text-xs text-yellow-500 hover:bg-yellow-50 hover:text-yellow-600 font-thin rounded-b"
             v-bind:class="{
                 flex: isOpen,
@@ -144,6 +144,11 @@
             </span>
             <p>Ujian Sudah Diselesaikan</p>
         </div>
+        <!-- <p>isDone {{ isDone }}</p>
+        <p>isPastTime {{ isPastTime }}</p>
+        <p>isOpen {{ isOpen }}</p>
+        <p>isWaiting {{ isWaiting }}</p>
+        <p>is_take_exam {{ subjectData.pivot.is_take_exam_selection }}</p> -->
     </div>
 </template>
 <script>
@@ -193,7 +198,7 @@ export default {
             let st = new Date(start_time);
             let et = new Date(end_time);
 
-            if (st > now && et < now && isTakeExam == 0) {
+            if (st < now && et > now && isTakeExam == 0) {
                 this.isOpen = true;
                 this.isWaiting = false;
             } else if (et < now && isTakeExam == 0) {

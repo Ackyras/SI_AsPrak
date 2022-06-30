@@ -64,6 +64,7 @@ Route::as('website.')->group(function () {
 Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
+    Route::get('ujian-seleksi/{subject}', [ExamController::class, 'exam'])->name('take.exam');
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {

@@ -34,6 +34,7 @@ class Registrar extends Model
         return $this->belongsToMany(PeriodSubject::class)->withPivot(
             [
                 'is_pass_file_selection',
+                'is_take_exam_selection',
                 'is_pass_exam_selection'
             ]
         );
