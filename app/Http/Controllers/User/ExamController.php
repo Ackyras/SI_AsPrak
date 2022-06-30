@@ -25,7 +25,7 @@ class ExamController extends Controller
         $user->load('period_subjects');
 
         $period_subject = PeriodSubject::where('id',$period_subject_id)->first();
-        $period_subject->load('questions');
+        $period_subject->load('questions.choices');
         // dd($period_subject);
 
         return Inertia::render('Exam/TakeExam', [
