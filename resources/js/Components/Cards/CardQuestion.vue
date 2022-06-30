@@ -1,10 +1,10 @@
 <template>
     <div class="bg-white rounded drop-shadow p-3 md:p-4 mb-4">
-        <label :for="'question_'+questionData.id"
-        class="mb-3">
-            {{ questionData.text }}
-        </label>
         <div v-if="questionData.type === 'essay'">
+            <label :for="'question_'+questionData.id"
+            class="mb-3">
+                {{ questionData.text }}
+            </label>
             <textarea 
                 :name="'question_'+questionData.id" 
                 :id="'question_'+questionData.id"
@@ -19,7 +19,55 @@
             </span>
         </div>
         <div v-if="questionData.type === 'pilihan berganda'">
-            pilgan
+            <p class="mb-3">{{ questionData.text }}</p>
+            <div class="mb-1 text-left border ">
+                <input type="radio" :id="'answer_'+questionData.id+'_1'" :name="'question_'+questionData.id" value="A"
+                v-on:change="radioChange($event)">
+                <label :for="'answer_'+questionData.id+'_1'" class="flex items-center gap-2 border">
+                    <div class="w-5 h-5 flex flex-col items-center justify-center rounded-full border border-gray-600">
+                        <div class="w-2 h-2 rounded-full bg-white"></div>
+                    </div>
+                    <p class="block m-0">
+                        Consectetur adipisicing elit. Nemo, fugit
+                    </p>
+                </label>
+            </div>
+            <div class="mb-1 text-left border ">
+                <input type="radio" :id="'answer_'+questionData.id+'_2'" :name="'question_'+questionData.id" value="B"
+                v-on:change="radioChange($event)">
+                <label :for="'answer_'+questionData.id+'_2'" class="flex items-center gap-2 border">
+                    <div class="w-5 h-5 flex flex-col items-center justify-center rounded-full border border-gray-600">
+                        <div class="w-2 h-2 rounded-full bg-white"></div>
+                    </div>
+                    <p class="block m-0">
+                        Tempore! Vero pariatur molestias cupiditate
+                    </p>
+                </label>
+            </div>
+            <div class="mb-1 text-left border ">
+                <input type="radio" :id="'answer_'+questionData.id+'_3'" :name="'question_'+questionData.id" value="C" 
+                v-on:change="radioChange($event)">
+                <label :for="'answer_'+questionData.id+'_3'" class="flex items-center gap-2 border">
+                    <div class="w-5 h-5 flex flex-col items-center justify-center rounded-full border border-gray-600">
+                        <div class="w-2 h-2 rounded-full bg-white"></div>
+                    </div>
+                    <p class="block m-0">
+                        Odit recusandae, vel porro cumque
+                    </p>
+                </label>
+            </div>
+            <div class="mb-1 text-left border ">
+                <input type="radio" :id="'answer_'+questionData.id+'_4'" :name="'question_'+questionData.id" value="D"
+                v-on:change="radioChange($event)">
+                <label :for="'answer_'+questionData.id+'_4'" class="flex items-center gap-2 border">
+                    <div class="w-5 h-5 flex flex-col items-center justify-center rounded-full border border-white bg-emerald-600">
+                        <div class="w-2 h-2 rounded-full bg-white"></div>
+                    </div>
+                    <p class="block m-0">
+                        Est, deserunt in doloremque quam?
+                    </p>
+                </label>
+            </div>
         </div>
     </div>
 </template>
@@ -38,6 +86,9 @@ export default {
             let text    = document.getElementById("question_"+id+"_content").innerText;
             answer.value = text;
         },
+        radioChange: function(event){
+            console.log(event.target.value);
+        }
     },
     components: {
     },
