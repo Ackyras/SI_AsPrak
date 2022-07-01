@@ -12,36 +12,20 @@ use App\Models\Subject;
 
 class QuestionController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function index(Period $period, Subject $subject)
     {
-        //
         $periodsubject = PeriodSubject::where('period_id', $period->id)->where('subject_id', $subject->id)->first();
         // dd($periodsubject);
         $periodsubject->load(['questions.choices']);
-        return view('admin.DataMaster.Periods.Question.index', compact('periodsubject'));
+        return view('admin.pages.periodsubject.question.index', compact('periodsubject','period','subject'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function create(Period $period, Subject $subject)
     {
-        //
+        $periodsubject = PeriodSubject::where('period_id', $period->id)->where('subject_id', $subject->id)->first();
+        return view('admin.pages.periodsubject.question.create', compact('periodsubject'));
     }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \App\Http\Requests\StoreQuestionRequest  $request
-     * @return \Illuminate\Http\Response
-     */
+    
     public function store(StoreQuestionRequest $request)
     {
         //

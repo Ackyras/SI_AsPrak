@@ -19,6 +19,10 @@ use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionContro
 use App\Mail\Notification\FileSelection;
 use Illuminate\Support\Facades\Mail;
 
+Route::get('/question/create', function(){
+    return view('admin.pages.periodsubject.question.create');
+})->name('test.123');
+
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
     //     return view('website.pages.home.index');
