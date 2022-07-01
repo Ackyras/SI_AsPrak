@@ -32,7 +32,9 @@ class RegistrationController extends Controller
         $validated = $request->validated();
         // dd($validated);
         $oldRegistrar = Registrar::query()
-            ->with('period_subjects')
+            ->with('period_subjects', function ($query) use ($period) {
+                $query->where('period_id', $period->id);
+            })
             ->where('nim', $request->nim)
             ->first();
         // dd($oldRegistrar);

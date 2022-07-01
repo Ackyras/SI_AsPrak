@@ -80,9 +80,9 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
                 Route::resource('question', PeriodQuestionController::class);
             });
         });
+        Route::resource('registrar',        RegistrarController::class);
         Route::resource('period',           PeriodController::class);
         Route::resource('subject',          SubjectController::class)->only('index');
-        Route::resource('registrar',        RegistrarController::class);
         // Route::resource('assistant',       AssitantController::class)->except('show');
         // Route::resource('archive',  ArchiveController::class)->only('index');
     });
