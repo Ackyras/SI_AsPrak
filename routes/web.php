@@ -18,6 +18,10 @@ use App\Http\Controllers\Admin\FileSelection\RegistrarFileController;
 use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionController;
 
 
+Route::get('/question/create', function(){
+    return view('admin.pages.periodsubject.question.create');
+})->name('test.123');
+
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
     //     return view('website.pages.home.index');
