@@ -141,6 +141,9 @@
         </div>
     </div>
 </div>
+@endsection
+
+@section('modals')
 
 <!-- Show File Modal -->
 <div class="modal" id="showFileModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
@@ -153,11 +156,12 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body d-flex justify-content-center">
+            <div class="modal-body d-flex justify-content-center" id="showFileModalContent">
             </div>
         </div>
     </div>
 </div>
+    
 @endsection
 
 @section('scripts')
@@ -165,7 +169,9 @@
     function print(data){
         console.log(data);
     }
+    
     $(document).ready(function() {
+
         var actionButtons = [
             { extend: "copy",   exportOptions: { columns: [0, 1, 2] } },
             { extend: "excel",  exportOptions: { columns: [0, 1, 2] } },
@@ -188,15 +194,18 @@
         $('#subjectFilter').on('change', function(){
             $('#period_subject_registrar_table').dataTable().fnFilter(this.value);
         });
-
-        $(".FileModalButton").click(function (event) {
+        
+        $("#period_subject_registrar_table").click('tr td.btn-group .FileModalButton', function (event) { 
             event.preventDefault();
-            var title = $(this).data('title');
-            var file = $(this).data('file');
-            var modal = $("#showFileModal");
-            modal.find('.modal-title').text(title);
-            pdf_embed = `<embed src="{{ asset('storage/`+file+`') }}" type="application/pdf" width="640" height="720" >`;
-            modal.find('.modal-body').html(pdf_embed);
+            if(event.target.classList.contains('FileModalButton')){
+                var btn = event.target;
+                var title = btn.getAttribute("data-title")
+                var file = btn.getAttribute("data-file")
+                var modal = $("#showFileModal");
+                $("#showFileModalLabel").text(title);
+                var pdf_embed = `<embed src="{{ asset('storage/`+file+`') }}" type="application/pdf" width="640" height="720" >`;
+                modal.find('.modal-body').html(pdf_embed);
+            }
         });
     });
 </script>

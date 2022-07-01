@@ -1,6 +1,6 @@
 <template>
     <Authenticated :psr_data="user.period_subjects">
-        <div class="min-h-[1000px] border-3 border-purple-500">
+        <div class="min-h-screen border-3 border-purple-500">
             <p>{{ user.name }}</p>
             <ul>
                 <li v-for="period_subject in user.period_subjects">

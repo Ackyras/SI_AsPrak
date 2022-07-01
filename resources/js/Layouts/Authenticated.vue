@@ -1,10 +1,18 @@
 <template>
-    <div class="">
+    <div :class="{ 
+        'bg-slate-50': $page.url.startsWith('/ujian-seleksi') 
+    }">
         <sidebar />
         <div class="relative md:ml-64 bg-blueGray-100">
             <admin-navbar />
-            <header-stats :psr="psr_data"/>
-            <div class="px-4 md:px-10 mx-auto w-full border-3 border-red-600">
+            <header-stats :psr="psr_data" v-if="$page.url === '/dashboard'"
+                
+            />
+            <div class="px-4 md:px-10 mx-auto w-full border-3 border-red-600"
+                :class="{ 
+                    'md:mt-[4rem]': $page.url !== '/dashboard',
+                }"
+            >
                 <slot />
                 <footer-admin />
             </div>

@@ -5,6 +5,7 @@ use App\Models\Period;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\User\ExamController;
 use App\Http\Controllers\Website\NewsController;
 use App\Http\Controllers\Admin\SubjectController;
 use App\Http\Controllers\Admin\DashboardController;
@@ -16,9 +17,6 @@ use App\Http\Controllers\Website\RegistrationController;
 use App\Http\Controllers\Admin\FileSelection\RegistrarFileController;
 use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionController;
 
-// Route::get('/', function () {
-//     return view('home');
-// })->name('home');
 
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
@@ -65,6 +63,8 @@ Route::as('website.')->group(function () {
 
 Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
+    Route::get('ujian-seleksi/{subject}', [ExamController::class, 'exam'])->name('take.exam');
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
