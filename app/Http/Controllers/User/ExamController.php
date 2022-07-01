@@ -6,6 +6,7 @@ use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PeriodSubject;
+use App\Models\Question;
 
 class ExamController extends Controller
 {
@@ -19,18 +20,24 @@ class ExamController extends Controller
         ]);
     }
 
-    public function exam($period_subject_id)
+    public function exam(PeriodSubject $subject)
     {
         $user = auth()->user()->registrar;
-        $user->load('period_subjects');
-
-        $period_subject = PeriodSubject::where('id',$period_subject_id)->first();
-        $period_subject->load('questions.choices');
-        // dd($period_subject);
+        $subject->load('questions.choices');
 
         return Inertia::render('Exam/TakeExam', [
             'user'      => $user,
-            'period_subject'   => $period_subject
+            'period_subject'   => $subject
         ]);
+    }
+
+    public function storeAnswer(Request $request, PeriodSubject $subject, Question $question)
+    {
+        $validated = $request->validate(
+            [
+                'answer'    =>  'required',
+            ]
+        );
+        dd($validated);
     }
 }

@@ -25,4 +25,14 @@ class Question extends Model
     {
         return $this->hasMany(Choice::class);
     }
+
+    public function period_subjects()
+    {
+        return $this->belongsToMany(PeriodSubjectRegistrar::class, 'answers')->withPivot(
+            [
+                'file',
+                'choice_id'
+            ]
+        );
+    }
 }

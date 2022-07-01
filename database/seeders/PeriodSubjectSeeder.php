@@ -20,10 +20,10 @@ class PeriodSubjectSeeder extends Seeder
         //
         $periodsubjects = PeriodSubject::all();
         foreach ($periodsubjects as $periodsubject) {
-            $essayquestions = Question::factory()->count(10)->for($periodsubject, 'period_subject')->create([
+            $essayquestions = Question::factory()->count(3)->for($periodsubject, 'period_subject')->create([
                 'type'  =>  'essay'
             ]);
-            $choicequestions = Question::factory()->count(10)->for($periodsubject, 'period_subject')
+            $choicequestions = Question::factory()->count(3)->for($periodsubject, 'period_subject')
                 ->has(
                     Choice::factory()->count(4)
                         ->state(function (array $attributes) {

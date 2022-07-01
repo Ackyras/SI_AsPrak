@@ -21,6 +21,7 @@ class QuestionController extends Controller
     {
         //
         $periodsubject = PeriodSubject::where('period_id', $period->id)->where('subject_id', $subject->id)->first();
+        // dd($periodsubject);
         $periodsubject->load(['questions.choices']);
         return view('admin.DataMaster.Periods.Question.index', compact('periodsubject'));
     }

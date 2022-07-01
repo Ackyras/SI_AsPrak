@@ -16,7 +16,8 @@ use App\Http\Controllers\Admin\Period\PeriodController;
 use App\Http\Controllers\Website\RegistrationController;
 use App\Http\Controllers\Admin\FileSelection\RegistrarFileController;
 use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionController;
-
+use App\Mail\Notification\FileSelection;
+use Illuminate\Support\Facades\Mail;
 
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
@@ -65,6 +66,7 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
     Route::get('ujian-seleksi/{subject}', [ExamController::class, 'exam'])->name('take.exam');
+    Route::post('ujian-seleksi/{subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
@@ -103,6 +105,14 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::put('profile',   [\App\Http\Controllers\ProfileController::class, 'update'])->name('profile.update');
     Route::view('about', 'about')->name('about');
 });
+
+Route::get('test-email', function () {
+    $maildata['subject'] = 'Anda lulus ges';
+    $maildata['body']   =  'Anda ganteng ges';
+    $maildata['title']   =   'SI paluing ganteng';
+    Mail::to('ackyrasibarani@gmail.com')->send(new FileSelection($maildata));
+});
+
 
 Route::get('/404', function () {
     return Inertia::render('NotFound');

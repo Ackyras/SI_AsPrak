@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\Choice;
 use App\Models\PeriodSubjectRegistrar;
 use App\Models\Question;
 use Illuminate\Database\Migrations\Migration;
@@ -17,7 +18,8 @@ return new class extends Migration
     {
         Schema::create('answers', function (Blueprint $table) {
             $table->id();
-            $table->string('file');
+            $table->string('file')->nullable();
+            $table->foreignIdFor(Choice::class)->nullable()->constrained()->cascadeOnDelete();
             // $table->foreignIdFor(PeriodSubjectRegistrar::class)->constrained()->cascadeOnDelete();
             $table->foreignId('period_subject_registrar_id')->references('id')->on('period_subject_registrar')->cascadeOnDelete();
             $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
