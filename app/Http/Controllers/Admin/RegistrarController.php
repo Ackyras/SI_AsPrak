@@ -12,8 +12,17 @@ class RegistrarController extends Controller
 {
     public function index()
     {
-        $registrars = Registrar::with('period_subjects.subject')->get();
-        // dd($registrars[0]);
+        $registrars = Registrar::query()
+            ->with('period_subjects.subject')
+            ->when(
+                request()->query('period'),
+                function ($query) {
+                    $query->where('period_id', request()->query('period'));
+                }
+            )
+            ->get();
+
+
         return view('admin.pages.datamaster.registrar.index', compact('registrars'));
     }
 
@@ -81,5 +90,9 @@ class RegistrarController extends Controller
     public function destroy(Registrar $registrar)
     {
         //
+    }
+
+    public function publish()
+    {
     }
 }

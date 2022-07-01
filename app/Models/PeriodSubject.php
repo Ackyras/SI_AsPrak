@@ -49,4 +49,14 @@ class PeriodSubject extends Model
             ]
         );
     }
+
+    public function answers()
+    {
+        return $this->belongsToMany(Question::class, 'answers')->withPivot(
+            [
+                'file',
+                'choice_id'
+            ]
+        );
+    }
 }

@@ -15,6 +15,7 @@ class QuestionController extends Controller
     public function index(Period $period, Subject $subject)
     {
         $periodsubject = PeriodSubject::where('period_id', $period->id)->where('subject_id', $subject->id)->first();
+        // dd($periodsubject);
         $periodsubject->load(['questions.choices']);
         return view('admin.pages.periodsubject.question.index', compact('periodsubject','period','subject'));
     }

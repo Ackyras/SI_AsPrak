@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\API\User\ExamController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -16,4 +17,31 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
+});
+
+Route::prefix('v1')->group(function () {
+    Route::get('test-connection', function () {
+        return response()->json(
+            [
+                'status'        =>  'OK',
+                'msg'           =>  'connection established'
+            ]
+        );
+    });
+    Route::get('test-user', function () {
+        $user = auth()->user();
+        return response()->json(
+            [
+                'user'          =>  $user,
+                'status'        =>  'OK',
+                'msg'           =>  'connection established'
+            ]
+        );
+    });
+    Route::prefix('user')->as('user.')->group(function () {
+        Route::prefix('exam')->as('exam.')->group(function () {
+            Route::post('store-choice', [ExamController::class, 'storeChoiceAnswer'])->name('store.choice-answer');
+            Route::post('store-essay', [ExamController::class, 'storeEssayAnswer'])->name('store.essay-answer');
+        });
+    });
 });
