@@ -9,13 +9,12 @@
 
             <div class="mb-4 md:px-4 lg:px-[8rem]">
                 <form @submit.prevent="">
-                    <p>{{ answer }}</p>
+                    <p v-for="each in answer">{{ each }}</p>
 
                     <card-question
                         v-for="(question, index) in period_subject.questions"
                         :question-data="question"
-                        :index="index"
-                        v-model="answer"
+                        v-model="answer[index]"
                     />
                     <button
                         type="submit"
@@ -49,7 +48,7 @@ export default {
     },
     data() {
         return {
-            answer: null,
+            answer: [],
         };
     },
 };
