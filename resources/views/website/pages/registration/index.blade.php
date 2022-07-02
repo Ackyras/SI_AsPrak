@@ -388,7 +388,7 @@
                     let fileExt = cvFile.name.split(".")[1];
                     print(fileExt);
                     if (fileExt === "pdf") {
-                        if(cvFile.size < 1000000){
+                        if(cvFile.size < 1048576){
                             if($("#cverrorcontainer").hasClass("flex")){
                                 $("#cverrorcontainer").removeClass("flex");
                                 $("#cverrorcontainer").addClass("hidden");
@@ -458,7 +458,7 @@
                     let fileExt = khsFile.name.split(".")[1];
                     print(fileExt);
                     if (fileExt === "pdf") {
-                        if(khsFile.size < 1000000){
+                        if(khsFile.size < 1048576){
                             if($("#khserrorcontainer").hasClass("flex")){
                                 $("#khserrorcontainer").removeClass("flex");
                                 $("#khserrorcontainer").addClass("hidden");
@@ -528,7 +528,7 @@
                     let fileExt = transkripFile.name.split(".")[1];
                     print(fileExt);
                     if (fileExt === "pdf") {
-                        if(transkripFile.size < 1000000){
+                        if(transkripFile.size < 1048576){
                             if($("#transkriperrorcontainer").hasClass("flex")){
                                 $("#transkriperrorcontainer").removeClass("flex");
                                 $("#transkriperrorcontainer").addClass("hidden");
