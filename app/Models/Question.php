@@ -26,7 +26,7 @@ class Question extends Model
         return $this->hasMany(Choice::class);
     }
 
-    public function period_subjects()
+    public function period_subject_registrars()
     {
         return $this->belongsToMany(PeriodSubjectRegistrar::class, 'answers')->withPivot(
             [

@@ -56,8 +56,8 @@ class RegistrationController extends Controller
 
         $storetranskrip = Storage::disk('local')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
-            $cv,
-            $cvFileName
+            $transkrip,
+            $transkripFileName
         );
         $khs = $request->file('khs');
         $khsFileName = $validated['nim'] . '_khs_' . $khs->hashName() . $cv->extension();

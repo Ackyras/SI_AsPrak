@@ -17,7 +17,7 @@ class QuestionController extends Controller
         $periodsubject = PeriodSubject::where('period_id', $period->id)->where('subject_id', $subject->id)->first();
         // dd($periodsubject);
         $periodsubject->load(['questions.choices']);
-        return view('admin.pages.periodsubject.question.index', compact('periodsubject','period','subject'));
+        return view('admin.pages.periodsubject.question.index', compact('periodsubject', 'period', 'subject'));
     }
 
     public function create(Period $period, Subject $subject)
@@ -25,7 +25,7 @@ class QuestionController extends Controller
         $periodsubject = PeriodSubject::where('period_id', $period->id)->where('subject_id', $subject->id)->first();
         return view('admin.pages.periodsubject.question.create', compact('periodsubject'));
     }
-    
+
     public function store(StoreQuestionRequest $request)
     {
         //

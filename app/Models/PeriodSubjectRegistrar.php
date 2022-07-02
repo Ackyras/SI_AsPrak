@@ -28,4 +28,10 @@ class PeriodSubjectRegistrar extends Model
     {
         return $this->belongsTo(PeriodSubject::class);
     }
+
+    public function answers()
+    {
+        return $this->belongsToMany(Question::class, 'answers')
+            ->withPivot(['choice_id', 'file']);
+    }
 }

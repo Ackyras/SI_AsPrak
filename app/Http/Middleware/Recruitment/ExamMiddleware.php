@@ -16,6 +16,8 @@ class ExamMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
+        $period = $request->route()->parameter('period');
+
         return $next($request);
     }
 }

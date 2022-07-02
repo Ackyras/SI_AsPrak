@@ -19,9 +19,6 @@ use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionContro
 use App\Mail\Notification\FileSelection;
 use Illuminate\Support\Facades\Mail;
 
-Route::get('/question/create', function(){
-    return view('admin.pages.periodsubject.question.create');
-})->name('test.123');
 
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
@@ -69,9 +66,11 @@ Route::as('website.')->group(function () {
 Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
-    Route::get('ujian-seleksi/{subject}', [ExamController::class, 'exam'])->name('take.exam');
-    Route::post('ujian-seleksi/{subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
-    Route::post('ujian-seleksi/{subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
+    Route::middleware(['is_eligible_for_exam'])->group(function () {
+        Route::get('ujian-seleksi/{period_subject}', [ExamController::class, 'exam'])->name('take.exam');
+        Route::post('ujian-seleksi/{period_subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
+        Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
+    });
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
