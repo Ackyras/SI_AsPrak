@@ -31,13 +31,17 @@ class ExamController extends Controller
         ]);
     }
 
-    public function storeAnswer(Request $request, PeriodSubject $subject, Question $question)
+    // public function storeAnswer(Request $request, PeriodSubject $subject, Question $question)
+    // {
+    //     $validated = $request->validate(
+    //         [
+    //             'answer'    =>  'required',
+    //         ]
+    //     );
+    //     dd($validated);
+    // }
+    public function storeAll(Request $request, PeriodSubject $subject)
     {
-        $validated = $request->validate(
-            [
-                'answer'    =>  'required',
-            ]
-        );
-        dd($validated);
+        dd($request->questions);
     }
 }

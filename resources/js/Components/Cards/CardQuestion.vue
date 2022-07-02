@@ -9,20 +9,12 @@
                 :name="'question_' + questionData.id"
                 :id="'question_' + questionData.id"
                 class="h-8"
+                required
                 :value="modelValue"
                 @input="$emit('update:modelValue', $event.target.value)"
             >
             </textarea>
-            <span
-                :id="'question_' + questionData.id + '_content'"
-                class="textarea block resize-none py-1 md:py-2 px-2 md:px-3 overflow-hidden outline-none text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
-                role="textbox"
-                v-on:focusout="editAnswer(questionData.id)"
-                contenteditable
-            >
-            </span>
         </div>
-        <p>{{ index }}</p>
         <!-- PILGAN -->
         <div v-if="questionData.type === 'pilihan berganda'">
             <p class="mb-3">{{ questionData.text }}</p>
@@ -36,6 +28,8 @@
                     :value="choice.id"
                     :id="'answer_' + questionData.id + '_' + choice.id"
                     :name="'question_' + questionData.id"
+                    v-model="modelValue"
+                    @input="$emit('update:modelValue', $event.target.value)"
                     required
                 />
 
@@ -49,25 +43,9 @@
 <script>
 export default {
     name: "card-exam-status",
-    data() {
-        return {
-            isChecked: false,
-        };
-    },
-    methods: {
-        editAnswer: function (id) {
-            let answer = document.getElementById("question_" + id);
-            let text = document.getElementById(
-                "question_" + id + "_content"
-            ).innerText;
-            answer.value = text;
-        },
-    },
-    components: {},
     props: {
-        questionData: Object,
-        index: Number,
-        modelValue: String,
+        questionData : Object,
+        modelValue   : String,
     },
     emits: ["update:modelValue"],
 };

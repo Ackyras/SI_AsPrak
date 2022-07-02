@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('mail.master')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
+@section('title')
+    {{ $maildata['title'] }}
+@endsection
 
-<body>
-    <h1>{{ $maildata['title'] }}</h1>
-    <p>{{ $maildata['body'] }}</p>
-</body>
-
-</html>
+@section('content')
+    {{ $maildata['receiver'] }} 
+    {{ $maildata['registrar_email'] }}    
+    {{ $maildata['registrar_password'] }} 
+@endsection

@@ -71,6 +71,7 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
     Route::get('ujian-seleksi/{subject}', [ExamController::class, 'exam'])->name('take.exam');
     Route::post('ujian-seleksi/{subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
+    Route::post('ujian-seleksi/{subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
@@ -110,11 +111,31 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::view('about', 'about')->name('about');
 });
 
+// Route::get('test-email', function () {
+//     $maildata['subject'] = 'Anda lulus ges';
+//     $maildata['body']    = 'Anda ganteng ges';
+//     $maildata['title']   = 'SI paluing ganteng';
+//     Mail::to('mancisp4@gmail.com')->send(new FileSelection($maildata));
+// });
+
 Route::get('test-email', function () {
-    $maildata['subject'] = 'Anda lulus ges';
-    $maildata['body']   =  'Anda ganteng ges';
-    $maildata['title']   =   'SI paluing ganteng';
-    Mail::to('ackyrasibarani@gmail.com')->send(new FileSelection($maildata));
+    $maildata['receiver']   = 'Erdy Gaya Manalu';
+    $maildata['subject']    = 'Seleksi Asisten Praktikum';
+    $maildata['title']      = 'Pengumuman Hasil Seleksi Berkas';
+    $maildata['registrar_email']    = 'erdy.banyakgaya@manalu.com';
+    $maildata['registrar_password'] = 'k8xeAou#svW$mu3x';
+
+    Mail::to('mancisp4@gmail.com')->send(new FileSelection($maildata));
+});
+
+Route::get('test-email-2', function () {
+    $maildata['receiver']   = 'Erdy Gaya Manalu';
+    $maildata['subject']    = 'Seleksi Asisten Praktikum';
+    $maildata['title']      = 'Pengumuman Hasil Seleksi Berkas';
+    $maildata['registrar_email']    = 'erdy.banyakgaya@manalu.com';
+    $maildata['registrar_password'] = 'k8xeAou#svW$mu3x';
+
+    return view('mail.PassExam', compact('maildata'));
 });
 
 
