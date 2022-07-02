@@ -7,13 +7,25 @@
 
             <div class="mb-4 md:px-4 lg:px-[8rem]">
                 <form @submit.prevent="submit">
-
-                    <div>
-                        <p>Jawaban Saat ini</p>
-                        <p>{{ form_fields }}</p>
+                    <div class="flex gap-2">
+                        <div>
+                            <p>ID Pertanyaan</p>
+                            <p v-for="(id, index) in form.questions">{{ index+1 }}. {{ id }}</p>
+                            <!-- <p>Avatar</p> -->
+                        </div>
+                        <div>
+                            <p>Jawaban Saat ini</p>
+                            <p v-for="(answer, index) in form.answers">{{ index+1 }}. {{ answer }}</p>
+                            <!-- <p>{{ form.avatar }}</p> -->
+                        </div>
                     </div>
 
-                    <card-question v-for="(question, index) in questions" :question-data="question" v-model="form.questions[index]" />
+                    <!-- <input type="file" @input="form.avatar = $event.target.files[0]" />
+                    <progress v-if="form.progress" :value="form.progress.percentage" max="100">
+                        {{ form.progress.percentage }}%
+                    </progress> -->
+
+                    <card-question v-for="(question, index) in db_questions" :question-data="question" v-model="form.answers[index]" />
 
                     <button type="submit"
                         class="block bg-emerald-600 hover:bg-emerald-500 text-white text-base font-bold tracking-wide uppercase py-1 px-2 rounded">
@@ -42,25 +54,30 @@ export default {
         period_subject: Object,
     },
     setup(props) {
-        const questions = ref(props.period_subject.questions);
+        const db_questions = ref(props.period_subject.questions);
+
+        const question_id_arr = ref([]);
 
         const form_fields = computed (() => {
-            let arr = [];
-            for (let i = 0; i< questions.value.length; i++) {
-                arr[i] = "test";
-            }
-            return arr;
+            let answer_arr = [];
+            db_questions.value.forEach((question,index) => {
+                answer_arr[index] = null;
+                question_id_arr.value[index] = question['id'];
+            });
+            return answer_arr;
         })
 
         const form = useForm({
-            questions : form_fields.value 
+            questions   : question_id_arr.value,
+            answers     : form_fields.value,
+            // avatar      : null,
         });
 
         const submit = () =>  {
             Inertia.post(route('user.take-exam.store-all', props.period_subject), form);
         }
 
-        return {questions, form_fields, form, submit};
+        return {db_questions, question_id_arr, form_fields, form, submit};
     }
 };
 </script>

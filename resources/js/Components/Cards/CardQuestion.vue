@@ -15,6 +15,7 @@
             >
             </textarea>
         </div>
+        
         <!-- PILGAN -->
         <div v-if="questionData.type === 'pilihan berganda'">
             <p class="mb-3">{{ questionData.text }}</p>

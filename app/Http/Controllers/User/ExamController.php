@@ -42,6 +42,7 @@ class ExamController extends Controller
     // }
     public function storeAll(Request $request, PeriodSubject $subject)
     {
-        dd($request->questions);
+        // dd($request->questions);
+        dd($request);
     }
 }
