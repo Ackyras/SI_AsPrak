@@ -5,11 +5,12 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between mb-4">
-                <h2 class="card-title font-weight-bold">Soal Ujian Seleksi {{ $periodsubject->subject->name }}</h2>
+                <h2 class="card-title font-weight-bold">Soal Ujian Seleksi {{ $period_subject->subject->name }}</h2>
                 {{-- <a role="button"
                     href="{{ route('admin.data-master.period.subject.question.create'), [ $period, $subject] }}"
                     class="d-block btn btn-success" data-toggle="modal" data-target="#subjectFormModal"> --}}
-                    <a href="{{ route('admin.data-master.period.subject.question.create', [$period, $subject]) }}"
+                    <a 
+                        {{-- href="{{ route('admin.data-master.period.subject.question.create', [$period, $subject]) }}" --}}
                         class="btn btn-success">
                         <i class="fas fa-plus mr-2"></i>
                         Tambah Soal
@@ -18,7 +19,7 @@
 
             <div class="">
                 <div>
-                    @forelse ($periodsubject->questions as $question)
+                    @forelse ($period_subject->questions as $question)
                     <div style=" border-left: 5px solid #34d399; background-color: #ecfdf5"
                         class="d-flex justify-content-between mb-4 p-2">
                         <p style="width: 3.5%" class="d-block font-weight-bold text-center m-0 ">
@@ -63,7 +64,7 @@
                         </div>
                     </div>
                     @empty
-
+                    <p style="border-left: 5px solid #34d399; background-color: #ecfdf5;" class="d-block m-0 p-2">Belum Ada Soal</p>
                     @endforelse
                 </div>
             </div>

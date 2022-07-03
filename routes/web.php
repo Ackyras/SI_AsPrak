@@ -1,7 +1,12 @@
 <?php
 
+use App\Http\Controllers\Admin\ActivePeriod\PeriodController as ActivePeriod;
+use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectController as ActivePeriodSubject;
+use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectRegistrarController as ActivePeriodRegistrar;
+use App\Http\Controllers\Admin\ActivePeriod\FileSelectionController as PeriodFileSelection;
+use App\Http\Controllers\Admin\ActivePeriod\ExamSelectionController as PeriodExamSelection;
+use App\Http\Controllers\Admin\ActivePeriod\QuestionController;
 use Inertia\Inertia;
-use App\Models\Period;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
@@ -14,8 +19,6 @@ use App\Http\Controllers\Admin\DataMasterController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\Admin\Period\PeriodController;
 use App\Http\Controllers\Website\RegistrationController;
-use App\Http\Controllers\Admin\FileSelection\RegistrarFileController;
-use App\Http\Controllers\Admin\Period\QuestionController as PeriodQuestionController;
 use App\Mail\Notification\FileSelection;
 use Illuminate\Support\Facades\Mail;
 
@@ -74,34 +77,59 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
-
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-
-    Route::prefix('data-master')->as('data.master.')->group(function () {
-        Route::controller(PeriodController::class)->as('period.')->group(function () {
-            Route::post('period/{period}/subject', 'addSubject')->name('addSubject');
-            Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
-
-            Route::prefix('period/{period}/subject/{subject}')->as('subject.')->group(function () {
-                Route::resource('question', PeriodQuestionController::class);
+    Route::as('active-period.')->group(function () {
+        Route::as('data.')->group(function () {
+            // ACTIVE PERIOD
+            Route::controller(ActivePeriod::class)->group(function () {
+                Route::get('/period-detail', 'index')->name('period');
+            });
+            // ACTIVE PERIOD SUBJECT
+            Route::controller(ActivePeriodSubject::class)->group(function () {
+                Route::get ('period-subject', 'index')
+                    ->name('period-subject');
+                Route::post('period-subject/{period}', 'addSubject')
+                    ->name('add-period-subject');
+                Route::put ('period-subject/{period}/subject/{subject}', 'updateSubject')
+                    ->name('update-period-subject');
+            });
+            // ACTIVE PERIOD SUBJECT REGISTRAR
+            Route::controller(ActivePeriodRegistrar::class)->group(function () {
+                Route::get('/period-subject-registrar', 'index')->name('period-subject-registrar');
             });
         });
+        // ACTIVE PERIOD FILE SELECTION
+        Route::controller(PeriodFileSelection::class)->prefix('file-selection')->as('file-selection.')->group(function () {
+            Route::get('/registrar-file', 'index')->name('registrar-file');
+            Route::get('/pass-selection-registrar', 'passSelection')->name('pass-selection-registrar');
+        });
+
+        // ACTIVE PERIOD EXAM SELECTION
+        Route::prefix('exam-selection')->as('exam-selection.')->group(function () {
+            Route::get('/question', [PeriodExamSelection::class, 'index'])->name('question');
+            Route::prefix('subject/{period_subject}')->as('subject.')->group(function () {
+                Route::resource('question', QuestionController::class);
+            });
+            Route::get('/exam-data', [PeriodExamSelection::class, 'examData'])->name('exam-data');
+            Route::get('/exam-data/subject/{period_subject}', [PeriodExamSelection::class, 'examDataDetail'])->name('exam-data-detail');
+            Route::get('/exam-data/subject/{period_subject}/registrar/{psr}', [PeriodExamSelection::class, 'registrarExamData'])->name('registrar-exam-data');
+        });
+    });
+
+    Route::prefix('data-master')->as('data-master.')->group(function () {
         Route::resource('registrar',        RegistrarController::class);
         Route::resource('period',           PeriodController::class);
         Route::resource('subject',          SubjectController::class)->only('index');
-        // Route::resource('assistant',       AssitantController::class)->except('show');
-        // Route::resource('archive',  ArchiveController::class)->only('index');
+
+        // Route::controller(PeriodController::class)->as('period.')->group(function () {
+            // Route::post('period/{period}/subject', 'addSubject')->name('addSubject');
+            // Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
+        // });
     });
 
     Route::prefix('schedule')->as('schedule.')->group(function () {
         // Ini cuma dipake sementara
         Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
-    });
-
-    Route::prefix('file-selection')->as('file.selection.')->group(function () {
-        Route::resource('registrar-file',           RegistrarFileController::class)->parameters([
-            'registrar-file' => 'psr'
-        ]);
     });
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
@@ -110,12 +138,6 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::view('about', 'about')->name('about');
 });
 
-// Route::get('test-email', function () {
-//     $maildata['subject'] = 'Anda lulus ges';
-//     $maildata['body']    = 'Anda ganteng ges';
-//     $maildata['title']   = 'SI paluing ganteng';
-//     Mail::to('mancisp4@gmail.com')->send(new FileSelection($maildata));
-// });
 
 Route::get('test-email', function () {
     $maildata['receiver']   = 'Erdy Gaya Manalu';

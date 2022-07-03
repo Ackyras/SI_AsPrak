@@ -29,7 +29,7 @@ class PeriodController extends Controller
         $validated = $request->validated();
         $activePeriod = Period::where('is_active', true)->first();
         if ($activePeriod) {
-            return to_route('admin.data.master.period.index')->with(
+            return to_route('admin.data-master.period.index')->with(
                 [
                     'failed'   =>  'Masih ada periode yang belum ditutup, periode baru tidak dapat dibuka'
                 ]
@@ -38,14 +38,14 @@ class PeriodController extends Controller
         $period = Period::create($validated);
 
         if ($period) {
-            return to_route('admin.data.master.period.index')->with(
+            return to_route('admin.data-master.period.index')->with(
                 [
                     'success'   =>  'Periode baru berhasil dibuka'
                 ]
             );
         }
 
-        return to_route('admin.data.master.period.index')->with(
+        return to_route('admin.data-master.period.index')->with(
             [
                 'failed'   =>  'Periode baru gagal dibuka'
             ]
@@ -88,7 +88,7 @@ class PeriodController extends Controller
         $validated = $request->validated();
         $activePeriod = Period::where('is_active', true)->first();
         if ($activePeriod) {
-            return to_route('admin.data.master.period.index')->with(
+            return to_route('admin.data-master.period.index')->with(
                 [
                     'failed'   =>  'Masih ada periode yang belum ditutup, periode baru tidak dapat dibuka'
                 ]
@@ -97,14 +97,14 @@ class PeriodController extends Controller
         $period = Period::create($validated);
 
         if ($period) {
-            return to_route('admin.data.master.period.index')->with(
+            return to_route('admin.data-master.period.index')->with(
                 [
                     'success'   =>  'Periode baru berhasil dibuka'
                 ]
             );
         }
 
-        return to_route('admin.data.master.period.index')->with(
+        return to_route('admin.data-master.period.index')->with(
             [
                 'failed'   =>  'Periode baru gagal dibuka'
             ]

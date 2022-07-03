@@ -38,7 +38,7 @@ class SubjectController extends Controller
         $validated = $request->validated();
         $subject = Subject::create($validated);
         if ($subject) {
-            return to_route('admin.data.master.subject.index')->with(
+            return to_route('admin.data-master.subject.index')->with(
                 [
                     'success'   =>  'Mata Kuliah baru berhasil dibuat'
                 ]
@@ -86,7 +86,7 @@ class SubjectController extends Controller
         //
         $validated = $request->validated();
         Subject::create($validated);
-        return to_route('admin.data.master.subject.index')->with(
+        return to_route('admin.data-master.subject.index')->with(
             [
                 'success'   =>  'Mata Kuliah baru berhasil dibuat'
             ]
@@ -103,7 +103,7 @@ class SubjectController extends Controller
     {
         //
         $subject->deleteOrFail();
-        return to_route('admin.data.master.subject.index')->with(
+        return to_route('admin.data-master.subject.index')->with(
             [
                 'success'   =>  'Mata Kuliah berhasil dihapus'
             ]

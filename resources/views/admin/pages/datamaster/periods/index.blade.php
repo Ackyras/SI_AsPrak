@@ -40,7 +40,7 @@
                                     <td>
                                         <div class="d-flex align-items-center justify-content-between">
                                             <a class="btn btn-sm btn-success"
-                                                href="{{ route('admin.data.master.period.show', $period) }}">Detail</a>
+                                                href="{{ route('admin.data-master.period.show', $period) }}">Detail</a>
                                             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#periodEditFormModal{{ $period->id }}">Edit</button>
                                             <!-- Edit Period Modal -->
