@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Period;
 use App\Models\PeriodSubject;
 use App\Models\Registrar;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
@@ -17,10 +18,13 @@ class PeriodSubjectRegistrarSeeder extends Seeder
     public function run()
     {
         //
-        $registrars = Registrar::all();
-        foreach ($registrars as $registrar) {
-            $periodsubjects = PeriodSubject::inRandomOrder()->limit(3)->get();
-            $registrar->period_subjects()->attach($periodsubjects);
+        $periods = Period::all();
+        foreach ($periods as $period) {
+            $period_subjects = PeriodSubject::where('period_id', $period->id)->get();
+            $registrars = Registrar::factory()->count(50)->create();
+            foreach ($registrars as $registrar) {
+                $registrar->period_subjects()->attach($period_subjects->random(3));
+            }
         }
     }
 }
