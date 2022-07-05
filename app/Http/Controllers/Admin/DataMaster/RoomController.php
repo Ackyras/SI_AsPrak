@@ -17,6 +17,8 @@ class RoomController extends Controller
     public function index()
     {
         //
+        $rooms = Room::all();
+        return view('admin.pages.datamaster.room.index', compact('rooms'));
     }
 
     /**

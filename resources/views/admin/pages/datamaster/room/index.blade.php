@@ -7,7 +7,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <h2 class="card-title font-weight-bold">Data Seluruh Ruangan</h2>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#subjectFormModal">
-                    <i class="fas fa-plus mr-2"></i>
+                    <i class="mr-2 fas fa-plus"></i>
                     Ruangan Baru
                 </button>
             </div>
@@ -19,67 +19,20 @@
                     aria-describedby="room_table_info">
                     <thead>
                         <tr>
-                            <th tabindex="0" aria-controls="room_table" rowspan="1" colspan="1" style="width: 20px; text-align: center">#</th>
+                            <th tabindex="0" aria-controls="room_table" rowspan="1" colspan="1"
+                                style="width: 20px; text-align: center">#</th>
                             <th tabindex="0" aria-controls="room_table" rowspan="1" colspan="1">Nama Ruangan</th>
                             <th tabindex="0" aria-controls="room_table" rowspan="1" colspan="1">Gedung</th>
                         </tr>
                     </thead>
                     <tbody>
+                        @foreach ($rooms as $room)
                         <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
+                            <td tabindex="0" style="text-align: center">{{ $loop->index +1 }}</td>
+                            <td>{{ $room->name }}</td>
+                            <td>{{ $room->building }}</td>
                         </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0" style="text-align: center">1</td>
-                            <td>Ruangan {{ rand(1,100) }}</td>
-                            <td>Gedung {{ rand(1,100) }}</td>
-                        </tr>
+                        @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
@@ -106,7 +59,7 @@
                 </button>
             </div>
 
-            <form action="">
+            <form action="{{ route('admin.data-master.room.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">
@@ -116,8 +69,8 @@
                     </div>
                     <div class="form-group">
                         <label for="building">Gedung</label>
-                        <input type="text" id="building" name="building" class="form-control" required autocomplete="off"
-                            placeholder="Gedung">
+                        <input type="text" id="building" name="building" class="form-control" required
+                            autocomplete="off" placeholder="Gedung">
                     </div>
                 </div>
 
