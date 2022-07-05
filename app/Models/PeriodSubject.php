@@ -59,4 +59,9 @@ class PeriodSubject extends Model
             ]
         );
     }
+
+    public function classrooms()
+    {
+        return $this->hasMany(Classroom::class);
+    }
 }
