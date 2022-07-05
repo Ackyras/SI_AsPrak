@@ -27,7 +27,8 @@ class StoreSubjectForPeriodRequest extends FormRequest
             //
             'subject_id'                =>  'required',
             'number_of_lab_assistant'   =>  'required',
-            'prefix'                    =>  'required',
+            'class_name_prefix'         =>  ['required', 'in:TPB,R'],
+            'number_of_class'           =>  ['required', 'numeric'],
             'exam_start'                =>  ['required', 'date', 'before:exam_end'],
             'exam_end'                  =>  ['required', 'date', 'after:exam_start'],
         ];
