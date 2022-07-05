@@ -19,7 +19,11 @@
                                 <th style="text-align: center" tabindex="0" aria-controls="exam_data_table"
                                     rowspan="1" colspan="1">NIM</th>
                                 <th style="text-align: center" tabindex="0" aria-controls="exam_data_table"
-                                    rowspan="1" colspan="1">Waktu Pengerjaan</th>
+                                    rowspan="1" colspan="1">Skor Pilihan Ganda</th>
+                                <th style="text-align: center" tabindex="0" aria-controls="exam_data_table"
+                                    rowspan="1" colspan="1">Skor Essay</th>
+                                <th style="text-align: center" tabindex="0" aria-controls="exam_data_table"
+                                    rowspan="1" colspan="1">Skor Total</th>
                                 <th tabindex="0" aria-controls="exam_data_table" rowspan="1" colspan="1"
                                     style="width: 125px; text-align: center">Aksi</th>
                             </tr>
@@ -29,7 +33,9 @@
                             <tr>
                                 <td tabindex="0">{{ $psr->registrar->name }}</td>
                                 <td style="text-align: center;">{{ $psr->registrar->nim }}</td>
-                                <td style="text-align: center;">random(0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }})</td>
+                                <td style="text-align: center;">random({{ rand(11,50) }})</td>
+                                <td style="text-align: center;">random({{ rand(11,50) }})</td>
+                                <td style="text-align: center;">random({{ rand(22,100) }})</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a role="button"
@@ -45,7 +51,9 @@
                             <tr>
                                 <th style="text-align: center" rowspan="1" colspan="1">Nama</th>
                                 <th style="text-align: center" rowspan="1" colspan="1">NIM</th>
-                                <th style="text-align: center" rowspan="1" colspan="1">Waktu Pengerjaan</th>
+                                <th style="text-align: center" rowspan="1" colspan="1">Skor Pilihan Ganda</th>
+                                <th style="text-align: center" rowspan="1" colspan="1">Skor Essay</th>
+                                <th style="text-align: center" rowspan="1" colspan="1">Skor Total</th>
                                 <th style="text-align: center" rowspan="1" colspan="1">Aksi</th>
                             </tr>
                         </tfoot>

@@ -25,20 +25,20 @@
                         <span style="width: 15%; font-weight: 600" class="d-block m-0">Mata Kuliah</span>
                         <span style="width: 84%" class="d-block m-0">: {{ $period_subject->subject->name }}</span>
                     </h6>
-                    <!-- WAKTU PENGERJAAN -->
-                    <h6 class="d-flex w-100 justify-content-between">
-                        <span style="width: 15%; font-weight: 600" class="d-block m-0">Waktu Pengerjaan</span>
-                        <span style="width: 84%" class="d-block m-0">: random(0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }})</span>
+                    <!-- SKOR PILIHAN GANDA -->
+                    <h6 class="d-flex w-100 justify-content-between mb-3">
+                        <span style="width: 15%; font-weight: 600" class="d-block m-0">Skor Pilihan Ganda</span>
+                        <span style="width: 84%" class="d-block m-0">: rand({{ rand(11,50) }} ...(A1))/(total jumlah soal pilihan ganda x skor masing-masing soal yang sudah ditentukan ...(A2))</span>
                     </h6>
-                    <!-- Status Pengecekan -->
-                    <h6 class="d-flex w-100 justify-content-between align-items-center">
-                        <span style="width: 15%; font-weight: 600" class="d-block m-0">Status Pengecekan</span>
-                        <span style="width: 63%" class="d-block m-0">: <span class="badge badge-secondary">Belum Selesai</span> </span>
-                        <span style="width: 20%" class="d-flex justify-content-end m-0">
-                            <button class="btn btn-sm btn-primary">
-                                <i class="fas fa-pencil-alt mr-2"></i> Ubah Status Pengecekan
-                            </button>
-                        </span>
+                    <!-- SKOR ESSAY -->
+                    <h6 class="d-flex w-100 justify-content-between mb-3">
+                        <span style="width: 15%; font-weight: 600" class="d-block m-0">Skor Essay</span>
+                        <span style="width: 84%" class="d-block m-0">: rand({{ rand(11,50) }} ...(B1))/(total jumlah soal essay x skor masing-masing soal yang sudah ditentukan ...(B2))</span>
+                    </h6>
+                    <!-- SKOR TOTAL -->
+                    <h6 class="d-flex w-100 justify-content-between mb-3">
+                        <span style="width: 15%; font-weight: 600" class="d-block m-0">Skor Total</span>
+                        <span style="width: 84%" class="d-block m-0">: ( (A1) + (B1) ) / ( (A2) + (B2) )</span>
                     </h6>
                 </div>
 
