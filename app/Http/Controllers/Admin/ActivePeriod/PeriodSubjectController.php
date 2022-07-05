@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Period\StoreSubjectForPeriodRequest;
 use App\Http\Requests\Period\UpdateSubjectForPeriodRequest;
 use App\Models\Classroom;
+use App\Models\PeriodSubject;
 
 class PeriodSubjectController extends Controller
 {
@@ -35,23 +36,27 @@ class PeriodSubjectController extends Controller
     public function addSubject(StoreSubjectForPeriodRequest $request, Period $period)
     {
         $validated = $request->validated();
-        $period_subject = $period->subjects()->attach(
-            $validated['subject_id'],
-            $request->safe()->except(['subject_id', 'number_of_class', 'class_name_prefix'])
+        $validated['period_id'] = $period->id;
+        $period_subject = PeriodSubject::create(
+            $validated,
         );
-        dd($period_subject);
+        // $period_subject = $period->subjects()->attach(
+        //     $validated['subject_id'],
+        //     $request->safe()->except(['subject_id', 'number_of_class', 'class_name_prefix'])
+        // );
         $alphabet = range('A', 'Z');
         for ($i = 0; $i < $validated['number_of_class']; $i++) {
             # code...
             $iteration = '';
-            if ($validated['class_name_prefix'] == 'TPB') {
+            if ($validated['class_name_prefix'] == 'R') {
                 $iteration = $alphabet[$i];
             } else if ($validated['class_name_prefix'] == 'TPB') {
                 $iteration = $i + 1;
             }
             $classrooms = Classroom::create(
                 [
-                    'name'  =>  $validated['class_name_prefix'] . ' ' . $iteration,
+                    'name'                  =>  $validated['class_name_prefix'] . ' ' . $iteration,
+                    'period_subject_id'     =>  $period_subject->id
                 ]
             );
         };
