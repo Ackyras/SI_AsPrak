@@ -127,17 +127,20 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::get('ruangan', function(){
             return view('admin.pages.datamaster.room.index');
         })->name('ruangan');
-
-        // Route::controller(PeriodController::class)->as('period.')->group(function () {
-        // Route::post('period/{period}/subject', 'addSubject')->name('addSubject');
-        // Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
-        // });
     });
 
-    Route::prefix('schedule')->as('schedule.')->group(function () {
-        // Ini cuma dipake sementara
-        Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
-    });
+    Route::get('assistant', function(){
+        return view('admin.pages.practicum.assistant.index');
+    })->name('assistant');
+
+    Route::get('schedule', function(){
+        return view('admin.pages.practicum.schedule.index');
+    })->name('schedule');
+
+    // Route::prefix('schedule')->as('schedule.')->group(function () {
+    //     // Ini cuma dipake sementara
+    //     Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
+    // });
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile',   [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
