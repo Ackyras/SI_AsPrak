@@ -35,6 +35,7 @@ class DatabaseSeeder extends Seeder
             RegistrarSeeder::class,
             PeriodSubjectRegistrarSeeder::class,
             RoomSeeder::class,
+            ClassroomSeeder::class,
         ]);
     }
 }

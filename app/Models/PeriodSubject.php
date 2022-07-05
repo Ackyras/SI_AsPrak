@@ -62,6 +62,6 @@ class PeriodSubject extends Model
 
     public function classrooms()
     {
-        return $this->hasMany(Classroom::class);
+        return $this->hasMany(Classroom::class, 'period_subject_id');
     }
 }

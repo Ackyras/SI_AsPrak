@@ -17,6 +17,6 @@ class Classroom extends Model
 
     public function periodsubject()
     {
-        return $this->belongsTo(PeriodSubject::class);
+        return $this->belongsTo(PeriodSubject::class, 'period_subject_id');
     }
 }
