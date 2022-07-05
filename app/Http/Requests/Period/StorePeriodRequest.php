@@ -13,7 +13,7 @@ class StorePeriodRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -26,8 +26,6 @@ class StorePeriodRequest extends FormRequest
         return [
             //
             'name'                  =>  'required',
-            'registration_start'    =>  ['required', 'date', 'before:registration_end'],
-            'registration_end'      =>  ['required', 'date', 'after:registration_start'],
         ];
     }
 }

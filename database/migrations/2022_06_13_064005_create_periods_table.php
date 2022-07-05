@@ -16,8 +16,8 @@ return new class extends Migration
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
-            $table->dateTime('registration_start');
-            $table->dateTime('registration_end');
+            $table->dateTime('registration_start')->nullable();
+            $table->dateTime('registration_end')->nullable();
             $table->boolean('is_active')->default(true);
             $table->dateTime('is_active_date')->nullable();
             $table->boolean('is_open_for_selection')->default(false);

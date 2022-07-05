@@ -38,7 +38,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST" action="">
+                                <form method="POST" action="{{ route('admin.data-master.period.update', $period) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">

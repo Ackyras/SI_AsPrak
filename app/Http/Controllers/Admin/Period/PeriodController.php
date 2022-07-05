@@ -87,27 +87,19 @@ class PeriodController extends Controller
     {
         //
         $validated = $request->validated();
-        $activePeriod = Period::where('is_active', true)->first();
-        if ($activePeriod) {
-            return to_route('admin.data-master.period.index')->with(
-                [
-                    'failed'   =>  'Masih ada periode yang belum ditutup, periode baru tidak dapat dibuka'
-                ]
-            );
-        }
-        $period = Period::create($validated);
+        $period->updateOrFail($validated);
 
-        if ($period) {
-            return to_route('admin.data-master.period.index')->with(
+        if ($period->wasChanged()) {
+            return redirect()->back()->with(
                 [
-                    'success'   =>  'Periode baru berhasil dibuka'
+                    'success'   =>  'Data periode berhasil diubah'
                 ]
             );
         }
 
-        return to_route('admin.data-master.period.index')->with(
+        return redirect()->back()->with(
             [
-                'failed'   =>  'Periode baru gagal dibuka'
+                'failed'   =>  'Data periode gagal diubah'
             ]
         );
     }
