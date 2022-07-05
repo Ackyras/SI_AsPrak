@@ -65,20 +65,16 @@
                                 </div>
                             </td>
                             <td class="text-align: center;">
-                                @if ($psr->is_pass_file_selection)
-                                <button type="button" class="btn btn-sm btn-block btn-success" data-toggle="modal"
-                                    data-target="#IPFSEFM{{ $psr->id }}">
-                                    Lulus
+                                <button type="button" class="btn btn-sm btn-block {{ $psr->is_pass_file_selection ? 'btn-success' : 'btn-danger' }} "
+                                    data-toggle="modal" data-target="#IPFSEFM{{ $psr->id }}">
+                                    @if ($psr->is_pass_file_selection)
+                                        Lulus
+                                    @else
+                                        Tidak Lulus
+                                    @endif
                                 </button>
-                                @else
-                                <button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal"
-                                    data-target="#IPFSEFM{{ $psr->id }}">
-                                    Tidak Lulus
-                                </button>
-                                @endif
                                 <div class="modal fade" id="IPFSEFM{{ $psr->id }}" tabindex="-1" data-backdrop="static"
-                                    data-keyboard="false" aria-labelledby="IPFSEFMLabel{{ $psr->id }}"
-                                    aria-hidden="true">
+                                    data-keyboard="false" aria-labelledby="IPFSEFMLabel{{ $psr->id }}" aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -91,35 +87,36 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form
-                                                action="{{ route('admin.active-period.file-selection.registrar-file.update', $psr) }}"
-                                                method="POST">
+                                            <form method="POST" action="{{ route('admin.active-period.file-selection.registrar-file.update', $psr) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
+                                                    <input name="is_pass_file_selection" type="hidden" value="{{ $psr->is_pass_file_selection ? 0 : 1 }}">
                                                     @if ($psr->is_pass_file_selection)
-                                                    <h5>
-                                                        Anda akan mengubah status Kelululusan <span
-                                                            class="font-weight-bold">{{ $psr->registrar->name }}</span>
-                                                        dari <span class="badge badge-success">Lulus</span> menjadi
-                                                        <span class="badge badge-danger">Tidak Lulus</span>.
-                                                    </h5>
-                                                    <h5>Simpan perubahan ini?</h5>
+                                                        <h5>
+                                                            Anda akan mengubah status Kelululusan
+                                                            <span class="font-weight-bold">{{ $psr->registrar->name }}</span>
+                                                            dari 
+                                                            <span class="badge badge-success">Lulus</span>
+                                                            menjadi
+                                                            <span class="badge badge-danger">Tidak Lulus</span>.
+                                                        </h5>
                                                     @else
-                                                    <h5>
-                                                        Anda akan mengubah status Kelululusan <span
-                                                            class="font-weight-bold">{{ $psr->registrar->name }}</span>
-                                                        dari <span class="badge badge-danger">Tidak Lulus</span> menjadi
-                                                        <span class="badge badge-success">Lulus</span>.
-                                                    </h5>
-                                                    <h5>Simpan perubahan ini?</h5>
+                                                        <h5>
+                                                            Anda akan mengubah status Kelululusan
+                                                            <span class="font-weight-bold">{{ $psr->registrar->name }}</span>
+                                                            dari
+                                                            <span class="badge badge-danger">Tidak Lulus</span>
+                                                            menjadi
+                                                            <span class="badge badge-success">Lulus</span>.
+                                                        </h5>
                                                     @endif
+                                                    <h5>Simpan perubahan ini?</h5>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button name="is_pass_file_selection"
-                                                        value="{{ $psr->is_pass_file_selection ? 0 : 1 }}" type="submit"
-                                                        class="btn btn-primary">SIMPAN
-                                                        PERUBAHAN</button>
+                                                    <button type="submit" class="btn btn-primary">
+                                                        SIMPAN PERUBAHAN
+                                                    </button>
                                                 </div>
                                             </form>
                                         </div>
@@ -146,14 +143,13 @@
 @endsection
 
 @section('modals')
-
 <!-- Show File Modal -->
 <div class="modal" id="showFileModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
     aria-labelledby="showFileModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title font-weight-bold" id="showFileModalLabel">Periode Baru</h4>
+                <h4 class="modal-title font-weight-bold" id="showFileModalLabel"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -163,7 +159,6 @@
         </div>
     </div>
 </div>
-
 @endsection
 
 @section('scripts')

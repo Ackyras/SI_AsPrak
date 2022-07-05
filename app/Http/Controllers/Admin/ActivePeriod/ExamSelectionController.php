@@ -29,14 +29,20 @@ class ExamSelectionController extends Controller
 
     public function examData()
     {
-        return view('admin.pages.active-period.exam-selection.exam-data');
+        $period = $this->period;
+        return view('admin.pages.active-period.exam-selection.exam-data', compact('period'));
     }
     public function examDataDetail(PeriodSubject $period_subject)
     {
-        return view('admin.pages.active-period.exam-selection.exam-data-detail');
+        $period_subject_registrar = PeriodSubjectRegistrar::query()
+            ->where('period_subject_id', $period_subject->id)
+            ->get();
+        $period_subject_registrar->load('registrar');
+        return view('admin.pages.active-period.exam-selection.exam-data-detail', compact('period_subject','period_subject_registrar'));
     }
     public function registrarExamData(PeriodSubject $period_subject, PeriodSubjectRegistrar $psr)
     {
-        return view('admin.pages.active-period.exam-selection.registrar-exam-data');
+        $registrar = $psr->registrar;
+        return view('admin.pages.active-period.exam-selection.registrar-exam-data', compact('period_subject','registrar'));
     }
 }
