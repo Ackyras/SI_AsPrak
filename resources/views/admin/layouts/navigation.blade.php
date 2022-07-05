@@ -19,7 +19,7 @@
                     </p>
                 </a>
             </li>
-            
+
             <div class="dropdown-divider"></div>
 
             <!-- --------------------------------------------------- -->
@@ -31,13 +31,13 @@
                 <a href="#datamasterdropdown"
                     class="nav-link {{ request()->routeIs('admin.data-master.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="datamasterdropdown">
-                    <i class="nav-icon fas fa-table nav-icon"></i>
+                    <i class="nav-icon fas fa-table"></i>
                     <p>
                         Data Master
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="datamasterdropdown">
+                <ul class="py-2 rounded nav bg-secondary collapse" id="datamasterdropdown">
                     <li class="nav-item">
                         <a href="{{ route('admin.data-master.period.index') }}"
                             class="nav-link {{ request()->routeIs('admin.data-master.period.*') ? 'bg-white' : 'bg-secondary' }}">
@@ -53,8 +53,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.data-master.ruangan') }}"
-                            class="nav-link {{ request()->routeIs('admin.data-master.ruangan') ? 'bg-white' : 'bg-secondary' }}">
+                        <a href="{{ route('admin.data-master.room.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.data-master.room.*') ? 'bg-white' : 'bg-secondary' }}">
                             <i class="fas fa-building nav-icon"></i>
                             <p>Ruangan</p>
                         </a>
@@ -69,22 +69,23 @@
             <!-- -------- AWAL KAWASAN KHUSUS PERIODE AKTIF -------- -->
             <!-- --------------------------------------------------- -->
             <!-- --------------------------------------------------- -->
-            
+
             <!-- ------------------- -->
             <!-- DETAIL PERIODE AKTIF -->
             <!-- ------------------- -->
-            <li class="nav-item mb-3">
+            <li class="mb-3 nav-item">
                 <a href="#activePeriodDetailDropdown"
                     class="nav-link {{ request()->routeIs('admin.active-period.data.*') ? 'bg-light' : '' }}"
-                    data-toggle="collapse" role="button" aria-expanded="false" aria-controls="activePeriodDetailDropdown">
-                    {{-- <i class="nav-icon fas fa-table nav-icon"></i> --}}
+                    data-toggle="collapse" role="button" aria-expanded="false"
+                    aria-controls="activePeriodDetailDropdown">
+                    {{-- <i class="nav-icon fas fa-table"></i> --}}
                     <i class="fas fa-chart-line nav-icon"></i>
                     <p>
                         Periode Aktif
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="activePeriodDetailDropdown">
+                <ul class="py-2 rounded nav bg-secondary collapse" id="activePeriodDetailDropdown">
                     <li class="nav-item">
                         <a href="{{ route('admin.active-period.data.period') }}"
                             class="nav-link {{ request()->routeIs('admin.active-period.data.period') ? 'bg-light' : 'bg-secondary' }}">
@@ -112,7 +113,7 @@
             <!-- ---------------------------- -->
             <!-- SELEKSI BERKAS PERIODE AKTIF -->
             <!-- ---------------------------- -->
-            <li class="nav-item mb-3">
+            <li class="mb-3 nav-item">
                 <a href="#seleksiberkasdropdown"
                     class="nav-link {{ request()->routeIs('admin.active-period.file-selection.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksiberkasdropdown">
@@ -122,7 +123,7 @@
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="seleksiberkasdropdown">
+                <ul class="py-2 rounded nav bg-secondary collapse" id="seleksiberkasdropdown">
                     {{-- DRAF-A --}}
                     <li class="nav-item">
                         <a href="{{ route('admin.active-period.file-selection.registrar-file') }}"
@@ -144,41 +145,37 @@
             <!-- ------------------------- -->
             <!-- SELEKSI TES PERIODE AKTIF -->
             <!-- ------------------------- -->
-            <li class="nav-item mb-3">
+            <li class="mb-3 nav-item">
                 <a href="#seleksitesdropdown"
                     class="nav-link {{ request()->routeIs('admin.active-period.exam-selection*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksitesdropdown">
-                    <i class="nav-icon fas fa-pen-square nav-icon"></i>
+                    <i class="nav-icon fas fa-pen-square"></i>
                     {{-- <i class="fas fa-file-signature nav-icon"></i> --}}
                     <p>
                         Seleksi Tes
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="seleksitesdropdown">
+                <ul class="py-2 rounded nav bg-secondary collapse" id="seleksitesdropdown">
                     <li class="nav-item">
-                        <a href="{{ route('admin.active-period.exam-selection.question') }}"
-                            class="nav-link 
-                            {{ 
-                                request()->routeIs('admin.active-period.exam-selection.question') 
-                                || 
-                                request()->routeIs('admin.active-period.exam-selection.subject.question.*') 
+                        <a href="{{ route('admin.active-period.exam-selection.question') }}" class="nav-link
+                            {{
+                                request()->routeIs('admin.active-period.exam-selection.question')
+                                ||
+                                request()->routeIs('admin.active-period.exam-selection.subject.question.*')
                                 ? 'bg-light' : 'bg-secondary'
-                            }}"
-                        >
+                            }}">
                             <i class="fas fa-list-ol nav-icon"></i>
                             <p>Soal dan Kunci</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.active-period.exam-selection.exam-data') }}"
-                            class="nav-link {{ 
-                                request()->routeIs('admin.active-period.exam-selection.exam-data') 
-                                || 
-                                request()->routeIs('admin.active-period.exam-selection.exam-data.*') 
+                        <a href="{{ route('admin.active-period.exam-selection.exam-data') }}" class="nav-link {{
+                                request()->routeIs('admin.active-period.exam-selection.exam-data')
+                                ||
+                                request()->routeIs('admin.active-period.exam-selection.exam-data.*')
                                 ? 'bg-light' : 'bg-secondary'
-                            }}"
-                        >
+                            }}">
                             <i class="fas fa-th-list nav-icon"></i>
                             <p>Data Nilai Tes</p>
                         </a>
@@ -192,23 +189,23 @@
                     </li>
                 </ul>
             </li>
-            
+
             <!-- ----------------------- -->
             <!-- PRAKTIKUM PERIODE AKTIF -->
             <!-- ----------------------- -->
             <li class="nav-item">
-                <a href="#activePeriodPracticumDropdown"
-                    {{-- class="nav-link {{ request()->routeIs('admin.data-master.*') ? 'bg-light' : '' }}" --}}
-                    class="nav-link"
-                    data-toggle="collapse" role="button" aria-expanded="false" aria-controls="activePeriodPracticumDropdown">
-                    <i class="nav-icon fas fa-project-diagram nav-icon"></i>
+                <a href="#activePeriodPracticumDropdown" {{--
+                    class="nav-link {{ request()->routeIs('admin.data-master.*') ? 'bg-light' : '' }}" --}}
+                    class="nav-link" data-toggle="collapse" role="button" aria-expanded="false"
+                    aria-controls="activePeriodPracticumDropdown">
+                    <i class="nav-icon fas fa-project-diagram"></i>
                     {{-- <i class="fas "></i> --}}
                     <p>
                         Praktikum
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="activePeriodPracticumDropdown">
+                <ul class="py-2 rounded nav bg-secondary collapse" id="activePeriodPracticumDropdown">
                     <li class="nav-item">
                         <a href="#"
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
@@ -229,17 +226,17 @@
             <div class="dropdown-divider"></div>
 
             <!-- JADWAL -->
-            {{-- <li class="nav-item mb-3">
+            {{-- <li class="mb-3 nav-item">
                 <a href="#jadwaldropdown"
                     class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="jadwaldropdown">
-                    <i class="nav-icon fas fa-clock nav-icon"></i>
+                    <i class="nav-icon fas fa-clock"></i>
                     <p>
                         Jadwal
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="jadwaldropdown">
+                <ul class="py-2 rounded nav bg-secondary collapse" id="jadwaldropdown">
                     <li class="nav-item">
                         <a href="{{ route('admin.schedule.recruitment') }}"
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
@@ -258,17 +255,17 @@
             </li> --}}
 
             <!-- INFORMASI -->
-            {{-- <li class="nav-item mb-3">
+            {{-- <li class="mb-3 nav-item">
                 <a href="#informasidropdown"
                     class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="informasidropdown">
-                    <i class="nav-icon fas fa-info-circle nav-icon"></i>
+                    <i class="nav-icon fas fa-info-circle"></i>
                     <p>
                         Informasi
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="informasidropdown">
+                <ul class="py-2 rounded nav bg-secondary collapse" id="informasidropdown">
                     <li class="nav-item">
                         <a href="#"
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
@@ -294,17 +291,17 @@
             </li> --}}
 
             <!-- LAPORAN -->
-            {{-- <li class="nav-item mb-3">
+            {{-- <li class="mb-3 nav-item">
                 <a href="#laporandropdown"
                     class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="laporandropdown">
-                    <i class="nav-icon fas fa-book-open nav-icon"></i>
+                    <i class="nav-icon fas fa-book-open"></i>
                     <p>
                         Laporan
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
-                <ul class="nav py-2 bg-secondary rounded collapse" id="laporandropdown">
+                <ul class="py-2 rounded nav bg-secondary collapse" id="laporandropdown">
                     <li class="nav-item">
                         <a href="#"
                             class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
@@ -322,7 +319,7 @@
                 </ul>
             </li> --}}
 
-            <li class="nav-item mb-3">
+            <li class="mb-3 nav-item">
                 <a href="{{ route('admin.about') }}"
                     class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}">
                     <i class="nav-icon far fa-address-card"></i>
@@ -340,8 +337,7 @@
 
 {{-- DRAF - A --}}
 {{-- <li class="nav-item">
-    <a href="#"
-        class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+    <a href="#" class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
         <i class="fas fa-list-alt nav-icon"></i>
         <p>Form Seleksi</p>
     </a>

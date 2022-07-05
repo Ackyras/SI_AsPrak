@@ -1,15 +1,11 @@
 <?php
 
-use App\Http\Controllers\Admin\ActivePeriod\PeriodController as ActivePeriod;
-use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectController as ActivePeriodSubject;
-use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectRegistrarController as ActivePeriodRegistrar;
-use App\Http\Controllers\Admin\ActivePeriod\FileSelectionController as PeriodFileSelection;
-use App\Http\Controllers\Admin\ActivePeriod\ExamSelectionController as PeriodExamSelection;
-use App\Http\Controllers\Admin\ActivePeriod\QuestionController;
 use Inertia\Inertia;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Foundation\Application;
 use App\Http\Controllers\HomeController;
+use App\Mail\Notification\FileSelection;
 use App\Http\Controllers\User\ExamController;
 use App\Http\Controllers\Website\NewsController;
 use App\Http\Controllers\Admin\SubjectController;
@@ -19,8 +15,13 @@ use App\Http\Controllers\Admin\DataMasterController;
 use App\Http\Controllers\User\UserDashboardController;
 use App\Http\Controllers\Admin\Period\PeriodController;
 use App\Http\Controllers\Website\RegistrationController;
-use App\Mail\Notification\FileSelection;
-use Illuminate\Support\Facades\Mail;
+use App\Http\Controllers\Admin\DataMaster\RoomController;
+use App\Http\Controllers\Admin\ActivePeriod\QuestionController;
+use App\Http\Controllers\Admin\ActivePeriod\PeriodController as ActivePeriod;
+use App\Http\Controllers\Admin\ActivePeriod\ExamSelectionController as PeriodExamSelection;
+use App\Http\Controllers\Admin\ActivePeriod\FileSelectionController as PeriodFileSelection;
+use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectController as ActivePeriodSubject;
+use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectRegistrarController as ActivePeriodRegistrar;
 
 
 Route::as('website.')->group(function () {
@@ -124,9 +125,8 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::resource('registrar',        RegistrarController::class);
         Route::resource('period',           PeriodController::class);
         Route::resource('subject',          SubjectController::class)->only('index');
-        Route::get('ruangan', function(){
-            return view('admin.pages.datamaster.room.index');
-        })->name('ruangan');
+        Route::resource('room',             RoomController::class);
+
 
         // Route::controller(PeriodController::class)->as('period.')->group(function () {
         // Route::post('period/{period}/subject', 'addSubject')->name('addSubject');

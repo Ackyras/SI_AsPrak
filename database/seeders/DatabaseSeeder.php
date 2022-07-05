@@ -33,7 +33,8 @@ class DatabaseSeeder extends Seeder
             PeriodSeeder::class,
             PeriodSubjectSeeder::class,
             RegistrarSeeder::class,
-            PeriodSubjectRegistrarSeeder::class
+            PeriodSubjectRegistrarSeeder::class,
+            RoomSeeder::class,
         ]);
     }
 }
