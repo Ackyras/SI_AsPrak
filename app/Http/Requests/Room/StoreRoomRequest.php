@@ -1,10 +1,10 @@
 <?php
 
-namespace App\Http\Requests\Period;
+namespace App\Http\Requests\Room;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class StoreSubjectForPeriodRequest extends FormRequest
+class StoreRoomRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -25,11 +25,8 @@ class StoreSubjectForPeriodRequest extends FormRequest
     {
         return [
             //
-            'subject_id'                =>  'required',
-            'number_of_lab_assistant'   =>  'required',
-            'prefix'                    =>  'required',
-            'exam_start'                =>  ['required', 'date', 'before:exam_end'],
-            'exam_end'                  =>  ['required', 'date', 'after:exam_start'],
+            'name'      =>  'required',
+            'building'  =>  'required'
         ];
     }
 }
