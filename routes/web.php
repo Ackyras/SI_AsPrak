@@ -104,6 +104,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         // ACTIVE PERIOD FILE SELECTION
         Route::controller(PeriodFileSelection::class)->prefix('file-selection')->as('file-selection.')->group(function () {
             Route::get('/registrar-file', 'index')->name('registrar-file');
+            Route::put('/registrar-file/{psr}', 'updateFileSelection')->name('registrar-file.update');
             Route::get('/pass-selection-registrar', 'passSelection')->name('pass-selection-registrar');
         });
 

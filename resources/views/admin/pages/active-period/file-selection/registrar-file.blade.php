@@ -92,9 +92,10 @@
                                                 </button>
                                             </div>
                                             <form
-                                                action=""
-                                                method="">
+                                                action="{{ route('admin.active-period.file-selection.registrar-file.update', $psr) }}"
+                                                method="POST">
                                                 @csrf
+                                                @method('PUT')
                                                 <div class="modal-body">
                                                     @if ($psr->is_pass_file_selection)
                                                     <h5>
@@ -115,7 +116,9 @@
                                                     @endif
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">SIMPAN
+                                                    <button name="is_pass_file_selection"
+                                                        value="{{ $psr->is_pass_file_selection ? 0 : 1 }}" type="submit"
+                                                        class="btn btn-primary">SIMPAN
                                                         PERUBAHAN</button>
                                                 </div>
                                             </form>
@@ -160,7 +163,7 @@
         </div>
     </div>
 </div>
-    
+
 @endsection
 
 @section('scripts')
@@ -168,7 +171,7 @@
     function print(data){
         console.log(data);
     }
-    
+
     $(document).ready(function() {
 
         var actionButtons = [
@@ -193,8 +196,8 @@
         $('#subjectFilter').on('change', function(){
             $('#period_subject_registrar_table').dataTable().fnFilter(this.value);
         });
-        
-        $("#period_subject_registrar_table").click('tr td.btn-group .FileModalButton', function (event) { 
+
+        $("#period_subject_registrar_table").click('tr td.btn-group .FileModalButton', function (event) {
             event.preventDefault();
             if(event.target.classList.contains('FileModalButton')){
                 var btn = event.target;
