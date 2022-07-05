@@ -75,35 +75,6 @@
                                                                 placeholder="Nama mata kuliah"
                                                                 value="{{ $subject->name }}" readonly>
                                                         </div>
-                                                        <p class="m-0 mb-1 d-block font-weight-bold">Prefix Nama Kelas
-                                                        </p>
-                                                        <div
-                                                            class="pl-2 mb-3 d-flex justify-content-between align-items-center">
-                                                            <div style="width: 49.5%"
-                                                                class="input-group d-flex align-items-center">
-                                                                <input type="radio"
-                                                                    id="class_prefix_1{{ $loop->index }}"
-                                                                    name="class_name_prefix" disabled>
-                                                                <label for="class_prefix_1{{ $loop->index }}"
-                                                                    class="m-0 ml-2 d-block">TPB</label>
-                                                            </div>
-                                                            <div style="width: 49.5%"
-                                                                class="input-group d-flex align-items-center">
-                                                                <input type="radio"
-                                                                    id="class_prefix_2{{ $loop->index }}"
-                                                                    name="class_name_prefix" disabled>
-                                                                <label for="class_prefix_2{{ $loop->index }}"
-                                                                    class="m-0 ml-2 d-block">R</label>
-                                                            </div>
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="number_of_class">Jumlah Kelas</label>
-                                                            <input type="number" id="number_of_class"
-                                                                name="number_of_class" class="form-control" required
-                                                                autocomplete="off" min="1" {{--
-                                                                value="{{ $subject->pivot->number_of_lab_assistant }}"
-                                                                --}} placeholder="(masukkan angka)">
-                                                        </div>
                                                         <div class="form-group">
                                                             <label for="number_of_lab_assistant">Kuota asisten
                                                                 praktikum</label>
