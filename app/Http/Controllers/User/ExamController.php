@@ -62,9 +62,9 @@ class ExamController extends Controller
             ->first();
         foreach ($request->questions as $key => $value) {
             $tempRequest['question_id'] =   $value;
-            $question = Question::find($value);
             $tempRequest['file'] = null;
             $tempRequest['choice_id'] = null;
+            $question = Question::find($value);
             if ($question->type == 'essay') {
                 $tempRequest['file'] =   $request->answers[$key];
             } else {
@@ -73,7 +73,6 @@ class ExamController extends Controller
             array_push($transformRequests, $tempRequest);
         }
         foreach ($transformRequests as $transformRequest) {
-            $question = Question::find($transformRequest['question_id']);
             if (isset($transformRequest['file'])) {
                 $file = $transformRequest['file'];
                 $fileName = $registrar['nim'] . 'file_' . $file->hashName() . $file->extension();
@@ -88,9 +87,10 @@ class ExamController extends Controller
             }
 
             $period_subject_registrar->answers()->attach(
-                $question,
+                $transformRequest['question_id'],
                 $transformRequest
             );
         }
+        return to_route('user.take.exam', );
     }
 }
