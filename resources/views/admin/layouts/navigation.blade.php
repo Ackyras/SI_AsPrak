@@ -52,6 +52,13 @@
                             <p>Mata Kuliah</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.data-master.ruangan') }}"
+                            class="nav-link {{ request()->routeIs('admin.data-master.ruangan') ? 'bg-white' : 'bg-secondary' }}">
+                            <i class="fas fa-building nav-icon"></i>
+                            <p>Ruangan</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

@@ -124,6 +124,9 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::resource('registrar',        RegistrarController::class);
         Route::resource('period',           PeriodController::class);
         Route::resource('subject',          SubjectController::class)->only('index');
+        Route::get('ruangan', function(){
+            return view('admin.pages.datamaster.room.index');
+        })->name('ruangan');
 
         // Route::controller(PeriodController::class)->as('period.')->group(function () {
         // Route::post('period/{period}/subject', 'addSubject')->name('addSubject');

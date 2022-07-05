@@ -23,6 +23,8 @@
                                 <th style="text-align: center" tabindex="0" aria-controls="period_subject_table"
                                     rowspan="1" colspan="1">Nama Mata Kuliah</th>
                                 <th style="text-align: center" tabindex="0" aria-controls="period_subject_table"
+                                    rowspan="1" colspan="1">Jumlah Kelas</th>
+                                <th style="text-align: center" tabindex="0" aria-controls="period_subject_table"
                                     rowspan="1" colspan="1">Kuota Asisten</th>
                                 <th style="text-align: center" tabindex="0" aria-controls="period_subject_table"
                                     rowspan="1" colspan="1">Tanggal Awal Ujian</th>
@@ -37,15 +39,12 @@
                             @forelse ($period->subjects as $subject)
                                 <tr>
                                     <td tabindex="0">{{ $subject->name }}</td>
+                                    <td style="text-align: center;">rand({{ rand(1,4) }})</td>
                                     <td style="text-align: center;">{{ $subject->pivot->number_of_lab_assistant }}</td>
                                     <td style="text-align: center;">{{ $subject->pivot->exam_start }}</td>
                                     <td style="text-align: center;">{{ $subject->pivot->exam_end }}</td>
                                     <td>
                                         <div class="d-flex align-items-center justify-content-between">
-                                            {{-- <a role="button"
-                                        href="{{route('admin.data-master.period.subject.question.index', [$period, $subject])}}"
-                                        class="btn btn-sm btn-success">Detail</a> --}}
-                                            <!-- Edit Subject Button -->
                                             <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                                 data-target="#subjectEditFormModal{{ $subject->id }}">Edit</button>
                                             <!-- Edit Subject Modal -->
@@ -76,13 +75,34 @@
                                                                         placeholder="Nama mata kuliah"
                                                                         value="{{ $subject->name }}" readonly>
                                                                 </div>
+                                                                <p class="d-block m-0 mb-1 font-weight-bold">Prefix Nama Kelas</p>
+                                                                <div class="d-flex justify-content-between align-items-center mb-3 pl-2">
+                                                                    <div style="width: 49.5%" class="input-group d-flex align-items-center">
+                                                                        <input type="radio" id="class_prefix_1{{ $loop->index }}" name="class_name_prefix" disabled>
+                                                                        <label for="class_prefix_1{{ $loop->index }}" class="d-block m-0 ml-2">TPB</label>
+                                                                    </div>
+                                                                    <div style="width: 49.5%" class="input-group d-flex align-items-center">
+                                                                        <input type="radio" id="class_prefix_2{{ $loop->index }}" name="class_name_prefix" disabled>
+                                                                        <label for="class_prefix_2{{ $loop->index }}" class="d-block m-0 ml-2">R</label>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="form-group">
+                                                                    <label for="number_of_class">Jumlah Kelas</label>
+                                                                    <input type="number" id="number_of_class"
+                                                                        name="number_of_class" class="form-control"
+                                                                        required autocomplete="off"
+                                                                        min="1"
+                                                                        {{-- value="{{ $subject->pivot->number_of_lab_assistant }}" --}}
+                                                                        placeholder="(masukkan angka)">
+                                                                </div>
                                                                 <div class="form-group">
                                                                     <label for="number_of_lab_assistant">Kuota asisten
                                                                         praktikum</label>
-                                                                    <input type="text" id="number_of_lab_assistant"
+                                                                    <input type="number" id="number_of_lab_assistant"
                                                                         name="number_of_lab_assistant" class="form-control"
-                                                                        required autocomplete="off"
+                                                                        {{-- required autocomplete="off" --}}
                                                                         placeholder="(masukkan angka)"
+                                                                        min="0"
                                                                         value="{{ $subject->pivot->number_of_lab_assistant }}">
                                                                 </div>
                                                                 <div class="form-group">
@@ -151,6 +171,7 @@
                         <tfoot>
                             <tr>
                                 <th style="text-align: center" rowspan="1" colspan="1">Nama Mata Kuliah</th>
+                                <th style="text-align: center" rowspan="1" colspan="1">Jumlah Kelas</th>
                                 <th style="text-align: center" rowspan="1" colspan="1">Kuota Asisten</th>
                                 <th style="text-align: center" rowspan="1" colspan="1">Tanggal Awal Ujian</th>
                                 <th style="text-align: center" rowspan="1" colspan="1">Tanggal Akhir Ujian</th>
@@ -190,11 +211,28 @@
                                 @endforelse
                             </select>
                         </div>
+                        <p class="d-block m-0 mb-1 font-weight-bold">Prefix Nama Kelas</p>
+                        <div class="d-flex justify-content-between align-items-center mb-3 pl-2">
+                            <div style="width: 49.5%" class="input-group d-flex align-items-center">
+                                <input type="radio" id="class_prefix_1" name="class_name_prefix">
+                                <label for="class_prefix_1" class="d-block m-0 ml-2">TPB</label>
+                            </div>
+                            <div style="width: 49.5%" class="input-group d-flex align-items-center">
+                                <input type="radio" id="class_prefix_2" name="class_name_prefix">
+                                <label for="class_prefix_2" class="d-block m-0 ml-2">R</label>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="number_of_class">Jumlah Kelas</label>
+                            <input type="number" id="number_of_class" name="number_of_class" 
+                                class="form-control" required autocomplete="off"
+                                min="1" value="{{ old('number_of_class') }}" placeholder="(masukkan angka)">
+                        </div>
                         <div class="form-group">
                             <label for="number_of_lab_assistant">Kuota asisten praktikum</label>
-                            <input type="text" id="number_of_lab_assistant" name="number_of_lab_assistant"
+                            <input type="number" id="number_of_lab_assistant" name="number_of_lab_assistant"
                                 class="form-control" required value="{{ old('number_of_lab_assistant') }}"
-                                autocomplete="off" placeholder="(masukkan angka)">
+                                autocomplete="off" placeholder="(masukkan angka)" min="0">
                         </div>
                         <div class="form-group">
                             <label for="exam_start">Tanggal mulai ujian</label>
