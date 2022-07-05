@@ -78,7 +78,10 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    Route::as('active-period.')->group(function () {
+
+    Route::put('period/{period}/update-status', [PeriodController::class, 'updatePeriodStatus'])->name('period.update-status');
+
+    Route::middleware(['is_active_period_exist'])->as('active-period.')->group(function () {
         Route::as('data.')->group(function () {
             // ACTIVE PERIOD
             Route::controller(ActivePeriod::class)->group(function () {
@@ -86,11 +89,11 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
             });
             // ACTIVE PERIOD SUBJECT
             Route::controller(ActivePeriodSubject::class)->group(function () {
-                Route::get ('period-subject', 'index')
+                Route::get('period-subject', 'index')
                     ->name('period-subject');
                 Route::post('period-subject/{period}', 'addSubject')
                     ->name('add-period-subject');
-                Route::put ('period-subject/{period}/subject/{subject}', 'updateSubject')
+                Route::put('period-subject/{period}/subject/{subject}', 'updateSubject')
                     ->name('update-period-subject');
             });
             // ACTIVE PERIOD SUBJECT REGISTRAR
@@ -101,6 +104,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         // ACTIVE PERIOD FILE SELECTION
         Route::controller(PeriodFileSelection::class)->prefix('file-selection')->as('file-selection.')->group(function () {
             Route::get('/registrar-file', 'index')->name('registrar-file');
+            Route::put('/registrar-file/{psr}', 'updateFileSelection')->name('registrar-file.update');
             Route::get('/pass-selection-registrar', 'passSelection')->name('pass-selection-registrar');
         });
 
@@ -122,8 +126,8 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::resource('subject',          SubjectController::class)->only('index');
 
         // Route::controller(PeriodController::class)->as('period.')->group(function () {
-            // Route::post('period/{period}/subject', 'addSubject')->name('addSubject');
-            // Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
+        // Route::post('period/{period}/subject', 'addSubject')->name('addSubject');
+        // Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
         // });
     });
 

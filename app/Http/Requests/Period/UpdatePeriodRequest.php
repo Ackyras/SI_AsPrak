@@ -13,7 +13,7 @@ class UpdatePeriodRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -24,9 +24,9 @@ class UpdatePeriodRequest extends FormRequest
     public function rules()
     {
         return [
-            'name'                  =>  'required',
-            'registration_start'    =>  ['required', 'date', 'before:registration_end'],
-            'registration_end'      =>  ['required', 'date', 'after:registration_start'],
+            'name'                  =>  'filled',
+            'registration_start'    =>  ['filled', 'date', 'before:registration_end'],
+            'registration_end'      =>  ['filled', 'date', 'after:registration_start'],
         ];
     }
 }

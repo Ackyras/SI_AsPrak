@@ -24,6 +24,34 @@ class FileSelectionController extends Controller
         return view('admin.pages.active-period.file-selection.registrar-file', compact('period_subject_registrars', 'subjects'));
     }
 
+    public function updateFileSelection(Request $req, PeriodSubjectRegistrar $psr)
+    {
+        $validated = $req->validate(
+            [
+                'is_pass_file_selection'    =>  'required'
+            ]
+        );
+        $psr->updateOrFail($validated);
+
+        if ($psr->wasChanged()) {
+            if ($validated['is_pass_file_selection']) {
+                $status = 'tidak lulus';
+            } else {
+                $status = 'lulus';
+            }
+            return back()->with(
+                [
+                    'success'   =>  'Peserta berhasil dinyatakan ' . $status . ' seleksi berkas',
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'   =>  'Gagal mengubah status peserta',
+            ]
+        );
+    }
+
     public function passSelection()
     {
         $period_subject_registrars = PeriodSubjectRegistrar::query()
