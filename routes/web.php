@@ -134,10 +134,18 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         // });
     });
 
-    Route::prefix('schedule')->as('schedule.')->group(function () {
-        // Ini cuma dipake sementara
-        Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
-    });
+    Route::get('assistant', function(){
+        return view('admin.pages.practicum.assistant.index');
+    })->name('assistant');
+
+    Route::get('schedule', function(){
+        return view('admin.pages.practicum.schedule.index');
+    })->name('schedule');
+
+    // Route::prefix('schedule')->as('schedule.')->group(function () {
+    //     // Ini cuma dipake sementara
+    //     Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
+    // });
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile',   [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
