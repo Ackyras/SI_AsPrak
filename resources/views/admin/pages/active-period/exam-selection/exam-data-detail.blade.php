@@ -4,7 +4,7 @@
     <div class="p-2">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title font-weight-bold">Data Tes Mata Kuliah XXXX YYYY</h2>
+                <h2 class="card-title font-weight-bold">Data Tes Mata Kuliah {{ $period_subject->subject->name }}</h2>
             </div>
 
             <div class="card-body">
@@ -25,84 +25,21 @@
                             </tr>
                         </thead>
                         <tbody>
+                            @foreach ($period_subject_registrar as $psr)
                             <tr>
-                                <td tabindex="0">Nama Orang {{ rand(1,22) }}</td>
-                                <td style="text-align: center;">1181400{{ rand(11,99) }}</td>
-                                <td style="text-align: center;">0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }}</td>
+                                <td tabindex="0">{{ $psr->registrar->name }}</td>
+                                <td style="text-align: center;">{{ $psr->registrar->nim }}</td>
+                                <td style="text-align: center;">random(0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }})</td>
                                 <td>
                                     <div class="d-flex align-items-center justify-content-center">
                                         <a role="button"
                                             target="_blank"
-                                            href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [1,1]) }}"
+                                            href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [$period_subject,$psr->id]) }}"
                                             class="btn btn-sm btn-success">Periksa Jawaban</a>
                                     </div>
                                 </td>
                             </tr>
-                            <tr>
-                                <td tabindex="0">Nama Orang {{ rand(1,22) }}</td>
-                                <td style="text-align: center;">1181400{{ rand(11,99) }}</td>
-                                <td style="text-align: center;">0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            target="_blank"
-                                            href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [1,1]) }}"
-                                            class="btn btn-sm btn-success">Periksa Jawaban</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Nama Orang {{ rand(1,22) }}</td>
-                                <td style="text-align: center;">1181400{{ rand(11,99) }}</td>
-                                <td style="text-align: center;">0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            target="_blank"
-                                            href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [1,1]) }}"
-                                            class="btn btn-sm btn-success">Periksa Jawaban</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Nama Orang {{ rand(1,22) }}</td>
-                                <td style="text-align: center;">1181400{{ rand(11,99) }}</td>
-                                <td style="text-align: center;">0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            target="_blank"
-                                            href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [1,1]) }}"
-                                            class="btn btn-sm btn-success">Periksa Jawaban</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Nama Orang {{ rand(1,22) }}</td>
-                                <td style="text-align: center;">1181400{{ rand(11,99) }}</td>
-                                <td style="text-align: center;">0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            target="_blank"
-                                            href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [1,1]) }}"
-                                            class="btn btn-sm btn-success">Periksa Jawaban</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Nama Orang {{ rand(1,22) }}</td>
-                                <td style="text-align: center;">1181400{{ rand(11,99) }}</td>
-                                <td style="text-align: center;">0{{ rand(0,1) }}:{{ rand(11,59) }}:{{ rand(11,59) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            target="_blank"
-                                            href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [1,1]) }}"
-                                            class="btn btn-sm btn-success">Periksa Jawaban</a>
-                                    </div>
-                                </td>
-                            </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>

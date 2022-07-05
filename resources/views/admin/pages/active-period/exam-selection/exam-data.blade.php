@@ -4,7 +4,7 @@
     <div class="p-2">
         <div class="card">
             <div class="card-header">
-                <h2 class="card-title font-weight-bold">Data Tes Pendaftar Periode Ganjil TA 2022/2023</h2>
+                <h2 class="card-title font-weight-bold">Data Tes Pendaftar Periode {{ $period->name }}</h2>
             </div>
 
             <div class="card-body">
@@ -19,90 +19,32 @@
                                 <th style="text-align: center" tabindex="0" aria-controls="exam_data_table"
                                     rowspan="1" colspan="1">Kuota Asisten</th>
                                 <th style="text-align: center" tabindex="0" aria-controls="exam_data_table"
-                                    rowspan="1" colspan="1">Jumlah Menyelesaikan Tes</th>
+                                    rowspan="1" colspan="1">Jumlah Mengikuti Tes</th>
                                 <th tabindex="0" aria-controls="exam_data_table" rowspan="1" colspan="1"
                                     style="width: 125px; text-align: center">Aksi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td tabindex="0">Filsafat Islam</td>
-                                <td style="text-align: center;">{{ rand(3,6) }}</td>
-                                <td style="text-align: center;">{{ rand(9,27) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            href="{{ route('admin.active-period.exam-selection.exam-data-detail', 1) }}"
-                                            class="btn btn-sm btn-success">Lihat Data</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Filsafat Hindu</td>
-                                <td style="text-align: center;">{{ rand(3,6) }}</td>
-                                <td style="text-align: center;">{{ rand(9,27) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            href="{{ route('admin.active-period.exam-selection.exam-data-detail', 1) }}"
-                                            class="btn btn-sm btn-success">Lihat Data</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Filsafat Budha</td>
-                                <td style="text-align: center;">{{ rand(3,6) }}</td>
-                                <td style="text-align: center;">{{ rand(9,27) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            href="{{ route('admin.active-period.exam-selection.exam-data-detail', 1) }}"
-                                            class="btn btn-sm btn-success">Lihat Data</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Filsafat Hu Chu</td>
-                                <td style="text-align: center;">{{ rand(3,6) }}</td>
-                                <td style="text-align: center;">{{ rand(9,27) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            href="{{ route('admin.active-period.exam-selection.exam-data-detail', 1) }}"
-                                            class="btn btn-sm btn-success">Lihat Data</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Filsafat Itu</td>
-                                <td style="text-align: center;">{{ rand(3,6) }}</td>
-                                <td style="text-align: center;">{{ rand(9,27) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            href="{{ route('admin.active-period.exam-selection.exam-data-detail', 1) }}"
-                                            class="btn btn-sm btn-success">Lihat Data</a>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td tabindex="0">Filsafat Ini</td>
-                                <td style="text-align: center;">{{ rand(3,6) }}</td>
-                                <td style="text-align: center;">{{ rand(9,27) }}</td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button"
-                                            href="{{ route('admin.active-period.exam-selection.exam-data-detail', 1) }}"
-                                            class="btn btn-sm btn-success">Lihat Data</a>
-                                    </div>
-                                </td>
-                            </tr>
+                            @foreach ($period->subjects as $subject)
+                                <tr>
+                                    <td tabindex="0">{{ $subject->name }}</td>
+                                    <td style="text-align: center;">{{ $subject->pivot->number_of_lab_assistant }}</td>
+                                    <td style="text-align: center;">random({{ rand(9,27) }})</td>
+                                    <td>
+                                        <div class="d-flex align-items-center justify-content-center">
+                                            <a role="button"
+                                                href="{{ route('admin.active-period.exam-selection.exam-data-detail', $subject->pivot->id) }}"
+                                                class="btn btn-sm btn-success">Lihat Data</a>
+                                        </div>
+                                    </td>
+                                </tr>
+                            @endforeach
                         </tbody>
                         <tfoot>
                             <tr>
                                 <th style="text-align: center" rowspan="1" colspan="1">Nama Mata Kuliah</th>
                                 <th style="text-align: center" rowspan="1" colspan="1">Kuota Asisten</th>
-                                <th style="text-align: center" rowspan="1" colspan="1">Jumlah Menyelesaikan Tes</th>
+                                <th style="text-align: center" rowspan="1" colspan="1">Jumlah Mengikuti Tes</th>
                                 <th style="text-align: center" rowspan="1" colspan="1">Aksi</th>
                             </tr>
                         </tfoot>

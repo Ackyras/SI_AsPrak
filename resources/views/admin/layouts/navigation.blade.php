@@ -31,7 +31,7 @@
                 <a href="#datamasterdropdown"
                     class="nav-link {{ request()->routeIs('admin.data-master.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="datamasterdropdown">
-                    {{-- <i class="nav-icon fas fa-table nav-icon"></i> --}}
+                    <i class="nav-icon fas fa-table nav-icon"></i>
                     <p>
                         Data Master
                         <i class="fas fa-angle-left right"></i>
@@ -71,6 +71,7 @@
                     class="nav-link {{ request()->routeIs('admin.active-period.data.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="activePeriodDetailDropdown">
                     {{-- <i class="nav-icon fas fa-table nav-icon"></i> --}}
+                    <i class="fas fa-chart-line nav-icon"></i>
                     <p>
                         Periode Aktif
                         <i class="fas fa-angle-left right"></i>
@@ -108,9 +109,9 @@
                 <a href="#seleksiberkasdropdown"
                     class="nav-link {{ request()->routeIs('admin.active-period.file-selection.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksiberkasdropdown">
-                    {{-- <i class="nav-icon fas fa-file-alt"></i> --}}
+                    <i class="nav-icon fas fa-file"></i>
                     <p>
-                        Seleksi Berkas Periode
+                        Seleksi Berkas
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
@@ -140,9 +141,10 @@
                 <a href="#seleksitesdropdown"
                     class="nav-link {{ request()->routeIs('admin.active-period.exam-selection*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksitesdropdown">
-                    {{-- <i class="nav-icon fas fa-pen-square nav-icon"></i> --}}
+                    <i class="nav-icon fas fa-pen-square nav-icon"></i>
+                    {{-- <i class="fas fa-file-signature nav-icon"></i> --}}
                     <p>
-                        Seleksi Tes Periode
+                        Seleksi Tes
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
@@ -192,9 +194,10 @@
                     {{-- class="nav-link {{ request()->routeIs('admin.data-master.*') ? 'bg-light' : '' }}" --}}
                     class="nav-link"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="activePeriodPracticumDropdown">
-                    {{-- <i class="nav-icon fas fa-table nav-icon"></i> --}}
+                    <i class="nav-icon fas fa-project-diagram nav-icon"></i>
+                    {{-- <i class="fas "></i> --}}
                     <p>
-                        Praktikum Periode
+                        Praktikum
                         <i class="fas fa-angle-left right"></i>
                     </p>
                 </a>
