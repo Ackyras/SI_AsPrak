@@ -18,9 +18,22 @@ class PeriodSeeder extends Seeder
     public function run()
     {
         //
-        Period::factory()->count(5)->create([
+        $periods = Period::factory()->count(5)->create([
             'is_active' =>  false
         ]);
+        foreach ($periods as $period) {
+            $subjects = Subject::inRandomOrder()->limit(5)->get();
+            foreach ($subjects as $key => $subject) {
+                $period->subjects()->attach(
+                    $subject,
+                    [
+                        'exam_start'                =>  Carbon::now()->addDays(5)->addHours($key),
+                        'exam_end'                  =>  Carbon::now()->addDays(5)->addHours($key + 2),
+                        'number_of_lab_assistant'   =>  rand(3, 6),
+                    ]
+                );
+            }
+        }
         $period = Period::create(
             [
                 'name'                  =>  'Semester Ganjil TA 2022/2023',
