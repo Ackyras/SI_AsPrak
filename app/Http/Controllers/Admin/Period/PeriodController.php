@@ -9,6 +9,7 @@ use App\Http\Requests\Period\StoreSubjectForPeriodRequest;
 use App\Http\Requests\Period\UpdatePeriodRequest;
 use App\Http\Requests\Period\UpdateSubjectForPeriodRequest;
 use App\Models\Subject;
+use Illuminate\Http\Request;
 
 class PeriodController extends Controller
 {
@@ -141,6 +142,7 @@ class PeriodController extends Controller
             ]
         );
     }
+
     public function updateSubject(UpdateSubjectForPeriodRequest $request, Period $period, Subject $subject)
     {
         $validated = $request->validated();
@@ -149,6 +151,38 @@ class PeriodController extends Controller
         return back()->with(
             [
                 'success'   =>  'Mata Kuliah berhasil diperbarui ke dalam periode' . $period->name,
+            ]
+        );
+    }
+
+    public function updatePeriodStatus(Request $req, Period $period)
+    {
+
+        $validated = $req->validate([
+            'is_active'                 =>  'boolean',
+            'is_open_for_selection'     =>  'boolean',
+            'is_file_selection_over'    =>  'boolean',
+            'is_exam_selection_over'    =>  'boolean',
+        ]);
+
+        foreach ($validated as $key => $value) {
+            $period->update(
+                [
+                    $key            =>  $value,
+                    $key . '_date'    =>  today()
+                ]
+            );
+        }
+        if ($period->wasChanged()) {
+            return redirect()->back()->with(
+                [
+                    'success'   =>  'Status periode berhasil dirubah',
+                ]
+            );
+        }
+        return redirect()->back()->with(
+            [
+                'failed'    =>  'Status periode gaga; dirubah',
             ]
         );
     }

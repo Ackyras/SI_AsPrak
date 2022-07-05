@@ -22,27 +22,23 @@
                         <p class="d-block w-50 m-0">{{ $period->registration_end }}</p>
                     </div>
                     <div class="w-auto">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#periodDetailEditFormModal1">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#periodDetailEditFormModal1">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
-                    <div class="modal fade" id="periodDetailEditFormModal1"
-                        tabindex="-1" data-backdrop="static" data-keyboard="false"
-                        aria-labelledby="periodDetailEditFormModalLabel1"
-                        aria-hidden="true">
+                    <div class="modal fade" id="periodDetailEditFormModal1" tabindex="-1" data-backdrop="static"
+                        data-keyboard="false" aria-labelledby="periodDetailEditFormModalLabel1" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h3 class="modal-title font-weight-bold"
-                                        id="periodDetailEditFormModalLabel1">
+                                    <h3 class="modal-title font-weight-bold" id="periodDetailEditFormModalLabel1">
                                         Ubah Detail Periode</h3>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST"
-                                    action="">
+                                <form method="POST" action="">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
@@ -55,9 +51,8 @@
                                         </div>
                                         <div class="form-group">
                                             <label for="registration_end">Tanggal akhir pendaftaran</label>
-                                            <input type="datetime-local" id="registration_end"
-                                                name="registration_end" class="form-control" required
-                                                autocomplete="off"
+                                            <input type="datetime-local" id="registration_end" name="registration_end"
+                                                class="form-control" required autocomplete="off"
                                                 value="{{ date('Y-m-d\TH:i:s', strtotime($period->registration_end)) }}">
                                         </div>
                                     </div>
@@ -78,9 +73,10 @@
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
                         <p class="d-block w-50 m-0 font-weight-bold">Status Keaktifan</p>
                         @if ($period->is_active)
-                            <p class="d-block w-50 m-0"><span class="w-50 badge " style="background-color: #0d9488; color:white;">Aktif</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge "
+                                style="background-color: #0d9488; color:white;">Aktif</span></p>
                         @else
-                            <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Tidak Aktif</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Tidak Aktif</span></p>
                         @endif
                     </div>
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
@@ -88,51 +84,50 @@
                         <p class="d-block w-50 m-0">{{ $period->is_active_date }}</p>
                     </div>
                     <div class="w-auto">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#periodDetailEditFormModal2">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#periodDetailEditFormModal2">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
-                    <div class="modal fade" id="periodDetailEditFormModal2"
-                        tabindex="-1" data-backdrop="static" data-keyboard="false"
-                        aria-labelledby="periodDetailEditFormModalLabel2"
-                        aria-hidden="true">
+                    <div class="modal fade" id="periodDetailEditFormModal2" tabindex="-1" data-backdrop="static"
+                        data-keyboard="false" aria-labelledby="periodDetailEditFormModalLabel2" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title font-weight-bold"
-                                        id="periodDetailEditFormModalLabel2">
+                                    <h4 class="modal-title font-weight-bold" id="periodDetailEditFormModalLabel2">
                                         Ubah Status Keaktifan Periode</h4>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST"
-                                    action="">
+                                <form method="POST" action="{{ route('admin.period.update-status', $period) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
                                         @if ($period->is_active)
-                                            <h5>
-                                                Anda akan mengubah Status Keaktifan Periode
-                                                <span class="font-weight-bold">{{ $period->name }}</span>
-                                                dari <span class="badge " style="background-color: #0d9488; color:white;">Aktif</span> menjadi
-                                                <span class="badge badge-secondary">Tidak Aktif</span>
-                                            </h5>
-                                            <h5>Simpan perubahan ini?</h5>
+                                        <h5>
+                                            Anda akan mengubah Status Keaktifan Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Aktif</span> menjadi
+                                            <span class="badge badge-secondary">Tidak Aktif</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
                                         @else
-                                            <h5>
-                                                Anda akan mengubah Status Keaktifan Periode
-                                                <span class="font-weight-bold">{{ $period->name }}</span>
-                                                dari <span class="badge badge-secondary">Tidak Aktif</span> menjadi
-                                                <span class="badge " style="background-color: #0d9488; color:white;">Aktif</span>
-                                            </h5>
-                                            <h5>Simpan perubahan ini?</h5>
+                                        <h5>
+                                            Anda akan mengubah Status Keaktifan Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge badge-secondary">Tidak Aktif</span> menjadi
+                                            <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Aktif</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
                                         @endif
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">SIMPAN
+                                        <button name="is_active" type="submit" value="{{ $period->is_active ? 0 : 1 }}"
+                                            class="btn btn-primary">SIMPAN
                                             PERUBAHAN</button>
                                     </div>
                                 </form>
@@ -147,9 +142,10 @@
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
                         <p class="d-block w-50 m-0 font-weight-bold">Status Menerima Pendaftar</p>
                         @if ($period->is_open_for_selection)
-                            <p class="d-block w-50 m-0"><span class="w-50 badge " style="background-color: #0d9488; color:white;">Menerima</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge "
+                                style="background-color: #0d9488; color:white;">Menerima</span></p>
                         @else
-                            <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Tidak Menerima</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Tidak Menerima</span></p>
                         @endif
                     </div>
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
@@ -157,51 +153,51 @@
                         <p class="d-block w-50 m-0">{{ $period->is_open_for_selection_date }}</p>
                     </div>
                     <div class="w-auto">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#periodDetailEditFormModal3">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#periodDetailEditFormModal3">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
-                    <div class="modal fade" id="periodDetailEditFormModal3"
-                        tabindex="-1" data-backdrop="static" data-keyboard="false"
-                        aria-labelledby="periodDetailEditFormModalLabel3"
-                        aria-hidden="true">
+                    <div class="modal fade" id="periodDetailEditFormModal3" tabindex="-1" data-backdrop="static"
+                        data-keyboard="false" aria-labelledby="periodDetailEditFormModalLabel3" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title font-weight-bold"
-                                        id="periodDetailEditFormModalLabel3">
+                                    <h4 class="modal-title font-weight-bold" id="periodDetailEditFormModalLabel3">
                                         Ubah Status Menerima Pendaftar Periode</h4>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST"
-                                    action="">
+                                <form method="POST" action="{{ route('admin.period.update-status', $period) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
                                         @if ($period->is_open_for_selection)
-                                            <h5>
-                                                Anda akan mengubah Status Menerima Pendaftar Periode
-                                                <span class="font-weight-bold">{{ $period->name }}</span>
-                                                dari <span class="badge " style="background-color: #0d9488; color:white;">Menerima</span> menjadi
-                                                <span class="badge badge-secondary">Tidak Menerima</span>
-                                            </h5>
-                                            <h5>Simpan perubahan ini?</h5>
+                                        <h5>
+                                            Anda akan mengubah Status Menerima Pendaftar Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Menerima</span> menjadi
+                                            <span class="badge badge-secondary">Tidak Menerima</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
                                         @else
-                                            <h5>
-                                                Anda akan mengubah Status Menerima Pendaftar Periode
-                                                <span class="font-weight-bold">{{ $period->name }}</span>
-                                                dari <span class="badge badge-secondary">Tidak Menerima</span> menjadi
-                                                <span class="badge " style="background-color: #0d9488; color:white;">Menerima</span>
-                                            </h5>
-                                            <h5>Simpan perubahan ini?</h5>
+                                        <h5>
+                                            Anda akan mengubah Status Menerima Pendaftar Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge badge-secondary">Tidak Menerima</span> menjadi
+                                            <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Menerima</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
                                         @endif
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">SIMPAN
+                                        <button name="is_open_for_selection" type="submit"
+                                            value="{{ $period->is_open_for_selection ? 0 : 1 }}"
+                                            class="btn btn-primary">SIMPAN
                                             PERUBAHAN</button>
                                     </div>
                                 </form>
@@ -216,9 +212,10 @@
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
                         <p class="d-block w-50 m-0 font-weight-bold">Status Seleksi Berkas</p>
                         @if ($period->is_file_selection_over)
-                            <p class="d-block w-50 m-0"><span class="w-50 badge " style="background-color: #0d9488; color:white;">Selesai</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge "
+                                style="background-color: #0d9488; color:white;">Selesai</span></p>
                         @else
-                            <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Belum Selesai</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Belum Selesai</span></p>
                         @endif
                     </div>
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
@@ -226,51 +223,51 @@
                         <p class="d-block w-50 m-0">{{ $period->is_file_selection_over_date }}</p>
                     </div>
                     <div class="w-auto">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#periodDetailEditFormModal4">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#periodDetailEditFormModal4">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
-                    <div class="modal fade" id="periodDetailEditFormModal4"
-                        tabindex="-1" data-backdrop="static" data-keyboard="false"
-                        aria-labelledby="periodDetailEditFormModalLabel4"
-                        aria-hidden="true">
+                    <div class="modal fade" id="periodDetailEditFormModal4" tabindex="-1" data-backdrop="static"
+                        data-keyboard="false" aria-labelledby="periodDetailEditFormModalLabel4" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title font-weight-bold"
-                                        id="periodDetailEditFormModalLabel4">
+                                    <h4 class="modal-title font-weight-bold" id="periodDetailEditFormModalLabel4">
                                         Ubah Status Seleksi Berkas Periode</h4>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST"
-                                    action="">
+                                <form method="POST" action="{{ route('admin.period.update-status', $period) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
                                         @if ($period->is_file_selection_over)
-                                            <h5>
-                                                Anda akan mengubah Status Seleksi Berkas Periode
-                                                <span class="font-weight-bold">{{ $period->name }}</span>
-                                                dari <span class="badge " style="background-color: #0d9488; color:white;">Selesai</span> menjadi
-                                                <span class="badge badge-secondary">Belum Selesai</span>
-                                            </h5>
-                                            <h5>Simpan perubahan ini?</h5>
+                                        <h5>
+                                            Anda akan mengubah Status Seleksi Berkas Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Selesai</span> menjadi
+                                            <span class="badge badge-secondary">Belum Selesai</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
                                         @else
-                                            <h5>
-                                                Anda akan mengubah Status Seleksi Berkas Periode
-                                                <span class="font-weight-bold">{{ $period->name }}</span>
-                                                dari <span class="badge badge-secondary">Belum Selesai</span> menjadi
-                                                <span class="badge " style="background-color: #0d9488; color:white;">Selesai</span>
-                                            </h5>
-                                            <h5>Simpan perubahan ini?</h5>
+                                        <h5>
+                                            Anda akan mengubah Status Seleksi Berkas Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge badge-secondary">Belum Selesai</span> menjadi
+                                            <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Selesai</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
                                         @endif
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">SIMPAN
+                                        <button name="is_file_selection_over" type="submit"
+                                            value="{{ $period->is_file_selection_over ? 0 : 1 }}"
+                                            class="btn btn-primary">SIMPAN
                                             PERUBAHAN</button>
                                     </div>
                                 </form>
@@ -285,9 +282,10 @@
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
                         <p class="d-block w-50 m-0 font-weight-bold">Status Seleksi Ujian</p>
                         @if ($period->is_exam_selection_over)
-                            <p class="d-block w-50 m-0"><span class="w-50 badge " style="background-color: #0d9488; color:white;">Selesai</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge "
+                                style="background-color: #0d9488; color:white;">Selesai</span></p>
                         @else
-                            <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Belum Selesai</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Belum Selesai</span></p>
                         @endif
                     </div>
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
@@ -295,46 +293,44 @@
                         <p class="d-block w-50 m-0">{{ $period->is_exam_selection_over_date }}</p>
                     </div>
                     <div class="w-auto">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#periodDetailEditFormModal5">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#periodDetailEditFormModal5">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
-                    <div class="modal fade" id="periodDetailEditFormModal5"
-                        tabindex="-1" data-backdrop="static" data-keyboard="false"
-                        aria-labelledby="periodDetailEditFormModalLabel5"
-                        aria-hidden="true">
+                    <div class="modal fade" id="periodDetailEditFormModal5" tabindex="-1" data-backdrop="static"
+                        data-keyboard="false" aria-labelledby="periodDetailEditFormModalLabel5" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title font-weight-bold"
-                                        id="periodDetailEditFormModalLabel5">
+                                    <h4 class="modal-title font-weight-bold" id="periodDetailEditFormModalLabel5">
                                         Ubah Status Seleksi Ujian Periode</h4>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST"
-                                    action="">
+                                <form method="POST" action="">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
                                         @if ($period->is_exam_selection_over)
-                                            <h5>
-                                                Anda akan mengubah Status Seleksi Ujian Periode
-                                                <span class="font-weight-bold">{{ $period->name }}</span>
-                                                dari <span class="badge " style="background-color: #0d9488; color:white;">Selesai</span> menjadi
-                                                <span class="badge badge-secondary">Belum Selesai</span>
-                                            </h5>
-                                            <h5>Simpan perubahan ini?</h5>
+                                        <h5>
+                                            Anda akan mengubah Status Seleksi Ujian Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Selesai</span> menjadi
+                                            <span class="badge badge-secondary">Belum Selesai</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
                                         @else
-                                            <h5>
-                                                Anda akan mengubah Status Seleksi Ujian Periode
-                                                <span class="font-weight-bold">{{ $period->name }}</span>
-                                                dari <span class="badge badge-secondary">Belum Selesai</span> menjadi
-                                                <span class="badge " style="background-color: #0d9488; color:white;">Selesai</span>
-                                            </h5>
-                                            <h5>Simpan perubahan ini?</h5>
+                                        <h5>
+                                            Anda akan mengubah Status Seleksi Ujian Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge badge-secondary">Belum Selesai</span> menjadi
+                                            <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Selesai</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
                                         @endif
                                     </div>
 
@@ -354,50 +350,49 @@
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">
                         <p class="d-block w-50 m-0 font-weight-bold">Poster Periode</p>
                         @if ($period->selection_poster)
-                            <div class="w-50 m-0">
-                                <div class="w-50">
-                                    <button type="button" class="btn btn-sm btn-success btn-block" data-toggle="modal" data-target="#viewPosterModal">
-                                        Lihat Poster
-                                    </button>
-                                </div>
+                        <div class="w-50 m-0">
+                            <div class="w-50">
+                                <button type="button" class="btn btn-sm btn-success btn-block" data-toggle="modal"
+                                    data-target="#viewPosterModal">
+                                    Lihat Poster
+                                </button>
                             </div>
+                        </div>
                         @else
-                            <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Belum Ada Poster</span></p>
+                        <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Belum Ada Poster</span></p>
                         @endif
                     </div>
                     <div style="width: 45%"></div>
                     <div class="w-auto">
-                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal" data-target="#periodDetailEditFormModal6">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#periodDetailEditFormModal6">
                             <i class="fas fa-edit"></i>
                         </button>
                     </div>
-                    <div class="modal fade" id="periodDetailEditFormModal6"
-                        tabindex="-1" data-backdrop="static" data-keyboard="false"
-                        aria-labelledby="periodDetailEditFormModalLabel6"
-                        aria-hidden="true">
+                    <div class="modal fade" id="periodDetailEditFormModal6" tabindex="-1" data-backdrop="static"
+                        data-keyboard="false" aria-labelledby="periodDetailEditFormModalLabel6" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
-                                    <h4 class="modal-title font-weight-bold"
-                                        id="periodDetailEditFormModalLabel6">
+                                    <h4 class="modal-title font-weight-bold" id="periodDetailEditFormModalLabel6">
                                         {{ $period->selection_poster ? 'Ubah' : 'Unggah' }}
                                         Poster Penerimaan</h4>
-                                    <button type="button" class="close" data-dismiss="modal"
-                                        aria-label="Close">
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST"
-                                    action="">
+                                <form method="POST" action="">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
                                         <p class="d-block mb-2">Pilih File</p>
-                                        <input type="file" name="selection_poster" id="selection_poster" class="hidden" required />
+                                        <input type="file" name="selection_poster" id="selection_poster" class="hidden"
+                                            required />
                                         {{-- <p id="selection_posternamecontainer"
                                             style="background-color: #f9fafb; border: 2px solid #9ca3af; color: #4b5563;"
                                             class="d-hidden w-auto border-2 py-1 px-2 gap-2 items-center">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
+                                                fill="currentColor">
                                                 <path fill-rule="evenodd"
                                                     d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
                                                     clip-rule="evenodd" />
@@ -408,7 +403,8 @@
                                         </p>
                                         <p id="selection_postererrorcontainer"
                                             class="hidden w-fit mb-2 border-2 py-1 px-2 gap-2 items-center bg-red-50 border-red-400 text-red-600">
-                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                                            <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
+                                                fill="currentColor">
                                                 <path fill-rule="evenodd"
                                                     d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                                                     clip-rule="evenodd" />
@@ -424,8 +420,8 @@
                                             </p>
                                             <div id="pilihselection_poster"
                                                 class="flex border cursor-pointer items-center py-1 pl-3 pr-5 gap-3 text-emerald-600 hover:bg-emerald-50">
-                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
-                                                    stroke="currentColor" stroke-width="2">
+                                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none"
+                                                    viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                                                     <path stroke-linecap="round" stroke-linejoin="round"
                                                         d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
                                                 </svg>
@@ -469,14 +465,14 @@
                     aria-describedby="period_subject_table_info">
                     <thead>
                         <tr>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table"
-                                rowspan="1" colspan="1">Nama Mata Kuliah</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table"
-                                rowspan="1" colspan="1">Kuota Asisten</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table"
-                                rowspan="1" colspan="1">Tanggal Awal Ujian</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table"
-                                rowspan="1" colspan="1">Tanggal Akhir Ujian</th>
+                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
+                                colspan="1">Nama Mata Kuliah</th>
+                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
+                                colspan="1">Kuota Asisten</th>
+                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
+                                colspan="1">Tanggal Awal Ujian</th>
+                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
+                                colspan="1">Tanggal Akhir Ujian</th>
                             <th tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1"
                                 style="width: 150px; text-align: center">Aksi</th>
                         </tr>
@@ -497,8 +493,8 @@
                                     <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
                                         data-target="#subjectEditFormModal{{ $subject->id }}">Edit</button>
                                     <!-- Edit Subject Modal -->
-                                    <div class="modal fade" id="subjectEditFormModal{{ $subject->id }}"
-                                        tabindex="-1" data-backdrop="static" data-keyboard="false"
+                                    <div class="modal fade" id="subjectEditFormModal{{ $subject->id }}" tabindex="-1"
+                                        data-backdrop="static" data-keyboard="false"
                                         aria-labelledby="subjectEditFormModalLabel{{ $subject->id }}"
                                         aria-hidden="true">
                                         <div class="modal-dialog">
@@ -542,9 +538,8 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="exam_end">Tanggal selesai ujian</label>
-                                                            <input type="datetime-local" id="exam_end"
-                                                                name="exam_end" class="form-control" required
-                                                                autocomplete="off"
+                                                            <input type="datetime-local" id="exam_end" name="exam_end"
+                                                                class="form-control" required autocomplete="off"
                                                                 value="{{ date('Y-m-d\TH:i:s', strtotime($subject->pivot->exam_end)) }}">
                                                         </div>
                                                     </div>
@@ -611,18 +606,14 @@
 </div> --}}
 
 <!-- View Poster Modal -->
-<div class="modal fade" id="viewPosterModal"
-    tabindex="-1" data-backdrop="static" data-keyboard="false"
-    aria-labelledby="viewPosterModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="viewPosterModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
+    aria-labelledby="viewPosterModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title font-weight-bold"
-                    id="viewPosterModalLabel">
+                <h4 class="modal-title font-weight-bold" id="viewPosterModalLabel">
                     Poster Periode {{ $period->name }}</h4>
-                <button type="button" class="close" data-dismiss="modal"
-                    aria-label="Close">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
