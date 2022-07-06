@@ -20,7 +20,6 @@ return new class extends Migration
             $table->id();
             $table->string('file')->nullable();
             $table->foreignIdFor(Choice::class)->nullable()->constrained()->cascadeOnDelete();
-            // $table->foreignIdFor(PeriodSubjectRegistrar::class)->constrained()->cascadeOnDelete();
             $table->foreignId('period_subject_registrar_id')->references('id')->on('period_subject_registrar')->cascadeOnDelete();
             $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
             $table->timestamps();

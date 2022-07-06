@@ -17,6 +17,14 @@ class Room extends Model
 
     public function classrooms()
     {
-        return $this->belongsToMany(Classroom::class, 'schedule');
+        return $this->belongsToMany(Classroom::class, 'schedules')->withPivot(
+            [
+                'day',
+                'start_time',
+                'end_time',
+                'classroom_id',
+                'room_id',
+            ]
+        );
     }
 }

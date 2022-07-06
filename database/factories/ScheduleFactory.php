@@ -16,8 +16,20 @@ class ScheduleFactory extends Factory
      */
     public function definition()
     {
+        $days = [
+            'Senin',
+            'Seleasa',
+            'Rabu',
+            'Kamis',
+            'Jumat',
+            'Sabtu',
+            'minggu',
+        ];
         return [
             //
+            'day'           =>  array_rand($days),
+            'start_time'    =>  $this->faker->time('H:i'),
+            'end_time'      =>  $this->faker->time('H:i'),
         ];
     }
 }

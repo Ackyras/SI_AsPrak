@@ -9,8 +9,6 @@ class PeriodSubjectRegistrar extends Model
 {
     use HasFactory;
 
-    protected $table = 'period_subject_registrar';
-
     protected $fillable =
     [
         'period_subject_id',
@@ -33,5 +31,10 @@ class PeriodSubjectRegistrar extends Model
     {
         return $this->belongsToMany(Question::class, 'answers')
             ->withPivot(['choice_id', 'file']);
+    }
+
+    public function schedule()
+    {
+        return $this->belongsToMany(Schedule::class);
     }
 }

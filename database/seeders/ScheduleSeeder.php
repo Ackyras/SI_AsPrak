@@ -2,6 +2,10 @@
 
 namespace Database\Seeders;
 
+use App\Models\Classroom;
+use App\Models\PeriodSubject;
+use App\Models\Room;
+use App\Models\Schedule;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
@@ -15,5 +19,15 @@ class ScheduleSeeder extends Seeder
     public function run()
     {
         //
+        $classrooms = Classroom::all();
+        foreach ($classrooms as $classroom) {
+            $room = Room::inRandomOrder()->first();
+            $schedule = Schedule::factory()->count(rand(1, 2))->create(
+                [
+                    'classroom_id'  =>  $classroom->id,
+                    'room_id'       =>  $room->id
+                ]
+            );
+        };
     }
 }

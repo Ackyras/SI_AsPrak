@@ -36,6 +36,7 @@ class DatabaseSeeder extends Seeder
             PeriodSubjectRegistrarSeeder::class,
             RoomSeeder::class,
             ClassroomSeeder::class,
+            ScheduleSeeder::class,
         ]);
     }
 }

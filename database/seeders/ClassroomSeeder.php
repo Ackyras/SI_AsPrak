@@ -19,7 +19,7 @@ class ClassroomSeeder extends Seeder
         //
         $period_subjects = PeriodSubject::all();
         foreach ($period_subjects as $period_subject) {
-            $classrooms = Classroom::factory()->count(4)->for($period_subject)->create();
+            $classrooms = Classroom::factory()->count(4)->for($period_subject, 'period_subject')->create();
         }
     }
 }
