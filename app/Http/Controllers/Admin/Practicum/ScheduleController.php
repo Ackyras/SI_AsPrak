@@ -27,14 +27,14 @@ class ScheduleController extends Controller
             ->withCount('schedules')
             ->get();
         $pivotCollection = new Collection();
-        $classrooms->map(function ($classroom) use ($pivotCollection) {
-            foreach ($classroom->schedules as $schedule) {
-                $temp_schedule = Schedule::find($schedule->pivot->id);
-                $temp_schedule->load('period_subject_registrars');
-                dd($temp_schedule);
-                $schedule->lab_asistant_count = $temp_schedule;
-            }
-        });
+        // $classrooms->map(function ($classroom) use ($pivotCollection) {
+        //     foreach ($classroom->schedules as $schedule) {
+        //         $temp_schedule = Schedule::find($schedule->pivot->id);
+        //         $temp_schedule->load('period_subject_registrars');
+        //         dd($temp_schedule);
+        //         $schedule->lab_asistant_count = $temp_schedule;
+        //     }
+        // });
 
         // dd($classrooms[0]);
         return view('admin.pages.practicum.schedule.index', compact('classrooms'));

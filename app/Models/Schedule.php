@@ -32,6 +32,6 @@ class Schedule extends Pivot
 
     public function period_subject_registrars()
     {
-        return $this->belongsToMany(PeriodSubjectRegistrar::class);
+        return $this->belongsToMany(PeriodSubjectRegistrar::class, 'period_subject_registrar');
     }
 }
