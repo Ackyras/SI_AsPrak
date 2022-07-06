@@ -189,7 +189,7 @@
                     </li>
                 </ul>
             </li>
-            
+
             <div class="dropdown-divider"></div>
 
             <!-- ----------------------- -->
@@ -209,15 +209,15 @@
                 </a>
                 <ul class="py-2 rounded nav bg-secondary collapse" id="activePeriodPracticumDropdown">
                     <li class="nav-item">
-                        <a href="{{ route('admin.assistant') }}"
-                            class="nav-link {{ request()->routeIs('admin.assistant') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="{{ route('admin.practicum.lab-assistant.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.practicum.lab-assistant.index') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-users nav-icon"></i>
                             <p>Asisten Praktikum</p>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.schedule') }}"
-                            class="nav-link {{ request()->routeIs('admin.schedule') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="{{ route('admin.practicum.schedule.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.practicum.schedule.index') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="nav-icon fas fa-clock"></i>
                             <p>Jadwal Praktikum</p>
                         </a>

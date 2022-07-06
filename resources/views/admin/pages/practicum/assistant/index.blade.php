@@ -23,12 +23,30 @@
                                 colspan="1">
                                 Mata Kuliah ((Diasisteni??))
                             </th>
-                            <th style="text-align: center; width: 120px;" tabindex="0" aria-controls="assistant_table" rowspan="1"
-                                colspan="1">Aksi</th>
+                            <th style="text-align: center; width: 120px;" tabindex="0" aria-controls="assistant_table"
+                                rowspan="1" colspan="1">Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
+                        @foreach ($lab_assistants as $lab_assistant)
+                        <tr class="">
+                            <td tabindex="0">{{ $lab_assistant->name }}</td>
+                            <td>{{ $lab_assistant->nim }}</td>
+                            <td>
+                                <ul>
+                                    @foreach ($lab_assistant->period_subjects as $period_subject)
+                                    <li>
+                                        {{ $period_subject->subject->name }}
+                                    </li>
+                                    @endforeach
+                                </ul>
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-sm btn-success">Lihat Detail</a>
+                            </td>
+                        </tr>
+                        @endforeach
                         <tr class="">
                             <td tabindex="0">Nama Orang {{ rand(1,9) }}</td>
                             <td>rand(1181400{{ rand(11,99) }})

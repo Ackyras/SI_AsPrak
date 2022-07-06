@@ -22,7 +22,8 @@ use App\Http\Controllers\Admin\ActivePeriod\ExamSelectionController as PeriodExa
 use App\Http\Controllers\Admin\ActivePeriod\FileSelectionController as PeriodFileSelection;
 use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectController as ActivePeriodSubject;
 use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectRegistrarController as ActivePeriodRegistrar;
-
+use App\Http\Controllers\Admin\Practicum\LabAssistantController;
+use App\Http\Controllers\Admin\Practicum\ScheduleController;
 
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
@@ -133,14 +134,18 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         // Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
         // });
     });
+    Route::as('practicum.')->group(function () {
 
-    Route::get('assistant', function(){
-        return view('admin.pages.practicum.assistant.index');
-    })->name('assistant');
+        Route::controller(LabAssistantController::class)->prefix('lab-assistant')->as('lab-assistant.')->group(function () {
+            Route::get('/', 'index')->name('index');
+        });
 
-    Route::get('schedule', function(){
-        return view('admin.pages.practicum.schedule.index');
-    })->name('schedule');
+        Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
+            Route::get('/', 'index')->name('index');
+        });
+    });
+
+
 
     // Route::prefix('schedule')->as('schedule.')->group(function () {
     //     // Ini cuma dipake sementara
