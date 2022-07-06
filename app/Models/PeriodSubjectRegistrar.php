@@ -9,6 +9,8 @@ class PeriodSubjectRegistrar extends Model
 {
     use HasFactory;
 
+    protected $table = 'period_subject_registrar';
+
     protected $fillable =
     [
         'period_subject_id',
