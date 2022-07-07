@@ -4,26 +4,25 @@
 <div class="p-2">
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title font-weight-bold">Data Jadwal Praktikum Periode <span
-                    class="text-danger font-weight-bolder">{{ $period->name }}</span></h2>
+            <h2 class="card-title font-weight-bold">Data Jadwal Praktikum Periode {{ $period->name }}</h2>
         </div>
 
         <div class="card-body">
-            <div id="period_subject_table_wrapper" class="dataTables_wrapper dt-bootstrap4 w-100">
-                <table id="period_subject_table"
+            <div id="schedule_table_wrapper" class="dataTables_wrapper dt-bootstrap4 w-100">
+                <table id="schedule_table"
                     class="table table-bordered table-hover dataTable dtr-inline collapsed w-100"
-                    aria-describedby="period_subject_table_info">
+                    aria-describedby="schedule_table_info">
                     <thead>
                         <tr>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
+                            <th style="text-align: center" tabindex="0" aria-controls="schedule_table" rowspan="1"
                                 colspan="1">Kelas</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
+                            <th style="text-align: center" tabindex="0" aria-controls="schedule_table" rowspan="1"
                                 colspan="1">Jadwal</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
+                            <th style="text-align: center" tabindex="0" aria-controls="schedule_table" rowspan="1"
                                 colspan="1">Jumlah Asisten</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
+                            <th style="text-align: center" tabindex="0" aria-controls="schedule_table" rowspan="1"
                                 colspan="1">Ruangan</th>
-                            <th tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1"
+                            <th tabindex="0" aria-controls="schedule_table" rowspan="1" colspan="1"
                                 style="width: 125px; text-align: center">Aksi</th>
                         </tr>
                     </thead>
@@ -339,7 +338,7 @@
 @section('scripts')
 <script>
     $(function() {
-            $('#period_subject_table').DataTable({
+            $('#schedule_table').DataTable({
                 "paging": true,
                 "lengthChange": false,
                 "searching": true,
@@ -379,7 +378,7 @@
                     },
                     "colvis"
                 ]
-            }).buttons().container().appendTo('#period_subject_table_wrapper .col-md-6:eq(0)');
+            }).buttons().container().appendTo('#schedule_table_wrapper .col-md-6:eq(0)');
         });
 </script>
 @endsection

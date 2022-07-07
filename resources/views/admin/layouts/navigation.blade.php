@@ -222,6 +222,14 @@
                             <p>Jadwal Praktikum</p>
                         </a>
                     </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.qr') }}"
+                            {{-- class="nav-link {{ request()->routeIs('admin.practicum.schedule.index') ? 'bg-light' : 'bg-secondary' }}"> --}}
+                            class="nav-link">
+                            <i class="nav-icon fas fa-qrcode"></i>
+                            <p>QR Code</p>
+                        </a>
+                    </li>
                 </ul>
             </li>
 

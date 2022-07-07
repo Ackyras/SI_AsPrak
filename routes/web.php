@@ -127,19 +127,11 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::resource('period',           PeriodController::class);
         Route::resource('subject',          SubjectController::class)->only('index');
         Route::resource('room',             RoomController::class);
-
-
-        // Route::controller(PeriodController::class)->as('period.')->group(function () {
-        // Route::post('period/{period}/subject', 'addSubject')->name('addSubject');
-        // Route::put('period/{period}/subject/{subject}', 'updateSubject')->name('updateSubject');
-        // });
     });
     Route::as('practicum.')->group(function () {
-
         Route::controller(LabAssistantController::class)->prefix('lab-assistant')->as('lab-assistant.')->group(function () {
             Route::get('/', 'index')->name('index');
         });
-
         Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
             Route::get('/', 'index')->name('index');
         });
@@ -148,6 +140,14 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::get('berdasarkan-kelas-xxx-yyy-zzz', function(){
         return view('admin.pages.practicum.assistant.index-per-subject');
     })->name('berdasarkan-kelas-xxx-yyy-zzz');
+
+    Route::get('qr', function(){
+        return view('admin.pages.practicum.qr-code.index');
+    })->name('qr');
+
+    Route::get('show-qr', function(){
+        return view('admin.pages.practicum.qr-code.show');
+    })->name('show-qr');
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile',   [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');
