@@ -4,7 +4,8 @@
 <div class="p-2">
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title font-weight-bold">Data Jadwal Praktikum Periode <span class="text-danger font-weight-bolder">AAAA BBBB/CCCC</span></h2>
+            <h2 class="card-title font-weight-bold">Data Jadwal Praktikum Periode <span
+                    class="text-danger font-weight-bolder">{{ $period->name }}</span></h2>
         </div>
 
         <div class="card-body">
@@ -31,7 +32,8 @@
                         <tr>
                             <td tabindex="0">{{ $classroom->name }}</td>
                             <td>
-                                JADWAL DUMMY
+                                {{ $classroom->schedules->day . ', '.$classroom->schedules->start_time.' -
+                                '.$classroom->schedules->end_time}}
                                 {{-- <ol>
                                     @forelse ($classroom->schedules as $schedule)
                                     <li>
@@ -43,12 +45,14 @@
                                     @empty
                                     Belum ada jadwal ditentukan
                                     @endforelse
+                                    {{Carbon\Carbon::parse($new->created_at)->diffForHumans() }}
                                 </ol> --}}
                             </td>
                             <td style="text-align: center;">
                                 {{ $classroom->registrar_count ? $classroom->registrar_count : 0 }}
                             </td>
-                            <td style="text-align: center;">RUANG DUMMY</td>
+                            <td style="text-align: center;">{{ $classroom->schedules->room->building.',
+                                '.$classroom->schedules->room->name }}</td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-between">
                                     @if ($loop->index % 2 == 0)
@@ -58,7 +62,8 @@
                                     <!-- Add Schedule Modal -->
                                     <div class="modal fade" id="scheduleAddFormModal_{{ $loop->index }}" tabindex="-1"
                                         data-backdrop="static" data-keyboard="false"
-                                        aria-labelledby="scheduleAddFormModalLabel_{{ $loop->index }}" aria-hidden="true">
+                                        aria-labelledby="scheduleAddFormModalLabel_{{ $loop->index }}"
+                                        aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -100,8 +105,8 @@
                                                             <label for="number_of_lab_assistant">Jumlah Assisten</label>
                                                             <input type="number" id="number_of_lab_assistant"
                                                                 name="number_of_lab_assistant" class="form-control"
-                                                                required autocomplete="off" min="1" max="{{ rand(1,5) }}" 
-                                                                placeholder="(masukkan angka)">
+                                                                required autocomplete="off" min="1"
+                                                                max="{{ rand(1,5) }}" placeholder="(masukkan angka)">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="practicum_room">Ruangan</label>
@@ -126,13 +131,15 @@
                                     @else
                                     <!-- Edit Schedule Button -->
                                     <div style="width:49%">
-                                        <button type="button" class="btn btn-sm btn-block btn-primary" data-toggle="modal"
+                                        <button type="button" class="btn btn-sm btn-block btn-primary"
+                                            data-toggle="modal"
                                             data-target="#scheduleEditFormModal_{{ $loop->index }}">Edit</button>
                                     </div>
                                     <!-- Edit Schedule Modal -->
                                     <div class="modal fade" id="scheduleEditFormModal_{{ $loop->index }}" tabindex="-1"
                                         data-backdrop="static" data-keyboard="false"
-                                        aria-labelledby="scheduleEditFormModalLabel_{{ $loop->index }}" aria-hidden="true">
+                                        aria-labelledby="scheduleEditFormModalLabel_{{ $loop->index }}"
+                                        aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -175,7 +182,8 @@
                                                             <input type="number" id="number_of_lab_assistant"
                                                                 name="number_of_lab_assistant" class="form-control"
                                                                 required autocomplete="off" min="1"
-                                                                max="{{ rand(1,5) }}" value="{{ rand(1,5) }}" placeholder="(masukkan angka)">
+                                                                max="{{ rand(1,5) }}" value="{{ rand(1,5) }}"
+                                                                placeholder="(masukkan angka)">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="practicum_room">Ruangan</label>
@@ -199,13 +207,15 @@
                                     </div>
                                     <!-- Delete Subject Button -->
                                     <div style="width:49%">
-                                        <button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal"
+                                        <button type="button" class="btn btn-sm btn-block btn-danger"
+                                            data-toggle="modal"
                                             data-target="#confirmDeleteScheduleModal_{{ $loop->index }}">Hapus</button>
                                     </div>
                                     <!-- Delete Subject Modal -->
-                                    <div class="modal fade" id="confirmDeleteScheduleModal_{{ $loop->index }}" tabindex="-1"
-                                        data-backdrop="static" data-keyboard="false"
-                                        aria-labelledby="confirmDeleteScheduleModalLabel_{{ $loop->index }}" aria-hidden="true">
+                                    <div class="modal fade" id="confirmDeleteScheduleModal_{{ $loop->index }}"
+                                        tabindex="-1" data-backdrop="static" data-keyboard="false"
+                                        aria-labelledby="confirmDeleteScheduleModalLabel_{{ $loop->index }}"
+                                        aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
