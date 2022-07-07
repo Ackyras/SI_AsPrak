@@ -23,20 +23,10 @@ class ScheduleController extends Controller
     {
         $classrooms = Classroom::query()
             ->whereRelation('period_subject', 'period_id', $this->period->id)
-            ->with(['schedules', 'period_subject.subject'])
-            ->withCount('schedules')
+            ->with(['schedules.room', 'period_subject.subject'])
             ->get();
+        // dd($classrooms);
         $pivotCollection = new Collection();
-        // $classrooms->map(function ($classroom) use ($pivotCollection) {
-        //     foreach ($classroom->schedules as $schedule) {
-        //         $temp_schedule = Schedule::find($schedule->pivot->id);
-        //         $temp_schedule->load('period_subject_registrars');
-        //         dd($temp_schedule);
-        //         $schedule->lab_asistant_count = $temp_schedule;
-        //     }
-        // });
-
-        // dd($classrooms[0]);
-        return view('admin.pages.practicum.schedule.index', compact('classrooms'));
+        return view('admin.pages.practicum.schedule.index', compact('classrooms'), ['period' => $this->period]);
     }
 }

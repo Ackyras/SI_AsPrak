@@ -28,15 +28,6 @@ class Classroom extends Model
 
     public function schedules()
     {
-        return $this->belongsToMany(Room::class, 'schedules')->withPivot(
-            [
-                'day',
-                'start_time',
-                'end_time',
-                'classroom_id',
-                'room_id',
-                'id'
-            ]
-        )->using(Schedule::class);
+        return $this->hasOne(Schedule::class);
     }
 }
