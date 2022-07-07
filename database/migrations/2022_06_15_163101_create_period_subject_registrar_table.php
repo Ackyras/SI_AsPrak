@@ -15,7 +15,7 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('period_subject_registrar', function (Blueprint $table) {
+        Schema::create('psr', function (Blueprint $table) {
             $table->id();
             // $table->foreignIdFor(PeriodSubject::class)->constrained()->cascadeOnDelete();
             $table->foreignId('period_subject_id')->references('id')->on('period_subject')->cascadeOnDelete();
@@ -34,6 +34,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('period_subject_registrars');
+        Schema::dropIfExists('psr');
     }
 };

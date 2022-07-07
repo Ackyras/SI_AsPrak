@@ -31,7 +31,7 @@ class Registrar extends Model
 
     public function period_subjects()
     {
-        return $this->belongsToMany(PeriodSubject::class)->withPivot(
+        return $this->belongsToMany(PeriodSubject::class, 'psr')->withPivot(
             [
                 'is_pass_file_selection',
                 'is_take_exam_selection',
