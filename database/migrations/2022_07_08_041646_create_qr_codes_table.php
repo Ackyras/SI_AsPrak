@@ -1,8 +1,8 @@
 <?php
 
-use App\Models\Choice;
 use App\Models\PeriodSubjectRegistrar;
-use App\Models\Question;
+use App\Models\Schedule;
+use App\Models\User;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,12 +16,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('answers', function (Blueprint $table) {
+        Schema::create('qr_codes', function (Blueprint $table) {
             $table->id();
-            $table->string('file')->nullable();
-            $table->foreignIdFor(Choice::class)->nullable()->constrained()->cascadeOnDelete();
-            $table->foreignId('period_subject_registrar_id')->references('id')->on('psr')->cascadeOnDelete();
-            $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
+            $table->string('token')->unique();
+            $table->foreignIdFor(Schedule::class)->constrained()->cascadeOnDelete();
+            $table->dateTime('end_date');
             $table->timestamps();
         });
     }
@@ -33,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('answers');
+        Schema::dropIfExists('qr_codes');
     }
 };

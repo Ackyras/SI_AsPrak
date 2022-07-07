@@ -9,7 +9,7 @@ class PeriodSubjectRegistrar extends Model
 {
     use HasFactory;
 
-    protected $table = 'period_subject_registrar';
+    protected $table = 'psr';
 
     protected $fillable =
     [
@@ -37,6 +37,17 @@ class PeriodSubjectRegistrar extends Model
 
     public function schedule()
     {
-        return $this->belongsToMany(Schedule::class);
+        return $this->hasOne(Schedule::class);
+    }
+
+    public function presences()
+    {
+        return $this->belongsToMany(QrCode::class, 'presences')->withPivot(
+            [
+                'id',
+                'qr_code_id',
+                'psr_id',
+            ]
+        );
     }
 }

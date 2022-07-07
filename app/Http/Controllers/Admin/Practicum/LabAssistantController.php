@@ -27,7 +27,7 @@ class LabAssistantController extends Controller
         $lab_assistants = Registrar::query()
             ->whereRelation('period_subjects', 'period_id', $this->period->id)
             ->whereHas('period_subjects', function ($query) {
-                $query->where('period_subject_registrar.is_pass_exam_selection', true);
+                $query->where('psr.is_pass_exam_selection', true);
             })
             ->with('period_subjects.subject')
             ->get();
