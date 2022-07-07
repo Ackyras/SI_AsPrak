@@ -15,11 +15,11 @@
         "laravel/tinker": "^2.7",
         "laravel/ui": "^3.3",
         "simplesoftwareio/simple-qrcode": "~4",
-        "tightenco/ziggy": "^1.0"
+        "tightenco/ziggy": "^1.0",
+        "fakerphp/faker": "^1.9.1"
     },
     "require-dev": {
         "beyondcode/laravel-query-detector": "^1.6",
-        "fakerphp/faker": "^1.9.1",
         "laravel/breeze": "^1.9",
         "laravel/sail": "^1.0.1",
         "laraveldaily/larastarters": "^1.4",
