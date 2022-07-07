@@ -23,6 +23,7 @@ use App\Http\Controllers\Admin\ActivePeriod\FileSelectionController as PeriodFil
 use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectController as ActivePeriodSubject;
 use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectRegistrarController as ActivePeriodRegistrar;
 use App\Http\Controllers\Admin\Practicum\LabAssistantController;
+use App\Http\Controllers\Admin\Practicum\QRCodeController;
 use App\Http\Controllers\Admin\Practicum\ScheduleController;
 
 Route::as('website.')->group(function () {
@@ -135,19 +136,16 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
             Route::get('/', 'index')->name('index');
         });
+        Route::resource('qr', QRCodeController::class)->except('show');
+        Route::get('qr/show', function () {
+            return view('admin.pages.practicum.qr-code.show');
+        });
     });
-    
-    Route::get('berdasarkan-kelas-xxx-yyy-zzz', function(){
+
+    Route::get('berdasarkan-kelas-xxx-yyy-zzz', function () {
         return view('admin.pages.practicum.assistant.index-per-subject');
     })->name('berdasarkan-kelas-xxx-yyy-zzz');
 
-    Route::get('qr', function(){
-        return view('admin.pages.practicum.qr-code.index');
-    })->name('qr');
-
-    Route::get('show-qr', function(){
-        return view('admin.pages.practicum.qr-code.show');
-    })->name('show-qr');
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile',   [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');

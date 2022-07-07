@@ -9,8 +9,7 @@
 
         <div class="card-body">
             <div id="qr_code_table_wrapper" class="dataTables_wrapper dt-bootstrap4 w-100">
-                <table id="qr_code_table"
-                    class="table table-bordered table-hover dataTable dtr-inline collapsed w-100"
+                <table id="qr_code_table" class="table table-bordered table-hover dataTable dtr-inline collapsed w-100"
                     aria-describedby="qr_code_table_info">
                     <thead>
                         <tr>
@@ -26,21 +25,21 @@
                     </thead>
                     <tbody>
                         @php
-                            $day = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
-                            $building = ["Gedung A", "Gedung B", "Gedung C", "Gedung D", "Gedung E"]
+                        $day = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
+                        $building = ["Gedung A", "Gedung B", "Gedung C", "Gedung D", "Gedung E"]
                         @endphp
-                        @for ($i = 11; $i <= 30; $i++)
-                        <tr>
+                        @for ($i = 11; $i <= 30; $i++) <tr>
                             <td tabindex="0">PKS 1 TPB - {{ $i }}</td>
                             <td>{{ $day[rand(0,4)] }}, {{ rand(11,13) }}:00 - {{ rand(14,16) }}:00</td>
                             <td>{{ $building[rand(0,4)] }}, Ruang 1{{ $i }}</td>
                             <td>
-                                <a href="{{ route('admin.show-qr') }}" role="button" class="btn btn-block btn-sm btn-success">
+                                <a href="{{ route('admin.practicum.qr.show', 1) }}" role="button"
+                                    class="btn btn-block btn-sm btn-success">
                                     Lihat Semua QR Code
                                 </a>
                             </td>
-                        </tr>
-                        @endfor
+                            </tr>
+                            @endfor
                     </tbody>
                     <tfoot>
                         <tr>

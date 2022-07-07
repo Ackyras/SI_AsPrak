@@ -223,7 +223,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="{{ route('admin.qr') }}"
+                        <a href="{{ route('admin.practicum.qr.index') }}"
                             {{-- class="nav-link {{ request()->routeIs('admin.practicum.schedule.index') ? 'bg-light' : 'bg-secondary' }}"> --}}
                             class="nav-link">
                             <i class="nav-icon fas fa-qrcode"></i>

@@ -9,8 +9,7 @@
 
         <div class="card-body">
             <div id="schedule_table_wrapper" class="dataTables_wrapper dt-bootstrap4 w-100">
-                <table id="schedule_table"
-                    class="table table-bordered table-hover dataTable dtr-inline collapsed w-100"
+                <table id="schedule_table" class="table table-bordered table-hover dataTable dtr-inline collapsed w-100"
                     aria-describedby="schedule_table_info">
                     <thead>
                         <tr>
@@ -31,10 +30,10 @@
                         <tr>
                             <td tabindex="0">{{ $classroom->name }}</td>
                             <td>
-                                {{ $classroom->schedules->day . ', '.$classroom->schedules->start_time.' -
-                                '.$classroom->schedules->end_time}}
+                                {{ $classroom->schedule->day . ', '.$classroom->schedule->start_time.' -
+                                '.$classroom->schedule->end_time}}
                                 {{-- <ol>
-                                    @forelse ($classroom->schedules as $schedule)
+                                    @forelse ($classroom->schedule as $schedule)
                                     <li>
                                         {{ $schedule->pivot->day.', '.$schedule->pivot->start_time.' -
                                         '.$schedule->pivot->end_time
@@ -48,10 +47,10 @@
                                 </ol> --}}
                             </td>
                             <td style="text-align: center;">
-                                {{ $classroom->registrar_count ? $classroom->registrar_count : 0 }}
+                                {{ $classroom->schedule->psrs_count }}
                             </td>
-                            <td style="text-align: center;">{{ $classroom->schedules->room->building.',
-                                '.$classroom->schedules->room->name }}</td>
+                            <td style="text-align: center;">{{ $classroom->schedule->room->building.',
+                                '.$classroom->schedule->room->name }}</td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-between">
                                     @if ($loop->index % 2 == 0)
