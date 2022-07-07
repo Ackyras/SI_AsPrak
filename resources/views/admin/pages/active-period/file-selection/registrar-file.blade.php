@@ -193,8 +193,8 @@
         });
 
         $("#period_subject_registrar_table").click('tr td.btn-group .FileModalButton', function (event) {
-            event.preventDefault();
             if(event.target.classList.contains('FileModalButton')){
+                event.preventDefault();
                 var btn = event.target;
                 var title = btn.getAttribute("data-title")
                 var file = btn.getAttribute("data-file")

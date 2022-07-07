@@ -23,11 +23,11 @@ class ScheduleFactory extends Factory
             'Kamis',
             'Jumat',
             'Sabtu',
-            'minggu',
+            'Minggu',
         ];
         return [
             //
-            'day'           =>  array_rand($days),
+            'day'           =>  $days[rand(0,6)],
             'start_time'    =>  $this->faker->time('H:i'),
             'end_time'      =>  $this->faker->time('H:i'),
         ];

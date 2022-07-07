@@ -144,13 +144,10 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
             Route::get('/', 'index')->name('index');
         });
     });
-
-
-
-    // Route::prefix('schedule')->as('schedule.')->group(function () {
-    //     // Ini cuma dipake sementara
-    //     Route::get('recruitment',           [DataMasterController::class, 'index'])->name('recruitment');
-    // });
+    
+    Route::get('berdasarkan-kelas-xxx-yyy-zzz', function(){
+        return view('admin.pages.practicum.assistant.index-per-subject');
+    })->name('berdasarkan-kelas-xxx-yyy-zzz');
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
     Route::get('profile',   [\App\Http\Controllers\ProfileController::class, 'show'])->name('profile.show');

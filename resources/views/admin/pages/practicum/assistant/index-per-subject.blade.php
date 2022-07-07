@@ -10,7 +10,7 @@
         </div>
 
         <div class="card-body">
-            <div id="assistant_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
+            <div id="subject_assistant_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <div class="btn-group mb-2">
                     <button style="background-color: #9ca3af;" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                     Filter Data
@@ -26,43 +26,61 @@
                     <a class="dropdown-item" href="{{ route('admin.berdasarkan-kelas-xxx-yyy-zzz') }}">Mata Kuliah C</a>
                     </div>
                 </div>
-                <table id="assistant_table" class="table table-bordered table-hover dataTable dtr-inline collapsed"
-                    aria-describedby="assistant_table_info">
+                <table id="subject_assistant_table" class="table table-bordered table-hover dataTable dtr-inline collapsed"
+                    aria-describedby="subject_assistant_table_info">
                     <thead>
                         <tr>
-                            <th style="text-align: center" tabindex="0" aria-controls="assistant_table" rowspan="1"
+                            <th style="text-align: center" tabindex="0" aria-controls="subject_assistant_table" rowspan="1"
                                 colspan="1">Nama</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="assistant_table" rowspan="1"
+                            <th style="text-align: center" tabindex="0" aria-controls="subject_assistant_table" rowspan="1"
                                 colspan="1">NIM</th>
-                            <th style="text-align: center" tabindex="0" aria-controls="assistant_table" rowspan="1"
+                            <th style="text-align: center" tabindex="0" aria-controls="subject_assistant_table" rowspan="1"
                                 colspan="1">
-                                Mata Kuliah Diasisteni
+                                Keaktifan
                             </th>
+                            <th tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1"
+                                style="width: 90px; text-align: center">Aksi</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        @foreach ($lab_assistants as $lab_assistant)
                         <tr class="">
-                            <td tabindex="0">{{ $lab_assistant->name }}</td>
-                            <td>{{ $lab_assistant->nim }}</td>
+                            <td tabindex="0">Marihot</td>
+                            <td>118140XXX</td>
+                            <td>69%</td>
                             <td>
-                                <ul>
-                                    @foreach ($lab_assistant->period_subjects as $period_subject)
-                                    <li>
-                                        {{ $period_subject->subject->name }}
-                                    </li>
-                                    @endforeach
-                                </ul>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a role="button" href=""class="btn btn-sm btn-success">Lihat Detail</a>
+                                </div>
                             </td>
                         </tr>
-                        @endforeach
+                        <tr class="">
+                            <td tabindex="0">Maria</td>
+                            <td>118140YYY</td>
+                            <td>79%</td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a role="button" href=""class="btn btn-sm btn-success">Lihat Detail</a>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr class="">
+                            <td tabindex="0">Maringan</td>
+                            <td>118140ZZZ</td>
+                            <td>89%</td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a role="button" href=""class="btn btn-sm btn-success">Lihat Detail</a>
+                                </div>
+                            </td>
+                        </tr>
                     </tbody>
                     <tfoot>
                         <tr>
                             <th style="text-align: center" rowspan="1" colspan="1">Nama</th>
                             <th style="text-align: center" rowspan="1" colspan="1">NIM</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Mata Kuliah Diasisteni</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Keaktifan</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Aksi</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -75,7 +93,7 @@
 @section('scripts')
 <script>
     $(function() {
-        $("#assistant_table").DataTable({
+        $("#subject_assistant_table").DataTable({
             "paging": true,
             "responsive": true,
             "lengthChange": false,
@@ -114,7 +132,7 @@
                 },
                 "colvis"
             ]
-        }).buttons().container().appendTo('#assistant_table_wrapper .col-md-6:eq(0)');
+        }).buttons().container().appendTo('#subject_assistant_table_wrapper .col-md-6:eq(0)');
     });
 </script>
 @endsection
