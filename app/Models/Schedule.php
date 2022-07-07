@@ -30,9 +30,9 @@ class Schedule extends Model
     //     return $this->belongsTo(Room::class);
     // }
 
-    public function period_subject_registrars()
+    public function psrs()
     {
-        return $this->belongsToMany(PeriodSubjectRegistrar::class, 'period_subject_registrar');
+        return $this->belongsToMany(PeriodSubjectRegistrar::class, 'psr_schedules', 'schedule_id', 'psr_id');
     }
 
     public function room()

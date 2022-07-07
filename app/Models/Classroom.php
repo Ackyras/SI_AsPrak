@@ -26,7 +26,7 @@ class Classroom extends Model
     //     return $this->hasMany(Schedule::class);
     // }
 
-    public function schedules()
+    public function schedule()
     {
         return $this->hasOne(Schedule::class);
     }

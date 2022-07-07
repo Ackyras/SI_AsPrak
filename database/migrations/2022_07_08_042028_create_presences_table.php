@@ -1,6 +1,6 @@
 <?php
 
-use App\Models\QrCode;
+use App\Models\Qr;
 use App\Models\Registrar;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
@@ -18,7 +18,7 @@ return new class extends Migration
         Schema::create('presences', function (Blueprint $table) {
             $table->id();
             $table->foreignId('psr_id')->references('id')->on('psr')->cascadeOnDelete();
-            $table->foreignIdFor(QrCode::class)->constrained()->cascadeOnDelete();
+            $table->foreignIdFor(Qr::class)->constrained()->cascadeOnDelete();
             $table->boolean('is_valid');
             $table->timestamps();
         });

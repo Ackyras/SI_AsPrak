@@ -23,7 +23,14 @@ class ScheduleController extends Controller
     {
         $classrooms = Classroom::query()
             ->whereRelation('period_subject', 'period_id', $this->period->id)
-            ->with(['schedules.room', 'period_subject.subject'])
+            ->with([
+                'schedule' => function ($query) {
+                    $query->withCount('psrs');
+                },
+                'schedule.room',
+                'schedule.psrs',
+                'period_subject.subject'
+            ])
             ->get();
         // dd($classrooms);
         $pivotCollection = new Collection();

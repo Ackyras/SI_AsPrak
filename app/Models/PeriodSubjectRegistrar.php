@@ -42,7 +42,7 @@ class PeriodSubjectRegistrar extends Model
 
     public function presences()
     {
-        return $this->belongsToMany(QrCode::class, 'presences')->withPivot(
+        return $this->belongsToMany(Qr::class, 'presences')->withPivot(
             [
                 'id',
                 'qr_code_id',
