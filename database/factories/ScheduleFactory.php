@@ -18,7 +18,7 @@ class ScheduleFactory extends Factory
     {
         $days = [
             'Senin',
-            'Seleasa',
+            'Selasa',
             'Rabu',
             'Kamis',
             'Jumat',
@@ -27,7 +27,7 @@ class ScheduleFactory extends Factory
         ];
         return [
             //
-            'day'           =>  $days[rand(0,6)],
+            'day'           =>  $days[rand(0, 6)],
             'start_time'    =>  $this->faker->time('H:i'),
             'end_time'      =>  $this->faker->time('H:i'),
         ];

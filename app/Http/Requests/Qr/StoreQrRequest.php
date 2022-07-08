@@ -13,7 +13,7 @@ class StoreQrRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return auth()->check();
     }
 
     /**
@@ -25,6 +25,7 @@ class StoreQrRequest extends FormRequest
     {
         return [
             //
+            'schedule_id'   =>  'required'
         ];
     }
 }

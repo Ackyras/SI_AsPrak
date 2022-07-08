@@ -4,7 +4,7 @@
 <div class="p-2">
     <div class="card">
         <div class="card-header">
-            <h2 class="card-title font-weight-bold">Data QR Code Praktikum Periode iOIu8yg0876y87y</h2>
+            <h2 class="card-title font-weight-bold">Data QR Code Praktikum Periode {{ $period->name }}</h2>
         </div>
 
         <div class="card-body">
@@ -24,22 +24,22 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @php
-                        $day = ["Senin", "Selasa", "Rabu", "Kamis", "Jumat"];
-                        $building = ["Gedung A", "Gedung B", "Gedung C", "Gedung D", "Gedung E"]
-                        @endphp
-                        @for ($i = 11; $i <= 30; $i++) <tr>
-                            <td tabindex="0">PKS 1 TPB - {{ $i }}</td>
-                            <td>{{ $day[rand(0,4)] }}, {{ rand(11,13) }}:00 - {{ rand(14,16) }}:00</td>
-                            <td>{{ $building[rand(0,4)] }}, Ruang 1{{ $i }}</td>
+                        @forelse ($classrooms as $classroom)
+                        <tr>
+                            <td tabindex="0">{{ $classroom->period_subject->subject->name.' - '.$classroom->name }}</td>
+                            <td>{{ $classroom->schedule->day }}, {{ $classroom->schedule->start_time }} - {{
+                                $classroom->schedule->end_time }}</td>
+                            <td>{{ $classroom->schedule->room->building }}, {{ $classroom->schedule->room->name }}
+                            </td>
                             <td>
-                                <a href="{{ route('admin.practicum.qr.show', 1) }}" role="button"
+                                <a href="{{ route('admin.practicum.qr.show', $classroom) }}" role="button"
                                     class="btn btn-block btn-sm btn-success">
                                     Lihat Semua QR Code
                                 </a>
                             </td>
-                            </tr>
-                            @endfor
+                        </tr>
+                        @empty
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
@@ -139,6 +139,7 @@
                 "info": true,
                 "autoWidth": false,
                 "responsive": true,
+                "order":[],
                 "buttons": [{
                         extend: "copy",
                         exportOptions: {

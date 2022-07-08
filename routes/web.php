@@ -136,9 +136,12 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
             Route::get('/', 'index')->name('index');
         });
-        Route::resource('qr', QRCodeController::class)->except('show');
-        Route::get('qr/show', function () {
-            return view('admin.pages.practicum.qr-code.show');
+        Route::controller(QRCodeController::class)->as('qr.')->prefix('qr')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('/', 'store')->name('store');
+            Route::put('/{qr}', 'changeStatus')->name('change-status');
+            Route::get('/{classroom}', 'show')->name('show');
+            // Route::resource('qr', QRCodeController::class)->except('show');
         });
     });
 
