@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('day');
             $table->time('start_time');
             $table->time('end_time');
+            $table->integer('number_of_lab_assistant')->nullable();
             $table->foreignIdFor(Classroom::class)->constrained()->cascadeOnDelete();
             $table->foreignIdFor(Room::class)->constrained()->cascadeOnDelete();
             $table->timestamps();

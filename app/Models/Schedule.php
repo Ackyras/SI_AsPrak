@@ -44,4 +44,9 @@ class Schedule extends Model
     {
         return $this->hasMany(Qr::class);
     }
+
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class);
+    }
 }

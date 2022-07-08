@@ -53,7 +53,7 @@
                                 '.$classroom->schedule->room->name }}</td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-between">
-                                    @if ($loop->index % 2 == 0)
+                                    @if (!$classroom->schedule)
                                     <!-- Add Schedule Button -->
                                     <button type="button" class="btn btn-block btn-sm btn-success" data-toggle="modal"
                                         data-target="#scheduleAddFormModal_{{ $loop->index }}">Tambah</button>
@@ -149,48 +149,54 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form method="POST">
+                                                <form method="POST"
+                                                    action="{{ route('admin.practicum.schedule.update', $classroom->schedule) }}">
                                                     @csrf
+                                                    @method('PUT')
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="practicum_start">Hari praktikum</label>
+                                                            <label for="day">Hari praktikum</label>
                                                             <select class="custom-select" name="day" id="day">
-                                                                <option value="senin">Senin</option>
-                                                                <option value="selasa">Selasa</option>
-                                                                <option value="rabu">Rabu</option>
-                                                                <option value="kamis">Kamis</option>
-                                                                <option value="jumat">Jumat</option>
-                                                                <option value="sabtu">Sabtu</option>
-                                                                <option value="minggu">Minggu</option>
+                                                                <option selected disabled hidden>Pilih hari praktikum
+                                                                </option>
+                                                                <option value="Senin">Senin</option>
+                                                                <option value="Selasa">Selasa</option>
+                                                                <option value="Rabu">Rabu</option>
+                                                                <option value="Kamis">Kamis</option>
+                                                                <option value="Jumat">Jumat</option>
+                                                                <option value="Sabtu">Sabtu</option>
+                                                                <option value="Minggu">Minggu</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="practicum_start">Jam mulai praktikum</label>
-                                                            <input type="time" id="practicum_start"
-                                                                name="practicum_start" class="form-control" required
-                                                                autocomplete="off">
+                                                            <label for="start_time">Jam mulai praktikum</label>
+                                                            <input type="time" id="start_time" name="start_time"
+                                                                class="form-control" required autocomplete="off">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="practicum_end">Jam selesai praktikum</label>
-                                                            <input type="time" id="practicum_end" name="practicum_end"
+                                                            <label for="end_time">Jam selesai praktikum</label>
+                                                            <input type="time" id="end_time" name="end_time"
                                                                 class="form-control" required autocomplete="off">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="number_of_lab_assistant">Jumlah Assisten</label>
                                                             <input type="number" id="number_of_lab_assistant"
                                                                 name="number_of_lab_assistant" class="form-control"
-                                                                required autocomplete="off" min="1"
-                                                                max="{{ rand(1,5) }}" value="{{ rand(1,5) }}"
+                                                                required autocomplete="off"
                                                                 placeholder="(masukkan angka)">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="practicum_room">Ruangan</label>
-                                                            <select id="practicum_room" class="custom-select"
-                                                                name="practicum_room">
+                                                            <label for="room_id">Ruangan</label>
+                                                            <select id="room_id" class="custom-select" name="room_id">
                                                                 <option selected disabled hidden>Pilih ruangan</option>
-                                                                <option value="AAA">AAA</option>
-                                                                <option value="BBB">BBB</option>
-                                                                <option value="CCC">CCC</option>
+                                                                @forelse ($rooms as $room)
+                                                                <option value="{{ $room->id }}">{{ $room->building }},
+                                                                    {{
+                                                                    $room->name }}
+                                                                </option>
+                                                                @empty
+
+                                                                @endforelse
                                                             </select>
                                                         </div>
                                                     </div>

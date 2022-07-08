@@ -135,6 +135,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         });
         Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::put('/{schedule}', 'update')->name('update');
         });
         Route::controller(QRCodeController::class)->as('qr.')->prefix('qr')->group(function () {
             Route::get('/', 'index')->name('index');
