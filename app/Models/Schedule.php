@@ -39,4 +39,9 @@ class Schedule extends Model
     {
         return $this->belongsTo(Room::class);
     }
+
+    public function qrs()
+    {
+        return $this->hasMany(Qr::class);
+    }
 }
