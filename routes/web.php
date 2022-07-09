@@ -77,9 +77,9 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
         Route::post('ujian-seleksi/{period_subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
     });
-    Route::post('presensi/{psr}', 
-        function(Illuminate\Http\Request $req, App\Models\PeriodSubjectRegistrar $psr)
-        {
+    Route::post(
+        'presensi/{psr}',
+        function (Illuminate\Http\Request $req, App\Models\PeriodSubjectRegistrar $psr) {
             dd($req->token);
         }
     )->name('presensi');
@@ -138,6 +138,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
     Route::as('practicum.')->group(function () {
         Route::controller(LabAssistantController::class)->prefix('lab-assistant')->as('lab-assistant.')->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::get('subject-based', 'subjectBased')->name('subject-based');
         });
         Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
             Route::get('/', 'index')->name('index');
@@ -152,9 +153,6 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         });
     });
 
-    Route::get('berdasarkan-kelas-xxx-yyy-zzz', function () {
-        return view('admin.pages.practicum.assistant.index-per-subject');
-    })->name('berdasarkan-kelas-xxx-yyy-zzz');
 
 
     Route::get('users',     [\App\Http\Controllers\UserController::class, 'index'])->name('users.index');
