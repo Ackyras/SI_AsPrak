@@ -9,4 +9,6 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 class PeriodSubjectRegistrarSchedule extends Model
 {
     use HasFactory;
+
+    protected $table = 'psr_schedules';
 }
