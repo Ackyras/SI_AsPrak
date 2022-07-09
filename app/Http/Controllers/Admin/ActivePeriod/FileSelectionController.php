@@ -55,6 +55,7 @@ class FileSelectionController extends Controller
     public function passSelection()
     {
         $period_subject_registrars = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_id', $this->period->id)
             ->where('is_pass_file_selection', true)
             ->with('registrar', 'period_subject.subject')
             ->get();
