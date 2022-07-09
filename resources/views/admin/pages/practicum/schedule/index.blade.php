@@ -30,8 +30,12 @@
                         <tr>
                             <td tabindex="0">{{ $classroom->name }}</td>
                             <td>
+                                @empty($classroom->schedule)
+                                Belum ada jadwal ditentukan
+                                @else
                                 {{ $classroom->schedule->day . ', '.$classroom->schedule->start_time.' -
                                 '.$classroom->schedule->end_time}}
+                                @endempty
                                 {{-- <ol>
                                     @forelse ($classroom->schedule as $schedule)
                                     <li>
@@ -47,10 +51,23 @@
                                 </ol> --}}
                             </td>
                             <td style="text-align: center;">
+                                @empty($classroom->schedule)
+                                -
+                                @else
+                                @empty($classroom->schedule->psrs_count)
+                                -
+                                @endempty
                                 {{ $classroom->schedule->psrs_count }}
+                                @endempty
                             </td>
-                            <td style="text-align: center;">{{ $classroom->schedule->room->building.',
-                                '.$classroom->schedule->room->name }}</td>
+                            <td style="text-align: center;">
+                                @empty($classroom->schedule)
+                                -
+                                @else
+                                {{ $classroom->schedule->room->building.',
+                                '.$classroom->schedule->room->name }}
+                                @endempty
+                            </td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-between">
                                     @if (!$classroom->schedule)
