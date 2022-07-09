@@ -29,10 +29,21 @@ class Registrar extends Model
         return $this->belongsTo(Period::class);
     }
 
+    public function schedules()
+    {
+        return $this->hasManyThrough(PeriodSubjectRegistrarSchedule::class, PeriodSubjectRegistrar::class, 'registrar_id', 'psr_id', 'id', 'id');
+    }
+
+    public function presences()
+    {
+        return $this->hasManyThrough(Presence::class, PeriodSubjectRegistrar::class, 'registrar_id', 'psr_id');
+    }
+
     public function period_subjects()
     {
         return $this->belongsToMany(PeriodSubject::class, 'psr')->withPivot(
             [
+                'id',
                 'is_pass_file_selection',
                 'is_take_exam_selection',
                 'is_pass_exam_selection'
