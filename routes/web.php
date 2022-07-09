@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Practicum\LabAssistantController;
 use App\Http\Controllers\Admin\Practicum\QRCodeController;
 use App\Http\Controllers\Admin\Practicum\ScheduleController;
 
+
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
     //     return view('website.pages.home.index');
@@ -37,7 +38,6 @@ Route::as('website.')->group(function () {
     Route::prefix('period/{period}')->group(function () {
 
         Route::controller(NewsController::class)->prefix('news')->as('news.')->group(function () {
-
             Route::get('registration', 'open_for_selection')->middleware('news_open_for_registration')->name('open_for_selection');
             Route::get('file_selection', 'file_selection_over')->middleware('news_file_selection_is_over')->name('file_selection_over');
             Route::get('final_result', 'exam_selection_over')->middleware('news_exam_selection_is_over')->name('exam_selection_over');
@@ -77,6 +77,12 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
         Route::post('ujian-seleksi/{period_subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
     });
+    Route::post('presensi/{psr}', 
+        function(Illuminate\Http\Request $req, App\Models\PeriodSubjectRegistrar $psr)
+        {
+            dd($req->token);
+        }
+    )->name('presensi');
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
