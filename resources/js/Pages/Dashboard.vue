@@ -32,6 +32,3 @@ export default {
     },
 };
 </script>
-<!-- <div class="absolute rounded shadow top-[20px] md:top-[40px] inset-x-[16px] md:inset-x-[240px] bg-white p-6">
-    <barcode-scanner/>
-</div> -->

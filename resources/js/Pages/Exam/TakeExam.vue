@@ -148,7 +148,7 @@ export default {
                 });
             } else {
                 Inertia.post(
-                    route("user.take-exam.store-all", props.period_subject.id),
+                    route("user.take-exam.store-all", {period_subject: props.period_subject.id}),
                     form
                 );
             }
