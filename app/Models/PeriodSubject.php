@@ -44,7 +44,9 @@ class PeriodSubject extends Model
     {
         return $this->belongsToMany(Registrar::class, 'psr')->withPivot(
             [
+                'id',
                 'is_pass_file_selection',
+                'is_take_exam_selection',
                 'is_pass_exam_selection'
             ]
         );
