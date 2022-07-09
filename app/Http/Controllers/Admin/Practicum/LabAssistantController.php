@@ -83,6 +83,6 @@ class LabAssistantController extends Controller
         // dd($lab_assistants);
         $this->period->load('subjects');
         $subjects = $this->period->subjects;
-        return view('admin.pages.practicum.assistant.index-per-subject', compact('subjects', 'lab_assistants'));
+        return view('admin.pages.practicum.assistant.index-per-subject', compact('subjects', 'lab_assistants', 'period_subject'));
     }
 }

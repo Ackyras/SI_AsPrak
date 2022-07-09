@@ -11,19 +11,25 @@
 
         <div class="card-body">
             <div id="assistant_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="btn-group mb-2">
-                    <button style="background-color: #9ca3af;" type="button" class="btn dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                    Filter Data
+                <div class="mb-2 btn-group">
+                    <button style="background-color: #9ca3af;" type="button" class="btn dropdown-toggle"
+                        data-toggle="dropdown" aria-expanded="false">
+                        Filter Data
                     </button>
                     <div class="dropdown-menu">
-                    <a href="{{ route('admin.practicum.lab-assistant.index') }}"
-                        class="dropdown-item {{ request()->routeIs('admin.practicum.lab-assistant.index') ? 'bg-info' : '' }}">
-                        Berdasarkan Nama Asisten
-                    </a>
-                    <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="{{ route('admin.berdasarkan-kelas-xxx-yyy-zzz') }}">Mata Kuliah A</a>
-                    <a class="dropdown-item" href="{{ route('admin.berdasarkan-kelas-xxx-yyy-zzz') }}">Mata Kuliah B</a>
-                    <a class="dropdown-item" href="{{ route('admin.berdasarkan-kelas-xxx-yyy-zzz') }}">Mata Kuliah C</a>
+                        <a href="{{ route('admin.practicum.lab-assistant.index') }}"
+                            class="dropdown-item {{ request()->routeIs('admin.practicum.lab-assistant.index') ? 'bg-info' : '' }}">
+                            Berdasarkan Nama Asisten
+                        </a>
+                        <div class="dropdown-divider"></div>
+                        @forelse ($subjects as $subject)
+                        <a class="dropdown-item"
+                            href="{{ route('admin.practicum.lab-assistant.subject-based', ['period_subject_id'=> $subject->pivot->id]) }}">
+                            {{ $subject->name }}
+                        </a>
+                        @empty
+
+                        @endforelse
                     </div>
                 </div>
                 <table id="assistant_table" class="table table-bordered table-hover dataTable dtr-inline collapsed"
