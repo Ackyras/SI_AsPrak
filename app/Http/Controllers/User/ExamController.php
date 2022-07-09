@@ -91,6 +91,6 @@ class ExamController extends Controller
                 $transformRequest
             );
         }
-        return to_route('user.take.exam', );
+        return to_route('user.take.exam',);
     }
 }
