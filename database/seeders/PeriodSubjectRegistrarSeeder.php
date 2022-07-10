@@ -43,6 +43,14 @@ class PeriodSubjectRegistrarSeeder extends Seeder
                     ]
                 );
             }
+            $registrar = Registrar::find(1);
+            $registrar->period_subjects()->attach(
+                $period_subjects->random(2),
+                [
+                    'is_pass_exam_selection'        =>  true,
+                    'is_pass_file_selection'        =>  true,
+                ]
+            );
         }
     }
 }

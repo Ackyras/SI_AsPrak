@@ -12121,6 +12121,9 @@ input[type="range"]::-ms-fill-lower {
 .p-2 {
   padding: 0.5rem;
 }
+.p-4 {
+  padding: 1rem;
+}
 .p-6 {
   padding: 1.5rem;
 }
@@ -12222,6 +12225,23 @@ input[type="range"]::-ms-fill-lower {
 }
 .pb-4 {
   padding-bottom: 1rem;
+.pb-3 {
+  padding-bottom: 0.75rem;
+}
+.pl-2 {
+  padding-left: 0.5rem;
+}
+.pr-4 {
+  padding-right: 1rem;
+}
+.pb-2 {
+  padding-bottom: 0.5rem;
+}
+.pr-2 {
+  padding-right: 0.5rem;
+}
+.pl-3 {
+  padding-left: 0.75rem;
 }
 .pt-8 {
   padding-top: 2rem;
@@ -12243,6 +12263,15 @@ input[type="range"]::-ms-fill-lower {
 }
 .pl-3 {
   padding-left: 0.75rem;
+}
+.pb-4 {
+  padding-bottom: 1rem;
+}
+.pt-3 {
+  padding-top: 0.75rem;
+}
+.pt-2 {
+  padding-top: 0.5rem;
 }
 .pr-5 {
   padding-right: 1.25rem;
@@ -12273,7 +12302,6 @@ input[type="range"]::-ms-fill-lower {
 }
 .pl-0 {
   padding-left: 0px;
-}
 .pl-1 {
   padding-left: 0.25rem;
 }
@@ -12281,8 +12309,6 @@ input[type="range"]::-ms-fill-lower {
   padding-right: 0.75rem;
 }
 .text-left {
-  text-align: left;
-}
 .text-center {
   text-align: center;
 }

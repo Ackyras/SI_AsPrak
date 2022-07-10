@@ -20,6 +20,7 @@ class ChoiceFactory extends Factory
             //
             'text'      =>  $this->faker->sentence(6, true),
             'option'    =>  $this->faker->word(),
+            'image'     =>  $this->faker->imageUrl()
         ];
     }
 }

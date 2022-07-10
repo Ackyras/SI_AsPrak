@@ -22,7 +22,8 @@ return new class extends Migration
             $table->foreignIdFor(Choice::class)->nullable()->constrained()->cascadeOnDelete();
             $table->foreignId('period_subject_registrar_id')->references('id')->on('psr')->cascadeOnDelete();
             $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
-            $table->string('extension');
+            $table->integer('score')->default(0);
+            $table->string('extension')->nullable();
             $table->timestamps();
         });
     }

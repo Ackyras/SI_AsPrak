@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\API\User\ExamController;
+use App\Http\Controllers\User\UserDashboardController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -44,4 +45,6 @@ Route::prefix('v1')->group(function () {
             Route::post('store-essay', [ExamController::class, 'storeEssayAnswer'])->name('store.essay-answer');
         });
     });
+
+    Route::post('test-presence', [UserDashboardController::class, 'presence']);
 });

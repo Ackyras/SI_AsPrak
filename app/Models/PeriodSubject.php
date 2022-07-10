@@ -12,11 +12,11 @@ class PeriodSubject extends Model
 
     protected $table = 'period_subject';
 
-    protected $with =
-    [
-        'subject',
-        'period'
-    ];
+    // protected $with =
+    // [
+    //     'subject',
+    //     'period'
+    // ];
 
     protected $fillable = [
         'period_id',

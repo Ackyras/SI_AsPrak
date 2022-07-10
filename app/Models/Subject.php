@@ -17,4 +17,9 @@ class Subject extends Model
     {
         return $this->belongsToMany(Period::class)->withPivot(['number_of_lab_assistant', 'exam_start', 'exam_end', 'id']);
     }
+
+    public function period_subject()
+    {
+        return $this->hasMany(PeriodSubject::class);
+    }
 }

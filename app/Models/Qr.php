@@ -32,4 +32,9 @@ class Qr extends Model
             ]
         );
     }
+
+    public function classroom()
+    {
+        return $this->belongsTo(Classroom::class);
+    }
 }
