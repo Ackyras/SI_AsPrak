@@ -7,6 +7,7 @@ use App\Models\Question;
 use Illuminate\Http\Request;
 use App\Models\PeriodSubject;
 use App\Http\Controllers\Controller;
+use App\Models\Choice;
 use App\Models\Period;
 use App\Models\PeriodSubjectRegistrar;
 use Illuminate\Support\Facades\Storage;
@@ -64,11 +65,16 @@ class ExamController extends Controller
             $tempRequest['question_id'] =   $value;
             $tempRequest['file'] = null;
             $tempRequest['choice_id'] = null;
+            $tempRequest['score'] = null;
             $question = Question::find($value);
             if ($question->type == 'essay') {
                 $tempRequest['file'] =   $request->answers[$key];
             } else {
                 $tempRequest['choice_id'] = $request->answers[$key];
+                $choice = Choice::find($tempRequest['choice_id']);
+                if ($choice->is_true) {
+                    $tempRequest['score'] = $question->score;
+                }
             }
             array_push($transformRequests, $tempRequest);
         }

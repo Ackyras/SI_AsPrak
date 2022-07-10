@@ -51,21 +51,6 @@ class UserDashboardController extends Controller
                 ]
             )
             ->first();
-        dd($qr);
-        $registrar = auth()->user()->registrar;
-        $user = User::with('registrar')->where('email', 'user@user')->first();
-        $psr = PeriodSubjectRegistrar::query()
-            ->where('period_subject_id', $qr->schedule->psrs)
-            //
-        ;
-        if ($qr->schedule->psrs->contain($user->registrar)) {
-            return response()->json(
-                [
-                    'msg'   =>  'Presensi sudah ada'
-                ]
-            );
-        }
-        return response()->json($qr);
         if (!$qr) {
             return back()->with(
                 [
@@ -76,5 +61,18 @@ class UserDashboardController extends Controller
                 ]
             );
         }
+        $registrar = auth()->user()->registrar;
+        $registrar->load(
+            [
+                'period_subjects'   
+            ]
+        );
+        // if ($registrar) {
+        //     return response()->json(
+        //         [
+        //             'msg'   =>  'Presensi sudah ada'
+        //         ]
+        //     );
+        // }
     }
 }

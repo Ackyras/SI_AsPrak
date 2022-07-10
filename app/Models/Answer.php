@@ -15,4 +15,14 @@ class Answer extends Model
         'choice_id',
         'file',
     ];
+
+    public function question()
+    {
+        return $this->belongsTo(Question::class);
+    }
+
+    public function psr()
+    {
+        return $this->belongsTo(PeriodSubjectRegistrar::class);
+    }
 }
