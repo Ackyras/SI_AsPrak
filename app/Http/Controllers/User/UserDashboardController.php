@@ -48,7 +48,6 @@ class UserDashboardController extends Controller
                         ],
                         'classroom.period_subject.subject'
                     ],
-                    'period_subject_registrar'
                 ]
             )
             ->first();

@@ -51,5 +51,19 @@ class QrCodeSeeder extends Seeder
             }
         }
         // $qr = Qr::create()
+        $period_subject = PeriodSubject::query()
+            ->where('id', $period->subjects[0]->pivot->id)
+            ->with('classrooms.schedule')
+            ->first()
+            //
+        ;
+        $token = 'tokentest';
+        $qr = Qr::create(
+            [
+                'token'         =>  $token,
+                'end_date'      =>  now()->addDay(),
+                'schedule_id'   =>  $period_subject->classrooms[0]->schedule->id,
+            ]
+        );
     }
 }
