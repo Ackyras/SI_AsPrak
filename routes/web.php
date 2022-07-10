@@ -71,18 +71,13 @@ Route::as('website.')->group(function () {
 
 Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
+    Route::post('presence', [UserDashboardController::class, 'presence'])->name('presence');
     Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
     Route::middleware(['is_eligible_for_exam'])->group(function () {
         Route::get('ujian-seleksi/{period_subject}', [ExamController::class, 'exam'])->name('take.exam');
         Route::post('ujian-seleksi/{period_subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
     });
-    Route::post(
-        'presensi/{psr}',
-        function (Illuminate\Http\Request $req, App\Models\PeriodSubjectRegistrar $psr) {
-            dd($req->token);
-        }
-    )->name('presensi');
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
