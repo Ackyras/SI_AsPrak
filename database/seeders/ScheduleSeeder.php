@@ -22,7 +22,7 @@ class ScheduleSeeder extends Seeder
         $classrooms = Classroom::all();
         foreach ($classrooms as $classroom) {
             $room = Room::inRandomOrder()->first();
-            $schedule = Schedule::factory()->count(rand(1, 2))->create(
+            $schedule = Schedule::factory()->create(
                 [
                     'classroom_id'  =>  $classroom->id,
                     'room_id'       =>  $room->id
