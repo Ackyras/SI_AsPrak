@@ -37,6 +37,7 @@ class DatabaseSeeder extends Seeder
             RoomSeeder::class,
             ClassroomSeeder::class,
             ScheduleSeeder::class,
+            QrCodeSeeder::class,
         ]);
     }
 }
