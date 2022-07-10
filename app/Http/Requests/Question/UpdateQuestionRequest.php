@@ -25,6 +25,14 @@ class UpdateQuestionRequest extends FormRequest
     {
         return [
             //
+            'text'                  =>  'required',
+            'type'                  =>  'required',
+            'score'                 =>  'required|numeric',
+            'image'                 =>  'nullable',
+            'choice.option.*'       =>  'required_if:type,choice',
+            'choice.text.*'         =>  'required_if:type,choice',
+            'choice.image.*'        =>  'nullable',
+            'choice.is_true.*'      =>  'required_if:type,choice',
         ];
     }
 }

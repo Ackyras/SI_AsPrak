@@ -31,7 +31,7 @@ class StoreQuestionRequest extends FormRequest
             'image'                 =>  'nullable',
             'choice.option.*'       =>  'required_if:type,choice',
             'choice.text.*'         =>  'required_if:type,choice',
-            'choice.image.*'        =>  'required_if:type,choice',
+            'choice.image.*'        =>  'nullable',
             'choice.is_true.*'      =>  'required_if:type,choice',
         ];
     }

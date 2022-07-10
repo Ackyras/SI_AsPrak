@@ -18,6 +18,7 @@ return new class extends Migration
             $table->id();
             $table->string('text');
             $table->string('option');
+            $table->string('image');
             $table->boolean('is_true');
             $table->foreignIdFor(Question::class)->constrained()->cascadeOnDelete();
             $table->timestamps();
