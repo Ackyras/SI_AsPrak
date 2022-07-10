@@ -5,6 +5,7 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
+        "ext-imagick": "*",
         "php": "^8.0.2",
         "ajcastro/eager-load-pivot-relations": "^0.2.2",
         "barryvdh/laravel-debugbar": "^3.6",
