@@ -52,8 +52,8 @@ class UserDashboardController extends Controller
                 ]
             )
             ->first();
-        // dd($qr);
-        // $registrar = auth()->user()->registrar;
+        dd($qr);
+        $registrar = auth()->user()->registrar;
         $user = User::with('registrar')->where('email', 'user@user')->first();
         $psr = PeriodSubjectRegistrar::query()
             ->where('period_subject_id', $qr->schedule->psrs)
