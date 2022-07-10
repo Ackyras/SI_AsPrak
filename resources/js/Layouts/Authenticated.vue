@@ -17,7 +17,7 @@
             >
                 <div v-if="$page.props.alert" class="alert">
                     <div
-                        v-if="$page.props.alert.status == 'succes'"
+                        v-if="$page.props.alert.status == 'success'"
                         class="success"
                     >
                         {{ $page.props.alert.msg }}

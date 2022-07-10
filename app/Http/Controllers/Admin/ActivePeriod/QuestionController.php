@@ -14,14 +14,14 @@ class QuestionController extends Controller
         return view('admin.pages.active-period.period-subject-question.index', compact('period_subject'));
     }
     
-    public function create()
+    public function create(PeriodSubject $period_subject)
     {
-        //
+        return view('admin.pages.active-period.period-subject-question.create', compact('period_subject'));
     }
     
-    public function store(Request $request)
+    public function store(Request $request, PeriodSubject $period_subject)
     {
-        //
+        dd($request->request);
     }
     
     public function show($id)
@@ -29,7 +29,7 @@ class QuestionController extends Controller
         //
     }
     
-    public function edit($id)
+    public function edit()
     {
         //
     }
