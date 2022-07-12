@@ -40,8 +40,8 @@
                                     @else
                                         <div style="width: 88%">
                                             <button type="button" class="btn btn-sm btn-info show-image-btn" data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
-                                                data-toggle="modal" data-target="#showImageModal">
-                                                Lihat Gambar Soal
+                                                data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                Lihat Gambar
                                             </button>
                                         </div>
                                     @endif
@@ -54,9 +54,18 @@
                                         <div style="width: 88%" class="">
                                             <ul class="pl-4">
                                                 @foreach ($question->choices as $choice)
-                                                    <li
-                                                        class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
-                                                        {{ $choice->text }}
+                                                    <li class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
+                                                        <p class="d-block m-0 mb-1">{{ $choice->text }}</p>
+                                                        @if (rand(1,5)%2==0)
+                                                            <p style="width: 88%" class="d-block m-0 font-italic font-weight-bold text-secondary">Tidak Ada Gambar Jawaban</p>
+                                                        @else
+                                                            <div style="width: 88%">
+                                                                <button type="button" class="btn btn-sm {{ $choice->is_true ? 'btn-success' : 'btn-secondary' }} show-image-btn" data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
+                                                                    data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                                    Lihat Gambar Jawaban
+                                                                </button>
+                                                            </div>
+                                                        @endif
                                                     </li>
                                                 @endforeach
                                             </ul>
@@ -84,7 +93,7 @@
                                     data-backdrop="static" data-keyboard="false"
                                     aria-labelledby="questionEditFormModalLabel{{ $question->id }}"
                                     aria-hidden="true">
-                                    <div class="modal-dialog modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
                                         <div class="modal-content" style="overflow-y:auto;">
                                             <div class="modal-header">
                                                 <h4 class="modal-title font-weight-bold"
@@ -100,6 +109,7 @@
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
+                                                    <!-- TIPE SOAL -->
                                                     <div class="form-group">
                                                         <label for="name">Tipe Soal</label>
                                                         <input type="text" id="name" name="name"
@@ -107,6 +117,7 @@
                                                             placeholder="Nama mata kuliah"
                                                             value="{{ $question->type }}" readonly>
                                                     </div>
+                                                    <!-- TEKS SOAL -->
                                                     <div class="form-group">
                                                         <label for="text_{{ $question->id }}">Teks Soal</label>
                                                         <textarea id="text_{{ $question->id }}" name="text" class="d-none">
@@ -118,6 +129,39 @@
                                                             {{ $question->text }}
                                                         </span>
                                                     </div>
+                                                    <!-- HAPUS KALU SUDAH TIDAK DIGUNAKAN -->
+                                                    @php
+                                                        $random = rand(1,10);
+                                                    @endphp
+                                                    <!-- GAMBAR SOAL SAAT INI -->
+                                                    <p class="d-block m-0 mb-2 font-weight-bold">Gambar Soal</p>
+                                                    <div class="mb-3">
+                                                        @if ($random%2==0)
+                                                            <p class="d-block m-0 font-italic font-weight-bold text-secondary">Belum ada gambar soal saat ini</p>
+                                                        @else
+                                                            <button type="button" class="btn btn-sm btn-info show-image-btn" 
+                                                                data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
+                                                                data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                                Lihat gambar saat ini
+                                                            </button>
+                                                        @endif
+                                                    </div>
+                                                    <!-- TAMBAH JIKA BELUM ADA GAMBAR SOAL / UBAH JIKA SUDAH ADA GAMBAR SOAL -->
+                                                    <p class="d-block m-0 mb-2 font-weight-bold">{{ $random%2==0 ? 'Tambah ' : 'Ubah ' }}Gambar Soal</p>
+                                                    <p class="d-block m-0 mb-2 text-danger" id="editQuestionFileError_{{ $question->id }}"></p>
+                                                    <div class="input-group mb-3">
+                                                        <div class="input-group-prepend">
+                                                            <button class="btn btn-outline-secondary edit-question-file-preview" type="button" id="editQuestionImagePreview_{{ $question->id }}" 
+                                                                data-toggle="modal" data-target="#showFormImageModal">
+                                                                Pratinjau
+                                                            </button>
+                                                        </div>
+                                                        <div class="custom-file">
+                                                            <input type="file" class="custom-file-input edit-question-file-input" name="file" id="editQuestionFile_{{ $question->id }}">
+                                                            <label class="custom-file-label" for="editQuestionFile_{{ $question->id }}">Pilih file soal (JPG, JPEG, PNG) </label>
+                                                        </div>
+                                                    </div>
+                                                    <!-- BAGIAN PILIHAN UNTUK SOAL TIPE PILIHAN BERGANDA -->
                                                     @if ($question->choices->count() > 0)
                                                         <p class="d-block m-0 mb-2 font-weight-bold">Pilihan Jawaban</p>
                                                         <div id="question_{{ $question->id }}_choices_container">
@@ -129,11 +173,45 @@
                                                                                 id="choice_{{ $choice->id }}_question_{{ $question->id }}" value="choice_{{ $loop->index }}" {{ $choice->is_true ? 'checked' : '' }}>
                                                                         </div>
                                                                     </div>
-                                                                    <input type="text" required autocomplete="off" class="form-control {{ $choice->is_true ? 'text-primary' : '' }}" 
+                                                                    <input type="text" autocomplete="off" class="form-control {{ $choice->is_true ? 'text-primary' : '' }}" 
                                                                         name="choice_{{ $choice->id }}_text" 
                                                                         id="choice_{{ $choice->id }}_text"
                                                                         value="{{ $choice->text }}">
                                                                 </div>
+                                                                @php
+                                                                    $random2 = rand(1,10);
+                                                                @endphp
+                                                                <!-- GAMBAR JAWABAN SAAT INI -->
+                                                                <div style="padding-left: 38px;" class="mb-2">
+                                                                    @if ($random2%2==0)
+                                                                        <p class="d-block m-0 font-italic font-weight-bold text-secondary">Belum ada gambar jawaban saat ini</p>
+                                                                    @else
+                                                                        <button type="button" class="btn btn-sm btn-success show-image-btn" 
+                                                                            data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
+                                                                            data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                                            Lihat Gambar Jawaban Saat Ini
+                                                                        </button>
+                                                                    @endif
+                                                                </div>
+                                                                <div style="padding-left: 38px;" class="input-group mb-3">
+                                                                    <div class="input-group-prepend">
+                                                                        <button class="btn btn-outline-secondary preview-choice-file-edit" type="button" 
+                                                                            id="previewChoice_{{ $question->id }}_{{ $choice->id }}_file" 
+                                                                            data-toggle="modal" data-target="#showFormImageModal">
+                                                                            Pratinjau
+                                                                        </button>
+                                                                    </div>
+                                                                    <div class="custom-file">
+                                                                        <input type="file" 
+                                                                            class="custom-file-input edit-question-choice-file" 
+                                                                            id="choice_{{ $question->id }}_{{ $choice->id }}_file" 
+                                                                            name="choice_{{ $question->id }}_{{ $choice->id }}_file">
+                                                                        <label class="custom-file-label" for="choice_{{ $question->id }}_{{ $choice->id }}_file">
+                                                                            Pilih file jawaban (JPG, JPEG, PNG) 
+                                                                        </label>
+                                                                    </div>
+                                                                </div>
+                                                                <p style="padding-left: 38px;" class="d-block m-0 my-3 text-danger" id="choice_{{ $question->id }}_{{ $choice->id }}_file_error"></p>
                                                             @endforeach
                                                         </div>
                                                     @endif
@@ -161,8 +239,8 @@
                                     tabindex="-1" data-backdrop="static" data-keyboard="false"
                                     aria-labelledby="confirmDeleteQuestionModalLabel{{ $question->id }}"
                                     aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
+                                    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                                        <div class="modal-content" style="overflow-y:auto;">
                                             <div class="modal-header">
                                                 <h4 class="modal-title font-weight-bold"
                                                     id="confirmDeleteQuestionModalLabel{{ $question->id }}">
@@ -174,14 +252,71 @@
                                                 </button>
                                             </div>
                                             <div class="modal-body">
-                                                <h5>
-                                                    Yakin untuk menghapus soal
-                                                    <br>
-                                                    "<span class="text-info">{{ $question->text }}</span>" 
-                                                    @if ($question->choices->count() > 0)
-                                                        beserta pilihan jawabannya
-                                                    @endif ?
-                                                </h5>
+                                                <h5> Anda akan menghapus soal berikut : </h5>
+                                                <div class="d-flex justify-content-between mb-2 ">
+                                                    <p style="width: 20%; font-weight: 600" class="d-block m-0">Tipe Soal</p>
+                                                    <p class="d-block m-0 ">:</p>
+                                                    <p style="width: 78%" class="d-block m-0 text-uppercase">{{ $question->type }}</p>
+                                                </div>
+                
+                                                <div class="d-flex justify-content-between mb-2">
+                                                    <p style="width: 20%; font-weight: 600" class="d-block m-0">Teks Soal</p>
+                                                    <p class="d-block m-0">:</p>
+                                                    <p style="width: 78%" class="d-block m-0">{{ $question->text }}</p>
+                                                </div>
+                
+                                                <div class="d-flex justify-content-between align-items-center {{ $question->choices->count() > 0 ? '' : 'mb-2' }}">
+                                                    <p style="width: 20%; font-weight: 600" class="d-block m-0">Gambar Soal</p>
+                                                    <p class="d-block m-0">:</p>
+                                                    @if (rand(1,5)%2==0)
+                                                        <p style="width: 78%" class="d-block m-0 font-italic font-weight-bold text-secondary">Tidak Ada Gambar Soal</p>
+                                                    @else
+                                                        <div style="width: 78%">
+                                                            <button type="button" class="btn btn-sm btn-info show-image-btn" data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
+                                                                data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                                Lihat Gambar
+                                                            </button>
+                                                        </div>
+                                                    @endif
+                                                </div>
+                
+                                                @if ($question->choices->count() > 0)
+                                                    <div class="d-flex justify-content-between mt-2 ">
+                                                        <p style="width: 20%; font-weight: 600" class="d-block m-0">Pilihan</p>
+                                                        <p class="d-block m-0">:</p>
+                                                        <div style="width: 78%" class="">
+                                                            <ul class="pl-4">
+                                                                @foreach ($question->choices as $choice)
+                                                                    <li class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
+                                                                        <p class="d-block m-0 mb-1">{{ $choice->text }}</p>
+                                                                        @if (rand(1,5)%2==0)
+                                                                            <p style="width: 78%" class="d-block m-0 font-italic font-weight-bold text-secondary">Tidak Ada Gambar Jawaban</p>
+                                                                        @else
+                                                                            <div style="width: 78%">
+                                                                                <button type="button" class="btn btn-sm {{ $choice->is_true ? 'btn-success' : 'btn-secondary' }} show-image-btn" data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
+                                                                                    data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                                                    Lihat Gambar Jawaban
+                                                                                </button>
+                                                                            </div>
+                                                                        @endif
+                                                                    </li>
+                                                                @endforeach
+                                                            </ul>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                
+                                                <div class="d-flex justify-content-between {{ $question->choices->count() > 0 ? 'mb-2' : 'my-2' }}">
+                                                    <p style="width: 20%; font-weight: 600" class="d-block m-0">Skor</p>
+                                                    <p class="d-block m-0">:</p>
+                                                    <p style="width: 78%" class="d-block m-0">
+                                                        <span class="badge badge-success">{{ $question->score }}
+                                                            poin
+                                                        </span>
+                                                    </p>
+                                                </div>
+
+                                                <h5>Lanjutkan aksi ini?</h5>
                                             </div>
                                             <div class="modal-footer">
                                                 <button type="button" class="btn btn-secondary"
@@ -241,18 +376,34 @@
         </div>
     </div>
 
-    <!-- Show Image Modal -->
-    <div class="modal" id="showImageModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
-        aria-labelledby="showImageModalLabel" aria-hidden="true">
+    <!-- Show Static Data Image Modal -->
+    <div class="modal" id="showStaticDataImageModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
+        aria-labelledby="showStaticDataImageModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title font-weight-bold" id="showImageModalLabel">Gambar Soal</h5>
+                    <h5 class="modal-title font-weight-bold" id="showStaticDataImageModalLabel">Gambar Soal</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body d-flex justify-content-center" id="showImageModalContent"></div>
+                <div class="modal-body d-flex justify-content-center" id="showStaticDataImageModalContent"></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Show Form-Input Image Modal -->
+    <div class="modal" id="showFormImageModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
+        aria-labelledby="showFormImageModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title font-weight-bold" id="showFormImageModalLabel">Pratinjau Gambar</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body d-flex justify-content-center" id="showFormImageModalContent"></div>
             </div>
         </div>
     </div>
@@ -280,7 +431,7 @@
                 let question_text = ""
                     + "<div class=\"form-group\" id=\"questionTextSection\">"
                         + "<label for=\"newQuestionText\">Teks Soal</label>"
-                        + "<textarea id=\"newQuestionText\" name=\"text\" class=\"d-none\" required>"
+                        + "<textarea id=\"newQuestionText\" name=\"text\" class=\"d-none\">"
                         + "</textarea>"
                         + "<span id=\"questionTextContent\" class=\"d-block w-100 py-1 px-2 overflow-hidden rounded border\" role=\"textbox\" contenteditable>"
                         + "</span>"
@@ -288,6 +439,9 @@
                     + "<p class=\"d-block m-0 mb-2 font-weight-bold\">Gambar Soal</p>"
                     + "<p class=\"d-block m-0 mb-2 text-danger\" id=\"questionFileError\"></p>"
                     + "<div class=\"input-group mb-3\">"
+                        + "<div class=\"input-group-prepend\">"
+                            + "<button class=\"btn btn-outline-secondary\" type=\"button\" id=\"questionImagePreview\" data-toggle=\"modal\" data-target=\"#showFormImageModal\">Pratinjau</button>"
+                        + "</div>"
                         + "<div class=\"custom-file\">"
                             + "<input type=\"file\" class=\"custom-file-input\" name=\"file\" id=\"questionFile\">"
                             + "<label class=\"custom-file-label\" for=\"questionFile\">Pilih file soal (JPG, JPEG, PNG) </label>"
@@ -307,12 +461,15 @@
                                                 + "<input type=\"radio\" required class=\"new-question-choices\" name=\"question_choices\" id=\"choice_0_radio\" value=\"0\">"
                                             + "</div>"
                                         + "</div>"
-                                        + "<input type=\"text\" required autocomplete=\"off\" class=\"form-control\" name=\"choice_0_text\" id=\"new_question_choice_0_text\">"
+                                        + "<input type=\"text\" autocomplete=\"off\" class=\"form-control\" name=\"choice_0_text\" id=\"new_question_choice_0_text\">"
                                     + "</div>"
                                     + "<div style=\"width: 9.9%\" class=\"d-flex flex-column justify-content-center align-items-center\"></div>"
                                 + "</div>"
                                 + "<div class=\"d-flex justify-content-between align-items-center\">"
                                     + "<div style=\"width: 90%; padding-left:38px;\" class=\"input-group\">"
+                                        + "<div class=\"input-group-prepend\">"
+                                            + "<button class=\"btn btn-outline-secondary preview-choice-file\" type=\"button\" id=\"previewChoice_0_file\" data-toggle=\"modal\" data-target=\"#showFormImageModal\">Pratinjau</button>"
+                                        + "</div>"
                                         + "<div class=\"custom-file\">"
                                             + "<input type=\"file\" class=\"custom-file-input\" id=\"choice_0_file\" name=\"choice_0_file\">"
                                             + "<label class=\"custom-file-label\" for=\"choice_0_file\">Pilih file jawaban (JPG, JPEG, PNG) </label>"
@@ -365,7 +522,7 @@
                                             + "<input type=\"radio\" required class=\"new-question-choices\" name=\"question_choices\" id=\"choice_"+choice_id+"_radio\" value=\""+choice_id+"\">"
                                         + "</div>"
                                     + "</div>"
-                                    + "<input type=\"text\" required autocomplete=\"off\" class=\"form-control\" name=\"choice_"+choice_id+"_text\" id=\"new_question_choice_"+choice_id+"_text\">"
+                                    + "<input type=\"text\" autocomplete=\"off\" class=\"form-control\" name=\"choice_"+choice_id+"_text\" id=\"new_question_choice_"+choice_id+"_text\">"
                                 + "</div>"
                                 + "<div style=\"width: 9.9%\" class=\"d-flex flex-column justify-content-center align-items-center delete-choice-btn-container\">"
                                     + "<button type=\"button\" class=\"btn btn-block delete-choice-btn\" id=\"deleteChoice_"+choice_id+"\">"
@@ -375,6 +532,9 @@
                             + "</div>"
                             + "<div class=\"d-flex justify-content-between align-items-center\">"
                                 + "<div style=\"width: 90%; padding-left:38px;\" class=\"input-group\">"
+                                    + "<div class=\"input-group-prepend\">"
+                                        + "<button class=\"btn btn-outline-secondary preview-choice-file\" type=\"button\" id=\"previewChoice_"+choice_id+"_file\" data-toggle=\"modal\" data-target=\"#showFormImageModal\">Pratinjau</button>"
+                                    + "</div>"
                                     + "<div class=\"custom-file\">"
                                         + "<input type=\"file\" class=\"custom-file-input\" id=\"choice_"+choice_id+"_file\" name=\"choice_"+choice_id+"_file\">"
                                         + "<label class=\"custom-file-label\" for=\"choice_"+choice_id+"_file\">Pilih file jawaban (JPG, JPEG, PNG) </label>"
@@ -405,7 +565,6 @@
                 "change",
                 "input[type=file]",
                 function (event) {
-                    let inputField     = document.getElementById($(this).attr("id"));
                     let fileError;
                     if($(this).attr("id").includes("_")) {
                         let id = $(this).attr("id").split("_")[1];
@@ -413,6 +572,7 @@
                     }else{
                         fileError = document.getElementById("questionFileError");
                     }
+                    let inputField     = document.getElementById($(this).attr("id"));
                     let inputFieldFile = inputField.files[0];
                     let label          = $(this).siblings()[0];
                     if(inputFieldFile){
@@ -436,6 +596,65 @@
                     }
                 }
             );
+            // INPUT FILE VALIDATION FOR QUESTION ON "EDIT QUESTION MODAL"
+            $(".edit-question-file-input").on("change", function (event) {
+                let id          = $(this).attr("id").split("_")[1];
+                let fileError   = document.getElementById("editQuestionFileError_"+id);
+
+                let inputField     = document.getElementById($(this).attr("id"));
+                let inputFieldFile = inputField.files[0];
+                let label          = $(this).siblings()[0];
+                
+                if(inputFieldFile){
+                    let allowedExtension = ["image/jpeg", "image/png", "image/jpg"];
+                    if( allowedExtension.includes(inputFieldFile.type) ){
+                        if( inputFieldFile.size < 2097152 ){
+                            fileError.innerText = "";
+                            label.innerText = inputFieldFile.name;
+                        }else{
+                            fileError.innerText = "";
+                            label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+                            fileError.innerText = "Mohon pilih file berukuran maks. 2MB";
+                            inputField.value = null;
+                        }
+                    }else{
+                        fileError.innerText = "";
+                        label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+                        fileError.innerText = "Mohon pilih file gambar (JPG, JPEG, atau PNG)";
+                        inputField.value = null;
+                    }
+                }
+            });
+            // INPUT FILE VALIDATION FOR CHOICES ON "EDIT QUESTION MODAL"
+            $(".edit-question-choice-file").on("change", function (event) {
+                let question_id = $(this).attr("id").split("_")[1];
+                let id          = $(this).attr("id").split("_")[2];
+                let fileError   = document.getElementById("choice_"+question_id+"_"+id+"_file_error");
+
+                let inputField     = document.getElementById($(this).attr("id"));
+                let inputFieldFile = inputField.files[0];
+                let label          = $(this).siblings()[0];
+
+                if(inputFieldFile){
+                    let allowedExtension = ["image/jpeg", "image/png", "image/jpg"];
+                    if( allowedExtension.includes(inputFieldFile.type) ){
+                        if( inputFieldFile.size < 2097152 ){
+                            fileError.innerText = "";
+                            label.innerText = inputFieldFile.name;
+                        }else{
+                            fileError.innerText = "";
+                            label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+                            fileError.innerText = "Mohon pilih file berukuran maks. 2MB";
+                            inputField.value = null;
+                        }
+                    }else{
+                        fileError.innerText = "";
+                        label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+                        fileError.innerText = "Mohon pilih file gambar (JPG, JPEG, atau PNG)";
+                        inputField.value = null;
+                    }
+                }
+            });
             // CHANGE CHECKED TRUE CHOICE ON "ADD QUESTION MODAL"
             $("#questionDetail").on(
                 "change",
@@ -446,14 +665,117 @@
                     $("#new_question_choice_"+id+"_text").addClass("text-primary");
                 }
             );
-            
+            // QUESTION IMAGE PREVIEW ON "ADD QUESTION MODAL"
+            $("#questionDetail").on(
+                "click",
+                "#questionImagePreview",
+                function (event) {
+                    let inputField     = document.getElementById("questionFile");
+                    let inputFieldFile = inputField.files[0];
+                    let element;
+                    if (inputFieldFile) {
+                        element = `
+                            <div style="width: 87.5%" class="mx-auto"> 
+                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="w-100 h-auto">
+                            </div>
+                        `;
+                    }else{
+                        element = `
+                            <div style="width:75%; aspect-ratio:1/1;" class="mx-auto d-flex flex-column justify-content-center align-items-center"> 
+                                <h6 class=\"d-block m-0 text-center text-secondary\">Belum ada file gambar yang dipilih.</h6> 
+                            </div>
+                        `;
+                    }
+                    let modal = $("#showFormImageModal");
+                    modal.find('.modal-body').html(element);
+                }
+            );
+            // QUESTION IMAGE PREVIEW ON "EDIT QUESTION MODAL"
+            $(".edit-question-file-preview").on(
+                "click",
+                function (event) {
+                    let id = $(this).attr("id").split("_")[1];
+                    let inputField     = document.getElementById("editQuestionFile_"+id);
+                    let inputFieldFile = inputField.files[0];
+                    let element;
+                    if (inputFieldFile) {
+                        element = `
+                            <div style="width: 87.5%" class="mx-auto"> 
+                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="w-100 h-auto">
+                            </div>
+                        `;
+                    }else{
+                        element = `
+                            <div style="width:75%; aspect-ratio:1/1;" class="mx-auto d-flex flex-column justify-content-center align-items-center"> 
+                                <h6 class=\"d-block m-0 text-center text-secondary\">Belum ada file gambar yang dipilih.</h6> 
+                            </div>
+                        `;
+                    }
+                    let modal = $("#showFormImageModal");
+                    modal.find('.modal-body').html(element);
+                }
+            );
+            // CHOICE IMAGE PREVIEW ON "ADD QUESTION MODAL"
+            $("#questionDetail").on(
+                "click",
+                ".preview-choice-file",
+                function (event) {
+                    let id = $(this).attr("id").split("_")[1];
+                    let inputField     = document.getElementById("choice_"+id+"_file");
+                    let inputFieldFile = inputField.files[0];
+                    let element;
+                    if (inputFieldFile) {
+                        element = `
+                            <div style="width: 87.5%" class="mx-auto"> 
+                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="w-100 h-auto">
+                            </div>
+                        `;
+                    }else{
+                        element = `
+                            <div style="width:75%; aspect-ratio:1/1;" class="mx-auto d-flex flex-column justify-content-center align-items-center"> 
+                                <h6 class=\"d-block m-0 text-center text-secondary\">Belum ada file gambar yang dipilih.</h6> 
+                            </div>
+                        `;
+                    }
+                    let modal = $("#showFormImageModal");
+                    modal.find('.modal-body').html(element);
+                }
+            );
+            // CHOICE IMAGE PREVIEW ON "ADD QUESTION MODAL"
+            $(".preview-choice-file-edit").on(
+                "click",
+                function (event) {
+                    let question_id = $(this).attr("id").split("_")[1];
+                    let id          = $(this).attr("id").split("_")[2];
+
+                    let inputField     = document.getElementById("choice_"+question_id+"_"+id+"_file");
+                    let inputFieldFile = inputField.files[0];
+                    let element;
+                    if (inputFieldFile) {
+                        element = `
+                            <div style="width: 87.5%" class="mx-auto"> 
+                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="w-100 h-auto">
+                            </div>
+                        `;
+                    }else{
+                        element = `
+                            <div style="width:75%; aspect-ratio:1/1;" class="mx-auto d-flex flex-column justify-content-center align-items-center"> 
+                                <h6 class=\"d-block m-0 text-center text-secondary\">Belum ada file gambar yang dipilih.</h6> 
+                            </div>
+                        `;
+                    }
+                    let modal = $("#showFormImageModal");
+                    modal.find('.modal-body').html(element);
+                }
+            );
+            // IMAGE PREVIEW MODAL FOR PRELOADED DATA
             $(".show-image-btn").on("click", function (event) {
                 if(event.target.classList.contains('show-image-btn')){
                     event.preventDefault();
-                    var btn = event.target;
-                    var file = btn.getAttribute("data-file");
-                    var modal = $("#showImageModal");
-                    var img_element = `<div style="width: 87.5%" class="mx-auto"> <img src="{{ asset('storage/`+file+`') }}" class="w-100 h-auto"></div>`;
+                    let btn = event.target;
+                    let file = btn.getAttribute("data-file");
+                    let modal = $("#showStaticDataImageModal");
+                    let img_element = `<div style="width: 87.5%" class="mx-auto"> <img src="{{ asset('storage/`+file+`') }}" class="w-100 h-auto"></div>`;
                     modal.find('.modal-body').html(img_element);
                 }
             });
