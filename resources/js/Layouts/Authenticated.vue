@@ -20,15 +20,14 @@
                         v-if="$page.props.alert.status == 'success'"
                         class="success"
                     >
-                        {{ $page.props.alert.msg }}
+                        Success {{ $page.props.alert.msg }}
                     </div>
                     <div
                         v-if="$page.props.alert.status == 'failed'"
                         class="danger"
                     >
-                        {{ $page.props.alert.msg }}
+                        Failed {{ $page.props.alert.msg }}
                     </div>
-                    {{ $page.props.alert.msg }}
                 </div>
                 <slot />
                 <footer-admin />
