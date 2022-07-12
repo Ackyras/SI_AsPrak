@@ -44,7 +44,10 @@
                                 <div class="d-flex align-items-center justify-content-center">
                                     <a role="button" target="_blank"
                                         href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [$period_subject,$psr->id]) }}"
-                                        class="btn btn-sm btn-success">Periksa Jawaban</a>
+                                        class="btn btn-sm btn-info">Periksa Jawaban</a>
+                                    <a role="button" target="_blank"
+                                        href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [$period_subject,$psr->id]) }}"
+                                        class="btn btn-sm btn-success">Nyatakan lulus</a>
                                 </div>
                             </td>
                         </tr>
