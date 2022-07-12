@@ -24,6 +24,8 @@
                                 colspan="1">Skor Essay</th>
                             <th style="text-align: center" tabindex="0" aria-controls="exam_data_table" rowspan="1"
                                 colspan="1">Skor Total</th>
+                            <th style="text-align: center" tabindex="0" aria-controls="exam_data_table" rowspan="1"
+                                colspan="1">Status Kelulusan</th>
                             <th tabindex="0" aria-controls="exam_data_table" rowspan="1" colspan="1"
                                 style="width: 125px; text-align: center">Aksi</th>
                         </tr>
@@ -40,6 +42,9 @@
                             </td>
                             <td style="text-align: center;">{{ $psr->choice_score + $psr->essay_score }} / {{
                                 $period_subject->questions_sum_score }}</td>
+                            <td style="text-align: center;">
+                                {{ $psr->is_pass_exam_selection ? 'Lulus' : 'Gagal' }}
+                            </td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-center">
                                     <a role="button" target="_blank"

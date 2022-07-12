@@ -13,6 +13,7 @@ class Question extends Model
         'text',
         'type',
         'score',
+        'image',
         'period_subject_id',
     ];
 

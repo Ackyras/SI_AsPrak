@@ -27,7 +27,7 @@ class QuestionController extends Controller
         $period_subject->load(['questions.choices']);
         return view('admin.pages.active-period.period-subject-question.index', compact('period_subject'));
     }
-    
+
     public function create(PeriodSubject $period_subject)
     {
         return view('admin.pages.active-period.period-subject-question.create', compact('period_subject'));
@@ -35,6 +35,7 @@ class QuestionController extends Controller
 
     public function store(StoreQuestionRequest $request, PeriodSubject $period_subject)
     {
+        dd($request->all());
         //
         $period_subject->load('subject');
         $validated = $request->validated();

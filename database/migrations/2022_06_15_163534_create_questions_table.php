@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('text');
             $table->string('type');
             $table->string('score');
+            $table->string('image')->nullable();
             $table->foreignId('period_subject_id')->references('id')->on('period_subject')->cascadeOnDelete();
             $table->timestamps();
         });

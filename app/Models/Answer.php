@@ -14,6 +14,7 @@ class Answer extends Model
         'question_id',
         'choice_id',
         'file',
+        'score',
     ];
 
     public function question()
