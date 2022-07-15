@@ -43,16 +43,17 @@ class QRCodeController extends Controller
             ])
             ->get()
             ->map(function ($classroom) {
-
-                $classroom->priority = match ($classroom->schedule->day) {
-                    now()->addDays(0)->dayName  =>  0,
-                    now()->addDays(1)->dayName  =>  1,
-                    now()->addDays(2)->dayName  =>  2,
-                    now()->addDays(3)->dayName  =>  3,
-                    now()->addDays(4)->dayName  =>  4,
-                    now()->addDays(5)->dayName  =>  5,
-                    now()->addDays(6)->dayName  =>  6,
-                };
+                if ($classroom->schedule) {
+                    $classroom->priority = match ($classroom->schedule->day) {
+                        now()->addDays(0)->dayName  =>  0,
+                        now()->addDays(1)->dayName  =>  1,
+                        now()->addDays(2)->dayName  =>  2,
+                        now()->addDays(3)->dayName  =>  3,
+                        now()->addDays(4)->dayName  =>  4,
+                        now()->addDays(5)->dayName  =>  5,
+                        now()->addDays(6)->dayName  =>  6,
+                    };
+                }
                 return $classroom;
             })
             ->sortBy('priority')
