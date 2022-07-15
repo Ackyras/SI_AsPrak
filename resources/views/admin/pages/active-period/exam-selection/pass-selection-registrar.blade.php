@@ -35,10 +35,8 @@
                                 rowspan="1" colspan="1">NIM</th>
                             <th style="text-align: center" tabindex="0" aria-controls="period_subject_registrar_table"
                                 rowspan="1" colspan="1">Mata Kuliah</th>
-                            <th style="text-align: center; width: 15%" tabindex="0"
-                                aria-controls="period_subject_registrar_table" rowspan="1" colspan="1">Berkas</th>
-                            <th style="text-align: center; width: 15%" tabindex="0"
-                                aria-controls="period_subject_registrar_table" rowspan="1" colspan="1">Status</th>
+                            <th style="text-align: center" tabindex="0" aria-controls="period_subject_registrar_table"
+                                rowspan="1" colspan="1">Nilai Ujian</th>
                         </tr>
                     </thead>
 
@@ -49,84 +47,7 @@
                             <td style="text-align: center;"> {{ $psr->registrar->nim }} </td>
                             <td data-search="'{{ $psr->period_subject->subject->name }}'"> {{
                                 $psr->period_subject->subject->name }} </td>
-                            <td>
-                                <div class="btn-group btn-group-sm" role="group" aria-label="Basic example">
-                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal"
-                                        data-target="#showFileModal" data-title="CV {{ $psr->registrar->name }}"
-                                        data-file="{{ $psr->registrar->cv }}">
-                                        CV
-                                    </button>
-                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal"
-                                        data-target="#showFileModal" data-title="KHS {{ $psr->registrar->name }}"
-                                        data-file="{{ $psr->registrar->khs }}">
-                                        KHS
-                                    </button>
-                                    <button type="button" class="btn btn-info FileModalButton" data-toggle="modal"
-                                        data-target="#showFileModal" data-title="Transkrip {{ $psr->registrar->name }}"
-                                        data-file="{{ $psr->registrar->transkrip }}">
-                                        Transkrip
-                                    </button>
-                                </div>
-                            </td>
-                            <td class="text-align: center;">
-                                @if ($psr->is_pass_file_selection)
-                                <button type="button" class="btn btn-sm btn-block btn-success" data-toggle="modal"
-                                    data-target="#IPFSEFM{{ $psr->id }}">
-                                    Lulus
-                                </button>
-                                @else
-                                <button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal"
-                                    data-target="#IPFSEFM{{ $psr->id }}">
-                                    Tidak Lulus
-                                </button>
-                                @endif
-                                <div class="modal fade" id="IPFSEFM{{ $psr->id }}" tabindex="-1" data-backdrop="static"
-                                    data-keyboard="false" aria-labelledby="IPFSEFMLabel{{ $psr->id }}"
-                                    aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h3 class="modal-title font-weight-bold"
-                                                    id="IPFSEFMLabel{{ $psr->id }}">
-                                                    Ubah Status Kelulusan
-                                                </h3>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form
-                                                action=""
-                                                method="">
-                                                @csrf
-                                                <div class="modal-body">
-                                                    @if ($psr->is_pass_file_selection)
-                                                    <h5>
-                                                        Anda akan mengubah status Kelululusan <span
-                                                            class="font-weight-bold">{{ $psr->registrar->name }}</span>
-                                                        dari <span class="badge badge-success">Lulus</span> menjadi
-                                                        <span class="badge badge-danger">Tidak Lulus</span>.
-                                                    </h5>
-                                                    <h5>Simpan perubahan ini?</h5>
-                                                    @else
-                                                    <h5>
-                                                        Anda akan mengubah status Kelululusan <span
-                                                            class="font-weight-bold">{{ $psr->registrar->name }}</span>
-                                                        dari <span class="badge badge-danger">Tidak Lulus</span> menjadi
-                                                        <span class="badge badge-success">Lulus</span>.
-                                                    </h5>
-                                                    <h5>Simpan perubahan ini?</h5>
-                                                    @endif
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">SIMPAN
-                                                        PERUBAHAN</button>
-                                                </div>
-                                            </form>
-                                        </div>
-                                    </div>
-                                </div>
-                            </td>
+                            <td style="text-align: center;"> {{ rand(65,99) }}/100 </td>
                         </tr>
                         @endforeach
                     </tbody>
@@ -135,8 +56,7 @@
                             <th style="text-align: center" rowspan="1" colspan="1">Nama</th>
                             <th style="text-align: center" rowspan="1" colspan="1">NIM</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Mata Kuliah</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Berkas</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Status</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Nilai Ujian</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -239,7 +159,7 @@
             "lengthChange": false,
             "autoWidth": false,
             "searching": true,
-            "ordering": false,
+            "ordering": true,
             "buttons": actionButtons
         }).buttons().container().appendTo('#period_subject_registrar_table_wrapper .col-md-6:eq(0)');
 

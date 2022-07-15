@@ -12184,6 +12184,10 @@ input[type="range"]::-ms-fill-lower {
   padding-top: 6px;
   padding-bottom: 6px;
 }
+.py-\[72px\] {
+  padding-top: 72px;
+  padding-bottom: 72px;
+}
 .pb-4 {
   padding-bottom: 1rem;
 }
@@ -13248,6 +13252,16 @@ input[type="range"]::-ms-fill-lower {
   .lg\:px-10 {
     padding-left: 2.5rem;
     padding-right: 2.5rem;
+  }
+
+  .lg\:py-\[48px\] {
+    padding-top: 48px;
+    padding-bottom: 48px;
+  }
+
+  .lg\:py-\[128px\] {
+    padding-top: 128px;
+    padding-bottom: 128px;
   }
 
   .lg\:pl-2 {

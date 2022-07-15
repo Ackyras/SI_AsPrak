@@ -62,7 +62,7 @@
             </div>
         </div>
         @if ($period->is_exam_selection_over || $period->is_file_selection_over || $period->is_open_for_selection)
-            <div id="news_{{ $period->id }}" class="p-1 pt-3 bg-gray-200 w-full mb-2">
+            <div id="news_{{ $period->id }}" class="{{ $period->is_active ? '' : 'hidden' }} p-1 pt-3 bg-gray-200 w-full mb-2">
                 @if ($period->is_exam_selection_over)
                     <div class="p-2 bg-white rounded mb-3">
                         <a href="{{ route('website.news.exam_selection_over',$period) }}"
@@ -139,9 +139,9 @@
                 @endif
             </div>
         @else
-            <div id="news_{{ $period->id }}" class="hidden border w-full mb-2">
-                <p class="text-2xl lg:text-3xl text-center p-6 lg:py-10 text-gray-500 bg-gray-50">
-                    Tidak ada berita untuk periode ini
+            <div id="news_{{ $period->id }}" class="{{ $period->is_active ? '' : 'hidden' }} border w-full mb-2">
+                <p class="text-lg lg:text-xl text-center p-6 py-[72px] lg:py-[128px] text-gray-500 bg-gray-50">
+                    Belum ada berita untuk periode ini
                 </p>
             </div>
         @endif
