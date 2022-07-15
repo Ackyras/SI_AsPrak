@@ -27,9 +27,17 @@
                         @forelse ($classrooms as $classroom)
                         <tr>
                             <td tabindex="0">{{ $classroom->period_subject->subject->name.' - '.$classroom->name }}</td>
-                            <td>{{ $classroom->schedule->day }}, {{ $classroom->schedule->start_time }} - {{
+                            <td>
+                                @if ($classroom->schedule)
+
+                                {{ $classroom->schedule->day }}, {{ $classroom->schedule->start_time }} - {{
                                 $classroom->schedule->end_time }}</td>
-                            <td>{{ $classroom->schedule->room->building }}, {{ $classroom->schedule->room->name }}
+                            @endif
+                            <td>
+                                @if ($classroom->schedule)
+
+                                {{ $classroom->schedule->room->building }}, {{ $classroom->schedule->room->name }}
+                                @endif
                             </td>
                             <td>
                                 <a href="{{ route('admin.practicum.qr.show', $classroom) }}" role="button"

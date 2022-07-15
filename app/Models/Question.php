@@ -31,6 +31,7 @@ class Question extends Model
     {
         return $this->belongsToMany(PeriodSubjectRegistrar::class, 'answers')->withPivot(
             [
+                'score',
                 'file',
                 'choice_id'
             ]

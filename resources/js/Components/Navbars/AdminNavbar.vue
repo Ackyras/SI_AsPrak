@@ -1,5 +1,5 @@
 <template>
-    <nav class="fixed bg-emerald-700 top-0 left-0 w-full z-10 md:flex-row md:flex-nowrap md:justify-start hidden md:flex items-center p-2">
+    <nav class="fixed bg-emerald-700 top-0 left-0 w-full z-10 hidden md:flex md:flex-row md:flex-nowrap md:justify-start items-center p-2">
         <div class="w-full mx-autp items-center flex justify-end md:flex-nowrap flex-wrap md:px-10 px-4">
             <!-- User -->
             <ul class="hidden items-center md:flex gap-4 list-none">

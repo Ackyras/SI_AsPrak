@@ -52,10 +52,7 @@ class ExamSelectionController extends Controller
             ->with(
                 [
                     'registrar',
-                    'answers'   =>  [
-                        'question',
-                        'psr',
-                    ],
+                    'answers'
                 ]
             )
             ->get();
@@ -79,13 +76,14 @@ class ExamSelectionController extends Controller
             $psr->choice_score = 0;
             $psr->total_choice_score = 0;
             foreach ($psr->answers as $answer) {
-                if ($answer->question->type == 'essay') {
-                    $psr->essay_score += $answer->score;
+                if ($answer->type == 'essay') {
+                    $psr->essay_score += $answer->pivot->score;
                 } else {
-                    $psr->choice_score += $answer->score;
+                    $psr->choice_score += $answer->pivot->score;
                 }
             }
         });
+        // dd($period_subject_registrar);
         return view('admin.pages.active-period.exam-selection.exam-data-detail', compact('period_subject', 'period_subject_registrar'));
     }
 

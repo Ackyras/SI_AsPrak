@@ -35,7 +35,7 @@ class QuestionController extends Controller
 
     public function store(StoreQuestionRequest $request, PeriodSubject $period_subject)
     {
-        dd($request->all());
+        // dd($request->all());
         //
         $period_subject->load('subject');
         $validated = $request->validated();

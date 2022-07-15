@@ -474,7 +474,7 @@
                             + "<button class=\"btn btn-outline-secondary\" type=\"button\" id=\"questionImagePreview\" data-toggle=\"modal\" data-target=\"#showFormImageModal\">Pratinjau</button>"
                         + "</div>"
                         + "<div class=\"custom-file\">"
-                            + "<input type=\"file\" class=\"custom-file-input\" name=\"file\" id=\"questionFile\">"
+                            + "<input type=\"file\" class=\"custom-file-input\" name=\"image\" id=\"questionFile\">"
                             + "<label class=\"custom-file-label\" for=\"questionFile\">Pilih file soal (JPG, JPEG, PNG) </label>"
                         + "</div>"
                     + "</div>"

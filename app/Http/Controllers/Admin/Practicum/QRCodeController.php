@@ -164,6 +164,7 @@ class QRCodeController extends Controller
 
     public function changeStatus(Request $request, Qr $qr)
     {
+        // dd($request->all());
         $validated = $request->validate(
             [
                 'status'    =>  'boolean'

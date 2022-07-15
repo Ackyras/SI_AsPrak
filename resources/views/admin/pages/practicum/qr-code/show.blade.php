@@ -44,8 +44,9 @@
                                             <h6>Lanjutkan aksi ini?</h6>
                                         </div>
                                         <div class="modal-footer">
+                                            {{-- <input type="hidden" name="status" , value=""> --}}
                                             <button type="submit" class="btn btn-primary" name="status" value={{
-                                                $qr->end_date > now() ? false : true }}>
+                                                $qr->end_date > now() ? 0 : 1 }}>
                                                 LANJUTKAN
                                             </button>
                                         </div>

@@ -20,7 +20,7 @@ class UserDashboardController extends Controller
         ])->with(
             [
                 'alert'   =>  [
-                    'msg'       =>  'welcome ' . $user->name,
+                    'msg'       =>  'Welcome ' . $user->name,
                     'status'    =>  'success',
                 ],
             ]
@@ -64,7 +64,7 @@ class UserDashboardController extends Controller
         $registrar = auth()->user()->registrar;
         $registrar->load(
             [
-                'period_subjects'   
+                'period_subjects'
             ]
         );
         // if ($registrar) {

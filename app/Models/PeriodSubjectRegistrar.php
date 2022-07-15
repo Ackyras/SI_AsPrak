@@ -32,7 +32,7 @@ class PeriodSubjectRegistrar extends Model
     public function answers()
     {
         return $this->belongsToMany(Question::class, 'answers')
-            ->withPivot(['choice_id', 'file']);
+            ->withPivot(['choice_id', 'file', 'score']);
     }
 
     public function schedule()

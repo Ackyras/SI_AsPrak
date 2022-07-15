@@ -26,7 +26,12 @@ class ExamController extends Controller
     public function index()
     {
         $user = auth()->user()->registrar;
-        $user->load('period_subjects.subject');
+        $user->load([
+            'period_subjects' =>    function ($query) {
+                $query->where('period_id', $this->period->id);
+            },
+            'period_subjects.subject'
+        ]);
         // dd($user);
         return Inertia::render('Exam/Index', [
             'user'      => $user,
@@ -36,7 +41,7 @@ class ExamController extends Controller
     public function exam(PeriodSubject $period_subject)
     {
         $user = auth()->user()->registrar;
-        $period_subject->load('questions.choices');
+        $period_subject->load(['questions.choices', 'subject']);
 
         return Inertia::render('Exam/TakeExam', [
             'user'      => $user,
@@ -65,7 +70,7 @@ class ExamController extends Controller
             $tempRequest['question_id'] =   $value;
             $tempRequest['file'] = null;
             $tempRequest['choice_id'] = null;
-            $tempRequest['score'] = null;
+            $tempRequest['score'] = 0;
             $question = Question::find($value);
             if ($question->type == 'essay') {
                 $tempRequest['file'] =   $request->answers[$key];
@@ -97,6 +102,6 @@ class ExamController extends Controller
                 $transformRequest
             );
         }
-        return to_route('user.take.exam',);
+        return to_route('user.exam.index',);
     }
 }
