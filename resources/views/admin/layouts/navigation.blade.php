@@ -136,7 +136,7 @@
                         <a href="{{ route('admin.active-period.file-selection.pass-selection-registrar') }}"
                             class="nav-link {{ request()->routeIs('admin.active-period.file-selection.pass-selection-registrar') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-file-alt nav-icon"></i>
-                            <p>Berkas Lolos Seleksi</p>
+                            <p>Pendaftar Lolos Seleksi</p>
                         </a>
                     </li>
                 </ul>
@@ -181,8 +181,8 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a href="#"
-                            class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : 'bg-secondary' }}">
+                        <a href="{{ route('admin.active-period.exam-selection.pass-selection-registrar') }}"
+                            class="nav-link {{ request()->routeIs('admin.active-period.exam-selection.pass-selection-registrar') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="fas fa-clipboard-check nav-icon"></i>
                             <p>Data Lolos Tes</p>
                         </a>
@@ -224,8 +224,7 @@
                     </li>
                     <li class="nav-item">
                         <a href="{{ route('admin.practicum.qr.index') }}"
-                            {{-- class="nav-link {{ request()->routeIs('admin.practicum.schedule.index') ? 'bg-light' : 'bg-secondary' }}"> --}}
-                            class="nav-link">
+                            class="nav-link {{ request()->routeIs('admin.practicum.qr.*') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="nav-icon fas fa-qrcode"></i>
                             <p>QR Code</p>
                         </a>

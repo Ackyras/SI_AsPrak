@@ -114,8 +114,8 @@
                                         <div class="modal-body">
                                             <!-- TIPE SOAL -->
                                             <div class="form-group">
-                                                <label for="name">Tipe Soal</label>
-                                                <input type="text" id="name" name="name"
+                                                <label for="type">Tipe Soal</label>
+                                                <input type="text" id="type" name="type"
                                                     class="form-control text-uppercase" required autocomplete="off"
                                                     placeholder="Nama mata kuliah" value="{{ $question->type }}"
                                                     readonly>
@@ -464,7 +464,7 @@
                         + "<label for=\"newQuestionText\">Teks Soal</label>"
                         + "<textarea id=\"newQuestionText\" name=\"text\" class=\"d-none\">"
                         + "</textarea>"
-                        + "<span id=\"questionTextContent\" class=\"d-block w-100 py-1 px-2 overflow-hidden rounded border\" role=\"textbox\" contenteditable>"
+                        + "<span id=\"questionTextContent\" class=\"d-block w-100 py-1 px-2 overflow-hidden rounded border new-question-text-content\" role=\"textbox\" contenteditable>"
                         + "</span>"
                     + "</div>"
                     + "<p class=\"d-block m-0 mb-2 font-weight-bold\">Gambar Soal</p>"
@@ -531,10 +531,12 @@
             });
             // AUTO GROWING TEXT AREA ON "ADD QUESTION MODAL"
             $("#questionDetail").keyup(
-                "#questionTextSection .form-group #questionTextContent",
+                "#questionTextSection #questionTextContent",
                 function (event) {
-                    let text = event.target.innerText;
-                    $("#newQuestionText").val(text);
+                    if(event.target.classList.contains("new-question-text-content")){
+                        let text = event.target.innerText;
+                        $("#newQuestionText").val(text);
+                    }
                 }
             );
             // ADD NEW CHOICE ON "ADD QUESTION MODAL"
@@ -542,7 +544,7 @@
                 "click",
                 "#add_new_question_choice",
                 function () {
-                    let choice_id = parseInt($("#question_choices_container input[type=text]").last().attr("id").split("_")[1]);
+                    let choice_id = parseInt($("#question_choices_container input[type=text]").last().attr("id").split("_")[3]);
                     choice_id += 1;
                     let new_choice = ""
                         + "<div class=\"w-100 mb-2 choice-container\" id=\"choice_"+choice_id+"_container\">"

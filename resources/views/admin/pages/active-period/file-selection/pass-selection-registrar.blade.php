@@ -7,6 +7,10 @@
             <div class="d-flex align-items-center justify-content-between">
                 <h2 class="card-title font-weight-bold">Seleksi Berkas Pendaftar
                 </h2>
+                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#announceResult">
+                    <i class="mr-2 fas fa-bullhorn"></i>
+                    Umumkan Kelulusan
+                </button>
             </div>
         </div>
 
@@ -144,13 +148,62 @@
 
 @section('modals')
 
+<!-- Add Question Modal -->
+<div class="modal fade" id="announceResult" tabindex="-1" data-backdrop="static" data-keyboard="false"
+    aria-labelledby="announceResultLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" id="announceResultDialog">
+        <div class="modal-content" id="announceResultContent" style="overflow-y:auto;">
+            <div class="modal-header">
+                <h3 class="modal-title font-weight-bold" id="announceResultLabel">Umumkan Kelulusan Seleksi Berkas</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body" id="announceResultBody">
+                <h5 class="d-block m-0 mb-2 font-weight-bold"> 
+                    Berikut adalah Data Lulus Seleksi Berkas
+                </h5>
+                @foreach ($subjects as $subject)
+                @php
+                    $kuota = rand(3,6);
+                    $lulus = rand(3,6);
+                @endphp
+                    <p class="d-block m-0 mb-2 font-weight-bold">
+                        {{ $subject->name }} 
+                        @if ($lulus > $kuota)
+                            (<span class="text-danger">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
+                        @elseif ($lulus < $kuota)
+                            (<span class="text-secondary">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
+                        @else
+                            (<span class="text-success">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
+                        @endif
+                    </p>
+                    <ul>
+                        @foreach ($period_subject_registrars as $psr)
+                            @if ($psr->period_subject->subject->name == $subject->name)
+                                <li>{{ $psr->registrar->name }}</li>
+                            @endif
+                        @endforeach
+                    </ul>
+                @endforeach
+            </div>
+
+            <div class="modal-footer">
+                <form action="">
+                    <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- Show File Modal -->
 <div class="modal" id="showFileModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
     aria-labelledby="showFileModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
         <div class="modal-content">
             <div class="modal-header">
-                <h4 class="modal-title font-weight-bold" id="showFileModalLabel">Periode Baru</h4>
+                <h4 class="modal-title font-weight-bold" id="showFileModalLabel"></h4>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

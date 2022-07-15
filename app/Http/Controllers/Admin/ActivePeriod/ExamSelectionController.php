@@ -128,4 +128,15 @@ class ExamSelectionController extends Controller
         // dd($period_subject->questions, $psr->id);
         return view('admin.pages.active-period.exam-selection.registrar-exam-data', compact('period_subject', 'psr'));
     }
+
+    public function passSelection()
+    {
+        $period_subject_registrars = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_id', $this->period->id)
+            ->where('is_pass_file_selection', true)
+            ->with('registrar', 'period_subject.subject')
+            ->get();
+        $subjects = $this->period->subjects;
+        return view('admin.pages.active-period.exam-selection.pass-selection-registrar', compact('period_subject_registrars', 'subjects'));
+    }
 }

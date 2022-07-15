@@ -26,7 +26,7 @@ class ExamController extends Controller
     public function index()
     {
         $user = auth()->user()->registrar;
-        $user->load('period_subjects');
+        $user->load('period_subjects.subject');
         // dd($user);
         return Inertia::render('Exam/Index', [
             'user'      => $user,
