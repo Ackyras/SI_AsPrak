@@ -8,28 +8,10 @@
         <div class="relative md:ml-64 bg-blueGray-100">
             <admin-navbar />
             <header-stats :psr="psr_data" v-if="$page.url === '/dashboard'" />
-            <!-- <alert-info /> -->
-            <div
-                class="w-full px-4 mx-auto border-red-600 md:px-10 border-3"
-                :class="{
-                    'md:mt-[4rem]': $page.url !== '/dashboard',
-                }"
-            >
-                <div v-if="$page.props.alert" class="alert">
-                    <div
-                        v-if="$page.props.alert.status == 'success'"
-                        class="success"
-                    >
-                        Success {{ $page.props.alert.msg }}
-                    </div>
-                    <div
-                        v-if="$page.props.alert.status == 'failed'"
-                        class="danger"
-                    >
-                        Failed {{ $page.props.alert.msg }}
-                    </div>
-                </div>
-                <slot />
+
+            <div class="w-full px-4 mx-auto border-red-600 md:px-10 border-3"
+                :class="{ 'md:mt-[4rem]': $page.url !== '/dashboard', }">
+                <slot/>
                 <footer-admin />
             </div>
         </div>
@@ -44,11 +26,17 @@ import FooterAdmin from "@/components/Footers/FooterAdmin.vue";
 
 export default {
     name: "admin-layout",
+    data () {
+        return {
+        };
+    },
     components: {
         AdminNavbar,
         Sidebar,
         HeaderStats,
         FooterAdmin,
+    },
+    methods : {
     },
     props: {
         psr_data: Object,
