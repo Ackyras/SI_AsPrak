@@ -1,7 +1,7 @@
 <template>
     <!-- HEADER INFO AND MESSAGE -->
     <div class="md:pt-24 py-4">
-        <div class="px-4 md:px-10 xl:pt-14 mx-auto w-full">
+        <div class="px-4 md:px-10 lg:pt-14 mx-auto w-full">
             <!-- MESSAGES CONTAINER -->
             <div
                 v-if="$page.props.alert"
