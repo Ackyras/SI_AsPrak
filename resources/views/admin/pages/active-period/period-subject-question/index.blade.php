@@ -108,7 +108,7 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="POST">
+                                    <form method="POST" enctype="multipart/form-data">
                                         @csrf
                                         @method('PUT')
                                         <div class="modal-body">
@@ -382,7 +382,7 @@
                 </button>
             </div>
 
-            <form method="POST"
+            <form method="POST" enctype="multipart/form-data"
                 action="{{ route('admin.active-period.exam-selection.subject.question.store', $period_subject) }}">
                 @csrf
                 <div class="modal-body" id="addQuestionFormModalBody">

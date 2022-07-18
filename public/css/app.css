@@ -11360,6 +11360,10 @@ input[type="range"]::-ms-fill-lower {
   margin-left: auto;
   margin-right: auto;
 }
+.mx-2 {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+}
 .my-3 {
   margin-top: 0.75rem;
   margin-bottom: 0.75rem;
@@ -11379,10 +11383,6 @@ input[type="range"]::-ms-fill-lower {
 .my-6 {
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
-}
-.mx-2 {
-  margin-left: 0.5rem;
-  margin-right: 0.5rem;
 }
 .ml-3 {
   margin-left: 0.75rem;
@@ -12117,6 +12117,9 @@ input[type="range"]::-ms-fill-lower {
 }
 .p-\[8px\] {
   padding: 8px;
+}
+.p-8 {
+  padding: 2rem;
 }
 .px-4 {
   padding-left: 1rem;
@@ -13230,6 +13233,10 @@ input[type="range"]::-ms-fill-lower {
 
   .lg\:mr-1 {
     margin-right: 0.25rem;
+  }
+
+  .lg\:mt-0 {
+    margin-top: 0px;
   }
 
   .lg\:block {
