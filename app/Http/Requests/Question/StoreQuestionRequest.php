@@ -30,7 +30,7 @@ class StoreQuestionRequest extends FormRequest
             'score'                 =>  'required|numeric',
             'image'                 =>  'nullable',
             'choice.option.*'       =>  'required_if:type,choice',
-            'choice.text.*'         =>  'required_if:type,choice',
+            'choice.text.*'         =>  'required_if:choice,null',
             'choice.image.*'        =>  'nullable',
             'choice.is_true.*'      =>  'required_if:type,choice',
         ];

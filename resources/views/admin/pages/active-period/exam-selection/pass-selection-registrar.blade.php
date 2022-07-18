@@ -41,7 +41,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($period_subject_registrars as $psr)
+                        @forelse ($period_subject_registrars as $psr)
                         <tr>
                             <td tabindex="0"> {{ $psr->registrar->name }} </td>
                             <td style="text-align: center;"> {{ $psr->registrar->nim }} </td>
@@ -49,7 +49,8 @@
                                 $psr->period_subject->subject->name }} </td>
                             <td style="text-align: center;"> {{ rand(65,99) }}/100 </td>
                         </tr>
-                        @endforeach
+                        @empty
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
@@ -90,7 +91,7 @@
                     (<span class="text-danger">{{ $subject->pass_exam_count }}/{{
                         $subject->pivot->number_of_lab_assistant }} kuota
                         terisi</span>)
-                    @elseif ($subject->pass_exam_count < $subject->pivot->number_of_lab_assistant)) (<span
+                    @elseif ($subject->pass_exam_count < $subject->pivot->number_of_lab_assistant) (<span
                             class="text-secondary">{{ $subject->pass_exam_count
                             }}/{{ $subject->pivot->number_of_lab_assistant }} kuota
                             terisi</span>)
@@ -110,9 +111,9 @@
                 @endforeach
             </div>
 
-                <div class="modal-footer">
-                    <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
-                </div>
+            <div class="modal-footer">
+                <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
+            </div>
             </form>
         </div>
     </div>

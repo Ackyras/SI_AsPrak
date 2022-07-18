@@ -9,6 +9,7 @@ use App\Models\PeriodSubjectRegistrar;
 use App\Models\Presence;
 use App\Models\Qr;
 use App\Models\User;
+use Illuminate\Support\Facades\Session;
 
 class UserDashboardController extends Controller
 {
@@ -16,16 +17,21 @@ class UserDashboardController extends Controller
     {
         $user = auth()->user()->registrar;
         $user->load(['period_subjects']);
+        // dd(Session::all());
         return Inertia::render('Dashboard', [
             'user'  =>  $user
-        ])->with(
-            [
-                'alert'   =>  [
-                    'msg'       =>  'Welcome ' . $user->name,
-                    'status'    =>  'success',
-                ],
-            ]
-        );
+        ])
+            ->with(
+                [
+                    'alert'   =>  Session::has('alert') ?
+                        Session::get('alert', 'default')
+                        :
+                        [
+                            'msg'       =>  'Welcome back,' . $user->name,
+                            'status'    =>  'success',
+                        ],
+                ]
+            );
     }
 
     public function presence(Request $request)

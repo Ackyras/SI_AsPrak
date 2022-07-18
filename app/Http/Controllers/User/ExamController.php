@@ -10,8 +10,10 @@ use App\Http\Controllers\Controller;
 use App\Models\Choice;
 use App\Models\Period;
 use App\Models\PeriodSubjectRegistrar;
+use App\Models\Registrar;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Contracts\Validation\Rule;
+use Illuminate\Support\Facades\Session;
 use Illuminate\Support\Facades\Validator;
 
 class ExamController extends Controller
@@ -25,17 +27,39 @@ class ExamController extends Controller
 
     public function index()
     {
+        // $user = Registrar::query()
+        //     ->where('user_id', auth()->id())
+        //     ->with(
+        //         [
+        //             'period_subjects'   =>  function ($query) {
+        //                 $query->where('period_id', $this->period->id);
+        //             }
+        //         ]
+        //     )
+        //     //
+        // ;
         $user = auth()->user()->registrar;
-        $user->load([
-            'period_subjects' =>    function ($query) {
-                $query->where('period_id', $this->period->id);
-            },
-            'period_subjects.subject'
-        ]);
-        // dd($user);
+        $user->load(
+            [
+                'period_subjects' =>    function ($query) {
+                    $query->where('period_id', $this->period->id);
+                },
+            ]
+        );
+        $user->period_subjects->load('subject');
         return Inertia::render('Exam/Index', [
             'user'      => $user,
-        ]);
+        ])->with(
+            [
+                'alert' => Session::has('alert') ?
+                    Session::get('alert')
+                    :
+                    [
+                        'status'    =>  'failed',
+                        'msg'       =>  'sopao['
+                    ]
+            ]
+        );;
     }
 
     public function exam(PeriodSubject $period_subject)
@@ -46,7 +70,14 @@ class ExamController extends Controller
         return Inertia::render('Exam/TakeExam', [
             'user'      => $user,
             'period_subject'   => $period_subject
-        ]);
+        ])->with(
+            [
+                'alert' => Session::has('alert') ?
+                    Session::get('alert')
+                    :
+                    []
+            ]
+        );
     }
 
     // public function storeAnswer(Request $request, PeriodSubject $subject, Question $question)
