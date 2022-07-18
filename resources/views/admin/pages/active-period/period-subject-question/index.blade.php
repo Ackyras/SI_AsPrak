@@ -4,7 +4,7 @@
 <div class="p-2">
     <div class="card">
         <div class="card-header">
-            <div class="d-flex align-items-center justify-content-between mb-4">
+            <div class="mb-4 d-flex align-items-center justify-content-between">
                 <h2 class="card-title font-weight-bold">Soal Ujian Seleksi Mata Kuliah
                     "{{ $period_subject->subject->name }}"</h2>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addQuestionFormModal">
@@ -15,34 +15,34 @@
             <div id="questions_container">
                 @forelse ($period_subject->questions as $question)
                 <div style=" border-left: 5px solid #34d399;"
-                    class="d-flex justify-content-between mb-4 p-2 rounded shadow-sm bg-white question-contaier">
-                    <p style="width: 3.5%" class="d-block font-weight-bold text-center m-0 ">
+                    class="p-2 mb-4 bg-white rounded shadow-sm d-flex justify-content-between question-contaier">
+                    <p style="width: 3.5%" class="m-0 text-center d-block font-weight-bold ">
                         {{ $loop->index + 1 }}
                     </p>
                     <div style="width: 90%;" class="pl-2">
-                        <div class="d-flex justify-content-between mb-2 ">
-                            <p style="width: 10%; font-weight: 600" class="d-block m-0">Tipe Soal</p>
-                            <p class="d-block m-0 ">:</p>
-                            <p style="width: 88%" class="d-block m-0 text-uppercase">{{ $question->type }}</p>
+                        <div class="mb-2 d-flex justify-content-between ">
+                            <p style="width: 10%; font-weight: 600" class="m-0 d-block">Tipe Soal</p>
+                            <p class="m-0 d-block ">:</p>
+                            <p style="width: 88%" class="m-0 d-block text-uppercase">{{ $question->type }}</p>
                         </div>
 
-                        <div class="d-flex justify-content-between mb-2">
-                            <p style="width: 10%; font-weight: 600" class="d-block m-0">Teks Soal</p>
-                            <p class="d-block m-0">:</p>
-                            <p style="width: 88%" class="d-block m-0">{{ $question->text }}</p>
+                        <div class="mb-2 d-flex justify-content-between">
+                            <p style="width: 10%; font-weight: 600" class="m-0 d-block">Teks Soal</p>
+                            <p class="m-0 d-block">:</p>
+                            <p style="width: 88%" class="m-0 d-block">{{ $question->text }}</p>
                         </div>
 
                         <div class="d-flex justify-content-between align-items-center">
-                            <p style="width: 10%; font-weight: 600" class="d-block m-0">Gambar Soal</p>
-                            <p class="d-block m-0">:</p>
-                            @if (rand(1,5)%2==0)
-                            <p style="width: 88%" class="d-block m-0 font-italic font-weight-bold text-secondary">Tidak
+                            <p style="width: 10%; font-weight: 600" class="m-0 d-block">Gambar Soal</p>
+                            <p class="m-0 d-block">:</p>
+                            @if (!$question->image)
+                            <p style="width: 88%" class="m-0 d-block font-italic font-weight-bold text-secondary">Tidak
                                 Ada Gambar Soal</p>
                             @else
                             <div style="width: 88%">
                                 <button type="button" class="btn btn-sm btn-info show-image-btn"
-                                    data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
-                                    data-toggle="modal" data-target="#showStaticDataImageModal">
+                                    data-file="{{ asset('storage/'.$question->image) }}" data-toggle="modal"
+                                    data-target="#showStaticDataImageModal">
                                     Lihat Gambar
                                 </button>
                             </div>
@@ -50,17 +50,17 @@
                         </div>
 
                         @if ($question->choices->count() > 0)
-                        <div class="d-flex justify-content-between mt-2 ">
-                            <p style="width: 10%; font-weight: 600" class="d-block m-0">Pilihan</p>
-                            <p class="d-block m-0">:</p>
+                        <div class="mt-2 d-flex justify-content-between ">
+                            <p style="width: 10%; font-weight: 600" class="m-0 d-block">Pilihan</p>
+                            <p class="m-0 d-block">:</p>
                             <div style="width: 88%" class="">
                                 <ul class="pl-4">
                                     @foreach ($question->choices as $choice)
                                     <li class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
-                                        <p class="d-block m-0 mb-1">{{ $choice->text }}</p>
+                                        <p class="m-0 mb-1 d-block">{{ $choice->text }}</p>
                                         @if (rand(1,5)%2==0)
                                         <p style="width: 88%"
-                                            class="d-block m-0 font-italic font-weight-bold text-secondary">Tidak Ada
+                                            class="m-0 d-block font-italic font-weight-bold text-secondary">Tidak Ada
                                             Gambar Jawaban</p>
                                         @else
                                         <div style="width: 88%">
@@ -80,16 +80,16 @@
                         @endif
 
                         <div class="d-flex justify-content-between {{ $question->choices->count() > 0 ? '' : 'mt-2' }}">
-                            <p style="width: 10%; font-weight: 600" class="d-block m-0">Skor</p>
-                            <p class="d-block m-0">:</p>
-                            <p style="width: 88%" class="d-block m-0"><span class="badge badge-success">{{
+                            <p style="width: 10%; font-weight: 600" class="m-0 d-block">Skor</p>
+                            <p class="m-0 d-block">:</p>
+                            <p style="width: 88%" class="m-0 d-block"><span class="badge badge-success">{{
                                     $question->score }}
                                     poin</span></p>
                         </div>
                     </div>
                     <div style="width: 4.5%" class="d-flex flex-column align-items-center actions-container">
                         <!-- Edit Question Button -->
-                        <button type="button" class="btn btn-sm btn-primary rounded-circle mb-2" data-toggle="modal"
+                        <button type="button" class="mb-2 btn btn-sm btn-primary rounded-circle" data-toggle="modal"
                             data-target="#questionEditFormModal{{ $question->id }}">
                             <i class="fas fa-pencil-alt"></i>
                         </button>
@@ -108,7 +108,8 @@
                                             <span aria-hidden="true">&times;</span>
                                         </button>
                                     </div>
-                                    <form method="POST" enctype="multipart/form-data">
+                                    <form method="POST" enctype="multipart/form-data"
+                                        action="{{ route('admin.active-period.exam-selection.subject.question.store', $period_subject) }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="modal-body">
@@ -127,7 +128,7 @@
                                                             {{ $question->text }}
                                                         </textarea>
                                                 <span id="textContent_{{ $question->id }}"
-                                                    class="d-block w-100 py-1 px-2 overflow-hidden rounded border question-text-content"
+                                                    class="px-2 py-1 overflow-hidden border rounded d-block w-100 question-text-content"
                                                     role="textbox" contenteditable>
                                                     {{ $question->text }}
                                                 </span>
@@ -137,10 +138,10 @@
                                             $random = rand(1,10);
                                             @endphp
                                             <!-- GAMBAR SOAL SAAT INI -->
-                                            <p class="d-block m-0 mb-2 font-weight-bold">Gambar Soal</p>
+                                            <p class="m-0 mb-2 d-block font-weight-bold">Gambar Soal</p>
                                             <div class="mb-3">
                                                 @if ($random%2==0)
-                                                <p class="d-block m-0 font-italic font-weight-bold text-secondary">Belum
+                                                <p class="m-0 d-block font-italic font-weight-bold text-secondary">Belum
                                                     ada gambar soal saat ini</p>
                                                 @else
                                                 <button type="button" class="btn btn-sm btn-info show-image-btn"
@@ -151,11 +152,11 @@
                                                 @endif
                                             </div>
                                             <!-- TAMBAH JIKA BELUM ADA GAMBAR SOAL / UBAH JIKA SUDAH ADA GAMBAR SOAL -->
-                                            <p class="d-block m-0 mb-2 font-weight-bold">{{ $random%2==0 ? 'Tambah ' :
+                                            <p class="m-0 mb-2 d-block font-weight-bold">{{ $random%2==0 ? 'Tambah ' :
                                                 'Ubah ' }}Gambar Soal</p>
-                                            <p class="d-block m-0 mb-2 text-danger"
+                                            <p class="m-0 mb-2 d-block text-danger"
                                                 id="editQuestionFileError_{{ $question->id }}"></p>
-                                            <div class="input-group mb-3">
+                                            <div class="mb-3 input-group">
                                                 <div class="input-group-prepend">
                                                     <button class="btn btn-outline-secondary edit-question-file-preview"
                                                         type="button" id="editQuestionImagePreview_{{ $question->id }}"
@@ -174,10 +175,10 @@
                                             </div>
                                             <!-- BAGIAN PILIHAN UNTUK SOAL TIPE PILIHAN BERGANDA -->
                                             @if ($question->choices->count() > 0)
-                                            <p class="d-block m-0 mb-2 font-weight-bold">Pilihan Jawaban</p>
+                                            <p class="m-0 mb-2 d-block font-weight-bold">Pilihan Jawaban</p>
                                             <div id="question_{{ $question->id }}_choices_container">
                                                 @foreach ($question->choices as $choice)
-                                                <div class="input-group mb-2">
+                                                <div class="mb-2 input-group">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
                                                             <input type="radio" required class="check-choices"
@@ -198,7 +199,7 @@
                                                 <!-- GAMBAR JAWABAN SAAT INI -->
                                                 <div style="padding-left: 38px;" class="mb-2">
                                                     @if ($random2%2==0)
-                                                    <p class="d-block m-0 font-italic font-weight-bold text-secondary">
+                                                    <p class="m-0 d-block font-italic font-weight-bold text-secondary">
                                                         Belum ada gambar jawaban saat ini</p>
                                                     @else
                                                     <button type="button" class="btn btn-sm btn-success show-image-btn"
@@ -208,7 +209,7 @@
                                                     </button>
                                                     @endif
                                                 </div>
-                                                <div style="padding-left: 38px;" class="input-group mb-3">
+                                                <div style="padding-left: 38px;" class="mb-3 input-group">
                                                     <div class="input-group-prepend">
                                                         <button
                                                             class="btn btn-outline-secondary preview-choice-file-edit"
@@ -229,7 +230,7 @@
                                                         </label>
                                                     </div>
                                                 </div>
-                                                <p style="padding-left: 38px;" class="d-block m-0 my-3 text-danger"
+                                                <p style="padding-left: 38px;" class="m-0 my-3 d-block text-danger"
                                                     id="choice_{{ $question->id }}_{{ $choice->id }}_file_error"></p>
                                                 @endforeach
                                             </div>
@@ -272,26 +273,26 @@
                                     </div>
                                     <div class="modal-body">
                                         <h5> Anda akan menghapus soal berikut : </h5>
-                                        <div class="d-flex justify-content-between mb-2 ">
-                                            <p style="width: 20%; font-weight: 600" class="d-block m-0">Tipe Soal</p>
-                                            <p class="d-block m-0 ">:</p>
-                                            <p style="width: 78%" class="d-block m-0 text-uppercase">{{ $question->type
+                                        <div class="mb-2 d-flex justify-content-between ">
+                                            <p style="width: 20%; font-weight: 600" class="m-0 d-block">Tipe Soal</p>
+                                            <p class="m-0 d-block ">:</p>
+                                            <p style="width: 78%" class="m-0 d-block text-uppercase">{{ $question->type
                                                 }}</p>
                                         </div>
 
-                                        <div class="d-flex justify-content-between mb-2">
-                                            <p style="width: 20%; font-weight: 600" class="d-block m-0">Teks Soal</p>
-                                            <p class="d-block m-0">:</p>
-                                            <p style="width: 78%" class="d-block m-0">{{ $question->text }}</p>
+                                        <div class="mb-2 d-flex justify-content-between">
+                                            <p style="width: 20%; font-weight: 600" class="m-0 d-block">Teks Soal</p>
+                                            <p class="m-0 d-block">:</p>
+                                            <p style="width: 78%" class="m-0 d-block">{{ $question->text }}</p>
                                         </div>
 
                                         <div
                                             class="d-flex justify-content-between align-items-center {{ $question->choices->count() > 0 ? '' : 'mb-2' }}">
-                                            <p style="width: 20%; font-weight: 600" class="d-block m-0">Gambar Soal</p>
-                                            <p class="d-block m-0">:</p>
+                                            <p style="width: 20%; font-weight: 600" class="m-0 d-block">Gambar Soal</p>
+                                            <p class="m-0 d-block">:</p>
                                             @if (rand(1,5)%2==0)
                                             <p style="width: 78%"
-                                                class="d-block m-0 font-italic font-weight-bold text-secondary">Tidak
+                                                class="m-0 d-block font-italic font-weight-bold text-secondary">Tidak
                                                 Ada Gambar Soal</p>
                                             @else
                                             <div style="width: 78%">
@@ -305,18 +306,18 @@
                                         </div>
 
                                         @if ($question->choices->count() > 0)
-                                        <div class="d-flex justify-content-between mt-2 ">
-                                            <p style="width: 20%; font-weight: 600" class="d-block m-0">Pilihan</p>
-                                            <p class="d-block m-0">:</p>
+                                        <div class="mt-2 d-flex justify-content-between ">
+                                            <p style="width: 20%; font-weight: 600" class="m-0 d-block">Pilihan</p>
+                                            <p class="m-0 d-block">:</p>
                                             <div style="width: 78%" class="">
                                                 <ul class="pl-4">
                                                     @foreach ($question->choices as $choice)
                                                     <li
                                                         class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
-                                                        <p class="d-block m-0 mb-1">{{ $choice->text }}</p>
+                                                        <p class="m-0 mb-1 d-block">{{ $choice->text }}</p>
                                                         @if (rand(1,5)%2==0)
                                                         <p style="width: 78%"
-                                                            class="d-block m-0 font-italic font-weight-bold text-secondary">
+                                                            class="m-0 d-block font-italic font-weight-bold text-secondary">
                                                             Tidak Ada Gambar Jawaban</p>
                                                         @else
                                                         <div style="width: 78%">
@@ -338,9 +339,9 @@
 
                                         <div
                                             class="d-flex justify-content-between {{ $question->choices->count() > 0 ? 'mb-2' : 'my-2' }}">
-                                            <p style="width: 20%; font-weight: 600" class="d-block m-0">Skor</p>
-                                            <p class="d-block m-0">:</p>
-                                            <p style="width: 78%" class="d-block m-0">
+                                            <p style="width: 20%; font-weight: 600" class="m-0 d-block">Skor</p>
+                                            <p class="m-0 d-block">:</p>
+                                            <p style="width: 78%" class="m-0 d-block">
                                                 <span class="badge badge-success">{{ $question->score }}
                                                     poin
                                                 </span>
@@ -352,9 +353,16 @@
                                     <div class="modal-footer">
                                         <button type="button" class="btn btn-secondary" data-dismiss="modal">BATALKAN
                                         </button>
-                                        <button type="button" class="btn btn-danger">
-                                            HAPUS DATA
-                                        </button>
+                                        <form
+                                            action="{{ route('admin.active-period.exam-selection.subject.question.destroy', [$period_subject,$question]) }}"
+                                            method="post">
+                                            @csrf
+                                            @method('DELETE')
+
+                                            <button type="submit" class="btn btn-danger">
+                                                HAPUS DATA
+                                            </button>
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -362,7 +370,7 @@
                     </div>
                 </div>
                 @empty
-                <p style="border-left: 5px solid #34d399; background-color: #ecfdf5;" class="d-block m-0 p-2">
+                <p style="border-left: 5px solid #34d399; background-color: #ecfdf5;" class="p-2 m-0 d-block">
                     Belum Ada Soal</p>
                 @endforelse
             </div>
@@ -394,7 +402,7 @@
                             <option value="pilihan berganda">PILIHAN BERGANDA</option>
                         </select>
                     </div>
-                    <div class="input-group mb-3">
+                    <div class="mb-3 input-group">
                     </div>
                     <div class="question-detail w-100" id="questionDetail"></div>
                 </div>
@@ -709,7 +717,7 @@
                     if (inputFieldFile) {
                         element = `
                             <div style="width: 87.5%" class="mx-auto">
-                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="w-100 h-auto">
+                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="h-auto w-100">
                             </div>
                         `;
                     }else{
@@ -734,7 +742,7 @@
                     if (inputFieldFile) {
                         element = `
                             <div style="width: 87.5%" class="mx-auto">
-                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="w-100 h-auto">
+                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="h-auto w-100">
                             </div>
                         `;
                     }else{
@@ -760,7 +768,7 @@
                     if (inputFieldFile) {
                         element = `
                             <div style="width: 87.5%" class="mx-auto">
-                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="w-100 h-auto">
+                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="h-auto w-100">
                             </div>
                         `;
                     }else{
@@ -787,7 +795,7 @@
                     if (inputFieldFile) {
                         element = `
                             <div style="width: 87.5%" class="mx-auto">
-                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="w-100 h-auto">
+                                <img src="`+URL.createObjectURL(inputFieldFile)+`" class="h-auto w-100">
                             </div>
                         `;
                     }else{
@@ -808,7 +816,7 @@
                     let btn = event.target;
                     let file = btn.getAttribute("data-file");
                     let modal = $("#showStaticDataImageModal");
-                    let img_element = `<div style="width: 87.5%" class="mx-auto"> <img src="{{ asset('storage/`+file+`') }}" class="w-100 h-auto"></div>`;
+                    let img_element = `<div style="width: 87.5%" class="mx-auto"> <img src="{{ asset('storage/`+file+`') }}" class="h-auto w-100"></div>`;
                     modal.find('.modal-body').html(img_element);
                 }
             });

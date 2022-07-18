@@ -25,6 +25,7 @@ class QuestionController extends Controller
     public function index(PeriodSubject $period_subject)
     {
         $period_subject->load(['questions.choices']);
+        // dd($period_subject->questions);
         return view('admin.pages.active-period.period-subject-question.index', compact('period_subject'));
     }
 
@@ -41,16 +42,17 @@ class QuestionController extends Controller
         $validated = $request->validated();
         if ($validated['image']) {
             $image = $request->file('image');
-            $imageFileName = $period_subject->subject->name . '_question_image_' . $image->hashName() . $image->extension();
+            $imageFileName = $period_subject->subject->name . '_question_image_' . $image->hashName();
             // dd($imageFileName);
 
             $storeimage = Storage::disk('public')->putFileAs(
-                    'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/',
+                'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/',
                 $image,
                 $imageFileName
             );
             $validated['image'] = $storeimage;
         }
+        $validated['period_subject_id'] = $period_subject->id;
         $question = Question::create($validated);
         $validated['question_id'] = $question->id;
         if ($question) {
@@ -64,7 +66,7 @@ class QuestionController extends Controller
                         // dd($imageFileName);
 
                         $storeimage = Storage::disk('public')->putFileAs(
-                                'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
+                            'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
                             $image,
                             $imageFileName
                         );
@@ -116,7 +118,7 @@ class QuestionController extends Controller
             // dd($imageFileName);
 
             $storeimage = Storage::disk('public')->putFileAs(
-                    'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/',
+                'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/',
                 $image,
                 $imageFileName
             );
@@ -135,7 +137,7 @@ class QuestionController extends Controller
                         // dd($imageFileName);
 
                         $storeimage = Storage::disk('public')->putFileAs(
-                                'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
+                            'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
                             $image,
                             $imageFileName
                         );
@@ -166,8 +168,20 @@ class QuestionController extends Controller
         );
     }
 
-    public function destroy(Question $question)
+    public function destroy(PeriodSubject $period_subject, Question $question)
     {
         //
+        if ($question->deleteOrFail()) {
+            return back()->with(
+                [
+                    'warning'   =>  'Soal berhasil dihapus',
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'   =>  'Soal gagal dihapus',
+            ]
+        );
     }
 }
