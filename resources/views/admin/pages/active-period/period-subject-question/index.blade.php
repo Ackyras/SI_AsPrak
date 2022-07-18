@@ -7,9 +7,15 @@
             <div class="mb-4 d-flex align-items-center justify-content-between">
                 <h2 class="card-title font-weight-bold">Soal Ujian Seleksi Mata Kuliah
                     "{{ $period_subject->subject->name }}"</h2>
-                <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addQuestionFormModal">
+                <button type="button" class="btn btn-success" data-toggle="modal"
+                    data-target="#addEssayQuestionFormModal">
                     <i class="mr-2 fas fa-plus"></i>
-                    Tambah Soal
+                    Tambah Soal Essay
+                </button>
+                <button type="button" class="btn btn-success" data-toggle="modal"
+                    data-target="#addChoiceQuestionFormModal">
+                    <i class="mr-2 fas fa-plus"></i>
+                    Tambah Soal Pilihan Ganda
                 </button>
             </div>
             <div id="questions_container">
@@ -41,7 +47,7 @@
                             @else
                             <div style="width: 88%">
                                 <button type="button" class="btn btn-sm btn-info show-image-btn"
-                                    data-file="{{ asset('storage/'.$question->image) }}" data-toggle="modal"
+                                    data-file="{{ $question->image }}" data-toggle="modal"
                                     data-target="#showStaticDataImageModal">
                                     Lihat Gambar
                                 </button>
@@ -58,7 +64,7 @@
                                     @foreach ($question->choices as $choice)
                                     <li class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
                                         <p class="m-0 mb-1 d-block">{{ $choice->text }}</p>
-                                        @if (rand(1,5)%2==0)
+                                        @if (!$choice->image)
                                         <p style="width: 88%"
                                             class="m-0 d-block font-italic font-weight-bold text-secondary">Tidak Ada
                                             Gambar Jawaban</p>
@@ -66,8 +72,8 @@
                                         <div style="width: 88%">
                                             <button type="button"
                                                 class="btn btn-sm {{ $choice->is_true ? 'btn-success' : 'btn-secondary' }} show-image-btn"
-                                                data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
-                                                data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                data-file="{{ $choice->image }}" data-toggle="modal"
+                                                data-target="#showStaticDataImageModal">
                                                 Lihat Gambar Jawaban
                                             </button>
                                         </div>
@@ -109,7 +115,7 @@
                                         </button>
                                     </div>
                                     <form method="POST" enctype="multipart/form-data"
-                                        action="{{ route('admin.active-period.exam-selection.subject.question.store', $period_subject) }}">
+                                        action="{{ route('admin.active-period.exam-selection.subject.question.update', [$period_subject, $question]) }}">
                                         @csrf
                                         @method('PUT')
                                         <div class="modal-body">
@@ -133,26 +139,23 @@
                                                     {{ $question->text }}
                                                 </span>
                                             </div>
-                                            <!-- HAPUS KALU SUDAH TIDAK DIGUNAKAN -->
-                                            @php
-                                            $random = rand(1,10);
-                                            @endphp
                                             <!-- GAMBAR SOAL SAAT INI -->
                                             <p class="m-0 mb-2 d-block font-weight-bold">Gambar Soal</p>
                                             <div class="mb-3">
-                                                @if ($random%2==0)
+                                                @if (!$question->image)
                                                 <p class="m-0 d-block font-italic font-weight-bold text-secondary">Belum
                                                     ada gambar soal saat ini</p>
                                                 @else
                                                 <button type="button" class="btn btn-sm btn-info show-image-btn"
-                                                    data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
-                                                    data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                    data-file="{{ $question->image }}" data-toggle="modal"
+                                                    data-target="#showStaticDataImageModal">
                                                     Lihat gambar saat ini
                                                 </button>
                                                 @endif
                                             </div>
                                             <!-- TAMBAH JIKA BELUM ADA GAMBAR SOAL / UBAH JIKA SUDAH ADA GAMBAR SOAL -->
-                                            <p class="m-0 mb-2 d-block font-weight-bold">{{ $random%2==0 ? 'Tambah ' :
+                                            <p class="m-0 mb-2 d-block font-weight-bold">{{ $question->image ? 'Tambah '
+                                                :
                                                 'Ubah ' }}Gambar Soal</p>
                                             <p class="m-0 mb-2 d-block text-danger"
                                                 id="editQuestionFileError_{{ $question->id }}"></p>
@@ -193,18 +196,15 @@
                                                         name="choice_{{ $choice->id }}_text"
                                                         id="choice_{{ $choice->id }}_text" value="{{ $choice->text }}">
                                                 </div>
-                                                @php
-                                                $random2 = rand(1,10);
-                                                @endphp
                                                 <!-- GAMBAR JAWABAN SAAT INI -->
                                                 <div style="padding-left: 38px;" class="mb-2">
-                                                    @if ($random2%2==0)
+                                                    @if (!$choice->image)
                                                     <p class="m-0 d-block font-italic font-weight-bold text-secondary">
                                                         Belum ada gambar jawaban saat ini</p>
                                                     @else
                                                     <button type="button" class="btn btn-sm btn-success show-image-btn"
-                                                        data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
-                                                        data-toggle="modal" data-target="#showStaticDataImageModal">
+                                                        data-file="{{ $choice->image }}" data-toggle="modal"
+                                                        data-target="#showStaticDataImageModal">
                                                         Lihat Gambar Jawaban Saat Ini
                                                     </button>
                                                     @endif
@@ -290,14 +290,14 @@
                                             class="d-flex justify-content-between align-items-center {{ $question->choices->count() > 0 ? '' : 'mb-2' }}">
                                             <p style="width: 20%; font-weight: 600" class="m-0 d-block">Gambar Soal</p>
                                             <p class="m-0 d-block">:</p>
-                                            @if (rand(1,5)%2==0)
+                                            @if (!$question->image)
                                             <p style="width: 78%"
                                                 class="m-0 d-block font-italic font-weight-bold text-secondary">Tidak
                                                 Ada Gambar Soal</p>
                                             @else
                                             <div style="width: 78%">
                                                 <button type="button" class="btn btn-sm btn-info show-image-btn"
-                                                    data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
+                                                    data-file="{{ $question->image ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
                                                     data-toggle="modal" data-target="#showStaticDataImageModal">
                                                     Lihat Gambar
                                                 </button>
@@ -315,7 +315,7 @@
                                                     <li
                                                         class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
                                                         <p class="m-0 mb-1 d-block">{{ $choice->text }}</p>
-                                                        @if (rand(1,5)%2==0)
+                                                        @if (!$choice->image)
                                                         <p style="width: 78%"
                                                             class="m-0 d-block font-italic font-weight-bold text-secondary">
                                                             Tidak Ada Gambar Jawaban</p>
@@ -323,8 +323,7 @@
                                                         <div style="width: 78%">
                                                             <button type="button"
                                                                 class="btn btn-sm {{ $choice->is_true ? 'btn-success' : 'btn-secondary' }} show-image-btn"
-                                                                data-file="{{ rand(1,5)%2==0 ? 'dummy/PasFoto.jpg' : 'dummy/Poster.jpeg' }}"
-                                                                data-toggle="modal"
+                                                                data-file="{{ $choice->image }}" data-toggle="modal"
                                                                 data-target="#showStaticDataImageModal">
                                                                 Lihat Gambar Jawaban
                                                             </button>
@@ -378,13 +377,14 @@
     </div>
 </div>
 
-<!-- Add Question Modal -->
-<div class="modal fade" id="addQuestionFormModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
-    aria-labelledby="addQuestionFormModalLabel" aria-hidden="true">
-    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" id="addQuestionFormModalDialog">
-        <div class="modal-content" id="addQuestionFormModalContent" style="overflow-y:auto;">
+<!-- Add Choice Question Modal -->
+<div class="modal fade" id="addChoiceQuestionFormModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
+    aria-labelledby="addChoiceQuestionFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+        id="addChoiceQuestionFormModalDialog">
+        <div class="modal-content" id="addChoiceQuestionFormModalContent" style="overflow-y:auto;">
             <div class="modal-header">
-                <h3 class="modal-title font-weight-bold" id="addQuestionFormModalLabel">Soal Baru</h3>
+                <h3 class="modal-title font-weight-bold" id="addChoiceQuestionFormModalLabel">Soal Baru</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -393,7 +393,174 @@
             <form method="POST" enctype="multipart/form-data"
                 action="{{ route('admin.active-period.exam-selection.subject.question.store', $period_subject) }}">
                 @csrf
-                <div class="modal-body" id="addQuestionFormModalBody">
+                <div class="modal-body" id="addChoiceQuestionFormModalBody">
+                    <input type="hidden" name="type" value="pilihan berganda">
+                    <div class="form-group">
+                        <label for="text">Soal</label>
+                        <input type="text" name="text" id="text" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="form-label">Gambar Soal</label>
+                        <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="choice.text.0">Opsi A</label>
+                        <div class="form-group">
+                            <div class="mb-3 input-group">
+                                <input type="hidden" name="choice[option][0]" value="a">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" name="choice[is_true][0]" value=true>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" name="choice[text][0]" id="choice_text_a"
+                                        placeholder="Isi opsi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-label">Gambar opsi A</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="choice[image][0]" class="custom-file-input"
+                                            id="customFile.0">
+                                        <label class="custom-file-label" for="customFile.0">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="choice.text.1">Opsi B</label>
+                        <div class="form-group">
+                            <div class="mb-3 input-group">
+                                <input type="hidden" name="choice[option][1]" value="b">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" name="choice[is_true][1]" value=true>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" name="choice[text][1]" id="choice_text_b"
+                                        placeholder="Isi opsi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-label">Gambar opsi B</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="choice[image][1]" class="custom-file-input"
+                                            id="customFile.1">
+                                        <label class="custom-file-label" for="customFile.1">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="choice.text.2">Opsi C</label>
+                        <div class="form-group">
+                            <div class="mb-3 input-group">
+                                <input type="hidden" name="choice[option][2]" value="c">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" name="choice[is_true][2]" value=true>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" name="choice[text][2]" id="choice_text_c"
+                                        placeholder="Isi opsi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-label">Gambar opsi C</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="choice[image][2]" class="custom-file-input"
+                                            id="customFile.2">
+                                        <label class="custom-file-label" for="customFile.2">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="choice.text.3">Opsi D</label>
+                        <div class="form-group">
+                            <div class="mb-3 input-group">
+                                <input type="hidden" name="choice[option][3]" value="d">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" name="choice[is_true][3]" value=true>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" name="choice[text][3]" id="choice_text_d"
+                                        placeholder="Isi opsi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-label">Gambar opsi D</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="choice[image][3]" class="custom-file-input"
+                                            id="customFile.3">
+                                        <label class="custom-file-label" for="customFile.3">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="choice.text.4">Opsi E</label>
+                        <div class="form-group">
+                            <div class="mb-3 input-group">
+                                <input type="hidden" name="choice[option][4]" value="e">
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text">
+                                            <input type="checkbox" name="choice[is_true][4]" value=true>
+                                        </span>
+                                    </div>
+                                    <input type="text" class="form-control" name="choice[text][4]" id="choice_text_e"
+                                        placeholder="Isi opsi">
+                                </div>
+                                <div class="form-group">
+                                    <label for="form-label">Gambar opsi E</label>
+                                    <div class="custom-file">
+                                        <input type="file" name="choice[image][4]" class="custom-file-input"
+                                            id="customFile.4">
+                                        <label class="custom-file-label" for="customFile.4">Choose file</label>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="score" class="form-label">Skor</label>
+                        <input type="number" name="score" id="score" class="form-control">
+                    </div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">SIMPAN</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<!-- Add Question Modal -->
+<div class="modal fade" id="addEssayQuestionFormModal" tabindex="-1" data-backdrop="static" data-keyboard="false"
+    aria-labelledby="addEssayQuestionFormModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg"
+        id="addEssayQuestionFormModalDialog">
+        <div class="modal-content" id="addEssayQuestionFormModalContent" style="overflow-y:auto;">
+            <div class="modal-header">
+                <h3 class="modal-title font-weight-bold" id="addEssayQuestionFormModalLabel">Soal Baru</h3>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form method="POST" enctype="multipart/form-data"
+                action="{{ route('admin.active-period.exam-selection.subject.question.store', $period_subject) }}">
+                @csrf
+                <div class="modal-body" id="addEssayQuestionFormModalBody">
                     <div class="form-group">
                         <label for="question_type">Tipe Soal</label>
                         <select id="question_type" class="custom-select" name="type">

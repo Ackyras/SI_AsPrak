@@ -40,7 +40,7 @@ class QuestionController extends Controller
         //
         $period_subject->load('subject');
         $validated = $request->validated();
-        if ($validated['image']) {
+        if (isset($validated['image'])) {
             $image = $request->file('image');
             $imageFileName = $period_subject->subject->name . '_question_image_' . $image->hashName();
             // dd($imageFileName);
@@ -58,27 +58,30 @@ class QuestionController extends Controller
         if ($question) {
             if ($validated['type'] == 'pilihan berganda') {
                 $choices = [];
+                // dd($validated['choice']);
                 foreach ($validated['choice']['option'] as $key => $value) {
                     // $new_choice = Choice
-                    if ($validated['choice']['image'][$key]) {
+                    if (isset($validated['choice']['image'][$key])) {
                         $image = $validated['choice']['image'][$key];
-                        $imageFileName = $period_subject->subject->name . '_choice_image_' . $image->hashName() . $image->extension();
+                        $imageFileName = $period_subject->subject->name . '_choice_image_' . $image->hashName();
                         // dd($imageFileName);
 
                         $storeimage = Storage::disk('public')->putFileAs(
-                            'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
+                            'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage',
                             $image,
                             $imageFileName
                         );
                         $validated['choice']['image'][$key] = $storeimage;
+                    } else {
+                        $validated['choice']['image'][$key] = null;
                     }
                     $choice = Choice::create(
                         [
                             'text'          =>  $validated['choice']['text'][$key],
                             'option'        =>  $validated['choice']['option'][$key],
                             'image'         =>  $validated['choice']['image'][$key],
-                            'is_true'       =>  $validated['choice']['is_true'][$key],
-                            'question_id'   =>  $validated['choice']['question_id'][$key],
+                            'is_true'       =>  isset($validated['choice']['is_true'][$key]) ? true : false,
+                            'question_id'   =>  $validated['question_id'],
                         ]
                     );
                     array_push($choices, $choice);

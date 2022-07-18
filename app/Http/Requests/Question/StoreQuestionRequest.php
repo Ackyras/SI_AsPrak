@@ -29,10 +29,10 @@ class StoreQuestionRequest extends FormRequest
             'type'                  =>  'required',
             'score'                 =>  'required|numeric',
             'image'                 =>  'nullable',
-            'choice.option.*'       =>  'required_if:type,choice',
-            'choice.text.*'         =>  'required_if:choice,null',
+            'choice.option.*'       =>  'required_if:type,pilihan berganda',
+            'choice.text.*'         =>  'required_if:type,pilihan berganda',
             'choice.image.*'        =>  'nullable',
-            'choice.is_true.*'      =>  'required_if:type,choice',
+            'choice.is_true.*'             =>  ['required_if:type,choice'],
         ];
     }
 }

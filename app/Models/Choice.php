@@ -13,6 +13,7 @@ class Choice extends Model
         'text',
         'option',
         'is_true',
+        'image',
         'question_id',
     ];
 
