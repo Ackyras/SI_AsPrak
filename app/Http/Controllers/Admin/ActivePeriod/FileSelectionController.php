@@ -76,7 +76,13 @@ class FileSelectionController extends Controller
             ;
         });
         // dd($subjects[1]);
-        return view('admin.pages.active-period.file-selection.pass-selection-registrar', compact('period_subject_registrars', 'subjects'));
+        return view(
+            'admin.pages.active-period.file-selection.pass-selection-registrar',
+            compact(
+                'period_subject_registrars',
+                'subjects'
+            )
+        );
     }
 
     public function announceFileSelectionResult()
