@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
-                <h2 class="card-title font-weight-bold">Seleksi Berkas Pendaftar
+                <h2 class="card-title font-weight-bold">Seleksi Ujian Pendaftar
                 </h2>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#announceResult">
                     <i class="mr-2 fas fa-bullhorn"></i>
@@ -13,7 +13,7 @@
                 </button>
             </div>
         </div>
-
+        
         <div class="card-body">
             <div id="period_subject_registrar_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
                 <div class="w-25 mb-3">
@@ -74,45 +74,45 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" id="announceResultDialog">
         <div class="modal-content" id="announceResultContent" style="overflow-y:auto;">
             <div class="modal-header">
-                <h3 class="modal-title font-weight-bold" id="announceResultLabel">Umumkan Kelulusan Seleksi Berkas</h3>
+                <h3 class="modal-title font-weight-bold" id="announceResultLabel">Umumkan Kelulusan Seleksi Tes</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body" id="announceResultBody">
-                <h5 class="d-block m-0 mb-2 font-weight-bold"> 
-                    Berikut adalah Data Lulus Seleksi Berkas
-                </h5>
-                @foreach ($subjects as $subject)
-                @php
-                    $kuota = rand(3,6);
-                    $lulus = rand(3,6);
-                @endphp
-                    <p class="d-block m-0 mb-2 font-weight-bold">
-                        {{ $subject->name }} 
-                        @if ($lulus > $kuota)
-                            (<span class="text-danger">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
-                        @elseif ($lulus < $kuota)
-                            (<span class="text-secondary">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
-                        @else
-                            (<span class="text-success">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
-                        @endif
-                    </p>
-                    <ul>
-                        @foreach ($period_subject_registrars as $psr)
-                            @if ($psr->period_subject->subject->name == $subject->name)
-                                <li>{{ $psr->registrar->name }}</li>
-                            @endif
-                        @endforeach
-                    </ul>
-                @endforeach
-            </div>
+            <form action="">
+                <div class="modal-body" id="announceResultBody">
+                    <h5 class="d-block m-0 mb-2 font-weight-bold"> 
+                        Berikut adalah Data Lulus Seleksi Tes
+                    </h5>
+                    @foreach ($subjects as $subject)
+                        @php
+                            $kuota = rand(3,6);
+                        @endphp
+                        <p id="subject_{{ $subject->id }}_number_of_assistant" class="d-none">{{ $kuota }}</p>
+                        <p class="d-block m-0 mb-2 font-weight-bold">
+                            {{ $subject->name }} 
+                            (<span id="s_{{ $subject->id }}_noa" class="text-secondary">0/{{ $kuota }} kuota terisi</span>)
+                        </p>
+                        <div class="mb-2">
+                            @foreach ($period_subject_registrars as $psr)
+                                @if ($psr->period_subject->subject->name == $subject->name)
+                                    <input class="select-assistant" type="checkbox" value="{{ $psr->registrar->id }}" 
+                                        id="subject_{{ $subject->id }}_asisstant_{{ $psr->registrar->id }}" 
+                                        name="subject_{{ $subject->id }}_assistant[]">
+                                    <label class="form-check-label" for="subject_{{ $subject->id }}_asisstant_{{ $psr->registrar->id }}">
+                                        <span style="width:25%; text-align:right" class="mx-2">Nilai: {{ rand(65,99) }}/100</span>{{ $psr->registrar->name }}
+                                    </label>
+                                    <br>
+                                @endif
+                            @endforeach
+                        </div>
+                    @endforeach
+                </div>
 
-            <div class="modal-footer">
-                <form action="">
+                <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -177,6 +177,19 @@
                 $("#showFileModalLabel").text(title);
                 var pdf_embed = `<embed src="{{ asset('storage/`+file+`') }}" type="application/pdf" width="640" height="720" >`;
                 modal.find('.modal-body').html(pdf_embed);
+            }
+        });
+
+        $(".select-assistant").change(function (event) { 
+            let id = $(this).attr("id").split("_")[1];
+            let limit = parseInt($("#subject_"+id+"_number_of_assistant").text());
+            if($(this).siblings(':checked').length >= limit) {
+                this.checked = false;
+            }
+            if($(this).is(':checked')){
+                $("#s_"+id+"_noa").text(($(this).siblings(':checked').length+1)+"/"+limit+" kuota terisi");
+            }else{
+                $("#s_"+id+"_noa").text(($(this).siblings(':checked').length)+"/"+limit+" kuota terisi");
             }
         });
     });

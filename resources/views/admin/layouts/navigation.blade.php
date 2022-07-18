@@ -196,9 +196,8 @@
             <!-- ------ PRAKTIKUM ------ -->
             <!-- ----------------------- -->
             <li class="nav-item">
-                <a href="#activePeriodPracticumDropdown" {{--
-                    class="nav-link {{ request()->routeIs('admin.data-master.*') ? 'bg-light' : '' }}" --}}
-                    class="nav-link" data-toggle="collapse" role="button" aria-expanded="false"
+                <a href="#activePeriodPracticumDropdown" class="nav-link {{ request()->routeIs('admin.practicum.*') ? 'bg-light' : '' }}"
+                    data-toggle="collapse" role="button" aria-expanded="false"
                     aria-controls="activePeriodPracticumDropdown">
                     <i class="nav-icon fas fa-project-diagram"></i>
                     {{-- <i class="fas "></i> --}}
