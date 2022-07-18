@@ -66,6 +66,27 @@
                     <i class="mr-2 fas fa-eye"></i>
                     Lihat Jawaban
                 </button>
+                <div class="modal fade" id="viewAnswerImageModal_{{ $question->id }}" tabindex="-1"
+                    data-backdrop="static" data-keyboard="false"
+                    aria-labelledby="viewAnswerImageModalLabel_{{ $question->id }}" aria-hidden="true">
+                    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h3 class="modal-title font-weight-bold"
+                                    id="viewAnswerImageModalLabel_{{ $question->id }}">Jawaban
+
+                                </h3>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <img style="width: 87.5%" class="mx-auto d-block"
+                                    src="{{ asset('images/team-1-800x800.jpg') }}" alt="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
                 <small>
                     Peserta tidak menjawab
                 </small>
@@ -169,27 +190,6 @@
 
             @empty
             @endforelse
-        </div>
-    </div>
-</div>
-
-
-
-<div class="modal fade" id="viewAnswerImageModal_{{ $question->id }}" tabindex="-1" data-backdrop="static"
-    data-keyboard="false" aria-labelledby="viewAnswerImageModalLabel_{{ $question->id }}" aria-hidden="true">
-    <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h3 class="modal-title font-weight-bold" id="viewAnswerImageModalLabel_{{ $question->id }}">Jawaban
-                    
-                </h3>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <img style="width: 87.5%" class="mx-auto d-block" src="{{ asset('images/team-1-800x800.jpg') }}" alt="">
-            </div>
         </div>
     </div>
 </div>
