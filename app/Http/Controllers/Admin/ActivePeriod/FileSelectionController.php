@@ -95,6 +95,16 @@ class FileSelectionController extends Controller
     public function announceFileSelectionResult()
     {
         $period = $this->period;
+        if ($period->is_file_selection_over) {
+            return back()->with(
+                [
+                    'failed'    =>  'Pengumuman sudah dibuat, tidak dapat lagi mengubah ataupun mengumumkan kelulusan seleksi berkas'
+                ]
+            );
+        }
+        $period->is_file_selection_over = true;
+        $period->is_file_selection_over_date = now();
+        $period->save();
         AnnouncePassExamSelection::dispatch($period);
         return back()->with(
             [
