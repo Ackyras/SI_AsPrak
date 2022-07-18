@@ -95,10 +95,10 @@
                     </div>
                     <div style="width: 4.5%" class="d-flex flex-column align-items-center actions-container">
                         <!-- Edit Question Button -->
-                        <button type="button" class="mb-2 btn btn-sm btn-primary rounded-circle" data-toggle="modal"
-                            data-target="#questionEditFormModal{{ $question->id }}">
+                        {{-- <button type="button" class="mb-2 btn btn-sm btn-primary rounded-circle"
+                            data-toggle="modal" data-target="#questionEditFormModal{{ $question->id }}">
                             <i class="fas fa-pencil-alt"></i>
-                        </button>
+                        </button> --}}
                         <!-- Edit Question Modal -->
                         <div class="modal fade" id="questionEditFormModal{{ $question->id }}" tabindex="-1"
                             data-backdrop="static" data-keyboard="false"
@@ -407,14 +407,15 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="choice.text.0">Opsi A</label>
+                        <label for="choice.text.0">Opsi A(jawaban benar)</label>
                         <div class="form-group">
                             <div class="mb-3 input-group">
                                 <input type="hidden" name="choice[option][0]" value="a">
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <input type="checkbox" name="choice[is_true][0]" value=true>
+                                            <input type="checkbox" hidden name="choice[is_true][0]" checked value=true>
+                                            A
                                         </span>
                                     </div>
                                     <input type="text" class="form-control" name="choice[text][0]" id="choice_text_a"
@@ -439,7 +440,8 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <input type="checkbox" name="choice[is_true][1]" value=true>
+                                            <input type="checkbox" hidden name="choice[is_true][1]" value=false>
+                                            B
                                         </span>
                                     </div>
                                     <input type="text" class="form-control" name="choice[text][1]" id="choice_text_b"
@@ -464,7 +466,8 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <input type="checkbox" name="choice[is_true][2]" value=true>
+                                            <input type="checkbox" hidden name="choice[is_true][2]" value=false>
+                                            C
                                         </span>
                                     </div>
                                     <input type="text" class="form-control" name="choice[text][2]" id="choice_text_c"
@@ -489,7 +492,8 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <input type="checkbox" name="choice[is_true][3]" value=true>
+                                            <input type="checkbox" hidden name="choice[is_true][3]" value=false>
+                                            D
                                         </span>
                                     </div>
                                     <input type="text" class="form-control" name="choice[text][3]" id="choice_text_d"
@@ -514,7 +518,8 @@
                                 <div class="input-group">
                                     <div class="input-group-prepend">
                                         <span class="input-group-text">
-                                            <input type="checkbox" name="choice[is_true][4]" value=true>
+                                            <input type="checkbox" hidden name="choice[is_true][4]" value=false>
+                                            E
                                         </span>
                                     </div>
                                     <input type="text" class="form-control" name="choice[text][4]" id="choice_text_e"
@@ -561,17 +566,22 @@
                 action="{{ route('admin.active-period.exam-selection.subject.question.store', $period_subject) }}">
                 @csrf
                 <div class="modal-body" id="addEssayQuestionFormModalBody">
+                    <input type="hidden" name="type" value="essay">
                     <div class="form-group">
-                        <label for="question_type">Tipe Soal</label>
-                        <select id="question_type" class="custom-select" name="type">
-                            <option selected disabled hidden>Pilih tipe soal</option>
-                            <option value="essay">ESSAY</option>
-                            <option value="pilihan berganda">PILIHAN BERGANDA</option>
-                        </select>
+                        <label for="text">Soal</label>
+                        <input type="text" name="text" id="text" class="form-control">
                     </div>
-                    <div class="mb-3 input-group">
+                    <div class="form-group">
+                        <label for="form-label">Gambar Soal</label>
+                        <div class="custom-file">
+                            <input type="file" name="image" class="custom-file-input" id="customFile">
+                            <label class="custom-file-label" for="customFile">Choose file</label>
+                        </div>
                     </div>
-                    <div class="question-detail w-100" id="questionDetail"></div>
+                    <div class="form-group">
+                        <label for="score" class="form-label">Skor</label>
+                        <input type="number" name="score" id="score" class="form-control">
+                    </div>
                 </div>
 
                 <div class="modal-footer">
