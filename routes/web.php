@@ -25,7 +25,8 @@ use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectRegistrarController as 
 use App\Http\Controllers\Admin\Practicum\LabAssistantController;
 use App\Http\Controllers\Admin\Practicum\QRCodeController;
 use App\Http\Controllers\Admin\Practicum\ScheduleController;
-
+use App\Mail\ExamSelectionNotification;
+use App\Mail\FileSelectionNotification;
 
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
@@ -159,13 +160,15 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
 
 
 Route::get('test-email', function () {
-    $maildata['receiver']   = 'Erdy Gaya Manalu';
-    $maildata['subject']    = 'Seleksi Asisten Praktikum';
-    $maildata['title']      = 'Pengumuman Hasil Seleksi Berkas';
+    $maildata['receiver']           = 'Erdy Gaya Manalu';
+    $maildata['subject']            = 'Seleksi Asisten Praktikum';
+    $maildata['title']              = 'Pengumuman Hasil Seleksi Berkas';
     $maildata['registrar_email']    = 'erdy.banyakgaya@manalu.com';
     $maildata['registrar_password'] = 'k8xeAou#svW$mu3x';
+    
+    // return new ExamSelectionNotification($maildata);
 
-    Mail::to('mancisp4@gmail.com')->send(new FileSelection($maildata));
+    Mail::to('mancisp4@gmail.com')->send(new FileSelectionNotification($maildata));
 });
 
 Route::get('test-email-2', function () {
