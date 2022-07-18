@@ -5,7 +5,7 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
-                <h2 class="card-title font-weight-bold">Seleksi Berkas Pendaftar
+                <h2 class="card-title font-weight-bold">Seleksi Ujian Pendaftar
                 </h2>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#announceResult">
                     <i class="mr-2 fas fa-bullhorn"></i>
@@ -16,7 +16,7 @@
 
         <div class="card-body">
             <div id="period_subject_registrar_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="w-25 mb-3">
+                <div class="mb-3 w-25">
                     <select class="custom-select" id="subjectFilter">
                         <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
                         @foreach ($subjects as $subject)
@@ -74,17 +74,17 @@
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" id="announceResultDialog">
         <div class="modal-content" id="announceResultContent" style="overflow-y:auto;">
             <div class="modal-header">
-                <h3 class="modal-title font-weight-bold" id="announceResultLabel">Umumkan Kelulusan Seleksi Berkas</h3>
+                <h3 class="modal-title font-weight-bold" id="announceResultLabel">Umumkan Kelulusan Seleksi Tes</h3>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
             <div class="modal-body" id="announceResultBody">
-                <h5 class="d-block m-0 mb-2 font-weight-bold">
+                <h5 class="m-0 mb-2 d-block font-weight-bold">
                     Berikut adalah Data Lulus Seleksi Berkas
                 </h5>
                 @foreach ($subjects as $subject)
-                <p class="d-block m-0 mb-2 font-weight-bold">
+                <p class="m-0 mb-2 d-block font-weight-bold">
                     {{ $subject->name }}
                     @if ($subject->pass_exam_count > $subject->pivot->number_of_lab_assistant)
                     (<span class="text-danger">{{ $subject->pass_exam_count }}/{{
@@ -110,11 +110,10 @@
                 @endforeach
             </div>
 
-            <div class="modal-footer">
-                <form action="">
+                <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
-                </form>
-            </div>
+                </div>
+            </form>
         </div>
     </div>
 </div>
@@ -179,6 +178,19 @@
                 $("#showFileModalLabel").text(title);
                 var pdf_embed = `<embed src="{{ asset('storage/`+file+`') }}" type="application/pdf" width="640" height="720" >`;
                 modal.find('.modal-body').html(pdf_embed);
+            }
+        });
+
+        $(".select-assistant").change(function (event) {
+            let id = $(this).attr("id").split("_")[1];
+            let limit = parseInt($("#subject_"+id+"_number_of_assistant").text());
+            if($(this).siblings(':checked').length >= limit) {
+                this.checked = false;
+            }
+            if($(this).is(':checked')){
+                $("#s_"+id+"_noa").text(($(this).siblings(':checked').length+1)+"/"+limit+" kuota terisi");
+            }else{
+                $("#s_"+id+"_noa").text(($(this).siblings(':checked').length)+"/"+limit+" kuota terisi");
             }
         });
     });
