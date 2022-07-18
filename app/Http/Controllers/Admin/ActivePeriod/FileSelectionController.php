@@ -13,7 +13,7 @@ use App\Models\PeriodSubjectRegistrar;
 use App\Mail\FileSelectionNotification;
 use Illuminate\Support\Facades\Notification;
 use App\Notifications\Registrar\PassFileSelection;
-use App\Jobs\Recruitment\AnnouncePassExamSelection;
+use App\Jobs\Recruitment\AnnouncePassFileSelection;
 
 class FileSelectionController extends Controller
 {
@@ -105,7 +105,7 @@ class FileSelectionController extends Controller
         $period->is_file_selection_over = true;
         $period->is_file_selection_over_date = now();
         $period->save();
-        AnnouncePassExamSelection::dispatch($period);
+        AnnouncePassFileSelection::dispatch($period);
         return back()->with(
             [
                 'success'   => 'gl'
