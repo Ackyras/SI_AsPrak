@@ -102,7 +102,7 @@ class QuestionController extends Controller
 
     public function show(Question $question)
     {
-        dd($request->request);
+        // dd($request->request);
     }
 
     public function edit(Question $question)
