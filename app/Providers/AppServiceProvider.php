@@ -29,6 +29,10 @@ class AppServiceProvider extends ServiceProvider
     {
         Paginator::useBootstrap();
 
+        Blade::directive('money', function ($money) {
+            return "<?php echo number_format($money, 2); ?>";
+        });
+
         config(['app.locale' => 'id']);
         Carbon::setLocale('id');
         date_default_timezone_set('Asia/Jakarta');

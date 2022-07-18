@@ -2,11 +2,10 @@
 
 namespace App\Http\Middleware\Recruitment;
 
-use App\Models\Period;
 use Closure;
 use Illuminate\Http\Request;
 
-class RegistrationOpenMiddleware
+class OpenForRegistrationMiddleware
 {
     /**
      * Handle an incoming request.
@@ -17,15 +16,14 @@ class RegistrationOpenMiddleware
      */
     public function handle(Request $request, Closure $next)
     {
-        $period = Period::where('is_active', true)->get();
-        if ($period->count() > 1 || !$period) {
-            return redirect()->back()->with(
-                [
-                    'warning'   =>  'Pendaftaran Asisten Praktikum periode ini belum dibuka'
-                ]
-            );
-            // return to_route('')
+        $period = $request->route()->parameter('period');
+        if ($period->is_open_for_selection) {
+            return $next($request);
         }
-        return $next($request);
+        return back()->with(
+            [
+                'failed'    =>  'Pendaftaran belum dibuka atau sudah ditutup'
+            ]
+        );
     }
 }

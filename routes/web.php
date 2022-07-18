@@ -42,7 +42,7 @@ Route::as('website.')->group(function () {
             Route::get('file_selection', 'file_selection_over')->middleware('news_file_selection_is_over')->name('file_selection_over');
             Route::get('final_result', 'exam_selection_over')->middleware('news_exam_selection_is_over')->name('exam_selection_over');
         });
-        Route::as('registration.')->middleware('is_period_active')->group(function () {
+        Route::as('registration.')->middleware(['is_period_active', 'is_selection_open'])->group(function () {
             Route::get('/registration', [RegistrationController::class, 'index'])->name('index');
             Route::post('/registration', [RegistrationController::class, 'store'])->name('store');
         });
@@ -99,6 +99,8 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
                     ->name('add-period-subject');
                 Route::put('period-subject/{period}/subject/{subject}', 'updateSubject')
                     ->name('update-period-subject');
+                Route::delete('period-subject/{period_subject}', 'deleteSubject')
+                    ->name('delete-period-subject');
             });
             // ACTIVE PERIOD SUBJECT REGISTRAR
             Route::controller(ActivePeriodRegistrar::class)->group(function () {
@@ -121,7 +123,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
             Route::get('/exam-data', [PeriodExamSelection::class, 'examData'])->name('exam-data');
             Route::get('/exam-data/subject/{period_subject}', [PeriodExamSelection::class, 'examDataDetail'])->name('exam-data-detail');
             Route::get('/exam-data/subject/{period_subject}/registrar/{psr}', [PeriodExamSelection::class, 'registrarExamData'])->name('registrar-exam-data');
-            Route::get('/pass-selection-registrar', [PeriodExamSelection::class,'passSelection'])->name('pass-selection-registrar');
+            Route::get('/pass-selection-registrar', [PeriodExamSelection::class, 'passSelection'])->name('pass-selection-registrar');
         });
     });
 

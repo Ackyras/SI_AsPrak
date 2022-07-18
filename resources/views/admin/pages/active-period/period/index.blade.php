@@ -10,6 +10,52 @@
         </div>
 
         <div class="card-body">
+            {{-- BARIS 0 --}}
+            <div class="w-100 border-bottom p-2 pb-4 mb-2">
+                <div class="w-100 d-flex justify-content-between align-items-center">
+                    <div style="width: 45%" class="d-flex justify-content-between align-items-center">
+                        <p class="d-block w-50 m-0 font-weight-bold">Honor/Pertemuan</p>
+                        {{-- <p class="d-block w-50 m-0">Rp. {{ $period->honor }},-</p> --}}
+                        <p class="d-block w-50 m-0">Rp. @money($period->honor)</p>
+                    </div>
+                    <div class="w-auto">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#periodHonorEdit">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                    <div class="modal fade" id="periodHonorEdit" tabindex="-1" data-backdrop="static"
+                        data-keyboard="false" aria-labelledby="periodDetailEditFormModalLabel1" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h3 class="modal-title font-weight-bold" id="periodDetailEditFormModalLabel1">
+                                        Ubah Detail Periode</h3>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="POST" action="{{ route('admin.data-master.period.update', $period) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        <div class="form-group">
+                                            <label for="honor">Honor/Pertemuan</label>
+                                            <input type="number" id="honor" name="honor" class="form-control" required
+                                                autocomplete="off" value="{{ $period->honor }}">
+                                        </div>
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" class="btn btn-primary">SIMPAN
+                                            PERUBAHAN</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
             {{-- BARIS 1 --}}
             <div class="w-100 border-bottom p-2 pb-4 mb-2">
                 <div class="w-100 d-flex justify-content-between align-items-center">
@@ -381,7 +427,8 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST" action="">
+                                <form method="POST" action="{{ route('admin.data-master.period.update', $period) }}"
+                                    enctype="multipart/form-data">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
@@ -619,7 +666,7 @@
             </div>
             <div style="background-color: #f0f2f2;" class="modal-body ">
                 <div class="w-75 mx-auto">
-                    <img class="w-100 h-auto" src="{{ asset($period->selection_poster) }}" alt="">
+                    <img class="w-100 h-auto" src="{{ asset('storage/'.$period->selection_poster) }}" alt="">
                 </div>
             </div>
         </div>

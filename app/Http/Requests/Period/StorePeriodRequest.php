@@ -26,6 +26,7 @@ class StorePeriodRequest extends FormRequest
         return [
             //
             'name'                  =>  'required',
+            'honor'                 =>  'required'
         ];
     }
 }

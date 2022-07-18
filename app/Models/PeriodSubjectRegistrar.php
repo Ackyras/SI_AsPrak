@@ -47,6 +47,7 @@ class PeriodSubjectRegistrar extends Model
                 'id',
                 'qr_code_id',
                 'psr_id',
+                'is_valid',
             ]
         );
     }

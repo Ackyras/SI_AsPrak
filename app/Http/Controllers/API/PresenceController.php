@@ -1,33 +1,17 @@
 <?php
 
-namespace App\Http\Controllers\User;
+namespace App\Http\Controllers\API;
 
-use Inertia\Inertia;
+use App\Models\Qr;
+use App\Models\Presence;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PeriodSubjectRegistrar;
-use App\Models\Presence;
-use App\Models\Qr;
-use App\Models\User;
+use Carbon\Carbon;
 
-class UserDashboardController extends Controller
+class PresenceController extends Controller
 {
-    public function index()
-    {
-        $user = auth()->user()->registrar;
-        $user->load(['period_subjects']);
-        return Inertia::render('Dashboard', [
-            'user'  =>  $user
-        ])->with(
-            [
-                'alert'   =>  [
-                    'msg'       =>  'Welcome ' . $user->name,
-                    'status'    =>  'success',
-                ],
-            ]
-        );
-    }
-
+    //
     public function presence(Request $request)
     {
         $validated = $request->validate(
@@ -56,7 +40,17 @@ class UserDashboardController extends Controller
                 ]
             );
         }
-        $day = now()->format('l');
+
+        // if (now()->dayName != $qr->schedule->day) {
+        //     return response('failed');
+        // }
+
+        $is_valid = false;
+        if (now() < $qr->end_date) {
+            $is_valid = true;
+            return response($day != $qr->schedule->day);
+        }
+        // dd();
         // if()
         $registrar = auth()->user()->registrar;
         $registrar->load(

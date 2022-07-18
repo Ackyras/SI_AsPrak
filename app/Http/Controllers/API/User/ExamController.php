@@ -55,7 +55,7 @@ class ExamController extends Controller
         $answerFileName = 'question_' . $question->id . '_answer_' . $answer->hashName();
         // dd($answerFileName);
 
-        $storeanswer = Storage::disk('local')->putFileAs(
+        $storeanswer = Storage::disk('public')->putFileAs(
             'period/' . $period->id . '/registrar/' . $user->registrar->nim . '/',
             $answer,
             $answerFileName

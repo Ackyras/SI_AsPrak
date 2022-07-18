@@ -13,6 +13,7 @@ class Registrar extends Model
         'name',
         'username',
         'nim',
+        'email',
         'cv',
         'khs',
         'transkrip',

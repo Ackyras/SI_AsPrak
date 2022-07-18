@@ -134,8 +134,14 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">BATALKAN</button>
-                                                    <button type="button" class="btn btn-danger">HAPUS
-                                                        DATA</button>
+                                                    <form
+                                                        action="{{ route('admin.active-period.data.delete-period-subject', $subject->pivot) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">HAPUS
+                                                            DATA</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
@@ -191,11 +197,11 @@
                     <p class="m-0 mb-1 d-block font-weight-bold">Prefix Nama Kelas</p>
                     <div class="pl-2 mb-3 d-flex justify-content-between align-items-center">
                         <div style="width: 49.5%" class="input-group d-flex align-items-center">
-                            <input type="radio" id="class_prefix_1" name="class_name_prefix" value="TPB">
+                            <input type="radio" required id="class_prefix_1" name="class_name_prefix" value="TPB">
                             <label for="class_prefix_1" class="m-0 ml-2 d-block">TPB</label>
                         </div>
                         <div style="width: 49.5%" class="input-group d-flex align-items-center">
-                            <input type="radio" id="class_prefix_2" name="class_name_prefix" value="R">
+                            <input type="radio" required id="class_prefix_2" name="class_name_prefix" value="R">
                             <label for="class_prefix_2" class="m-0 ml-2 d-block">R</label>
                         </div>
                     </div>

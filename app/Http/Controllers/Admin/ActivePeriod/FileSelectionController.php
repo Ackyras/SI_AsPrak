@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Admin\ActivePeriod;
 
 use App\Models\Period;
+use App\Models\Registrar;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Models\PeriodSubjectRegistrar;
@@ -19,7 +20,12 @@ class FileSelectionController extends Controller
 
     public function index()
     {
-        $period_subject_registrars = PeriodSubjectRegistrar::with('registrar', 'period_subject.subject')->get();
+        $period_subject_registrars = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_id', $this->period->id)
+            ->with('registrar', 'period_subject.subject')
+            ->get()
+            //
+        ;
         $subjects = $this->period->subjects;
         return view('admin.pages.active-period.file-selection.registrar-file', compact('period_subject_registrars', 'subjects'));
     }
@@ -60,6 +66,30 @@ class FileSelectionController extends Controller
             ->with('registrar', 'period_subject.subject')
             ->get();
         $subjects = $this->period->subjects;
+        $subjects->map(function ($subject) {
+            $subject->pass_selection_count = PeriodSubjectRegistrar::query()
+                ->where('period_subject_id', $subject->pivot->id)
+                ->where('is_pass_file_selection', true)
+                // ->get()
+                ->count()
+                //
+            ;
+        });
+        // dd($subjects[1]);
         return view('admin.pages.active-period.file-selection.pass-selection-registrar', compact('period_subject_registrars', 'subjects'));
+    }
+
+    public function announceFileSelectionResult()
+    {
+        $registrars = Registrar::query()
+            ->whereRelation('period_subjects', 'is_pass_file_selection', true)
+            ->with(
+                [
+                    'period_subjects' => function ($query) {
+                        $query->where('is_pass_file_selection', true);
+                    }
+                ]
+            )->get();
+        dd($registrars);
     }
 }

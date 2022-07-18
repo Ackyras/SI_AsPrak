@@ -20,6 +20,7 @@ class RegistrarFactory extends Factory
         return [
             //
             'name'          =>  $this->faker->name(),
+            'email'         =>  $this->faker->email(),
             'nim'           =>  $this->faker->randomNumber(9, true),
             'cv'            =>  'dummy/CV.pdf',
             'khs'           =>  'dummy/KHS.pdf',
