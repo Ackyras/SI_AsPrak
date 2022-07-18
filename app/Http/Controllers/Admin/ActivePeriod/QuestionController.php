@@ -44,8 +44,8 @@ class QuestionController extends Controller
             $imageFileName = $period_subject->subject->name . '_question_image_' . $image->hashName() . $image->extension();
             // dd($imageFileName);
 
-            $storeimage = Storage::disk('local')->putFileAs(
-                'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/',
+            $storeimage = Storage::disk('public')->putFileAs(
+                    'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/',
                 $image,
                 $imageFileName
             );
@@ -63,8 +63,8 @@ class QuestionController extends Controller
                         $imageFileName = $period_subject->subject->name . '_choice_image_' . $image->hashName() . $image->extension();
                         // dd($imageFileName);
 
-                        $storeimage = Storage::disk('local')->putFileAs(
-                            'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
+                        $storeimage = Storage::disk('public')->putFileAs(
+                                'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
                             $image,
                             $imageFileName
                         );
@@ -115,8 +115,8 @@ class QuestionController extends Controller
             $imageFileName = $period_subject->subject->name . '_question_image_' . $image->hashName() . $image->extension();
             // dd($imageFileName);
 
-            $storeimage = Storage::disk('local')->putFileAs(
-                'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/',
+            $storeimage = Storage::disk('public')->putFileAs(
+                    'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/',
                 $image,
                 $imageFileName
             );
@@ -134,8 +134,8 @@ class QuestionController extends Controller
                         $imageFileName = $period_subject->subject->name . '_choice_image_' . $image->hashName() . $image->extension();
                         // dd($imageFileName);
 
-                        $storeimage = Storage::disk('local')->putFileAs(
-                            'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
+                        $storeimage = Storage::disk('public')->putFileAs(
+                                'period/' . $this->period->id . '/subject/' . $period_subject->subject->name . '/question/choiceImage/',
                             $image,
                             $imageFileName
                         );

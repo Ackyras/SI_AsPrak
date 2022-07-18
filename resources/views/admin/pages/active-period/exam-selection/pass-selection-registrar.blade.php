@@ -13,10 +13,10 @@
                 </button>
             </div>
         </div>
-        
+
         <div class="card-body">
             <div id="period_subject_registrar_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="w-25 mb-3">
+                <div class="mb-3 w-25">
                     <select class="custom-select" id="subjectFilter">
                         <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
                         @foreach ($subjects as $subject)
@@ -79,35 +79,36 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form action="">
-                <div class="modal-body" id="announceResultBody">
-                    <h5 class="d-block m-0 mb-2 font-weight-bold"> 
-                        Berikut adalah Data Lulus Seleksi Tes
-                    </h5>
-                    @foreach ($subjects as $subject)
-                        @php
-                            $kuota = rand(3,6);
-                        @endphp
-                        <p id="subject_{{ $subject->id }}_number_of_assistant" class="d-none">{{ $kuota }}</p>
-                        <p class="d-block m-0 mb-2 font-weight-bold">
-                            {{ $subject->name }} 
-                            (<span id="s_{{ $subject->id }}_noa" class="text-secondary">0/{{ $kuota }} kuota terisi</span>)
-                        </p>
-                        <div class="mb-2">
-                            @foreach ($period_subject_registrars as $psr)
-                                @if ($psr->period_subject->subject->name == $subject->name)
-                                    <input class="select-assistant" type="checkbox" value="{{ $psr->registrar->id }}" 
-                                        id="subject_{{ $subject->id }}_asisstant_{{ $psr->registrar->id }}" 
-                                        name="subject_{{ $subject->id }}_assistant[]">
-                                    <label class="form-check-label" for="subject_{{ $subject->id }}_asisstant_{{ $psr->registrar->id }}">
-                                        <span style="width:25%; text-align:right" class="mx-2">Nilai: {{ rand(65,99) }}/100</span>{{ $psr->registrar->name }}
-                                    </label>
-                                    <br>
-                                @endif
-                            @endforeach
-                        </div>
+            <div class="modal-body" id="announceResultBody">
+                <h5 class="m-0 mb-2 d-block font-weight-bold">
+                    Berikut adalah Data Lulus Seleksi Berkas
+                </h5>
+                @foreach ($subjects as $subject)
+                <p class="m-0 mb-2 d-block font-weight-bold">
+                    {{ $subject->name }}
+                    @if ($subject->pass_exam_count > $subject->pivot->number_of_lab_assistant)
+                    (<span class="text-danger">{{ $subject->pass_exam_count }}/{{
+                        $subject->pivot->number_of_lab_assistant }} kuota
+                        terisi</span>)
+                    @elseif ($subject->pass_exam_count < $subject->pivot->number_of_lab_assistant)) (<span
+                            class="text-secondary">{{ $subject->pass_exam_count
+                            }}/{{ $subject->pivot->number_of_lab_assistant }} kuota
+                            terisi</span>)
+                        @else
+                        (<span class="text-success">{{ $subject->pass_exam_count }}/{{
+                            $subject->pivot->number_of_lab_assistant }} kuota
+                            terisi</span>)
+                        @endif
+                </p>
+                <ul>
+                    @foreach ($period_subject_registrars as $psr)
+                    @if ($psr->period_subject->subject->name == $subject->name)
+                    <li>{{ $psr->registrar->name }}</li>
+                    @endif
                     @endforeach
-                </div>
+                </ul>
+                @endforeach
+            </div>
 
                 <div class="modal-footer">
                     <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
@@ -133,7 +134,7 @@
         </div>
     </div>
 </div>
-    
+
 @endsection
 
 @section('scripts')
@@ -141,7 +142,7 @@
     function print(data){
         console.log(data);
     }
-    
+
     $(document).ready(function() {
 
         var actionButtons = [
@@ -166,8 +167,8 @@
         $('#subjectFilter').on('change', function(){
             $('#period_subject_registrar_table').dataTable().fnFilter(this.value);
         });
-        
-        $("#period_subject_registrar_table").click('tr td.btn-group .FileModalButton', function (event) { 
+
+        $("#period_subject_registrar_table").click('tr td.btn-group .FileModalButton', function (event) {
             event.preventDefault();
             if(event.target.classList.contains('FileModalButton')){
                 var btn = event.target;
@@ -180,7 +181,7 @@
             }
         });
 
-        $(".select-assistant").change(function (event) { 
+        $(".select-assistant").change(function (event) {
             let id = $(this).attr("id").split("_")[1];
             let limit = parseInt($("#subject_"+id+"_number_of_assistant").text());
             if($(this).siblings(':checked').length >= limit) {

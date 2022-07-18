@@ -37,6 +37,7 @@ class PeriodSeeder extends Seeder
         $period = Period::create(
             [
                 'name'                  =>  'Semester Ganjil TA 2022/2023',
+                'honor'                 =>  18000,
                 'registration_start'    =>  Carbon::now(),
                 'registration_end'     =>   Carbon::now()->addDays(7),
                 'is_active'             =>  true,
@@ -47,7 +48,6 @@ class PeriodSeeder extends Seeder
                 'is_file_selection_over_date'       =>  Carbon::now(),
                 'is_exam_selection_over'        =>  true,
                 'is_exam_selection_over_date'       =>  Carbon::now(),
-                // 'selection_poster'  =>  asset('images/Poster.jpeg'),
                 'selection_poster'  =>  'images/Poster.jpeg',
             ]
         );

@@ -2,6 +2,8 @@
 
 namespace App\Http\Requests\Period;
 
+use App\Rules\NumberOfClassRule;
+use App\Rules\PeriodSubjectDateTime;
 use Illuminate\Foundation\Http\FormRequest;
 
 class StoreSubjectForPeriodRequest extends FormRequest
@@ -28,8 +30,14 @@ class StoreSubjectForPeriodRequest extends FormRequest
             'subject_id'                =>  'required',
             'number_of_lab_assistant'   =>  'required',
             'class_name_prefix'         =>  ['required', 'in:TPB,R'],
-            'number_of_class'           =>  ['required', 'numeric'],
-            'exam_start'                =>  ['required', 'date', 'before:exam_end'],
+            'number_of_class'           =>  [
+                'required', 'numeric',
+                new NumberOfClassRule()
+            ],
+            'exam_start'                =>  [
+                'required', 'date', 'before:exam_end',
+                // new PeriodSubjectDateTime()
+            ],
             'exam_end'                  =>  ['required', 'date', 'after:exam_start'],
         ];
     }

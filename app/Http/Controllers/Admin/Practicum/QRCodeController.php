@@ -124,6 +124,13 @@ class QRCodeController extends Controller
                 'period_subject.subject'
             ]
         );
+        if (!$classroom->schedule) {
+            return back()->with(
+                [
+                    'failed'    =>  'Jadwal belum ditentukan',
+                ]
+            );
+        }
 
         return view('admin.pages.practicum.qr-code.show', compact('classroom'));
     }

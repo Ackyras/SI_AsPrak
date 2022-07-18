@@ -95,9 +95,7 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form
-                                                action=""
-                                                method="">
+                                            <form action="" method="">
                                                 @csrf
                                                 <div class="modal-body">
                                                     @if ($psr->is_pass_file_selection)
@@ -160,36 +158,37 @@
                 </button>
             </div>
             <div class="modal-body" id="announceResultBody">
-                <h5 class="d-block m-0 mb-2 font-weight-bold"> 
+                <h5 class="d-block m-0 mb-2 font-weight-bold">
                     Berikut adalah Data Lulus Seleksi Berkas
                 </h5>
                 @foreach ($subjects as $subject)
-                @php
-                    $kuota = rand(3,6);
-                    $lulus = rand(3,6);
-                @endphp
-                    <p class="d-block m-0 mb-2 font-weight-bold">
-                        {{ $subject->name }} 
-                        @if ($lulus > $kuota)
-                            (<span class="text-danger">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
-                        @elseif ($lulus < $kuota)
-                            (<span class="text-secondary">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
+                <p class="d-block m-0 mb-2 font-weight-bold">
+                    {{ $subject->name }}
+                    @if ($subject->pass_selection_count > $subject->pivot->number_of_lab_assistant)
+                    (<span class="text-danger">{{ $subject->pass_selection_count }}/{{
+                        $subject->pivot->number_of_lab_assistant }} kuota terisi</span>)
+                    @elseif ($subject->pass_selection_count < $subject->pivot->number_of_lab_assistant) (<span
+                            class="text-secondary">{{
+                            $subject->pass_selection_count }}/{{ $subject->pivot->number_of_lab_assistant }} kuota
+                            terisi</span>)
                         @else
-                            (<span class="text-success">{{ $lulus }}/{{ $kuota }} kuota terisi</span>)
+                        (<span class="text-success">{{ $subject->pass_selection_count }}/{{
+                            $subject->pivot->number_of_lab_assistant }} kuota
+                            terisi</span>)
                         @endif
-                    </p>
-                    <ul>
-                        @foreach ($period_subject_registrars as $psr)
-                            @if ($psr->period_subject->subject->name == $subject->name)
-                                <li>{{ $psr->registrar->name }}</li>
-                            @endif
-                        @endforeach
-                    </ul>
+                </p>
+                <ul>
+                    @foreach ($period_subject_registrars as $psr)
+                    @if ($psr->period_subject->subject->name == $subject->name)
+                    <li>{{ $psr->registrar->name }}</li>
+                    @endif
+                    @endforeach
+                </ul>
                 @endforeach
             </div>
 
             <div class="modal-footer">
-                <form action="">
+                <form action="" method="PUT">
                     <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
                 </form>
             </div>
@@ -213,7 +212,7 @@
         </div>
     </div>
 </div>
-    
+
 @endsection
 
 @section('scripts')
@@ -221,7 +220,7 @@
     function print(data){
         console.log(data);
     }
-    
+
     $(document).ready(function() {
 
         var actionButtons = [
@@ -246,8 +245,8 @@
         $('#subjectFilter').on('change', function(){
             $('#period_subject_registrar_table').dataTable().fnFilter(this.value);
         });
-        
-        $("#period_subject_registrar_table").click('tr td.btn-group .FileModalButton', function (event) { 
+
+        $("#period_subject_registrar_table").click('tr td.btn-group .FileModalButton', function (event) {
             event.preventDefault();
             if(event.target.classList.contains('FileModalButton')){
                 var btn = event.target;

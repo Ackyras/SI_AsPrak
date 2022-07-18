@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('periods', function (Blueprint $table) {
             $table->id();
             $table->string('name');
+            $table->integer('honor');
             $table->dateTime('registration_start')->nullable();
             $table->dateTime('registration_end')->nullable();
             $table->boolean('is_active')->default(true);

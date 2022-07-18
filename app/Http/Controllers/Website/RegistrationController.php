@@ -45,7 +45,7 @@ class RegistrationController extends Controller
         $cv = $request->file('cv');
         $cvFileName = $validated['nim'] . '_cv_' . $cv->hashName() . $cv->extension();
 
-        $storecv = Storage::disk('local')->putFileAs(
+        $storecv = Storage::disk('public')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
             $cv,
             $cvFileName
@@ -54,7 +54,7 @@ class RegistrationController extends Controller
         $transkripFileName = $validated['nim'] . '_transkrip_' . $transkrip->hashName() . $transkrip->extension();
         // dd($transkripFileName);
 
-        $storetranskrip = Storage::disk('local')->putFileAs(
+        $storetranskrip = Storage::disk('public')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
             $transkrip,
             $transkripFileName
@@ -63,7 +63,7 @@ class RegistrationController extends Controller
         $khsFileName = $validated['nim'] . '_khs_' . $khs->hashName() . $cv->extension();
         // dd($khsFileName);
 
-        $storekhs = Storage::disk('local')->putFileAs(
+        $storekhs = Storage::disk('public')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
             $khs,
             $khsFileName
@@ -72,7 +72,7 @@ class RegistrationController extends Controller
         $transkripFileName = $validated['nim'] . '_transkrip_' . $transkrip->hashName() . $cv->extension();
         // dd($transkripFileName);
 
-        $storetranskrip = Storage::disk('local')->putFileAs(
+        $storetranskrip = Storage::disk('public')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
             $transkrip,
             $transkripFileName

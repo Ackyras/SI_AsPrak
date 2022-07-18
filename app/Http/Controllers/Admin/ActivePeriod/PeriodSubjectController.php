@@ -62,7 +62,7 @@ class PeriodSubjectController extends Controller
         };
         return back()->with(
             [
-                'success'   =>  'Mata Kuliah baru berhasil ditambahkan ke dalam periode' . $period->name,
+                'success'   =>  'Mata Kuliah baru berhasil ditambahkan ke dalam periode ' . $period->name,
             ]
         );
     }
@@ -73,7 +73,23 @@ class PeriodSubjectController extends Controller
 
         return back()->with(
             [
-                'success'   =>  'Mata Kuliah berhasil diperbarui ke dalam periode' . $period->name,
+                'success'   =>  'Mata Kuliah berhasil diperbarui ke dalam periode ' . $period->name,
+            ]
+        );
+    }
+
+    public function deleteSubject(PeriodSubject $period_subject)
+    {
+        if ($period_subject->deleteOrFail()) {
+            return back()->with(
+                [
+                    'warning'   =>  'Mata kuliah berhasil dihapus'
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'    =>  'Mata kuliah gagal dihapus'
             ]
         );
     }

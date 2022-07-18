@@ -49,7 +49,7 @@
                                         aria-labelledby="periodEditFormModalLabel{{ $period->id }}" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                                <div class="modal-header">
+                                            <div class="modal-header">
                                                     <h3 class="modal-title font-weight-bold"
                                                         id="periodEditFormModalLabel{{ $period->id }}">Ubah
                                                         Periode</h3>
@@ -67,6 +67,13 @@
                                                                 class="form-control" required autocomplete="off"
                                                                 value="{{ $period->name }}"
                                                                 placeholder="Ganjil 20XX/20XX">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="honor">Jumlah Honor/Pertemuan</label>
+                                                            <input type="text" id="honor" name="honor"
+                                                                class="form-control" required autocomplete="off"
+                                                                value="{{ $period->honor }}"
+                                                                placeholder="15000, 25000, ...">
                                                         </div>
                                                     </div>
 
@@ -145,6 +152,11 @@
                     <div class="form-group">
                         <label for="name">Nama periode</label>
                         <input type="text" id="name" name="name" class="form-control" required autocomplete="off"
+                            placeholder="Ganjil 20XX/20XX">
+                    </div>
+                    <div class="form-group">
+                        <label for="honor">Jumlah Honor/Pertemuan</label>
+                        <input type="text" id="honor" name="honor" class="form-control" required autocomplete="off"
                             placeholder="Ganjil 20XX/20XX">
                     </div>
                 </div>

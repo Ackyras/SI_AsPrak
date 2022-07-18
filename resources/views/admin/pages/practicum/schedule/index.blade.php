@@ -90,7 +90,7 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form method="POST">
+                                                <form method="POST" action="{{ route }}">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="form-group">
@@ -128,9 +128,12 @@
                                                             <select id="practicum_room" class="custom-select"
                                                                 name="practicum_room">
                                                                 <option selected disabled hidden>Pilih ruangan</option>
-                                                                <option value="AAA">AAA</option>
-                                                                <option value="BBB">BBB</option>
-                                                                <option value="CCC">CCC</option>
+                                                                @forelse ($rooms as $room)
+                                                                <option selected value="{{ $room->id }}">{{ $room->name
+                                                                    }}</option>
+                                                                @empty
+
+                                                                @endforelse
                                                             </select>
                                                         </div>
                                                     </div>

@@ -2,14 +2,15 @@
 
 namespace App\Http\Controllers\Admin\Period;
 
-use App\Http\Controllers\Controller;
 use App\Models\Period;
-use App\Http\Requests\Period\StorePeriodRequest;
-use App\Http\Requests\Period\StoreSubjectForPeriodRequest;
-use App\Http\Requests\Period\UpdatePeriodRequest;
-use App\Http\Requests\Period\UpdateSubjectForPeriodRequest;
 use App\Models\Subject;
 use Illuminate\Http\Request;
+use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Storage;
+use App\Http\Requests\Period\StorePeriodRequest;
+use App\Http\Requests\Period\UpdatePeriodRequest;
+use App\Http\Requests\Period\StoreSubjectForPeriodRequest;
+use App\Http\Requests\Period\UpdateSubjectForPeriodRequest;
 
 class PeriodController extends Controller
 {
@@ -87,7 +88,20 @@ class PeriodController extends Controller
     {
         //
         $validated = $request->validated();
+        if (isset($validated['selection_poster'])) {
+            // dd($validated['selection_poster']);
+            $selection_poster = $request->file('selection_poster');
+            $selection_posterFileName = 'selection_poster_' . $selection_poster->hashName();
+
+            $storeselection_poster = Storage::disk('public')->putFileAs(
+                'period/selection_poster',
+                $selection_poster,
+                $selection_posterFileName
+            );
+            $validated['selection_poster'] = $storeselection_poster;
+        }
         $period->updateOrFail($validated);
+
 
         if ($period->wasChanged()) {
             return redirect()->back()->with(
@@ -130,7 +144,7 @@ class PeriodController extends Controller
         );
         return back()->with(
             [
-                'success'   =>  'Mata Kuliah baru berhasil ditambahkan ke dalam periode' . $period->name,
+                'success'   =>  'Mata Kuliah baru berhasil ditambahkan ke dalam periode ' . $period->name,
             ]
         );
     }
@@ -142,7 +156,7 @@ class PeriodController extends Controller
 
         return back()->with(
             [
-                'success'   =>  'Mata Kuliah berhasil diperbarui ke dalam periode' . $period->name,
+                'success'   =>  'Mata Kuliah berhasil diperbarui ke dalam periode ' . $period->name,
             ]
         );
     }
@@ -156,6 +170,15 @@ class PeriodController extends Controller
             'is_file_selection_over'    =>  'boolean',
             'is_exam_selection_over'    =>  'boolean',
         ]);
+        if (!isset($validated['is_active'])) {
+            if ((!$period->registration_start || !$period->registration_end)) {
+                return redirect()->back()->with(
+                    [
+                        'failed'   =>  'Jadwal pendaftaran harus diisi terlebih dahulu',
+                    ]
+                );
+            }
+        };
 
         foreach ($validated as $key => $value) {
             $period->update(
@@ -174,7 +197,7 @@ class PeriodController extends Controller
         }
         return redirect()->back()->with(
             [
-                'failed'    =>  'Status periode gaga; dirubah',
+                'failed'    =>  'Status periode gagal dirubah',
             ]
         );
     }

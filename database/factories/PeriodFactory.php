@@ -20,6 +20,7 @@ class PeriodFactory extends Factory
         return [
             //
             'name'                  =>  $this->faker->numerify('Semester TA 20##/20##'),
+            'honor'                 =>  rand(10, 20) * 1000,
             'registration_start'    =>  Carbon::now(),
             'registration_end'      =>  Carbon::now()->addDays(7),
             'is_active'             =>  true,

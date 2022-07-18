@@ -96,7 +96,7 @@
                                                         <h5>
                                                             Anda akan mengubah status Kelululusan
                                                             <span class="font-weight-bold">{{ $psr->registrar->name }}</span>
-                                                            dari 
+                                                            dari
                                                             <span class="badge badge-success">Lulus</span>
                                                             menjadi
                                                             <span class="badge badge-danger">Tidak Lulus</span>.
@@ -155,6 +155,7 @@
                 </button>
             </div>
             <div class="modal-body d-flex justify-content-center" id="showFileModalContent">
+                
             </div>
         </div>
     </div>

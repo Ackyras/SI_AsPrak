@@ -89,7 +89,7 @@ class ExamController extends Controller
                 $fileName = $registrar['nim'] . 'file_' . $file->hashName() . $file->extension();
                 // dd($fileFileName);
 
-                $storefile = Storage::disk('local')->putFileAs(
+                $storefile = Storage::disk('public')->putFileAs(
                     'period/' . $this->period->id . '/Exam/' . $period_subject->subject->name . '/' . $registrar->nim,
                     $file,
                     $fileName

@@ -11,6 +11,8 @@ class Period extends Model
 
     protected $fillable = [
         'name',
+        'honor',
+        'poster',
         'registration_start',
         'registration_end',
         'is_active',

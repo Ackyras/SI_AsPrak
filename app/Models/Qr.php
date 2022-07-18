@@ -23,7 +23,7 @@ class Qr extends Model
 
     public function period_subject_registrars()
     {
-        return $this->belongsToMany(PeriodSubjectRegistrar::class)->withPivot(
+        return $this->belongsToMany(PeriodSubjectRegistrar::class, 'presences')->withPivot(
             [
                 'id',
                 'qr_id',
