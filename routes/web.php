@@ -93,6 +93,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
             Route::get('/registrar-file', 'index')->name('registrar-file');
             Route::put('/registrar-file/{psr}', 'updateFileSelection')->name('registrar-file.update');
             Route::get('/pass-selection-registrar', 'passSelection')->name('pass-selection-registrar');
+            Route::post('/announce-passed-file-selection-registrar', 'announceFileSelectionResult')->name('pass-selection-registrar.announce');
         });
 
         // ACTIVE PERIOD EXAM SELECTION

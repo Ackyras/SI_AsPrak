@@ -27,22 +27,12 @@ class ExamController extends Controller
 
     public function index()
     {
-        // $user = Registrar::query()
-        //     ->where('user_id', auth()->id())
-        //     ->with(
-        //         [
-        //             'period_subjects'   =>  function ($query) {
-        //                 $query->where('period_id', $this->period->id);
-        //             }
-        //         ]
-        //     )
-        //     //
-        // ;
         $user = auth()->user()->registrar;
         $user->load(
             [
                 'period_subjects' =>    function ($query) {
-                    $query->where('period_id', $this->period->id);
+                    $query->where('period_id', $this->period->id)
+                        ->where('is_pass_file_selection', true);
                 },
             ]
         );
