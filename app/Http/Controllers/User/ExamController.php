@@ -123,6 +123,8 @@ class ExamController extends Controller
                 $transformRequest
             );
         }
+        $registrar->is_take_exam_selection = true;
+        $registrar->save();
         return to_route('user.exam.index',);
     }
 }

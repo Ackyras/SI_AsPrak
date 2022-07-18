@@ -105,6 +105,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
             Route::get('/exam-data', [PeriodExamSelection::class, 'examData'])->name('exam-data');
             Route::get('/exam-data/subject/{period_subject}', [PeriodExamSelection::class, 'examDataDetail'])->name('exam-data-detail');
             Route::get('/exam-data/subject/{period_subject}/registrar/{psr}', [PeriodExamSelection::class, 'registrarExamData'])->name('registrar-exam-data');
+            Route::post('/exam-data/subject/{period_subject}/registrar/{psr}', [PeriodExamSelection::class, 'updateExamSelection'])->name('registrar.update-status');
             Route::get('/pass-selection-registrar', [PeriodExamSelection::class, 'passSelection'])->name('pass-selection-registrar');
         });
     });

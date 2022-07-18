@@ -20,7 +20,7 @@ class ExamSelectionController extends Controller
     }
     public function index()
     {
-        $period = $this->period;
+    $period = $this->period;
         $allsubjects = Subject::whereDoesntHave('periods', function ($query) use ($period) {
             $query->where('period_id', $period->id);
         })->orderBy('name')->get();
@@ -44,6 +44,35 @@ class ExamSelectionController extends Controller
         // dd($period->subjects);
         return view('admin.pages.active-period.exam-selection.exam-data', compact('period'));
     }
+
+    public function updateExamSelection(Request $req, PeriodSubject $period_subject, PeriodSubjectRegistrar $psr)
+    {
+        $validated = $req->validate(
+            [
+                'is_pass_exam_selection'    =>  'required'
+            ]
+        );
+        $psr->updateOrFail($validated);
+
+        if ($psr->wasChanged()) {
+            if ($validated['is_pass_exam_selection']) {
+                $status = 'lulus';
+            } else {
+                $status = 'tidak lulus';
+            }
+            return back()->with(
+                [
+                    'success'   =>  'Status peserta berhasil diubah menjadi ' . $status . ' seleksi berkas',
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'   =>  'Gagal mengubah status peserta',
+            ]
+        );
+    }
+
     public function examDataDetail(PeriodSubject $period_subject)
     {
         $period_subject_registrar = PeriodSubjectRegistrar::query()
