@@ -26,7 +26,7 @@ class UpdatePeriodRequest extends FormRequest
         return [
             'name'                  =>  'filled',
             'honor'                 =>  'filled',
-            'selection_poster'                =>  ['filled', 'image'],
+            'selection_poster'      =>  ['filled', 'image'],
             'registration_start'    =>  ['filled', 'date', 'before:registration_end'],
             'registration_end'      =>  ['filled', 'date', 'after:registration_start'],
         ];

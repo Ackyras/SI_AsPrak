@@ -7,7 +7,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <h2 class="card-title font-weight-bold">Data Periode Penerimaan Asisten Praktikum</h2>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#periodFormModal">
-                    <i class="fas fa-plus mr-2"></i>
+                    <i class="mr-2 fas fa-plus"></i>
                     Periode Baru
                 </button>
             </div>
@@ -49,7 +49,7 @@
                                         aria-labelledby="periodEditFormModalLabel{{ $period->id }}" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
-                                            <div class="modal-header">
+                                                <div class="modal-header">
                                                     <h3 class="modal-title font-weight-bold"
                                                         id="periodEditFormModalLabel{{ $period->id }}">Ubah
                                                         Periode</h3>
@@ -58,8 +58,10 @@
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form action="">
+                                                <form action="{{ route('admin.data-master.period.update', $period) }}"
+                                                    method="POST">
                                                     @csrf
+                                                    @method('PUT')
                                                     <div class="modal-body">
                                                         <div class="form-group">
                                                             <label for="name">Nama periode</label>
@@ -109,8 +111,14 @@
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary"
                                                         data-dismiss="modal">BATALKAN</button>
-                                                    <button type="button" class="btn btn-danger">HAPUS
-                                                        DATA</button>
+                                                    <form
+                                                        action="{{ route('admin.data-master.period.destroy', $period) }}"
+                                                        method="post">
+                                                        @csrf
+                                                        @method('DELETE')
+                                                        <button type="submit" class="btn btn-danger">HAPUS
+                                                            DATA</button>
+                                                    </form>
                                                 </div>
                                             </div>
                                         </div>
