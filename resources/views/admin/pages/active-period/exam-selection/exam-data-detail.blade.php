@@ -55,8 +55,9 @@
                                         method="post">
                                         @csrf
                                         <button type="submit" name="is_pass_exam_selection"
-                                            value="{{ $psr->is_pass_exam_selection ? false : true }}"
-                                            class="btn btn-sm btn-success">Nyatakan lulus</button>
+                                            value="{{ $psr->is_pass_exam_selection ? 0 : 1 }}"
+                                            class="btn btn-sm btn-{{ $psr->is_pass_exam_selection ? 'danger' : 'success' }}">Nyatakan
+                                            {{ $psr->is_pass_exam_selection ? 'tidak' : '' }} lulus</button>
                                     </form>
                                 </div>
                             </td>
