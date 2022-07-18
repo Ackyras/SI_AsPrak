@@ -48,33 +48,13 @@ Route::as('website.')->group(function () {
             Route::post('/registration', [RegistrationController::class, 'store'])->name('store');
         });
     });
-
-    // Route::as('register.')->prefix('register')->group(function () {
-    //     // Route::get()
-    // });
-
-    // Tampilan jika seleksi belum dibuka
-    // Route::group(function () {
-    // });
-
-    // // Tampilan jika seleksi dibuka
-    // Route::middleware(['is_selection_open'])->group(function () {
-    // });
-
-    // // Tampilan jika lulus seleksi berkas
-    // Route::middleware(['is_pass_file_selection'])->group(function () {
-    // });
-
-    // // Tampilan ketika tes
-    // Route::middleware(['is_eligible_for_exam'])->group(function () {
-    // });
 });
 
 Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::post('presence', [UserDashboardController::class, 'presence'])->name('presence');
     Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
-    Route::middleware(['is_eligible_for_exam'])->group(function () {
+    Route::middleware(['is_eligible_for_exam', 'is_exam_in_progress'])->group(function () {
         Route::get('ujian-seleksi/{period_subject}', [ExamController::class, 'exam'])->name('take.exam');
         Route::post('ujian-seleksi/{period_subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
@@ -167,7 +147,7 @@ Route::get('test-email', function () {
     $maildata['title']              = 'Pengumuman Hasil Seleksi Berkas';
     $maildata['registrar_email']    = 'erdy.banyakgaya@manalu.com';
     $maildata['registrar_password'] = 'k8xeAou#svW$mu3x';
-    
+
     // return new ExamSelectionNotification($maildata);
 
     Mail::to('mancisp4@gmail.com')->send(new FileSelectionNotification($maildata));
