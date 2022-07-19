@@ -2,11 +2,18 @@
 
 namespace App\Http\Controllers\Admin\ActivePeriod;
 
+use App\Models\User;
 use App\Models\Period;
 use App\Models\Registrar;
+use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Mail;
 use App\Models\PeriodSubjectRegistrar;
+use App\Mail\FileSelectionNotification;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\Registrar\PassFileSelection;
+use App\Jobs\Recruitment\AnnouncePassFileSelection;
 
 class FileSelectionController extends Controller
 {
@@ -87,15 +94,22 @@ class FileSelectionController extends Controller
 
     public function announceFileSelectionResult()
     {
-        $registrars = Registrar::query()
-            ->whereRelation('period_subjects', 'is_pass_file_selection', true)
-            ->with(
+        $period = $this->period;
+        if ($period->is_file_selection_over) {
+            return back()->with(
                 [
-                    'period_subjects' => function ($query) {
-                        $query->where('is_pass_file_selection', true);
-                    }
+                    'failed'    =>  'Pengumuman sudah dibuat, tidak dapat lagi mengubah ataupun mengumumkan kelulusan seleksi berkas'
                 ]
-            )->get();
-        dd($registrars);
+            );
+        }
+        $period->is_file_selection_over = true;
+        $period->is_file_selection_over_date = now();
+        $period->save();
+        AnnouncePassFileSelection::dispatch($period);
+        return back()->with(
+            [
+                'success'   => 'gl'
+            ]
+        );
     }
 }

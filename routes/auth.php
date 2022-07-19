@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\Auth\AuthenticatedSessionController;
 use App\Http\Controllers\Auth\ConfirmablePasswordController;
+use App\Http\Controllers\Auth\CustomResetPasswordController;
 use App\Http\Controllers\Auth\EmailVerificationNotificationController;
 use App\Http\Controllers\Auth\EmailVerificationPromptController;
 use App\Http\Controllers\Auth\NewPasswordController;
@@ -16,6 +17,11 @@ Route::middleware('guest')->group(function () {
         ->name('login');
 
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
+
+    Route::get('forgot-password', [CustomResetPasswordController::class, 'index'])->name('password.request');
+    Route::post('/forgot-password', [CustomResetPasswordController::class, 'email'])->name('password.email');
+    Route::get('/reset-password/{token}', [CustomResetPasswordController::class, 'reset'])->name('password.reset');
+    Route::post('/reset-password', [CustomResetPasswordController::class, 'update'])->name('password.update');
 });
 
 Route::middleware('auth')->group(function () {

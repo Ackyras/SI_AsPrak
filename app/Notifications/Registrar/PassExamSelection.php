@@ -3,14 +3,13 @@
 namespace App\Notifications\Registrar;
 
 use App\Models\Period;
-use App\Models\Registrar;
 use Illuminate\Bus\Queueable;
-use App\Mail\FileSelectionNotification;
+use App\Mail\ExamSelectionNotification;
 use Illuminate\Notifications\Notification;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 
-class PassFileSelection extends Notification implements ShouldQueue
+class PassExamSelection extends Notification implements ShouldQueue
 {
     use Queueable;
 
@@ -22,11 +21,9 @@ class PassFileSelection extends Notification implements ShouldQueue
      * @return void
      */
     public function __construct(
-        $user,
         $registrar
     ) {
         //
-        $this->user = $user;
         $this->registrar = $registrar;
         $this->period = Period::firstWhere('is_active', true);
     }
@@ -50,15 +47,13 @@ class PassFileSelection extends Notification implements ShouldQueue
      */
     public function toMail($notifiable)
     {
-        $maildata['title']      = 'Pengumuman Hasil Seleksi Berkas';
+        $maildata['title']      = 'Pengumuman Hasil Seleksi Akhir';
         $maildata['receiver']   = $this->registrar->name;
         $maildata['subject']    = 'Seleksi Asisten Praktikum';
-        $maildata['registrar_email']    = $this->user['email'];
-        $maildata['registrar_password'] = $this->user['password'];
         $maildata['period']     =   $this->period->name;
         $maildata['subjects']   =   $this->registrar->period_subjects;
         // dd($this->registrar);
-        return (new FileSelectionNotification($maildata, $this->registrar));
+        return (new ExamSelectionNotification($maildata, $this->registrar));
     }
 
     /**

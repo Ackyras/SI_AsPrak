@@ -5,9 +5,10 @@ namespace App\Http\Controllers\Admin\ActivePeriod;
 use App\Models\Period;
 use App\Models\Subject;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 use App\Models\PeriodSubject;
+use App\Http\Controllers\Controller;
 use App\Models\PeriodSubjectRegistrar;
+use App\Jobs\Recruitment\AnnouncePassExamSelection;
 
 class ExamSelectionController extends Controller
 {
@@ -44,6 +45,35 @@ class ExamSelectionController extends Controller
         // dd($period->subjects);
         return view('admin.pages.active-period.exam-selection.exam-data', compact('period'));
     }
+
+    public function updateExamSelection(Request $req, PeriodSubject $period_subject, PeriodSubjectRegistrar $psr)
+    {
+        $validated = $req->validate(
+            [
+                'is_pass_exam_selection'    =>  'required'
+            ]
+        );
+        $psr->updateOrFail($validated);
+
+        if ($psr->wasChanged()) {
+            if ($validated['is_pass_exam_selection']) {
+                $status = 'lulus';
+            } else {
+                $status = 'tidak lulus';
+            }
+            return back()->with(
+                [
+                    'success'   =>  'Status peserta berhasil diubah menjadi ' . $status . ' seleksi berkas',
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'   =>  'Gagal mengubah status peserta',
+            ]
+        );
+    }
+
     public function examDataDetail(PeriodSubject $period_subject)
     {
         $period_subject_registrar = PeriodSubjectRegistrar::query()
@@ -131,7 +161,8 @@ class ExamSelectionController extends Controller
     {
         $period_subject_registrars = PeriodSubjectRegistrar::query()
             ->whereRelation('period_subject', 'period_id', $this->period->id)
-            ->whereRelation('answers', 'answers.score', '>', 0)
+            // ->whereRelation('answers', 'answers.score', '>', 0)
+            ->where('is_pass_exam_selection', true)
             ->where('is_pass_file_selection', true)
             ->with(
                 [
@@ -141,8 +172,36 @@ class ExamSelectionController extends Controller
                 ]
             )
             ->get();
-
+        $period_subject_registrars->map(function ($psr) {
+            $psr->total_score = 0;
+            $psr->question_score = 0;
+            foreach ($psr->answers as $answer) {
+                $psr->total_score += $answer->pivot->score;
+                $psr->question_score += $answer->score;
+            }
+        });
         $subjects = $this->period->subjects;
         return view('admin.pages.active-period.exam-selection.pass-selection-registrar', compact('period_subject_registrars', 'subjects'));
+    }
+
+    public function announceExamSelectionResult()
+    {
+        $period = $this->period;
+        if ($period->is_exam_selection_over) {
+            return back()->with(
+                [
+                    'failed'    =>  'Pengumuman sudah dibuat, tidak dapat lagi mengubah ataupun mengumumkan kelulusan asisten praktikum'
+                ]
+            );
+        }
+        $period->is_exam_selection_over = true;
+        $period->is_exam_selection_over_date = now();
+        $period->save();
+        AnnouncePassExamSelection::dispatch($period);
+        return back()->with(
+            [
+                'success'   => 'gl'
+            ]
+        );
     }
 }

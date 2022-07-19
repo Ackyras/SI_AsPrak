@@ -50,9 +50,15 @@
                                     <a role="button" target="_blank"
                                         href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [$period_subject,$psr->id]) }}"
                                         class="btn btn-sm btn-info">Periksa Jawaban</a>
-                                    <a role="button" target="_blank"
-                                        href="{{ route('admin.active-period.exam-selection.registrar-exam-data', [$period_subject,$psr->id]) }}"
-                                        class="btn btn-sm btn-success">Nyatakan lulus</a>
+                                    <form
+                                        action="{{ route('admin.active-period.exam-selection.registrar.update-status', [$period_subject, $psr->id]) }}"
+                                        method="post">
+                                        @csrf
+                                        <button type="submit" name="is_pass_exam_selection"
+                                            value="{{ $psr->is_pass_exam_selection ? 0 : 1 }}"
+                                            class="btn btn-sm btn-{{ $psr->is_pass_exam_selection ? 'danger' : 'success' }}">Nyatakan
+                                            {{ $psr->is_pass_exam_selection ? 'tidak' : '' }} lulus</button>
+                                    </form>
                                 </div>
                             </td>
                         </tr>
@@ -60,12 +66,27 @@
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th style="text-align: center" rowspan="1" colspan="1">Nama</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">NIM</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Skor Pilihan Ganda</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Skor Essay</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Skor Total</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Aksi</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">
+                                Nama
+                            </th>
+                            <th style="text-align: center" rowspan="1" colspan="1">
+                                NIM
+                            </th>
+                            <th style="text-align: center" rowspan="1" colspan="1">
+                                Skor Pilihan Ganda
+                            </th>
+                            <th style="text-align: center" rowspan="1" colspan="1">
+                                Skor Essay
+                            </th>
+                            <th style="text-align: center" rowspan="1" colspan="1">
+                                Skor Total
+                            </th>
+                            <th style="text-align: center" rowspan="1" colspan="1">
+                                Status Kelulusan
+                            </th>
+                            <th style="text-align: center" rowspan="1" colspan="1">
+                                Aksi
+                            </th>
                         </tr>
                     </tfoot>
                 </table>
