@@ -11810,6 +11810,9 @@ input[type="range"]::-ms-fill-lower {
 .break-words {
   overflow-wrap: break-word;
 }
+.break-all {
+  word-break: break-all;
+}
 .rounded-md {
   border-radius: 0.375rem;
 }
@@ -11886,6 +11889,9 @@ input[type="range"]::-ms-fill-lower {
 }
 .border-b {
   border-bottom-width: 1px;
+}
+.border-t-2 {
+  border-top-width: 2px;
 }
 .border-solid {
   border-style: solid;
