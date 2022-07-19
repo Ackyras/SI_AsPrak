@@ -59,6 +59,20 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
         Route::post('ujian-seleksi/{period_subject}/{question}', [ExamController::class, 'storeAnswer'])->name('take-exam.store');
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
     });
+
+    Route::get('schedule', function(){
+        $user = auth()->user()->registrar;
+        return Inertia::render('Schedule/Index', [
+            'user'  =>  $user
+        ]);
+    })->name('schedule');
+
+    Route::get('salary', function(){
+        $user = auth()->user()->registrar;
+        return Inertia::render('Salary/Index', [
+            'user'  =>  $user
+        ]);
+    })->name('salary');
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
