@@ -82,31 +82,31 @@
             </div>
             <div class="modal-body" id="announceResultBody">
                 <h5 class="m-0 mb-2 d-block font-weight-bold">
-                    Berikut adalah Data Lulus Seleksi Berkas
+                    Berikut adalah Data Lulus Seleksi Tes
                 </h5>
                 @foreach ($subjects as $subject)
                 <p class="m-0 mb-2 d-block font-weight-bold">
                     {{ $subject->name }}
-                    @if ($subject->pass_exam_count > $subject->pivot->number_of_lab_assistant)
-                    (<span class="text-danger">{{ $subject->pass_exam_count }}/{{
-                        $subject->pivot->number_of_lab_assistant }} kuota
-                        terisi</span>)
-                    @elseif ($subject->pass_exam_count < $subject->pivot->number_of_lab_assistant) (<span
-                            class="text-secondary">{{ $subject->pass_exam_count
-                            }}/{{ $subject->pivot->number_of_lab_assistant }} kuota
-                            terisi</span>)
-                        @else
-                        (<span class="text-success">{{ $subject->pass_exam_count }}/{{
-                            $subject->pivot->number_of_lab_assistant }} kuota
-                            terisi</span>)
-                        @endif
+                    @if ($subject->pass_exam_count == $subject->pivot->number_of_lab_assistant)
+                    (<span class="text-success">
+                        {{ $subject->pass_exam_count>0 ? $subject->pass_exam_count : '0' }}/{{ $subject->pivot->number_of_lab_assistant }} kuota terisi
+                    </span>)
+                    @else
+                    (<span class="text-warning">
+                        {{ $subject->pass_exam_count>0 ? $subject->pass_exam_count : '0' }}/{{ $subject->pivot->number_of_lab_assistant }} kuota terisi
+                    </span>)
+                    @endif
                 </p>
                 <ul>
-                    @foreach ($period_subject_registrars as $psr)
-                    @if ($psr->period_subject->subject->name == $subject->name)
-                    <li>{{ $psr->registrar->name }}</li>
-                    @endif
-                    @endforeach
+                    @forelse ($period_subject_registrars as $psr)
+                        @if ($psr->period_subject->subject->name == $subject->name)
+                            <li>{{ $psr->registrar->name }}</li>
+                        @endif
+                    @empty
+                        <p style="margin-left: -32px">
+                            Belum ada calon asisten yang dinyatakan lulus untuk mata kuliah {{ $subject->name }}
+                        </p>
+                    @endforelse
                 </ul>
                 @endforeach
             </div>

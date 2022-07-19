@@ -42,6 +42,25 @@ class ScheduleController extends Controller
         return view('admin.pages.practicum.schedule.index', compact('classrooms', 'rooms'), ['period' => $this->period]);
     }
 
+    public function assistantSchedule()
+    {
+        // $classrooms = Classroom::query()
+        //     ->whereRelation('period_subject', 'period_id', $this->period->id)
+        //     ->with([
+        //         'schedule' => function ($query) {
+        //             $query->withCount('psrs');
+        //         },
+        //         'schedule' => [
+        //             'room',
+        //             'psrs',
+        //         ],
+        //         'period_subject.subject'
+        //     ])
+        //     ->get();
+        // $rooms = Room::all();
+        return view('admin.pages.practicum.schedule.assistant-schedule', ['period' => $this->period]);
+    }
+
     public function update(Request $request, Schedule $schedule)
     {
         $days = [
