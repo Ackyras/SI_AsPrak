@@ -47,7 +47,7 @@
                             <td style="text-align: center;"> {{ $psr->registrar->nim }} </td>
                             <td data-search="'{{ $psr->period_subject->subject->name }}'"> {{
                                 $psr->period_subject->subject->name }} </td>
-                            <td style="text-align: center;"> {{ rand(65,99) }}/100 </td>
+                            <td style="text-align: center;"> {{ $psr->total_score }}/{{ $psr->question_score }} </td>
                         </tr>
                         @empty
                         @endforelse
@@ -112,7 +112,11 @@
             </div>
 
             <div class="modal-footer">
-                <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
+                <form action="{{ route('admin.active-period.exam-selection.pass-selection-registrar.announce')}}"
+                    method="post">
+                    @csrf
+                    <button type="submit" class="btn btn-primary">UMUMKAN SEKARANG</button>
+                </form>
             </div>
             </form>
         </div>

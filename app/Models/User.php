@@ -4,13 +4,14 @@ namespace App\Models;
 
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Prunable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
 
 class User extends Authenticatable
 {
-    use HasApiTokens, HasFactory, Notifiable;
+    use HasApiTokens, HasFactory, Notifiable, Prunable;
 
     protected $with = [
         'registrar'
@@ -50,5 +51,30 @@ class User extends Authenticatable
     public function registrar()
     {
         return $this->hasOne(Registrar::class);
+    }
+
+    public function prunable()
+    {
+        // return static::where('created_at', '<=', now()->subMonth());
+        $period = Period::firstWhere('is_active', true);
+        return static::query()
+            ->where('is_admin', false)
+            ->whereRelation('registrar.period_subject', 'period_id', '<', $period->id)
+            //
+        ;
+    }
+    protected function pruning()
+    {
+        //
+        $period = Period::firstWhere('is_active', true);
+        $users = User::query()
+            ->where('is_admin', false)
+            ->whereRelation('registrar.period_subject.period', 'is_active', false)
+            ->with('registrars')
+            ->get();
+        foreach ($users as $user) {
+            $user->registrar->user_id = null;
+            $user->registrar->save();
+        }
     }
 }
