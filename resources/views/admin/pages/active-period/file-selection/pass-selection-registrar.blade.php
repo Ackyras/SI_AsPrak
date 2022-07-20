@@ -165,24 +165,28 @@
                 <p class="m-0 mb-2 d-block font-weight-bold">
                     {{ $subject->name }}
                     @if ($subject->pass_selection_count > $subject->pivot->number_of_lab_assistant)
-                    (<span class="text-danger">{{ $subject->pass_selection_count }}/{{
+                    (<span class="text-success">{{ $subject->pass_selection_count }}/{{
                         $subject->pivot->number_of_lab_assistant }} kuota terisi</span>)
                     @elseif ($subject->pass_selection_count < $subject->pivot->number_of_lab_assistant) (<span
-                            class="text-secondary">{{
+                            class="text-danger">{{
                             $subject->pass_selection_count }}/{{ $subject->pivot->number_of_lab_assistant }} kuota
                             terisi</span>)
                         @else
-                        (<span class="text-success">{{ $subject->pass_selection_count }}/{{
+                        (<span class="text-warning">{{ $subject->pass_selection_count }}/{{
                             $subject->pivot->number_of_lab_assistant }} kuota
                             terisi</span>)
                         @endif
                 </p>
                 <ul>
-                    @foreach ($period_subject_registrars as $psr)
+                    @forelse ($period_subject_registrars as $psr)
                     @if ($psr->period_subject->subject->name == $subject->name)
                     <li>{{ $psr->registrar->name }}</li>
                     @endif
-                    @endforeach
+                    @empty
+                        <p style="margin-left: -32px">
+                            Belum ada calon asisten yang dinyatakan lulus untuk mata kuliah {{ $subject->name }}
+                        </p>
+                    @endforelse
                 </ul>
                 @endforeach
             </div>

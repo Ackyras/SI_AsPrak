@@ -215,6 +215,13 @@
                         </a>
                     </li>
                     <li class="nav-item">
+                        <a href="{{ route('admin.practicum.schedule.assistant-schedule') }}"
+                            class="nav-link {{ request()->routeIs('admin.practicum.schedule.assistant-schedule') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="nav-icon fas fa-user-clock"></i>
+                            <p>Jadwal Asisten</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
                         <a href="{{ route('admin.practicum.schedule.index') }}"
                             class="nav-link {{ request()->routeIs('admin.practicum.schedule.index') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="nav-icon fas fa-clock"></i>
