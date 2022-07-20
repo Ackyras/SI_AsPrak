@@ -73,6 +73,13 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
             'user'  =>  $user
         ]);
     })->name('salary');
+    
+    Route::get('presence', function(){
+        $user = auth()->user()->registrar;
+        return Inertia::render('Presence/Index', [
+            'user'  =>  $user
+        ]);
+    })->name('presence');
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
@@ -168,7 +175,7 @@ Route::get('test-email', function () {
 
     // return new ExamSelectionNotification($maildata);
 
-    Mail::to('mancisp4@gmail.com')->send(new FileSelectionNotification($maildata));
+    // Mail::to('mancisp4@gmail.com')->send(new FileSelectionNotification($maildata));
 });
 
 Route::get('test-email-2', function () {
