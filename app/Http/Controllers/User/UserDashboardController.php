@@ -5,6 +5,7 @@ namespace App\Http\Controllers\User;
 use Inertia\Inertia;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Period;
 use App\Models\PeriodSubjectRegistrar;
 use App\Models\Presence;
 use App\Models\Qr;
@@ -87,5 +88,25 @@ class UserDashboardController extends Controller
         //         ]
         //     );
         // }
+    }
+
+    public function scheduleIndex()
+    {
+        $period = Period::firstWhere('is_active', true);
+        $user = auth()->user()->registrar;
+        $psr = PeriodSubjectRegistrar::query()
+            ->where('registrar_id', $user->id)
+            ->where('is_pass_exam_selection', true)
+            ->where('is_pass_file_selection', true)
+            ->with(
+                [
+                    'period_subject'    =>  function ($query) use ($user, $period) {
+                        $query->where('period_id', $period)->with('subject');
+                    }
+                ]
+            );
+        return Inertia::render('Schedule/Index', [
+            'user'  =>  $user
+        ]);
     }
 }
