@@ -13,7 +13,7 @@
                     <div class="grid grid-cols-3 gap-2 mb-3">
                         <p class="text-sm lg:text-base block m-0 font-semibold">Nama Asisten</p>
                         <p class="text-sm lg:text-base block m-0 col-span-2">: Ribka Julyasih Sidabutar</p>
-                        <p class="text-sm lg:text-base block m-0 font-semibold">Nomor Induk Mahasiswa</p>
+                        <p class="text-sm lg:text-base block m-0 font-semibold"><span class="lg:hidden">NIM</span> <span class="hidden lg:block">Nomor Induk Mahasiswa</span></p>
                         <p class="text-sm lg:text-base block m-0 col-span-2">: 1181400125</p>
                         <p class="text-sm lg:text-base block m-0 font-semibold">Mata Kuliah</p>
                         <p class="text-sm lg:text-base block m-0 col-span-2">: ASD, PBO, PWL</p>
