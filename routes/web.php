@@ -62,8 +62,7 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
 
     Route::controller(UserDashboardController::class)->group(function () {
 
-        Route::get('schedule', function () {
-        })->name('schedule');
+        Route::get('schedule', 'scheduleIndex')->name('schedule');
 
         Route::get('salary', function () {
             $user = auth()->user()->registrar;
