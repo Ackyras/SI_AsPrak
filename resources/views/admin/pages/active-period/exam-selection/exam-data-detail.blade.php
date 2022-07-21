@@ -35,9 +35,10 @@
                         <tr>
                             <td tabindex="0">{{ $psr->registrar->name }}</td>
                             <td style="text-align: center;">{{ $psr->registrar->nim }}</td>
-                            <td style="text-align: center;">{{ $psr->essay_score }} / {{ $period_subject->essay_score }}
-                            </td>
                             <td style="text-align: center;">{{ $psr->choice_score }} / {{ $period_subject->choice_score
+                                }}
+                            </td>
+                            <td style="text-align: center;">{{ $psr->essay_score }} / {{ $period_subject->essay_score
                                 }}
                             </td>
                             <td style="text-align: center;">{{ $psr->choice_score + $psr->essay_score }} / {{
