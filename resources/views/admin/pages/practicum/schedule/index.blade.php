@@ -33,39 +33,30 @@
                                 @empty($classroom->schedule)
                                 Belum ada jadwal ditentukan
                                 @else
-                                {{ $classroom->schedule->day . ', '.$classroom->schedule->start_time.' -
-                                '.$classroom->schedule->end_time}}
+                                {{ $classroom->schedule->day .
+                                ', ' .
+                                $classroom->schedule->start_time .
+                                ' - ' .
+                                $classroom->schedule->end_time }}
                                 @endempty
-                                {{-- <ol>
-                                    @forelse ($classroom->schedule as $schedule)
-                                    <li>
-                                        {{ $schedule->pivot->day.', '.$schedule->pivot->start_time.' -
-                                        '.$schedule->pivot->end_time
-                                        }}
-                                        ({{ $schedule->building.', '.$schedule->name }})
-                                    </li>
-                                    @empty
-                                    Belum ada jadwal ditentukan
-                                    @endforelse
-                                    {{Carbon\Carbon::parse($new->created_at)->diffForHumans() }}
-                                </ol> --}}
                             </td>
                             <td style="text-align: center;">
                                 @empty($classroom->schedule)
                                 -
                                 @else
                                 @empty($classroom->schedule->psrs_count)
-                                -
+                                Belum ada asprak memilih jadwal ini
+                                @else
+                                {{ $classroom->schedule->psrs_count }} / {{
+                                $classroom->schedule->number_of_lab_assistant }}
                                 @endempty
-                                {{ $classroom->schedule->psrs_count }}
                                 @endempty
                             </td>
                             <td style="text-align: center;">
                                 @empty($classroom->schedule)
                                 -
                                 @else
-                                {{ $classroom->schedule->room->building.',
-                                '.$classroom->schedule->room->name }}
+                                {{ $classroom->schedule->room->building . ',' . $classroom->schedule->room->name }}
                                 @endempty
                             </td>
                             <td>
@@ -83,18 +74,20 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h3 class="modal-title font-weight-bold"
-                                                        id="scheduleAddFormModalLabel_{{ $loop->index }}">Buat Jadwal
+                                                        id="scheduleAddFormModalLabel_{{ $loop->index }}">Buat
+                                                        Jadwal
                                                         Praktikum</h3>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
                                                         <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                                <form method="POST" action="{{ route }}">
+                                                <form method="POST"
+                                                    action="{{ route('admin.practicum.schedule.store', $classroom) }}">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <div class="form-group">
-                                                            <label for="practicum_start">Hari praktikum</label>
+                                                            <label for="day">Hari praktikum</label>
                                                             <select class="custom-select" name="day" id="day">
                                                                 <option value="Senin">Senin</option>
                                                                 <option value="Selasa">Selasa</option>
@@ -106,33 +99,34 @@
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="practicum_start">Jam mulai praktikum</label>
-                                                            <input type="time" id="practicum_start"
-                                                                name="practicum_start" class="form-control" required
-                                                                autocomplete="off">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="practicum_end">Jam selesai praktikum</label>
-                                                            <input type="time" id="practicum_end" name="practicum_end"
+                                                            <label for="start_time">Jam mulai
+                                                                praktikum</label>
+                                                            <input type="time" id="start_time" name="start_time"
                                                                 class="form-control" required autocomplete="off">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="number_of_lab_assistant">Jumlah Assisten</label>
+                                                            <label for="end_time">Jam selesai
+                                                                praktikum</label>
+                                                            <input type="time" id="end_time" name="end_time"
+                                                                class="form-control" required autocomplete="off">
+                                                        </div>
+                                                        <div class="form-group">
+                                                            <label for="number_of_lab_assistant">Jumlah
+                                                                Assisten</label>
                                                             <input type="number" id="number_of_lab_assistant"
                                                                 name="number_of_lab_assistant" class="form-control"
                                                                 required autocomplete="off" min="1"
-                                                                max="{{ rand(1,5) }}" placeholder="(masukkan angka)">
+                                                                max="{{ rand(1, 5) }}" placeholder="(masukkan angka)">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="practicum_room">Ruangan</label>
-                                                            <select id="practicum_room" class="custom-select"
-                                                                name="practicum_room">
-                                                                <option selected disabled hidden>Pilih ruangan</option>
+                                                            <label for="room_id">Ruangan</label>
+                                                            <select id="room_id" class="custom-select" name="room_id">
+                                                                <option selected disabled hidden>Pilih ruangan
+                                                                </option>
                                                                 @forelse ($rooms as $room)
-                                                                <option selected value="{{ $room->id }}">{{ $room->name
-                                                                    }}</option>
+                                                                <option selected value="{{ $room->id }}">
+                                                                    {{ $room->name }}</option>
                                                                 @empty
-
                                                                 @endforelse
                                                             </select>
                                                         </div>
@@ -162,7 +156,8 @@
                                             <div class="modal-content">
                                                 <div class="modal-header">
                                                     <h3 class="modal-title font-weight-bold"
-                                                        id="scheduleEditFormModalLabel_{{ $loop->index }}">Ubah Jadwal
+                                                        id="scheduleEditFormModalLabel_{{ $loop->index }}">
+                                                        Ubah Jadwal
                                                         Praktikum</h3>
                                                     <button type="button" class="close" data-dismiss="modal"
                                                         aria-label="Close">
@@ -177,7 +172,8 @@
                                                         <div class="form-group">
                                                             <label for="day">Hari praktikum</label>
                                                             <select class="custom-select" name="day" id="day">
-                                                                <option selected disabled hidden>Pilih hari praktikum
+                                                                <option selected disabled hidden>Pilih hari
+                                                                    praktikum
                                                                 </option>
                                                                 <option value="Senin">Senin</option>
                                                                 <option value="Selasa">Selasa</option>
@@ -199,7 +195,8 @@
                                                                 class="form-control" required autocomplete="off">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="number_of_lab_assistant">Jumlah Assisten</label>
+                                                            <label for="number_of_lab_assistant">Jumlah
+                                                                Assisten</label>
                                                             <input type="number" id="number_of_lab_assistant"
                                                                 name="number_of_lab_assistant" class="form-control"
                                                                 required autocomplete="off"
@@ -208,14 +205,14 @@
                                                         <div class="form-group">
                                                             <label for="room_id">Ruangan</label>
                                                             <select id="room_id" class="custom-select" name="room_id">
-                                                                <option selected disabled hidden>Pilih ruangan</option>
+                                                                <option selected disabled hidden>Pilih ruangan
+                                                                </option>
                                                                 @forelse ($rooms as $room)
-                                                                <option value="{{ $room->id }}">{{ $room->building }},
-                                                                    {{
-                                                                    $room->name }}
+                                                                <option value="{{ $room->id }}">
+                                                                    {{ $room->building }},
+                                                                    {{ $room->name }}
                                                                 </option>
                                                                 @empty
-
                                                                 @endforelse
                                                             </select>
                                                         </div>
@@ -253,7 +250,8 @@
                                                     </button>
                                                 </div>
                                                 <div class="modal-body">
-                                                    <h5>Yakin untuk menghapus jadwal praktikum 'Mata Kuliah-XXX R-YYY'?
+                                                    <h5>Yakin untuk menghapus jadwal praktikum 'Mata Kuliah-XXX
+                                                        R-YYY'?
                                                     </h5>
                                                 </div>
                                                 <div class="modal-footer">
@@ -337,7 +335,7 @@
                     <div class="form-group">
                         <label for="number_of_lab_assistant">Jumlah Assisten</label>
                         <input type="number" id="number_of_lab_assistant" name="number_of_lab_assistant"
-                            class="form-control" required autocomplete="off" min="1" value="{{ rand(1,5) }}"
+                            class="form-control" required autocomplete="off" min="1" value="{{ rand(1, 5) }}"
                             placeholder="(masukkan angka)">
                     </div>
                     <div class="form-group">
@@ -363,47 +361,47 @@
 @section('scripts')
 <script>
     $(function() {
-            $('#schedule_table').DataTable({
-                "paging": true,
-                "lengthChange": false,
-                "searching": true,
-                "ordering": true,
-                "info": true,
-                "autoWidth": false,
-                "responsive": true,
-                "buttons": [{
-                        extend: "copy",
-                        exportOptions: {
-                            columns: [0, 1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: "excel",
-                        exportOptions: {
-                            columns: [0, 1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: "csv",
-                        exportOptions: {
-                            columns: [0, 1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'pdf',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3]
-                        }
-                    },
-                    {
-                        extend: 'print',
-                        exportOptions: {
-                            columns: [0, 1, 2, 3]
-                        }
-                    },
-                    "colvis"
-                ]
-            }).buttons().container().appendTo('#schedule_table_wrapper .col-md-6:eq(0)');
-        });
+        $('#schedule_table').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": true,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "buttons": [{
+                    extend: "copy",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                {
+                    extend: "excel",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                {
+                    extend: "csv",
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                {
+                    extend: 'pdf',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                {
+                    extend: 'print',
+                    exportOptions: {
+                        columns: [0, 1, 2, 3]
+                    }
+                },
+                "colvis"
+            ]
+        }).buttons().container().appendTo('#schedule_table_wrapper .col-md-6:eq(0)');
+    });
 </script>
 @endsection

@@ -100,6 +100,67 @@ class ScheduleController extends Controller
         return view('admin.pages.practicum.schedule.assistant-schedule', compact('psrs', 'schedules'), ['period' => $this->period]);
     }
 
+    public function store(Request $request, Classroom $classroom)
+    {
+        // dd($request->all());
+        $days = [
+            'Senin',
+            'Selasa',
+            'Rabu',
+            'Kamis',
+            'Jumat',
+            'Sabtu',
+            'Minggu',
+        ];
+        $classroom->load(
+            [
+                'period_subject.classrooms.schedule',
+            ]
+        );
+        $period_subject = $classroom->period_subject;
+        $current_psr = 0;
+        foreach ($period_subject->classrooms as $newclassroom) {
+            // dd($newclassroom);
+            if ($newclassroom->schedule) {
+                $current_psr += $newclassroom->schedule->number_of_lab_assistant;
+            }
+        }
+        // dd($period_subject, $current_psr);
+        $validated = $request->validate(
+            [
+                'day'                           =>  ['required', Rule::in($days)],
+                'start_time'                    =>  ['required', 'date_format:H:i', 'before:end_time'],
+                'end_time'                      =>  ['required', 'date_format:H:i'],
+                'number_of_lab_assistant'       =>  [
+                    'required',
+                    function ($attribute, $value, $fail) use ($period_subject, $current_psr) {
+                        $limit = $period_subject->number_of_lab_assistant;
+                        $available = $limit - $current_psr;
+
+                        if ($value > $available) {
+                            $fail('Jumlah asisten praktikum yang tersedia adalah ' . $available);
+                        }
+                    }
+                ],
+                'room_id'                       =>  ['required']
+            ]
+        );
+        $validated['classroom_id'] = $classroom->id;
+        $schedule = Schedule::create($validated);
+        if ($schedule) {
+            return back()->with(
+                [
+                    'success'   =>  'Jadwal baru berhasil dibuat'
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'    =>  'Jadwal gagl dibuat'
+            ]
+        );
+    }
+
     public function update(Request $request, Schedule $schedule)
     {
         $days = [
@@ -131,13 +192,13 @@ class ScheduleController extends Controller
         if ($schedule->updateOrFail($validated)) {
             return back()->with(
                 [
-                    'success'   =>  'Jadwal baru berhasil dibuat'
+                    'success'   =>  'Jadwal berhasil diperbarui'
                 ]
             );
         }
         return back()->with(
             [
-                'failed'    =>  'Jadwal gagl dibuat'
+                'failed'    =>  'Jadwal gagl diperbarui'
             ]
         );
     }
