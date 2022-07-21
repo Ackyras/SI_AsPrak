@@ -25,16 +25,16 @@ class ExamMiddleware
                 }
             ]
         );
-        if ($registrar->period_subject) {
-            return $next($request);
-        }
-        return back()->with(
-            [
-                'alert' =>  [
-                    'status'    =>  'failed',
-                    'msg'   =>  'Anda tidak dapat mengikuti ujian ini jika anda tidak lulus seleksi berkas atau sudah melakukan submit ujian'
+        if (!$registrar->period_subjects) {
+            return back()->with(
+                [
+                    'alert' =>  [
+                        'status'    =>  'failed',
+                        'msg'   =>  'Anda tidak dapat mengikuti ujian ini jika anda tidak lulus seleksi berkas atau sudah melakukan submit ujian'
+                    ]
                 ]
-            ]
-        );
+            );
+        }
+        return $next($request);
     }
 }
