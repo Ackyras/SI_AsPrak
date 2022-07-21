@@ -23,6 +23,7 @@ return new class extends Migration
             $table->boolean('is_pass_file_selection')->default(false);
             $table->boolean('is_take_exam_selection')->default(false);
             $table->boolean('is_pass_exam_selection')->default(false);
+            $table->boolean('is_honor_taken')->default(false);
             $table->timestamps();
         });
     }
