@@ -35,9 +35,9 @@ class PeriodSubjectRegistrar extends Model
             ->withPivot(['choice_id', 'file', 'score']);
     }
 
-    public function schedule()
+    public function schedules()
     {
-        return $this->hasOne(Schedule::class);
+        return $this->belongsToMany(Schedule::class, 'psr_schedules', 'psr_id', 'schedule_id', 'id', 'id');
     }
 
     public function presences()

@@ -24,8 +24,9 @@ class ScheduleSeeder extends Seeder
             $room = Room::inRandomOrder()->first();
             $schedule = Schedule::factory()->create(
                 [
-                    'classroom_id'  =>  $classroom->id,
-                    'room_id'       =>  $room->id
+                    'classroom_id'              =>  $classroom->id,
+                    'room_id'                   =>  $room->id,
+                    'number_of_lab_assistant'   =>  1,
                 ]
             );
         };

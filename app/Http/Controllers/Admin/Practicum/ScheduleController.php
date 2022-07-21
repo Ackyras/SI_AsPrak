@@ -10,6 +10,7 @@ use App\Models\Classroom;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use App\Http\Controllers\Controller;
+use App\Models\PeriodSubjectRegistrar;
 use Illuminate\Database\Eloquent\Collection;
 
 class ScheduleController extends Controller
@@ -58,7 +59,45 @@ class ScheduleController extends Controller
         //     ])
         //     ->get();
         // $rooms = Room::all();
-        return view('admin.pages.practicum.schedule.assistant-schedule', ['period' => $this->period]);
+        $psrs = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject.period', 'is_active', true)
+            ->whereRelation('period_subject', 'period_id', $this->period->id)
+            ->where('is_pass_file_selection', true)
+            ->where('is_pass_exam_selection', true)
+            ->with(
+                [
+                    'period_subject'    =>  function ($query) {
+                        $query->where('period_id', $this->period->id)
+                            ->with('subject');
+                    },
+                    'schedules' => [
+                        'classroom',
+                        'room'
+                    ],
+                    'registrar'
+                ],
+            )
+            ->get()
+            ->sortBy('period_subject.subject.name')
+            // ->dd()
+            //
+        ;
+        // dd($psrs[0]->schedules);
+        $schedules = Schedule::query()
+            ->whereRelation('classroom.period_subject', 'period_id', $this->period->id)
+            ->with(
+                [
+                    'classroom.period_subject',
+                    'psrs',
+                    'room'
+                ]
+            )
+            ->withCount('psrs')
+            ->get()
+            // ->dd()
+            //
+        ;
+        return view('admin.pages.practicum.schedule.assistant-schedule', compact('psrs', 'schedules'), ['period' => $this->period]);
     }
 
     public function update(Request $request, Schedule $schedule)
@@ -101,5 +140,22 @@ class ScheduleController extends Controller
                 'failed'    =>  'Jadwal gagl dibuat'
             ]
         );
+    }
+
+    public function addSchedule(Request $req)
+    {
+        $validated = $req->validate(
+            [
+                'schedule_id'   =>  'required'
+            ]
+        );
+        $schedule = Schedule::find($validated['schedule_id']);
+        $schedule->loadCount('psrs')
+            ->load('classroom.period_subject.subject');
+        if ($schedule->psrs_count < $schedule->number_of_lab_assistant) {
+            dd($schedule);
+        } else {
+            dd('OD');
+        }
     }
 }

@@ -60,14 +60,14 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
     });
 
-    Route::get('schedule', function(){
+    Route::get('schedule', function () {
         $user = auth()->user()->registrar;
         return Inertia::render('Schedule/Index', [
             'user'  =>  $user
         ]);
     })->name('schedule');
 
-    Route::get('salary', function(){
+    Route::get('salary', function () {
         $user = auth()->user()->registrar;
         return Inertia::render('Salary/Index', [
             'user'  =>  $user
@@ -139,6 +139,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('/assistant-schedule', 'assistantSchedule')->name('assistant-schedule');
+            Route::post('/assistant-schedule', 'addSchedule')->name('assistant-schedule.store');
             Route::put('/{schedule}', 'update')->name('update');
         });
         Route::controller(QRCodeController::class)->as('qr.')->prefix('qr')->group(function () {
