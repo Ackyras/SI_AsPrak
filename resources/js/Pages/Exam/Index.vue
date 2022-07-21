@@ -15,7 +15,7 @@ import Authenticated from "@/Layouts/Authenticated";
 import CardExamsInfo from "@/components/Cards/CardExamsInfo.vue";
 
 export default {
-    name: "dashboard-page",
+    name: "exam-index",
     components: {
         CardExamsInfo,
         Authenticated,

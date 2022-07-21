@@ -1,6 +1,6 @@
 <template>
     <div class="bg-white p-3 rounded-md drop-shadow">
-        <p class="text-base font-semibold text-emerald-500 mb-2">{{ subjectData.name }}</p>
+        <p class="text-base font-semibold text-emerald-600 mb-2">{{ subjectData.name }}</p>
         <p class="text-sm text-gray-400 mb-2" v-if="subjectData.isSelected === false">
             Anda belum memilih jadwal
         </p>

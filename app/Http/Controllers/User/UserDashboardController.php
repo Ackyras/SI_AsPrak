@@ -16,6 +16,7 @@ class UserDashboardController extends Controller
     public function index()
     {
         $user = auth()->user()->registrar;
+        // dd($user);
         $user->load(['period_subjects']);
         // dd(Session::all());
         return Inertia::render('Dashboard', [
