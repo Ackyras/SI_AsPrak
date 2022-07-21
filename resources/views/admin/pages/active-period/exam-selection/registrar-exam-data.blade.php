@@ -179,11 +179,24 @@
                     @empty
                     @endforelse
                 </ul>
-                <div style="width: 25%; background-color: #fee2e2"
+                <div style="width: 25%; background-color: #fee2e215"
                     class="p-2 d-flex justify-content-between align-items-center">
-                    <h6 class="m-0 d-block text-danger">
-                        <span style="font-weight: 600">Skor : </span>0/5
+                    @if ($psr->answers->where('id', $question->id)->first()->score = $question->score)
+                    <h6 class="m-0 d-block text-success">
+                        <span style="font-weight: 600">Skor : </span>{{ $psr->answers->where('id',
+                        $question->id)->first()->score }} / {{ $question->score }}
                     </h6>
+                    @elseif ($psr->answers->where('id', $question->id)->first()->score < $question->score)
+                        <h6 class="m-0 d-block text-warning">
+                            <span style="font-weight: 600">Skor : </span>{{ $psr->answers->where('id',
+                            $question->id)->first()->score }} / {{ $question->score }}
+                        </h6>
+                        @elseif($psr->answers->where('id', $question->id)->first()->score == 0)
+                        <h6 class="m-0 d-block text-danger">
+                            <span style="font-weight: 600">Skor : </span>{{ $psr->answers->where('id',
+                            $question->id)->first()->score }} / {{ $question->score }}
+                        </h6>
+                        @endif
                 </div>
             </div>
             @endif
