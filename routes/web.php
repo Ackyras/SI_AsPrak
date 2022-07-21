@@ -60,26 +60,25 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
     });
 
-    Route::get('schedule', function () {
-        $user = auth()->user()->registrar;
-        return Inertia::render('Schedule/Index', [
-            'user'  =>  $user
-        ]);
-    })->name('schedule');
+    Route::controller(UserDashboardController::class)->group(function () {
 
-    Route::get('salary', function () {
-        $user = auth()->user()->registrar;
-        return Inertia::render('Salary/Index', [
-            'user'  =>  $user
-        ]);
-    })->name('salary');
-    
-    Route::get('presence', function(){
-        $user = auth()->user()->registrar;
-        return Inertia::render('Presence/Index', [
-            'user'  =>  $user
-        ]);
-    })->name('presence');
+        Route::get('schedule', function () {
+        })->name('schedule');
+
+        Route::get('salary', function () {
+            $user = auth()->user()->registrar;
+            return Inertia::render('Salary/Index', [
+                'user'  =>  $user
+            ]);
+        })->name('salary');
+
+        Route::get('presence', function () {
+            $user = auth()->user()->registrar;
+            return Inertia::render('Presence/Index', [
+                'user'  =>  $user
+            ]);
+        })->name('presence');
+    });
 });
 
 Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
@@ -145,6 +144,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         });
         Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
             Route::get('/', 'index')->name('index');
+            Route::post('/{classroom}', 'store')->name('store');
             Route::get('/assistant-schedule', 'assistantSchedule')->name('assistant-schedule');
             Route::post('/assistant-schedule', 'addSchedule')->name('assistant-schedule.store');
             Route::put('/{schedule}', 'update')->name('update');
