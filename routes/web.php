@@ -25,6 +25,7 @@ use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectRegistrarController as 
 use App\Http\Controllers\Admin\Practicum\LabAssistantController;
 use App\Http\Controllers\Admin\Practicum\QRCodeController;
 use App\Http\Controllers\Admin\Practicum\ScheduleController;
+use App\Http\Controllers\User\PresenceController;
 use App\Mail\ExamSelectionNotification;
 use App\Mail\FileSelectionNotification;
 
@@ -70,13 +71,9 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
                 'user'  =>  $user
             ]);
         })->name('salary');
-
-        Route::get('presence', function () {
-            $user = auth()->user()->registrar;
-            return Inertia::render('Presence/Index', [
-                'user'  =>  $user
-            ]);
-        })->name('presence');
+    });
+    Route::controller(PresenceController::class)->prefix('presence')->as('presence.')->group(function () {
+        Route::get('/', 'index')->name('index');
     });
 });
 

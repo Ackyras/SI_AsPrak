@@ -42,10 +42,17 @@ class PeriodSubjectRegistrar extends Model
 
     public function presences()
     {
-        return $this->belongsToMany(Qr::class, 'presences')->withPivot(
+        return $this->belongsToMany(
+            Qr::class,
+            'presences',
+            'psr_id',
+            'qr_id',
+            'id',
+            'id'
+        )->withPivot(
             [
                 'id',
-                'qr_code_id',
+                'qr_id',
                 'psr_id',
                 'is_valid',
             ]
