@@ -1,11 +1,15 @@
 <template>
     <Authenticated>
         <div class="min-h-[100vh-8.25rem-2px] md:min-h-[100vh-8.75rem]">
-            <div
-                class="bg-gray-200 sticky top-[4rem] left-0 w-full z-[11] flex items-center justify-between p-2 rounded-b">
+
+            <div class="flex lg:hidden bg-gray-200 sticky top-0 left-0 w-full z-[11] items-center justify-between p-2 rounded-b">
                 <div class="w-3/5 flex gap-2 overflow-x-auto custom-scrollbar pb-1">
-                    <p v-for="(data, index) in db_questions"
-                        class="block py-1 text-sm px-2 bg-white text-emerald-600 rounded">
+                    <p v-for="(answer, index) in form.answers"
+                        class="block py-1 text-sm px-2 rounded"
+                        :class="{
+                            'bg-white text-emerald-600' : answer === null,
+                            'bg-emerald-600 text-white' : answer !== null,
+                        }">
                         {{ index + 1 }}
                     </p>
                 </div>
@@ -16,6 +20,26 @@
                     </div>
                 </div>
             </div>
+
+            <div class="hidden lg:flex bg-gray-200 sticky top-[4rem] left-0 w-full z-[11] items-center justify-between p-2 rounded-b">
+                <div class="w-3/5 flex gap-2 overflow-x-auto custom-scrollbar pb-1">
+                    <p v-for="(answer, index) in form.answers"
+                        class="block py-1 text-sm px-2 rounded"
+                        :class="{
+                            'bg-white text-emerald-600' : answer === null,
+                            'bg-emerald-600 text-white' : answer !== null,
+                        }">
+                        {{ index + 1 }}
+                    </p>
+                </div>
+
+                <div class="flex gap-2">
+                    <div class="p-1 text-center text-sm font-semibold bg-white rounded drop-shadow text-gray-500">
+                        {{ hours }} : {{ minutes % 60 }} : {{ seconds % 60 }}
+                    </div>
+                </div>
+            </div>
+
             <p class="px-4 my-3 text-lg text-center md:text-left uppercase tracking-wide text-emerald-600 font-bold">
                 Ujian {{ period_subject.subject.name }}
             </p>
@@ -30,9 +54,9 @@
                                 Soal {{ index + 1 }}. <span class="text-gray-500 uppercase font-medium">({{ question.type
                                 }})</span>
                             </p>
-                            <!-- <div class="w-full mb-3 border">
-                                <img :src="'../storage/dummy/Poster.jpeg'" alt="" class="w-full h-auto">
-                            </div> -->
+                            <div class="w-full mb-3 border p-4" v-if="question.image">
+                                <img :src="'../storage/'+question.image" alt="" class="w-full h-auto">
+                            </div>
                             <p class="mb-3">
                                 {{ question.text }}
                             </p>
@@ -46,9 +70,9 @@
                                 Soal {{ index + 1 }}. <span class="text-gray-500 uppercase font-medium">({{ question.type
                                 }})</span>
                             </p>
-                            <!-- <div class="w-full mb-3 border">
-                                <img :src="'../storage/dummy/Poster.jpeg'" alt="" class="w-full h-auto">
-                            </div> -->
+                            <div class="w-full mb-3 border p-4" v-if="question.image">
+                                <img :src="'../storage/'+question.image" alt="" class="w-full h-auto">
+                            </div>
                             <p class="mb-3">{{ question.text }}</p>
                             <div v-for="choice in question.choices" class="mb-2 flex gap-3 items-start">
                                 <input
@@ -57,9 +81,9 @@
                                     :name="'question_' + question.id" @input="choiceSelected($event, index)" />
 
                                 <label :for=" 'answer_' + question.id + '_' +  choice.id  ">
-                                    <!-- <div class="w-full mb-2 border">
-                                        <img :src="'../storage/dummy/Poster.jpeg'" alt="" class="w-full h-auto">
-                                    </div> -->
+                                    <div class="w-full mb-2 border p-4" v-if="choice.image">
+                                        <img :src="'../storage/'+choice.image" alt="" class="w-full h-auto">
+                                    </div>
                                     {{ choice.text }}
                                 </label>
                             </div>
@@ -183,29 +207,29 @@ export default {
         };
 
         const submit = () => {
-            let null_answers = [];
-            for (let i = 0; i < db_questions.value.length; i++) {
-                question_errors_mssg.value[i] = "";
-                question_errors_stat.value[i] = false;
-                if (form.answers[i] == null) {
-                    null_answers.push(i);
-                }
-            }
+            // let null_answers = [];
+            // for (let i = 0; i < db_questions.value.length; i++) {
+            //     question_errors_mssg.value[i] = "";
+            //     question_errors_stat.value[i] = false;
+            //     if (form.answers[i] == null) {
+            //         null_answers.push(i);
+            //     }
+            // }
 
-            if (null_answers.length > 0) {
-                null_answers.forEach((element) => {
-                    question_errors_mssg.value[element] =
-                        "Jawaban tidak boleh kosong";
-                    question_errors_stat.value[element] = true;
-                });
-            } else {
+            // if (null_answers.length > 0) {
+            //     null_answers.forEach((element) => {
+            //         question_errors_mssg.value[element] =
+            //             "Jawaban tidak boleh kosong";
+            //         question_errors_stat.value[element] = true;
+            //     });
+            // } else {
                 Inertia.post(
                     route("user.take-exam.store-all", {
                         period_subject: props.period_subject.id,
                     }),
                     form
                 );
-            }
+            // }
         };
         return {
             db_questions,
