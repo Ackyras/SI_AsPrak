@@ -57,10 +57,13 @@ class ExamController extends Controller
         $user = auth()->user()->registrar;
         $period_subject->load(['questions.choices', 'subject']);
 
-        return Inertia::render('Exam/TakeExam', [
-            'user'      => $user,
-            'period_subject'   => $period_subject
-        ])->with(
+        return Inertia::render(
+            'Exam/TakeExam',
+            [
+                'user'      => $user,
+                'period_subject'   => $period_subject
+            ]
+        )->with(
             [
                 'alert' => Session::has('alert') ?
                     Session::get('alert')
@@ -82,6 +85,7 @@ class ExamController extends Controller
     public function storeAll(Request $request, PeriodSubject $period_subject)
     {
         $transformRequests = [];
+        // dd($request->all());
         $registrar = auth()->user()->registrar;
         $period_subject_registrar = PeriodSubjectRegistrar::query()
             ->where('period_subject_id', $period_subject->id)
@@ -104,10 +108,11 @@ class ExamController extends Controller
             }
             array_push($transformRequests, $tempRequest);
         }
+        // dd($transformRequests);
         foreach ($transformRequests as $transformRequest) {
             if (isset($transformRequest['file'])) {
                 $file = $transformRequest['file'];
-                $fileName = $registrar['nim'] . 'file_' . $file->hashName() . $file->extension();
+                $fileName = $registrar['nim'] . 'file_' . $file->hashName();
                 // dd($fileFileName);
 
                 $storefile = Storage::disk('public')->putFileAs(

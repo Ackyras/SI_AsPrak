@@ -96,6 +96,7 @@ class UserDashboardController extends Controller
         $period = Period::firstWhere('is_active', true);
         $user = auth()->user()->registrar;
         $psrs = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_id', $period->id)
             ->where('registrar_id', $user->id)
             ->where('is_pass_exam_selection', true)
             ->where('is_pass_file_selection', true)
@@ -107,7 +108,8 @@ class UserDashboardController extends Controller
                                 'classrooms.schedule'
                             ]
                         );
-                    }
+                    },
+                    'schedules'
                 ]
             )->get();
         $period_subjects = PeriodSubject::query()
@@ -115,6 +117,7 @@ class UserDashboardController extends Controller
             ->whereRelation('registrars', 'registrars.id', $user->id)
             ->whereRelation('registrars', 'psr.is_pass_file_selection', true)
             ->whereRelation('registrars', 'psr.is_pass_exam_selection', true)
+            ->whereRelation('registrars', 'psr.registrar_id', $user->id)
             ->with(
                 [
                     'subject',
@@ -128,7 +131,6 @@ class UserDashboardController extends Controller
             // ->dd()
             //
         ;
-        // dd($period_subjects, $psrs);
         return Inertia::render('Schedule/Index', [
             'user'  =>  $user,
             'period_subjects'   =>  $period_subjects,
