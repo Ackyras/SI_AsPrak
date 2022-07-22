@@ -28,6 +28,11 @@ use App\Http\Controllers\Admin\Practicum\ScheduleController;
 use App\Http\Controllers\User\PresenceController;
 use App\Mail\ExamSelectionNotification;
 use App\Mail\FileSelectionNotification;
+use Illuminate\Http\Request;
+
+Route::post('/schedule', function (Request $request) {
+    dd($request);
+})->name('test-post');
 
 Route::as('website.')->group(function () {
     // Route::get('/', function () {

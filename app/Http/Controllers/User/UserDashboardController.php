@@ -105,11 +105,14 @@ class UserDashboardController extends Controller
                     'period_subject'    =>  function ($query) use ($user, $period) {
                         $query->where('period_id', $period->id)->with(
                             [
-                                'classrooms.schedule'
+                                'classrooms.schedule.room',
+                                'subject'
                             ]
                         );
                     },
-                    'schedules'
+                    'schedules' =>  function ($query) {
+                        $query->with('classroom','room');
+                    },
                 ]
             )->get();
         $period_subjects = PeriodSubject::query()
