@@ -1,19 +1,18 @@
 <template>
     <Authenticated>
         <div class="min-h-screen">
-            <p
-                class="px-4 my-3 text-lg text-center md:text-left uppercase tracking-wide text-emerald-600 font-bold"
-            >
+            <p class="px-4 my-3 text-lg text-center md:text-left uppercase tracking-wide text-emerald-600 font-bold">
                 Jadwal Praktikum Saya
             </p>
 
             <div class="grid grid-cols-1 lg:grid-cols-3 gap-4">
-                <card-subject-schedule
-                    v-for="(subject, key) in period_subjects"
-                    :subject-data="subject"
-                    :psr-data="psrs[key]"
-                />
+                <card-subject-schedule v-for="(subject, key) in period_subjects" :subject-data="subject"
+                    :psr-data="psrs[key]" />
             </div>
+            <p class="text-lg font-bold mb-2">PERIOD SUBJECT</p>
+            <pre class="mb-3 border border-black">{{ JSON.stringify(period_subjects, null, '\t') }}</pre>
+            <p class="text-lg font-bold mb-2">PERIOD SUBJECT REGISTRAR</p>
+            <pre class="mb-3 border border-black">{{ JSON.stringify(psrs, null, '\t') }}</pre>
         </div>
     </Authenticated>
 </template>
