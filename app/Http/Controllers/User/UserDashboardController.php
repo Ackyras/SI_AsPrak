@@ -96,6 +96,7 @@ class UserDashboardController extends Controller
         $period = Period::firstWhere('is_active', true);
         $user = auth()->user()->registrar;
         $psrs = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_id', $period->id)
             ->where('registrar_id', $user->id)
             ->where('is_pass_exam_selection', true)
             ->where('is_pass_file_selection', true)
@@ -107,7 +108,8 @@ class UserDashboardController extends Controller
                                 'classrooms.schedule'
                             ]
                         );
-                    }
+                    },
+                    'schedule'
                 ]
             )->get();
         $period_subjects = PeriodSubject::query()

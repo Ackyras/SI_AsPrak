@@ -16,6 +16,7 @@ class PresenceController extends Controller
         $period = Period::firstWhere('is_active', true);
         $user = auth()->user()->registrar;
         $psr = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_id', $period->id)
             ->where('registrar_id', $user->id)
             ->where('is_pass_exam_selection', true)
             ->where('is_pass_file_selection', true)
