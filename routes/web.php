@@ -26,6 +26,7 @@ use App\Http\Controllers\Admin\Practicum\LabAssistantController;
 use App\Http\Controllers\Admin\Practicum\QRCodeController;
 use App\Http\Controllers\Admin\Practicum\ScheduleController;
 use App\Http\Controllers\User\PresenceController as UserPresenceController;
+use App\Http\Controllers\User\SalaryController;
 use App\Mail\ExamSelectionNotification;
 use App\Mail\FileSelectionNotification;
 use Illuminate\Http\Request;
@@ -70,13 +71,10 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
 
         Route::get('schedule', 'scheduleIndex')->name('schedule');
         Route::post('/schedule', 'scheduleStore')->name('schedule.store');
+    });
 
-        Route::get('salary', function () {
-            $user = auth()->user()->registrar;
-            return Inertia::render('Salary/Index', [
-                'user'  =>  $user
-            ]);
-        })->name('salary');
+    Route::controller(SalaryController::class)->prefix('salary')->as('salary.')->group(function () {
+        Route::get('/', 'index')->name('index');
     });
     Route::controller(UserPresenceController::class)->prefix('presence')->as('presence.')->group(function () {
         Route::get('/', 'index')->name('index');
