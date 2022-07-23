@@ -260,6 +260,8 @@
                                 request()->routeIs('admin.assistant.presence-index') 
                                 ||
                                 request()->routeIs('admin.assistant.presence-show')
+                                ||
+                                request()->routeIs('admin.assistant.presence-show-assistant')
                                 ? 'bg-light' : 'bg-secondary' }}">
                             <i class="nav-icon fas fa-user-check"></i>
                             <p>Kehadiran Asisten</p>

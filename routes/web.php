@@ -156,6 +156,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
             Route::get('/', 'index')->name('index');
             Route::get('presence', 'presenceIndex')->name('presence-index');
             Route::get('presence/subject/{period_subject}', 'presenceShow')->name('presence-show');
+            Route::get('presence/subject/{period_subject}/class/{class}', 'presenceShowAssistant')->name('presence-show-assistant');
             Route::get('salary', 'salaryIndex')->name('salary-index');
         });
         Route::controller(ScheduleController::class)->as('schedule.')->group(function () {

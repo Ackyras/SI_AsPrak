@@ -41,7 +41,8 @@
                         </div>
                     </div>
                     <!-- MESSAGES CONTAINER -->
-                    <div v-if="$page.props.alert"
+                    <message-alert v-if="$page.props.flash.alert" :msg-data="$page.props.flash.alert"/>
+                    <!-- <div v-if="$page.props.alert"
                         class="my-4 flex justify-between items-center p-2 text-white font-semibold drop-shadow rounded" :class="{
                             'bg-emerald-500': $page.props.alert.status == 'success',
                             'bg-red-500': $page.props.alert.status == 'failed',
@@ -63,7 +64,7 @@
                                 </svg>
                             </span>
                         </button>
-                    </div>
+                    </div> -->
                 </div>
             </div>
 
@@ -80,7 +81,7 @@ import AdminNavbar from "@/components/Navbars/AdminNavbar.vue";
 import Sidebar from "@/components/Sidebar/Sidebar.vue";
 import HeaderStats from "@/components/Headers/HeaderStats.vue";
 import FooterAdmin from "@/components/Footers/FooterAdmin.vue";
-// import AlertInfo from "@/components/AlertInfo.vue";
+import MessageAlert from "@/components/Alerts/MessageAlert.vue";
 
 export default {
     name: "admin-layout",
@@ -95,6 +96,7 @@ export default {
         Sidebar,
         HeaderStats,
         FooterAdmin,
+        MessageAlert
     },
     methods: {
         closeExamWarning: function () {

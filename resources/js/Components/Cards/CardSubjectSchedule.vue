@@ -26,25 +26,13 @@
                 {{ subjectData.schedules[0].room.building }},
                 {{ subjectData.schedules[0].room.name }}
             </p>
-            <!-- <p class="col-span-1">
-                Saat ini
-            </p>
-            <p class="col-span-2 font-semibold">
-                {{ current_schedule }}
-            </p>
-            <p class="col-span-1">
-                Dipilih
-            </p>
-            <p class="col-span-2 font-semibold">
-                {{ form.schedule }}
-            </p> -->
         </div>
 
         <form @submit.prevent="submit">
             <div class="mb-2">
                 <select
                     class="w-full text-sm text-gray-600 py-1 px-2 border-none bg-gray-50"
-                    v-model="form.schedule"
+                    v-model="form.schedule_id"
                 >
                     <option selected disabled hidden value="-1">
                         Pilih Jadwal
@@ -70,21 +58,21 @@
             </div>
             <button
                 type="submit"
-                :disabled="current_schedule === form.schedule"
+                :disabled="current_schedule === form.schedule_id"
                 class="py-1 px-2 rounded text-white font-bold text-sm mb-2"
                 :class="{
                     'bg-sky-400 hover:bg-sky-500':
                         subjectData.schedules.length > 0 &&
-                        current_schedule !== form.schedule,
+                        current_schedule !== form.schedule_id,
                     'bg-sky-200':
                         subjectData.schedules.length > 0 &&
-                        current_schedule === form.schedule,
+                        current_schedule === form.schedule_id,
                     'bg-emerald-400 hover:bg-emerald-500':
                         subjectData.schedules.length <= 0 &&
-                        current_schedule !== form.schedule,
+                        current_schedule !== form.schedule_id,
                     'bg-emerald-200':
                         subjectData.schedules.length <= 0 &&
-                        current_schedule === form.schedule,
+                        current_schedule === form.schedule_id,
                 }"
             >
                 {{
@@ -119,7 +107,8 @@ export default {
             }
         });
         const form = useForm({
-            schedule: current_schedule.value,
+            schedule_id : current_schedule.value,
+            psr_id      : props.subjectData.id,
         });
 
         const submit = () => {

@@ -67,7 +67,7 @@ class LabAssistantController extends Controller
 
     public function salaryIndex()
     {
-        return view('admin.pages.practicum.assistant.salary', compact('period'));
+        return view('admin.pages.practicum.assistant.salary');
     }
 
     public function presenceShow(PeriodSubject $period_subject)
@@ -114,5 +114,10 @@ class LabAssistantController extends Controller
         // dd($period_subject, $psr);
         $lab_assistants = $period_subject->registrars;
         return view('admin.pages.practicum.presence.show', compact('lab_assistants', 'period_subject'));
+    }
+
+    public function presenceShowAssistant(PeriodSubject $period_subject, Classroom $class)
+    {
+        return view('admin.pages.practicum.presence.show-assistant', compact('period_subject'));
     }
 }
