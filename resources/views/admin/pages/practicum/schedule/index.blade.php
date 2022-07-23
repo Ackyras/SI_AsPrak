@@ -28,7 +28,7 @@
                     <tbody>
                         @forelse ($classrooms as $classroom)
                         <tr>
-                            <td tabindex="0">{{ $classroom->name }}</td>
+                            <td tabindex="0">{{ $classroom->period_subject->subject->name }} - {{ $classroom->name }}</td>
                             <td>
                                 @empty($classroom->schedule)
                                 Belum ada jadwal ditentukan
@@ -89,6 +89,7 @@
                                                         <div class="form-group">
                                                             <label for="day">Hari praktikum</label>
                                                             <select class="custom-select" name="day" id="day">
+                                                                <option selected disabled hidden>Pilih Hari</option>
                                                                 <option value="Senin">Senin</option>
                                                                 <option value="Selasa">Selasa</option>
                                                                 <option value="Rabu">Rabu</option>
@@ -124,8 +125,10 @@
                                                                 <option selected disabled hidden>Pilih ruangan
                                                                 </option>
                                                                 @forelse ($rooms as $room)
-                                                                <option selected value="{{ $room->id }}">
-                                                                    {{ $room->name }}</option>
+                                                                <option value="{{ $room->id }}">
+                                                                    {{ $room->building }},
+                                                                    {{ $room->name }}
+                                                                </option>
                                                                 @empty
                                                                 @endforelse
                                                             </select>
@@ -175,24 +178,26 @@
                                                                 <option selected disabled hidden>Pilih hari
                                                                     praktikum
                                                                 </option>
-                                                                <option value="Senin">Senin</option>
-                                                                <option value="Selasa">Selasa</option>
-                                                                <option value="Rabu">Rabu</option>
-                                                                <option value="Kamis">Kamis</option>
-                                                                <option value="Jumat">Jumat</option>
-                                                                <option value="Sabtu">Sabtu</option>
-                                                                <option value="Minggu">Minggu</option>
+                                                                <option value="Senin" {{ $classroom->schedule->day == "Senin" ? 'selected' : '' }}>Senin</option>
+                                                                <option value="Selasa" {{ $classroom->schedule->day == "Selasa" ? 'selected' : '' }}>Selasa</option>
+                                                                <option value="Rabu" {{ $classroom->schedule->day == "Rabu" ? 'selected' : '' }}>Rabu</option>
+                                                                <option value="Kamis" {{ $classroom->schedule->day == "Kamis" ? 'selected' : '' }}>Kamis</option>
+                                                                <option value="Jumat" {{ $classroom->schedule->day == "Jumat" ? 'selected' : '' }}>Jumat</option>
+                                                                <option value="Sabtu" {{ $classroom->schedule->day == "Sabtu" ? 'selected' : '' }}>Sabtu</option>
+                                                                <option value="Minggu" {{ $classroom->schedule->day == "Minggu" ? 'selected' : '' }}>Minggu</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="start_time">Jam mulai praktikum</label>
                                                             <input type="time" id="start_time" name="start_time"
-                                                                class="form-control" required autocomplete="off">
+                                                                class="form-control" required autocomplete="off"
+                                                                value="{{ $classroom->schedule->start_time }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="end_time">Jam selesai praktikum</label>
                                                             <input type="time" id="end_time" name="end_time"
-                                                                class="form-control" required autocomplete="off">
+                                                                class="form-control" required autocomplete="off"
+                                                                value="{{ $classroom->schedule->end_time }}">
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="number_of_lab_assistant">Jumlah
@@ -208,7 +213,7 @@
                                                                 <option selected disabled hidden>Pilih ruangan
                                                                 </option>
                                                                 @forelse ($rooms as $room)
-                                                                <option value="{{ $room->id }}">
+                                                                <option value="{{ $room->id }}" {{ $classroom->schedule->room->id == $room->id ? 'selected' : '' }}>
                                                                     {{ $room->building }},
                                                                     {{ $room->name }}
                                                                 </option>
