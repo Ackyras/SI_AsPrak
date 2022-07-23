@@ -100,7 +100,7 @@
                                                     </button>
                                                 </div>
                                                 <form method="POST"
-                                                    action="{{ route('admin.practicum.schedule.assistant-schedule.store') }}">
+                                                    action="{{ route('admin.assistant.schedule.store') }}">
                                                     @csrf
                                                     <div class="modal-body">
                                                         <h6 class="d-block m-0 mb-2">

@@ -5,8 +5,10 @@
 
             <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 items-start">
                 <card-presence-info v-for="subject in subjects" :subject-data="subject"/>
-                
             </div>
+
+            <p class="text-lg font-bold mb-2">PERIOD SUBJECT REGISTRAR</p>
+            <pre class="mb-3 border border-black">{{ JSON.stringify(psrs, null, '\t') }}</pre>
 
         </div>
     </Authenticated>
@@ -71,6 +73,7 @@ export default {
     },
     props: {
         user: Object,
+        psrs: Object,
     },
 };
 </script>

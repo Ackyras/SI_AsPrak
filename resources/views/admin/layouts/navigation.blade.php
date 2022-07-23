@@ -73,7 +73,7 @@
             <!-- ------------------- -->
             <!-- DETAIL PERIODE AKTIF -->
             <!-- ------------------- -->
-            <li class="mb-3 nav-item">
+            <li class="nav-item">
                 <a href="#activePeriodDetailDropdown"
                     class="nav-link {{ request()->routeIs('admin.active-period.data.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false"
@@ -113,7 +113,7 @@
             <!-- ---------------------------- -->
             <!-- SELEKSI BERKAS PERIODE AKTIF -->
             <!-- ---------------------------- -->
-            <li class="mb-3 nav-item">
+            <li class="nav-item">
                 <a href="#seleksiberkasdropdown"
                     class="nav-link {{ request()->routeIs('admin.active-period.file-selection.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksiberkasdropdown">
@@ -145,7 +145,7 @@
             <!-- ------------------------- -->
             <!-- SELEKSI TES PERIODE AKTIF -->
             <!-- ------------------------- -->
-            <li class="mb-3 nav-item">
+            <li class="nav-item">
                 <a href="#seleksitesdropdown"
                     class="nav-link {{ request()->routeIs('admin.active-period.exam-selection*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="seleksitesdropdown">
@@ -208,20 +208,6 @@
                 </a>
                 <ul class="py-2 rounded nav bg-secondary collapse" id="activePeriodPracticumDropdown">
                     <li class="nav-item">
-                        <a href="{{ route('admin.practicum.lab-assistant.index') }}"
-                            class="nav-link {{ request()->routeIs('admin.practicum.lab-assistant.index') ? 'bg-light' : 'bg-secondary' }}">
-                            <i class="fas fa-users nav-icon"></i>
-                            <p>Asisten Praktikum</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="{{ route('admin.practicum.schedule.assistant-schedule') }}"
-                            class="nav-link {{ request()->routeIs('admin.practicum.schedule.assistant-schedule') ? 'bg-light' : 'bg-secondary' }}">
-                            <i class="nav-icon fas fa-user-clock"></i>
-                            <p>Jadwal Asisten</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
                         <a href="{{ route('admin.practicum.schedule.index') }}"
                             class="nav-link {{ request()->routeIs('admin.practicum.schedule.index') ? 'bg-light' : 'bg-secondary' }}">
                             <i class="nav-icon fas fa-clock"></i>
@@ -238,10 +224,61 @@
                 </ul>
             </li>
 
+            <!-- ------------------------------- -->
+            <!-- ------ ASISTEN PRAKTIKUM ------ -->
+            <!-- ------------------------------- -->
+            <li class="nav-item">
+                <a href="#activePeriodAssistantDropdown" class="nav-link {{ request()->routeIs('admin.assistant.*') ? 'bg-light' : '' }}"
+                    data-toggle="collapse" role="button" aria-expanded="false"
+                    aria-controls="activePeriodAssistantDropdown">
+                    <i class="nav-icon fas fa-users"></i>
+                    {{-- <i class="fas "></i> --}}
+                    <p>
+                        Asisten Praktikum
+                        <i class="fas fa-angle-left right"></i>
+                    </p>
+                </a>
+                <ul class="py-2 rounded nav bg-secondary collapse" id="activePeriodAssistantDropdown">
+                    <li class="nav-item">
+                        <a href="{{ route('admin.assistant.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.assistant.index') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="fas fa-table nav-icon"></i>
+                            <p>Data Asisten</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.assistant.schedule.index') }}"
+                            class="nav-link {{ request()->routeIs('admin.assistant.schedule.index') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="nav-icon fas fa-user-clock"></i>
+                            <p>Jadwal Asisten</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.assistant.presence-index') }}"
+                            class="nav-link 
+                            {{ 
+                                request()->routeIs('admin.assistant.presence-index') 
+                                ||
+                                request()->routeIs('admin.assistant.presence-show')
+                                ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="nav-icon fas fa-user-check"></i>
+                            <p>Kehadiran Asisten</p>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('admin.assistant.salary-index') }}"
+                            class="nav-link {{ request()->routeIs('admin.assistant.salary-index') ? 'bg-light' : 'bg-secondary' }}">
+                            <i class="nav-icon fas fa-money-bill-wave-alt"></i>
+                            <p>Honor Asisten</p>
+                        </a>
+                    </li>
+                </ul>
+            </li>
+
             <div class="dropdown-divider"></div>
 
             <!-- JADWAL -->
-            {{-- <li class="mb-3 nav-item">
+            {{-- <li class="nav-item">
                 <a href="#jadwaldropdown"
                     class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="jadwaldropdown">
@@ -270,7 +307,7 @@
             </li> --}}
 
             <!-- INFORMASI -->
-            {{-- <li class="mb-3 nav-item">
+            {{-- <li class="nav-item">
                 <a href="#informasidropdown"
                     class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="informasidropdown">
@@ -306,7 +343,7 @@
             </li> --}}
 
             <!-- LAPORAN -->
-            {{-- <li class="mb-3 nav-item">
+            {{-- <li class="nav-item">
                 <a href="#laporandropdown"
                     class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}"
                     data-toggle="collapse" role="button" aria-expanded="false" aria-controls="laporandropdown">
@@ -334,7 +371,7 @@
                 </ul>
             </li> --}}
 
-            <li class="mb-3 nav-item">
+            <li class="nav-item">
                 <a href="{{ route('admin.about') }}"
                     class="nav-link {{ request()->routeIs('admin.dashboard.*') ? 'bg-light' : '' }}">
                     <i class="nav-icon far fa-address-card"></i>

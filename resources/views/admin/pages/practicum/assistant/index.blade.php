@@ -16,7 +16,7 @@
                         data-toggle="dropdown" aria-expanded="false">
                         Filter Data
                     </button>
-                    <div class="dropdown-menu">
+                    {{-- <div class="dropdown-menu">
                         <a href="{{ route('admin.practicum.lab-assistant.index') }}"
                             class="dropdown-item {{ request()->routeIs('admin.practicum.lab-assistant.index') ? 'bg-info' : '' }}">
                             Berdasarkan Nama Asisten
@@ -30,7 +30,7 @@
                         @empty
 
                         @endforelse
-                    </div>
+                    </div> --}}
                 </div>
                 <table id="assistant_table" class="table table-bordered table-hover dataTable dtr-inline collapsed"
                     aria-describedby="assistant_table_info">

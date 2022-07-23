@@ -15,7 +15,7 @@ class PresenceController extends Controller
     {
         $period = Period::firstWhere('is_active', true);
         $user = auth()->user()->registrar;
-        $psr = PeriodSubjectRegistrar::query()
+        $psrs = PeriodSubjectRegistrar::query()
             ->whereRelation('period_subject', 'period_id', $period->id)
             ->where('registrar_id', $user->id)
             ->where('is_pass_exam_selection', true)
@@ -40,11 +40,11 @@ class PresenceController extends Controller
                 ]
             )
             ->get()
-            ->dd()
             //
         ;
         return Inertia::render('Presence/Index', [
-            'user'  =>  $user
+            'user'  =>  $user,
+            'psrs'  =>  $psrs,
         ]);
     }
 }

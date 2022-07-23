@@ -25,7 +25,7 @@ use App\Http\Controllers\Admin\ActivePeriod\PeriodSubjectRegistrarController as 
 use App\Http\Controllers\Admin\Practicum\LabAssistantController;
 use App\Http\Controllers\Admin\Practicum\QRCodeController;
 use App\Http\Controllers\Admin\Practicum\ScheduleController;
-use App\Http\Controllers\User\PresenceController;
+use App\Http\Controllers\User\PresenceController as UserPresenceController;
 use App\Mail\ExamSelectionNotification;
 use App\Mail\FileSelectionNotification;
 use Illuminate\Http\Request;
@@ -77,7 +77,7 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
             ]);
         })->name('salary');
     });
-    Route::controller(PresenceController::class)->prefix('presence')->as('presence.')->group(function () {
+    Route::controller(UserPresenceController::class)->prefix('presence')->as('presence.')->group(function () {
         Route::get('/', 'index')->name('index');
     });
 });
@@ -139,15 +139,9 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
         Route::resource('room',             RoomController::class);
     });
     Route::as('practicum.')->group(function () {
-        Route::controller(LabAssistantController::class)->prefix('lab-assistant')->as('lab-assistant.')->group(function () {
-            Route::get('/', 'index')->name('index');
-            Route::get('subject-based', 'subjectBased')->name('subject-based');
-        });
         Route::controller(ScheduleController::class)->prefix('schedule')->as('schedule.')->group(function () {
             Route::get('/', 'index')->name('index');
             Route::post('/{classroom}', 'store')->name('store');
-            Route::get('/assistant-schedule', 'assistantSchedule')->name('assistant-schedule');
-            Route::post('/assistant-schedule', 'addSchedule')->name('assistant-schedule.store');
             Route::put('/{schedule}', 'update')->name('update');
         });
         Route::controller(QRCodeController::class)->as('qr.')->prefix('qr')->group(function () {
@@ -156,6 +150,18 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
             Route::put('/{qr}', 'changeStatus')->name('change-status');
             Route::get('/{classroom}', 'show')->name('show');
             // Route::resource('qr', QRCodeController::class)->except('show');
+        });
+    });
+    Route::as('assistant.')->prefix('lab-assistant')->group( function () {
+        Route::controller(LabAssistantController::class)->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::get('presence', 'presenceIndex')->name('presence-index');
+            Route::get('presence/subject/{period_subject}', 'presenceShow')->name('presence-show');
+            Route::get('salary', 'salaryIndex')->name('salary-index');
+        });
+        Route::controller(ScheduleController::class)->as('schedule.')->group(function () {
+            Route::get('/schedule', 'assistantSchedule')->name('index');
+            Route::post('/schedule', 'addSchedule')->name('store');
         });
     });
 
