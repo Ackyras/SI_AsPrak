@@ -355,7 +355,7 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST" action="">
+                                <form method="POST" action="{{ route('admin.period.update-status',$period) }}">
                                     @csrf
                                     @method('PUT')
                                     <div class="modal-body">
@@ -381,7 +381,9 @@
                                     </div>
 
                                     <div class="modal-footer">
-                                        <button type="submit" class="btn btn-primary">SIMPAN
+                                        <button type="submit" name="is_exam_selection_over"
+                                            value="{{ $period->is_exam_selection_over ? 0 :1 }}"
+                                            class="btn btn-primary">SIMPAN
                                             PERUBAHAN</button>
                                     </div>
                                 </form>
