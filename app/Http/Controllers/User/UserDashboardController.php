@@ -24,19 +24,7 @@ class UserDashboardController extends Controller
         // dd(Session::all());
         return Inertia::render('Dashboard', [
             'user'  =>  $user
-        ])
-            // ->with(
-            //     [
-            //         'alert'   =>  Session::has('alert') ?
-            //             Session::get('alert', 'default')
-            //             :
-            //             [
-            //                 'msg'       =>  'Welcome back,' . $user->name,
-            //                 'status'    =>  'success',
-            //             ],
-            //     ]
-            // )
-        ;
+        ])->with( 'alert', [ 'msg' => 'Welcome back,' . $user->name, 'status' => 'success']);
     }
 
     public function presence(Request $request)
@@ -229,6 +217,7 @@ class UserDashboardController extends Controller
 
         // }
         // $schedule->psrs()->attach($validated['psr_id']);
-        // return
+        return to_route('user.schedule')
+            ->with( 'alert', [ 'msg' => 'Welcome back, ', 'status' => 'success']);
     }
 }
