@@ -69,6 +69,7 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
     Route::controller(UserDashboardController::class)->group(function () {
 
         Route::get('schedule', 'scheduleIndex')->name('schedule');
+        Route::post('/schedule', 'scheduleStore')->name('schedule.store');
 
         Route::get('salary', function () {
             $user = auth()->user()->registrar;
@@ -152,7 +153,7 @@ Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(funct
             // Route::resource('qr', QRCodeController::class)->except('show');
         });
     });
-    Route::as('assistant.')->prefix('lab-assistant')->group( function () {
+    Route::as('assistant.')->prefix('lab-assistant')->group(function () {
         Route::controller(LabAssistantController::class)->group(function () {
             Route::get('/', 'index')->name('index');
             Route::get('presence', 'presenceIndex')->name('presence-index');
