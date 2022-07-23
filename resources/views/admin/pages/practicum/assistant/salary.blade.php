@@ -17,7 +17,7 @@
 
     for($i=0; $i<20; $i++){
         array_push(
-            $assistant,
+            $assistants,
             (object)[
                 "name"          => $names[rand(0,5)]." ".$names[rand(6,11)],
                 "nim"           => rand(118140001,118140099),

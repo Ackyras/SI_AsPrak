@@ -21,7 +21,7 @@
                             <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
                                 colspan="1">Jumlah Kelas</th>
                             <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
-                                colspan="1">Jumlah Asisten</th>
+                                colspan="1">Total Jumlah Asisten</th>
                             <th tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1"
                                 style="width: 125px; text-align: center">Aksi</th>
                         </tr>
@@ -34,7 +34,7 @@
                             <td style="text-align: center;">{{ $subject->pivot->current_lab_assistant_count }}</td>
                             <td>
                                 <a href="{{ route('admin.assistant.presence-show', $subject->pivot->id) }}"
-                                    class="btn btn-sm btn-block btn-success">Lihat Detail</a>
+                                    class="btn btn-sm btn-block btn-success">Lihat Semua Kelas</a>
                             </td>
                         </tr>
                         @empty
@@ -44,7 +44,7 @@
                         <tr>
                             <th style="text-align: center" rowspan="1" colspan="1">Nama Mata Kuliah</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Jumlah Kelas</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Kuota Asisten</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Total Jumlah Asisten</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Aksi</th>
                         </tr>
                     </tfoot>
