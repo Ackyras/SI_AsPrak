@@ -31,9 +31,10 @@
                         <tr>
                             <td tabindex="0">{{ $subject->name }}</td>
                             <td style="text-align: center;">{{ $subject->pivot->classrooms_count }}</td>
-                            <td style="text-align: center;">{{ $subject->pivot->number_of_lab_assistant }}</td>
+                            <td style="text-align: center;">{{ $subject->pivot->current_lab_assistant_count }}</td>
                             <td>
-                                <a href="{{ route('admin.assistant.presence-show', $subject->pivot->id) }}" class="btn btn-sm btn-block btn-success">Lihat Detail</a>
+                                <a href="{{ route('admin.assistant.presence-show', $subject->pivot->id) }}"
+                                    class="btn btn-sm btn-block btn-success">Lihat Detail</a>
                             </td>
                         </tr>
                         @empty
