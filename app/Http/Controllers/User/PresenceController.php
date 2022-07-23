@@ -20,28 +20,36 @@ class PresenceController extends Controller
             ->where('registrar_id', $user->id)
             ->where('is_pass_exam_selection', true)
             ->where('is_pass_file_selection', true)
-            ->with(
-                [
-                    'period_subject'    =>  function ($query) use ($user, $period) {
-                        $query->where('period_id', $period->id)->with(
-                            [
-                                'classrooms'    =>  function ($query) use ($user) {
-                                    $query->whereRelation('schedule.psrs', 'psr.id', $user->id);
-                                },
-                                'subject'
-                            ]
-                        );
-                    },
-                    'presences'
-                ]
-            )->withCount(
-                [
-                    'presences',
-                ]
-            )
-            ->get()
-            //
-        ;
+            ->get();
+        $psrs->map(function ($psr) use ($user, $period) {
+            $id = $psr->id;
+            // dd($id);
+            $psr
+                ->load(
+                    [
+                        'period_subject'    =>  function ($query) use ($user, $period, $id) {
+                            $query->where('period_id', $period->id)->with(
+                                [
+                                    'classrooms'    =>  function ($query) use ($user, $id) {
+                                        $query->whereRelation('schedule.psrs', 'psr.registrar_id', $user->id)
+                                            ->with(
+                                                [
+                                                    'schedule.qrs.presenceds' => function ($query) use ($id) {
+                                                        $query->where('psr_id', $id);
+                                                    }
+                                                ]
+                                            );
+                                    },
+                                    'subject'
+                                ]
+                            );
+                        },
+                    ]
+                )
+                //
+            ;
+        });
+
         return Inertia::render('Presence/Index', [
             'user'  =>  $user,
             'psrs'  =>  $psrs,
