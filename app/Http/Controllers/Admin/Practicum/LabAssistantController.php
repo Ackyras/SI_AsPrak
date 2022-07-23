@@ -51,7 +51,17 @@ class LabAssistantController extends Controller
         $period->subjects->map(function ($subject) {
             $classrooms_count = Classroom::where('period_subject_id', $subject->pivot->id)->count();
             $subject->pivot->classrooms_count = $classrooms_count;
+            $lab_assistants_count = PeriodSubjectRegistrar::query()
+                ->where('is_pass_file_selection', true)
+                ->where('is_pass_exam_selection', true)
+                ->where('period_subject_id', $subject->pivot->id)
+                ->get()
+                ->count()
+                //
+            ;
+            $subject->pivot->current_lab_assistant_count = $lab_assistants_count;
         });
+        // dd($period);
         return view('admin.pages.practicum.presence.index', compact('period'));
     }
 
@@ -62,61 +72,46 @@ class LabAssistantController extends Controller
 
     public function presenceShow(PeriodSubject $period_subject)
     {
-        $period_subject->load([
-            'subject',
-            'registrars' => function($query) {
-                $query->where('psr.is_pass_exam_selection', true)
-                    ->withCount(
-                        [
-                            'presences' => function ($query) {
-                                $query->where('psr.period_subject_id', request()->query('period_subject_id'));
-                            },
-                            'schedules' => function ($query) {
-                                $query->where('psr.period_subject_id', request()->query('period_subject_id'));
-                            }
-                        ]
-                    )
-                ;
-            }
-        ]);
-        // if (!request()->query('period_subject_id')) {
-        //     return to_route('admin.practicum.lab-assistant.index')->with(
-        //         [
-        //             'failed'    =>  'Id yang dimasukkan salah'
-        //         ]
-        //     );
-        // }
-        // $period_subject = PeriodSubject::query()
-        //     ->whereRelation('period', 'id', $this->period->id)
-        //     ->with(
-        //         [
-        //             'subject',
-        //             'registrars' =>  function ($query) {
-        //                 $query->where('psr.is_pass_exam_selection', true)
-        //                     ->withCount(
-        //                         [
-        //                             'presences' => function ($query) {
-        //                                 $query->where('psr.period_subject_id', request()->query('period_subject_id'));
-        //                             },
-        //                             'schedules' => function ($query) {
-        //                                 $query->where('psr.period_subject_id', request()->query('period_subject_id'));
-        //                             }
-        //                         ]
-        //                     )
-        //                 ;
-        //             },
+        // $period_subject->load([
+        //     'subject',
+        //     'registrars' => function ($query) {
+        //         $query->where('psr.is_pass_exam_selection', true)
+        //             ->where('psr.is_pass_file_selection', true)
+        //             ->where('psr.period_subject_id', 'period_subject.id')
+        //             ->withCount(
+        //                 [
+        //                     'presences' => function ($query) {
+        //                         $query->where('psr.period_subject_id', 'period_subject.id');
+        //                     },
+        //                     'schedules' => function ($query) {
+        //                         $query->where('psr.period_subject_id', 'period_subject.id');
+        //                     }
+        //                 ]
+        //             );
+        //     },
+        //     'classrooms'    =>  function($query){
 
-        //         ]
-        //     )
-        //     ->find(request()->query('period_subject_id'));
-        // if (!$period_subject) {
-        //     return to_route('admin.practicum.lab-assistant.index')->with(
-        //         [
-        //             'failed'    =>  'Id yang dimasukkan tidak dalam periode yang aktif saat ini'
-        //         ]
-        //     );
-        // }
-        // dd($period_subject);
+        //     }
+        // ]);
+        $period_subject->load(
+            [
+                'classrooms.schedule',
+            ]
+        );
+        $psr = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_subject.id', $period_subject->id)
+            ->whereRelation('period_subject', 'psr.is_pass_file_selection', true)
+            ->whereRelation('period_subject', 'psr.is_pass_exam_selection', true)
+            ->with(
+                [
+                    'registrar',
+                    'presences'
+                ]
+            )
+            ->get()
+            //
+        ;
+        // dd($period_subject, $psr);
         $lab_assistants = $period_subject->registrars;
         return view('admin.pages.practicum.presence.show', compact('lab_assistants', 'period_subject'));
     }
