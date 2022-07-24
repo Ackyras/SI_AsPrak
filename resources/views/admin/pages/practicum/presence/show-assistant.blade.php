@@ -132,6 +132,21 @@
 
 @extends('admin.layouts.app')
 
+@section('styles')
+    <style>
+        .warning-button{
+            width: fit-content; 
+            background-color: transparent; 
+            border: none;
+        }
+        .warning-button-icon{
+            color:#FFC107;
+        }
+        .warning-button:hover .warning-button-icon{
+            color: #f59e0b;
+        }
+    </style>
+@endsection
 @section('content')
 <div class="p-2">
     <div class="card">
@@ -157,11 +172,11 @@
                                 <p>NIM</p>
                             </th>
                             <th style="text-align: center" tabindex="0" aria-controls="subject_assistant_table"
-                                rowspan="1" colspan="{{ $jumlah_pertemuan }}">
+                                rowspan="1" colspan="{{ $classroom->schedule->qrs->count() }}">
                                 Kehadiran Petemuan
                             </th>
                             <th tabindex="0" aria-controls="period_subject_table" rowspan="2" colspan="1"
-                                style="width: 90px; text-align: center">
+                                style="width: 125px; text-align: center">
                                 <p>Keaktifan</p>
                             </th>
                         </tr>
@@ -178,70 +193,174 @@
                     </thead>
 
                     <tbody>
+                        <!-- JANGAN DIHAPUS YAA :) -->
+                        @php $row = 0; @endphp
                         @foreach ($psrs as $psr)
-                        <tr>
-                            <td tabindex="0">
-                                {{ $psr->registrar->name }}
-                                <small>
-                                    psr_id: {{ $psr->id }}
-                                </small>
-                            </td>
-                            <td class="text-center">{{ $psr->registrar->nim }}</td>
-                            @foreach ($classroom->schedule->qrs as $qr)
-                            <td class="text-center">
-                                @if ($psr->presences->contains($qr))
-                                @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
-                                <i class="fas fa-check-circle text-success"></i>
-                                @else
-                                <i class="fas fa-exclamation-circle text-warning"></i>
-                                @endif
-                                @else
-                                <i class="fas fa-times-circle text-danger"></i>
-                                @endif
-                            </td>
-                            @endforeach
-                            <td class="font-weight-bold text-center">
-                                {{-- {{ number_format(($jumlah_hadir/$jumlah_pertemuan) * 100, 2) }}% --}}
-                            </td>
-                        </tr>
+                            @php $row++; @endphp
+                            <tr>
+                                <td tabindex="0">
+                                    {{ $psr->registrar->name }}
+                                    <small>
+                                        psr_id: {{ $psr->id }}
+                                    </small>
+                                </td>
+                                <td class="text-center">{{ $psr->registrar->nim }}</td>
+                                    @php $valid_count = 0; @endphp
+                                    @foreach ($classroom->schedule->qrs as $qr)
+                                        <td class="text-center">
+                                            @if ($psr->presences->contains($qr))
+                                                @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
+                                                    <i class="fas fa-check-circle text-success"></i>
+                                                    @php $valid_count++; @endphp
+                                                @else
+                                                    <button type="button" class="warning-button" data-toggle="modal"
+                                                    data-target="#validatePresence_{{ $row }}_{{ $loop->index }}">
+                                                        <span class="warning-button-icon">
+                                                            <i class="fas fa-exclamation-circle"></i>
+                                                        </span>
+                                                    </button>
+                                                    <div class="modal fade" id="validatePresence_{{ $row }}_{{ $loop->index }}" tabindex="-1" data-backdrop="static"
+                                                        data-keyboard="false" aria-labelledby="validatePresence_{{ $row }}_{{ $loop->index }}Label" aria-hidden="true">
+                                                        <div class="modal-dialog">
+                                                            <div class="modal-content">
+                                                                <div class="modal-header">
+                                                                    <h4 class="modal-title font-weight-bold" id="validatePresence_{{ $row }}_{{ $loop->index }}Label">
+                                                                        Validasi Presensi</h4>
+                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                        <span aria-hidden="true">&times;</span>
+                                                                    </button>
+                                                                </div>
+                                                                <form method="POST" action="">
+                                                                    @csrf
+                                                                    @method('PUT')
+                                                                    <div class="modal-body">
+                                                                        <h5 class="text-left">
+                                                                            Asisten praktikum ini terdaftar pada Mata Kuliah 
+                                                                            <span class="font-weight-bold">
+                                                                                {{ $period_subject->subject->name }}
+                                                                                Kelas {{ $classroom->name }}</span>,
+                                                                            namun melakukan presensi di luar jadwal praktikum.
+                                                                        </h5>
+                                                                        <h5 class="text-left mt-2">
+                                                                            Apakah anda ingin memvalidasi presensi ini ?
+                                                                        </h5>
+                                                                    </div>
+                                                                    <div class="modal-footer">
+                                                                        <button type="submit" name="is_valid"
+                                                                            value="1"
+                                                                            class="btn btn-success">
+                                                                            Validasi Presensi
+                                                                        </button>
+                                                                    </div>
+                                                                </form>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                @endif
+                                            @else
+                                                <i class="fas fa-times-circle text-danger"></i>
+                                            @endif
+                                        </td>
+                                    @endforeach
+                                <td class="font-weight-bold text-center">
+                                    {{ number_format( ($valid_count / $classroom->schedule->qrs->count()) * 100, 2) }}%
+                                </td>
+                            </tr>
                         @endforeach
+
                         @foreach ($extrapsrs as $psr)
-                        <tr>
-                            <td tabindex="0">
-                                {{ $psr->registrar->name }}
-                                <small>
-                                    psr_id: {{ $psr->id }}
-                                </small>
-                            </td>
-                            <td class="text-center">{{ $psr->registrar->nim }}</td>
-                            @foreach ($classroom->schedule->qrs as $qr)
-                            <td class="text-center">
-                                @if ($psr->presences->contains($qr))
-                                @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
-                                <i class="fas fa-check-circle text-success"></i>
-                                @else
-                                <i class="fas fa-exclamation-circle text-warning"></i>
-                                @endif
-                                @else
-                                <i class="fas fa-times-circle text-danger"></i>
-                                @endif
-                            </td>
-                            @endforeach
-                            <td class="font-weight-bold text-center">
-                                {{-- {{ number_format(($jumlah_hadir/$jumlah_pertemuan) * 100, 2) }}% --}}
-                            </td>
-                        </tr>
+                            @php $row++; @endphp
+                            <tr>
+                                <td tabindex="0">
+                                    {{ $psr->registrar->name }}
+                                    <small> psr_id: {{ $psr->id }} </small>
+                                </td>
+                                <td class="text-center">{{ $psr->registrar->nim }}</td>
+                                @php 
+                                    $waiting_count = 0;
+                                    $valid_count   = 0;
+                                @endphp
+                                @foreach ($classroom->schedule->qrs as $qr)
+                                    <td class="text-center">
+                                        @if ($psr->presences->contains($qr))
+                                            @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
+                                                <i class="fas fa-check-circle text-primary"></i>
+                                                @php $valid_count++; @endphp
+                                            @else
+                                                <button type="button" class="warning-button" data-toggle="modal"
+                                                    data-target="#validatePresence_{{ $row }}_{{ $loop->index }}">
+                                                    <span class="warning-button-icon">
+                                                        <i class="fas fa-exclamation-circle"></i>
+                                                    </span>
+                                                </button>
+                                                <div class="modal fade" id="validatePresence_{{ $row }}_{{ $loop->index }}" tabindex="-1" data-backdrop="static"
+                                                    data-keyboard="false" aria-labelledby="validatePresence_{{ $row }}_{{ $loop->index }}Label" aria-hidden="true">
+                                                    <div class="modal-dialog">
+                                                        <div class="modal-content">
+                                                            <div class="modal-header">
+                                                                <h4 class="modal-title font-weight-bold" id="validatePresence_{{ $row }}_{{ $loop->index }}Label">
+                                                                    Validasi Presensi</h4>
+                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                                    <span aria-hidden="true">&times;</span>
+                                                                </button>
+                                                            </div>
+                                                            <form method="POST" action="">
+                                                                @csrf
+                                                                @method('PUT')
+                                                                <div class="modal-body">
+                                                                    <h5 class="text-left">
+                                                                        Asisten praktikum ini terdaftar pada Mata Kuliah 
+                                                                        <span class="font-weight-bold">{{ $period_subject->subject->name }}</span>,
+                                                                        namun tidak di  
+                                                                        <span class="font-weight-bold">Kelas {{ $classroom->name }}</span>.
+                                                                    </h5>
+                                                                    <h5 class="text-left mt-2">
+                                                                        Apakah anda ingin memvalidasi presensi ini ?
+                                                                    </h5>
+                                                                </div>
+                                                                <div class="modal-footer">
+                                                                    <button type="submit" name="is_valid"
+                                                                        value="1"
+                                                                        class="btn btn-success">
+                                                                        Validasi Presensi
+                                                                    </button>
+                                                                </div>
+                                                            </form>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                @php $waiting_count++; @endphp
+                                            @endif
+                                        @else
+                                            <i class="fas fa-times-circle text-secondary"></i>
+                                        @endif
+                                    </td>
+                                @endforeach
+                                <td class="font-weight-bold text-center">
+                                    @if ($waiting_count>0)
+                                        <small class="text-warning">
+                                            {{ $waiting_count }} MENUNGGU VALIDASI
+                                        </small>
+                                    @else
+                                        <small class="text-primary">
+                                            {{ $valid_count }} PERTEMUAN
+                                        </small>
+                                    @endif
+                                </td>
+                            </tr>
                         @endforeach
                     </tbody>
-                    {{-- <tfoot>
-                        <tr>
-                            <th style="text-align: center" rowspan="1" colspan="1">Nama</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">NIM</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Keaktifan</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Aksi</th>
-                        </tr>
-                    </tfoot> --}}
                 </table>
+                <div class="mt-2">
+                    <small class="font-weight-bold d-block m-0 mb-1">Keterangan : </small>
+                    <div class="d-flex justify-content-between">
+                        <small class="d-block m-0"><i class="fas fa-check-circle text-success"></i> Presensi Valid</small>
+                        <small class="d-block m-0"><i class="fas fa-times-circle text-danger"></i> Tidak Presensi</small>
+                        <small class="d-block m-0"><i class="fas fa-check-circle text-primary"></i> Presensi Valid (<span class="font-italic text-secondary">Asisten Praktikum Kelas Luar</span>)</small>
+                        <small class="d-block m-0"><i class="fas fa-times-circle text-secondary"></i> Tidak Presensi (<span class="font-italic text-secondary">Asisten Praktikum Kelas Luar</span>)</small>
+                        <small class="d-block m-0"><i class="fas fa-exclamation-circle text-warning"></i> Menunggu Validasi (<span class="font-weight-bold text-secondary">Dapat diklik</span>)</small>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -252,7 +371,7 @@
 <script>
     $(function() {
         $("#subject_assistant_table").DataTable({
-            "paging": true,
+            "paging": false,
             "responsive": true,
             "lengthChange": false,
             "autoWidth": false,

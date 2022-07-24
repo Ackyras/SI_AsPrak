@@ -27,9 +27,9 @@
                             <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
                                 colspan="1">Kuota Asisten</th>
                             <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
-                                colspan="1">Tanggal Awal Ujian</th>
+                                colspan="1">Waktu Mulai Ujian</th>
                             <th style="text-align: center" tabindex="0" aria-controls="period_subject_table" rowspan="1"
-                                colspan="1">Tanggal Akhir Ujian</th>
+                                colspan="1">Waktu Selesai Ujian</th>
                             <th tabindex="0" aria-controls="period_subject_table" rowspan="1" colspan="1"
                                 style="width: 90px; text-align: center">Aksi</th>
                             {{-- style="width: 150px; text-align: center">Aksi</th> --}}
@@ -85,14 +85,14 @@
                                                                 value="{{ $subject->pivot->number_of_lab_assistant }}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="exam_start">Tanggal mulai ujian</label>
+                                                            <label for="exam_start">Waktu mulai ujian</label>
                                                             <input type="datetime-local" id="exam_start"
                                                                 name="exam_start" class="form-control" required
                                                                 autocomplete="off"
                                                                 value="{{ date('Y-m-d\TH:i:s', strtotime($subject->pivot->exam_start)) }}">
                                                         </div>
                                                         <div class="form-group">
-                                                            <label for="exam_end">Tanggal selesai ujian</label>
+                                                            <label for="exam_end">Waktu selesai ujian</label>
                                                             <input type="datetime-local" id="exam_end" name="exam_end"
                                                                 class="form-control" required autocomplete="off"
                                                                 value="{{ date('Y-m-d\TH:i:s', strtotime($subject->pivot->exam_end)) }}">
@@ -157,8 +157,8 @@
                             <th style="text-align: center" rowspan="1" colspan="1">Nama Mata Kuliah</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Jumlah Kelas</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Kuota Asisten</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Tanggal Awal Ujian</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Tanggal Akhir Ujian</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Waktu Mulai Ujian</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Waktu Selesai Ujian</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Aksi</th>
                         </tr>
                     </tfoot>
@@ -218,12 +218,12 @@
                             autocomplete="off" placeholder="(masukkan angka)" min="0">
                     </div>
                     <div class="form-group">
-                        <label for="exam_start">Tanggal mulai ujian</label>
+                        <label for="exam_start">Waktu mulai ujian</label>
                         <input type="datetime-local" id="exam_start" name="exam_start" class="form-control" required
                             value="{{ old('exam_start') }}" autocomplete="off">
                     </div>
                     <div class="form-group">
-                        <label for="exam_end">Tanggal selesai ujian</label>
+                        <label for="exam_end">Waktu selesai ujian</label>
                         <input type="datetime-local" id="exam_end" name="exam_end" class="form-control" required
                             value="{{ old('exam_end') }}" autocomplete="off">
                     </div>

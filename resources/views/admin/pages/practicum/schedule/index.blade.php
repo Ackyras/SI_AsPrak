@@ -18,7 +18,9 @@
                             <th style="text-align: center" tabindex="0" aria-controls="schedule_table" rowspan="1"
                                 colspan="1">Jadwal</th>
                             <th style="text-align: center" tabindex="0" aria-controls="schedule_table" rowspan="1"
-                                colspan="1">Jumlah Asisten</th>
+                                colspan="1">Jumlah Asisten Kelas</th>
+                            <th style="text-align: center" tabindex="0" aria-controls="schedule_table" rowspan="1"
+                                colspan="1">Jumlah Asisten MK</th>
                             <th style="text-align: center" tabindex="0" aria-controls="schedule_table" rowspan="1"
                                 colspan="1">Ruangan</th>
                             <th tabindex="0" aria-controls="schedule_table" rowspan="1" colspan="1"
@@ -45,20 +47,33 @@
                                 @empty($classroom->schedule)
                                 -
                                 @else
-                                @empty($classroom->schedule->psrs_count)
-                                Belum ada asprak memilih jadwal ini / {{ $classroom->schedule->number_of_lab_assistant
-                                }}
-                                @else
-                                {{ $classroom->schedule->psrs_count }} / {{
-                                $classroom->schedule->number_of_lab_assistant }}
-                                @endempty
+                                    @empty($classroom->schedule->psrs_count)
+                                        <p class="d-block m-0">
+                                            0 / {{ $classroom->schedule->number_of_lab_assistant }}
+                                            <span class="ml-2 text-warning"><i class="fas fa-exclamation-circle"></i></span>
+                                        </p>
+                                    @else
+                                    <p class="d-block m-0">
+                                        {{ $classroom->schedule->psrs_count }} /  {{ $classroom->schedule->number_of_lab_assistant }}
+                                        @if ($classroom->schedule->psrs_count > $classroom->schedule->number_of_lab_assistant)
+                                            <span class="ml-2 text-danger"><i class="fas fa-times-circle"></i></span>
+                                        @elseif ($classroom->schedule->psrs_count < $classroom->schedule->number_of_lab_assistant)
+                                            <span class="ml-2 text-warning"><i class="fas fa-exclamation-circle"></i></span>
+                                        @else
+                                            <span class="ml-2 text-success"><i class="fas fa-check-circle"></i></span>
+                                        @endif
+                                    </p>
+                                    @endempty
                                 @endempty
                             </td>
                             <td style="text-align: center;">
+                                {{ $classroom->period_subject->number_of_lab_assistant }}
+                            </td>
+                            <td >
                                 @empty($classroom->schedule)
                                 -
                                 @else
-                                {{ $classroom->schedule->room->building . ',' . $classroom->schedule->room->name }}
+                                {{ $classroom->schedule->room->building . ', ' . $classroom->schedule->room->name }}
                                 @endempty
                             </td>
                             <td>
@@ -115,12 +130,14 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="number_of_lab_assistant">Jumlah
-                                                                Assisten</label>
+                                                                Asisten Kelas</label>
                                                             <input type="number" id="number_of_lab_assistant"
                                                                 name="number_of_lab_assistant" class="form-control"
                                                                 required autocomplete="off" min="1"
-                                                                max="{{ rand(1, 5) }}" placeholder="(masukkan angka)">
+                                                                max="{{ $classroom->period_subject->number_of_lab_assistant }}" 
+                                                                placeholder="(masukkan angka)">
                                                         </div>
+                                                        <p class="d-block m-0 mb-2 text-secondary font-italic">Total asisten Mata Kuliah : {{ $classroom->period_subject->number_of_lab_assistant }}</p>
                                                         <div class="form-group">
                                                             <label for="room_id">Ruangan</label>
                                                             <select id="room_id" class="custom-select" name="room_id">
@@ -210,12 +227,14 @@
                                                         </div>
                                                         <div class="form-group">
                                                             <label for="number_of_lab_assistant">Jumlah
-                                                                Assisten</label>
+                                                                Asisten Kelas</label>
                                                             <input type="number" id="number_of_lab_assistant"
                                                                 name="number_of_lab_assistant" class="form-control"
                                                                 required autocomplete="off"
-                                                                placeholder="(masukkan angka)">
+                                                                max="{{ $classroom->period_subject->number_of_lab_assistant }}"
+                                                                value="{{ $classroom->schedule->number_of_lab_assistant }}">
                                                         </div>
+                                                        <p class="d-block m-0 mb-2 text-secondary font-italic">Total asisten Mata Kuliah : {{ $classroom->period_subject->number_of_lab_assistant }}</p>
                                                         <div class="form-group">
                                                             <label for="room_id">Ruangan</label>
                                                             <select id="room_id" class="custom-select" name="room_id">
@@ -290,7 +309,8 @@
                         <tr>
                             <th style="text-align: center" rowspan="1" colspan="1">Kelas</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Jadwal</th>
-                            <th style="text-align: center" rowspan="1" colspan="1">Jumlah Asisten</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Jumlah Asisten Kelas</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Jumlah Asisten MK</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Ruangan</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Aksi</th>
                         </tr>
