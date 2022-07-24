@@ -5,6 +5,7 @@
     <p class="login-box-msg">{{ __('Login') }}</p>
 
     <form action="{{ route('login') }}" method="post">
+        @include('admin.components.alert')
         @csrf
 
         <div class="mb-3 input-group">
