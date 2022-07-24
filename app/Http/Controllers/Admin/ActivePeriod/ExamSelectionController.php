@@ -181,6 +181,15 @@ class ExamSelectionController extends Controller
             }
         });
         $subjects = $this->period->subjects;
+        $subjects->map(function ($subject) {
+            $subject->pass_exam_count = PeriodSubjectRegistrar::query()
+                ->where('period_subject_id', $subject->pivot->id)
+                ->where('is_pass_exam_selection', true)
+                // ->get()
+                ->count()
+                //
+            ;
+        });
         return view('admin.pages.active-period.exam-selection.pass-selection-registrar', compact('period_subject_registrars', 'subjects'));
     }
 
@@ -194,10 +203,10 @@ class ExamSelectionController extends Controller
                 ]
             );
         }
+        AnnouncePassExamSelection::dispatch($period);
         $period->is_exam_selection_over = true;
         $period->is_exam_selection_over_date = now();
         $period->save();
-        AnnouncePassExamSelection::dispatch($period);
         return back()->with(
             [
                 'success'   => 'gl'
