@@ -57,9 +57,8 @@ Route::as('website.')->group(function () {
     });
 });
 
-Route::middleware(['auth', 'user'])->as('user.')->group(function () {
+Route::middleware(['auth', 'user_is_active', 'user'])->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
-    Route::post('presence', [UserDashboardController::class, 'presence'])->name('presence');
     Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
     Route::middleware(['is_eligible_for_exam', 'is_exam_in_progress'])->group(function () {
         Route::get('ujian-seleksi/{period_subject}', [ExamController::class, 'exam'])->name('take.exam');
@@ -67,21 +66,23 @@ Route::middleware(['auth', 'user'])->as('user.')->group(function () {
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
     });
 
-    Route::controller(UserDashboardController::class)->group(function () {
-
-        Route::get('schedule', 'scheduleIndex')->name('schedule');
-        Route::post('/schedule', 'scheduleStore')->name('schedule.store');
-    });
+    Route::controller(UserDashboardController::class)
+        ->middleware(['is_open_for_schedule_submission'])
+        ->group(function () {
+            Route::get('schedule', 'scheduleIndex')->name('schedule');
+            Route::post('/schedule', 'scheduleStore')->name('schedule.store');
+        });
 
     Route::controller(SalaryController::class)->prefix('salary')->as('salary.')->group(function () {
         Route::get('/', 'index')->name('index');
     });
     Route::controller(UserPresenceController::class)->prefix('presence')->as('presence.')->group(function () {
         Route::get('/', 'index')->name('index');
+        Route::post('presence', 'store')->name('store');
     });
 });
 
-Route::middleware(['auth', 'admin'])->as('admin.')->prefix('admin')->group(function () {
+Route::middleware(['auth', 'user_is_active', 'admin'])->as('admin.')->prefix('admin')->group(function () {
     Route::get('dashboard', [DashboardController::class, 'index'])->name('dashboard');
 
     Route::put('period/{period}/update-status', [PeriodController::class, 'updatePeriodStatus'])->name('period.update-status');
