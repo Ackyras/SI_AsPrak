@@ -4,61 +4,61 @@
             "nama"          => "Charles Xavier",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
         ],
@@ -66,64 +66,64 @@
             "nama"          => "Kipas Angin Arang Sate Madura",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
     );
 
@@ -138,7 +138,7 @@
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
                 <h2 class="card-title font-weight-bold">Data Kehadiran Asisten Praktikum Mata Kuliah {{
-                    $period_subject->subject->name }} Kelas ???</h2>
+                    $period_subject->subject->name }} Kelas {{ $classroom->name }} </h2>
             </div>
         </div>
         <div class="card-body">
@@ -148,8 +148,8 @@
                     aria-describedby="subject_assistant_table_info">
                     <thead>
                         <tr>
-                            <th style="text-align:center; padding:none; vertical-align:center;" tabindex="0" aria-controls="subject_assistant_table"
-                                rowspan="2" colspan="1">
+                            <th style="text-align:center; padding:none; vertical-align:center;" tabindex="0"
+                                aria-controls="subject_assistant_table" rowspan="2" colspan="1">
                                 <p>Nama</p>
                             </th>
                             <th style="text-align: center" tabindex="0" aria-controls="subject_assistant_table"
@@ -166,56 +166,71 @@
                             </th>
                         </tr>
                         <tr>
-                            @for ($i = 1; $i <= $jumlah_pertemuan; $i++)
-                                <th style="padding:none; text-align:center;">{{ $i }}</th>
-                            @endfor
+                            @forelse ($classroom->schedule->qrs as $qr)
+                            <th style="padding:none; text-align:center;">{{ $loop->index + 1 }}
+                                <small>
+                                    qr_id: {{ $qr->id }}
+                                </small>
+                            </th>
+                            @empty
+                            @endforelse
                         </tr>
                     </thead>
 
                     <tbody>
-                        {{-- @forelse ($lab_assistants as $lab_assistant)
-                            <tr class="">
-                                <td tabindex="0">{{ $lab_assistant->name }}</td>
-                                <td>{{ $lab_assistant->nim }}</td>
-                                <td>
-                                    @if ($lab_assistant->schedules_count > 0)
-                                    {{ $lab_assistant->presences_count /
-                                    $lab_assistant->schedules_count * 100}}%
-                                    @else
-                                    Belum ada jadwal ditentukan
-                                    @endif
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button" href="" class="btn btn-sm btn-success">Lihat Detail</a>
-                                    </div>
-                                </td>
-                            </tr>
-                        @empty
-                        @endforelse --}}
-                        @foreach ($data_kehadiran as $data)
-                            <tr>
-                                <td tabindex="0">{{ $data->nama }}</td>
-                                <td class="text-center">{{ $data->nim }}</td>
-                                @php
-                                    $jumlah_hadir = 0;
-                                @endphp
-                                @foreach ($data->kehadiran as $khdrn)
-                                    <td class="text-center">
-                                        @if ($khdrn->hadir)
-                                            @php
-                                                $jumlah_hadir++;
-                                            @endphp
-                                            <i class="fas fa-check-circle text-success"></i>
-                                        @else
-                                            <i class="fas fa-times-circle text-danger"></i>
-                                        @endif
-                                    </td>
-                                @endforeach
-                                <td class="font-weight-bold text-center">
-                                    {{ number_format(($jumlah_hadir/$jumlah_pertemuan) * 100, 2) }}%
-                                </td>
-                            </tr>
+                        @foreach ($psrs as $psr)
+                        <tr>
+                            <td tabindex="0">
+                                {{ $psr->registrar->name }}
+                                <small>
+                                    psr_id: {{ $psr->id }}
+                                </small>
+                            </td>
+                            <td class="text-center">{{ $psr->registrar->nim }}</td>
+                            @foreach ($classroom->schedule->qrs as $qr)
+                            <td class="text-center">
+                                @if ($psr->presences->contains($qr))
+                                @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
+                                <i class="fas fa-check-circle text-success"></i>
+                                @else
+                                <i class="fas fa-exclamation-circle text-warning"></i>
+                                @endif
+                                @else
+                                <i class="fas fa-times-circle text-danger"></i>
+                                @endif
+                            </td>
+                            @endforeach
+                            <td class="font-weight-bold text-center">
+                                {{-- {{ number_format(($jumlah_hadir/$jumlah_pertemuan) * 100, 2) }}% --}}
+                            </td>
+                        </tr>
+                        @endforeach
+                        @foreach ($extrapsrs as $psr)
+                        <tr>
+                            <td tabindex="0">
+                                {{ $psr->registrar->name }}
+                                <small>
+                                    psr_id: {{ $psr->id }}
+                                </small>
+                            </td>
+                            <td class="text-center">{{ $psr->registrar->nim }}</td>
+                            @foreach ($classroom->schedule->qrs as $qr)
+                            <td class="text-center">
+                                @if ($psr->presences->contains($qr))
+                                @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
+                                <i class="fas fa-check-circle text-success"></i>
+                                @else
+                                <i class="fas fa-exclamation-circle text-warning"></i>
+                                @endif
+                                @else
+                                <i class="fas fa-times-circle text-danger"></i>
+                                @endif
+                            </td>
+                            @endforeach
+                            <td class="font-weight-bold text-center">
+                                {{-- {{ number_format(($jumlah_hadir/$jumlah_pertemuan) * 100, 2) }}% --}}
+                            </td>
+                        </tr>
                         @endforeach
                     </tbody>
                     {{-- <tfoot>

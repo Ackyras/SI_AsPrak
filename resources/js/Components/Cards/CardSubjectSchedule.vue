@@ -53,6 +53,11 @@
                         {{ classroom.schedule.end_time }}
                         ({{ classroom.schedule.room.building }},
                         {{ classroom.schedule.room.name }})
+                        <small
+                            >({{ classroom.schedule.psrs_count }}/{{
+                                classroom.schedule.number_of_lab_assistant
+                            }})
+                        </small>
                     </option>
                 </select>
             </div>
@@ -107,8 +112,8 @@ export default {
             }
         });
         const form = useForm({
-            schedule_id : current_schedule.value,
-            psr_id      : props.subjectData.id,
+            schedule_id: current_schedule.value,
+            psr_id: props.subjectData.id,
         });
 
         const submit = () => {

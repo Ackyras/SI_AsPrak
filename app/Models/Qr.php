@@ -38,11 +38,6 @@ class Qr extends Model
         );
     }
 
-    public function classroom()
-    {
-        return $this->belongsTo(Classroom::class);
-    }
-
     public function presenceds()
     {
         return $this->hasMany(Presence::class);

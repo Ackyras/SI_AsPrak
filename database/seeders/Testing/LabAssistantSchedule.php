@@ -22,7 +22,13 @@ class LabAssistantSchedule extends Seeder
             ->whereRelation('registrar.user', 'is_asprak', true)
             ->where('is_pass_file_selection', true)
             ->where('is_pass_exam_selection', true)
-            ->with(
+            ->get()
+            //
+        ;
+        foreach ($psrs as $psr) {
+            // $classrooms = $psr->period_subject->classrooms;
+            $randomNumberOfSchedule = rand(1, 2);
+            $psr->load(
                 [
                     'period_subject' => [
                         'classrooms' => [
@@ -30,13 +36,7 @@ class LabAssistantSchedule extends Seeder
                         ]
                     ]
                 ]
-            )
-            ->get()
-            //
-        ;
-        foreach ($psrs as $psr) {
-            // $classrooms = $psr->period_subject->classrooms;
-            $randomNumberOfSchedule = rand(1, $psr->period_subject->classrooms->count());
+            );
             $classrooms = $psr->period_subject->classrooms->random($randomNumberOfSchedule);
             foreach ($classrooms as $classroom) {
                 $psr->schedules()->attach($classroom->schedule);

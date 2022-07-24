@@ -47,22 +47,41 @@ class LabAssistantController extends Controller
     public function presenceIndex()
     {
         $period = $this->period;
-        $period->load('subjects');
-        $period->subjects->map(function ($subject) {
-            $classrooms_count = Classroom::where('period_subject_id', $subject->pivot->id)->count();
-            $subject->pivot->classrooms_count = $classrooms_count;
-            $lab_assistants_count = PeriodSubjectRegistrar::query()
-                ->where('is_pass_file_selection', true)
-                ->where('is_pass_exam_selection', true)
-                ->where('period_subject_id', $subject->pivot->id)
-                ->get()
-                ->count()
-                //
-            ;
-            $subject->pivot->current_lab_assistant_count = $lab_assistants_count;
-        });
-        // dd($period);
-        return view('admin.pages.practicum.presence.index', compact('period'));
+        $period->load(
+            [
+                'subjects'
+            ]
+        );
+        $period_subjects = PeriodSubject::query()
+            ->where('period_id', $period->id)
+            ->with(
+                [
+                    'subject',
+                    'classrooms' => [
+                        'schedule'  =>  function ($query) {
+                            $query->withCount('psrs');
+                        }
+                    ]
+                ]
+            )->withCount(
+                [
+                    'classrooms',
+                ]
+            )
+            ->get()
+            ->map(function ($period_subject) {
+                $total_lab_assistant = 0;
+                // $total_lab_assistant = $period_subject->classrooms->sum('schedule.psrs_count');
+                foreach ($period_subject->classrooms as $classroom) {
+                    $total_lab_assistant += $classroom->schedule->psrs_count;
+                }
+                $period_subject->lab_assistant_count = $total_lab_assistant;
+                return $period_subject;
+            })
+            // ->dd()
+            //
+        ;
+        return view('admin.pages.practicum.presence.index', compact('period', 'period_subjects'));
     }
 
     public function salaryIndex()
@@ -72,52 +91,70 @@ class LabAssistantController extends Controller
 
     public function presenceShow(PeriodSubject $period_subject)
     {
-        // $period_subject->load([
-        //     'subject',
-        //     'registrars' => function ($query) {
-        //         $query->where('psr.is_pass_exam_selection', true)
-        //             ->where('psr.is_pass_file_selection', true)
-        //             ->where('psr.period_subject_id', 'period_subject.id')
-        //             ->withCount(
-        //                 [
-        //                     'presences' => function ($query) {
-        //                         $query->where('psr.period_subject_id', 'period_subject.id');
-        //                     },
-        //                     'schedules' => function ($query) {
-        //                         $query->where('psr.period_subject_id', 'period_subject.id');
-        //                     }
-        //                 ]
-        //             );
-        //     },
-        //     'classrooms'    =>  function($query){
-
-        //     }
-        // ]);
         $period_subject->load(
             [
-                'classrooms.schedule',
+                'classrooms.schedule' => function ($query) {
+                    $query->withCount('psrs');
+                },
             ]
         );
-        $psr = PeriodSubjectRegistrar::query()
+        return view('admin.pages.practicum.presence.show', compact('period_subject'));
+    }
+
+    public function presenceShowAssistant(PeriodSubject $period_subject, Classroom $classroom)
+    {
+        $period_subject->load(
+            [
+                'subject',
+            ]
+        );
+        $classroom->load(
+            [
+                'schedule' => function ($query) {
+                    $query->with(
+                        [
+                            'qrs' => [
+                                'presenceds'
+                            ]
+                        ]
+                    )->withCount('qrs');
+                }
+            ]
+        );
+        $psrs = PeriodSubjectRegistrar::query()
             ->whereRelation('period_subject', 'period_subject.id', $period_subject->id)
-            ->whereRelation('period_subject', 'psr.is_pass_file_selection', true)
-            ->whereRelation('period_subject', 'psr.is_pass_exam_selection', true)
+            ->whereRelation('registrar.user', 'is_active', true)
+            ->whereRelation('schedules', 'classroom_id', $classroom->id)
+            ->where('is_pass_file_selection', true)
+            ->where('is_pass_exam_selection', true)
             ->with(
                 [
-                    'registrar',
-                    'presences'
+                    'presences',
+                    'registrar'
                 ]
             )
             ->get()
             //
         ;
-        // dd($period_subject, $psr);
-        $lab_assistants = $period_subject->registrars;
-        return view('admin.pages.practicum.presence.show', compact('lab_assistants', 'period_subject'));
-    }
-
-    public function presenceShowAssistant(PeriodSubject $period_subject, Classroom $class)
-    {
-        return view('admin.pages.practicum.presence.show-assistant', compact('period_subject'));
+        $psrs_id = $psrs->pluck('id')->toArray();
+        // dd($psrs, $psrs_id);
+        $extrapsrs = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_subject.id', $period_subject->id)
+            ->whereRelation('registrar.user', 'is_active', true)
+            ->whereRelation('schedules', 'classroom_id', '!=', $classroom->id)
+            ->whereRelation('presences.schedule.classroom', 'classrooms.id', $classroom->id)
+            ->where('is_pass_file_selection', true)
+            ->where('is_pass_exam_selection', true)
+            ->with(
+                [
+                    'presences',
+                    'registrar'
+                ]
+            )
+            ->get()
+            ->except($psrs_id)
+            //
+        ;
+        return view('admin.pages.practicum.presence.show-assistant', compact('period_subject', 'classroom', 'psrs', 'extrapsrs'));
     }
 }

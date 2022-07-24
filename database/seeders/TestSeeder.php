@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Period;
 use Database\Seeders\Testing\AnswerSeeder;
 use Database\Seeders\Testing\ClassroomSeeder;
+use Database\Seeders\Testing\LabAssistantPresence;
 use Database\Seeders\Testing\LabAssistantSchedule;
 use Database\Seeders\Testing\PassedExamRegistrarSeeder;
 use Illuminate\Database\Seeder;
@@ -43,6 +44,7 @@ class TestSeeder extends Seeder
                 QrSeeder::class,
                 PassedExamRegistrarSeeder::class,
                 LabAssistantSchedule::class,
+                LabAssistantPresence::class
             ]
         );
     }

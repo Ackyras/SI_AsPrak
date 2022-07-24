@@ -27,13 +27,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @forelse ($period->subjects as $subject)
+                        @forelse ($period_subjects as $period_subject)
                         <tr>
-                            <td tabindex="0">{{ $subject->name }}</td>
-                            <td style="text-align: center;">{{ $subject->pivot->classrooms_count }}</td>
-                            <td style="text-align: center;">{{ $subject->pivot->current_lab_assistant_count }}</td>
+                            <td tabindex="0">{{ $period_subject->subject->name }}</td>
+                            <td style="text-align: center;">{{ $period_subject->classrooms_count }}</td>
+                            <td style="text-align: center;">{{ $period_subject->lab_assistant_count }}
+                            </td>
                             <td>
-                                <a href="{{ route('admin.assistant.presence-show', $subject->pivot->id) }}"
+                                <a href="{{ route('admin.assistant.presence-show', $period_subject->id) }}"
                                     class="btn btn-sm btn-block btn-success">Lihat Semua Kelas</a>
                             </td>
                         </tr>

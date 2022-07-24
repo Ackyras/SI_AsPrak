@@ -41,7 +41,15 @@ class UserDashboardController extends Controller
                     'period_subject'    =>  function ($query) use ($user, $period) {
                         $query->where('period_id', $period->id)->with(
                             [
-                                'classrooms.schedule.room',
+                                'classrooms' => function ($query) {
+                                    $query->with(
+                                        [
+                                            'schedule' => function ($query) {
+                                                $query->with('room')->withCount('psrs');
+                                            }
+                                        ]
+                                    );
+                                },
                                 'subject'
                             ]
                         );
@@ -86,9 +94,17 @@ class UserDashboardController extends Controller
                 'psr_id'        =>  'required'
             ]
         );
-        dd($validated);
-        $schedule = Schedule::with('psrs')->find($validated['schedule_id']);
-        // if($schedule->)
+        $schedule = Schedule::withCount('psrs')->find($validated['schedule_id']);
+        if ($schedule->psrs_count >= $schedule->number_of_lab_assistant) {
+            return back()
+                ->with(
+                    'alert',
+                    [
+                        'msg' => 'Jadwal sudah penuh, harap pilih jadwal lain, atau hubungi laboran untuk pengajuan jadwal',
+                        'status' => 'failed'
+                    ]
+                );
+        }
         $psr = PeriodSubjectRegistrar::find($validated['psr_id']);
         if ($schedule->psrs->contains($psr)) {
         }
