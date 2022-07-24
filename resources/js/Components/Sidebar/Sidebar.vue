@@ -148,7 +148,7 @@
                     <li>
                         <Link
                             class="flex items-center w-full gap-2 px-2 py-2 mb-2 text-xs font-bold text-gray-700 uppercase hover:text-emerald-500 md:text-sm"
-                            :href="route('user.presence')"
+                            :href="route('user.presence.index')"
                             :class="{
                                 'text-emerald-500':
                                     $page.url.startsWith('/presence'),
@@ -369,7 +369,7 @@ export default {
             camera_status.value = "off";
             show_reader.value = false;
             // is_loading.value = true;
-            Inertia.post(route("user.presence"), form);
+            Inertia.post(route("user.presence.store"), form);
             // show_reader.value    = true;
             // setTimeout(() => {
             //     is_loading.value = false;
