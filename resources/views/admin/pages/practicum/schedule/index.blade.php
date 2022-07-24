@@ -28,7 +28,8 @@
                     <tbody>
                         @forelse ($classrooms as $classroom)
                         <tr>
-                            <td tabindex="0">{{ $classroom->period_subject->subject->name }} - {{ $classroom->name }}</td>
+                            <td tabindex="0">{{ $classroom->period_subject->subject->name }} - {{ $classroom->name }}
+                            </td>
                             <td>
                                 @empty($classroom->schedule)
                                 Belum ada jadwal ditentukan
@@ -45,7 +46,8 @@
                                 -
                                 @else
                                 @empty($classroom->schedule->psrs_count)
-                                Belum ada asprak memilih jadwal ini
+                                Belum ada asprak memilih jadwal ini / {{ $classroom->schedule->number_of_lab_assistant
+                                }}
                                 @else
                                 {{ $classroom->schedule->psrs_count }} / {{
                                 $classroom->schedule->number_of_lab_assistant }}
@@ -178,13 +180,20 @@
                                                                 <option selected disabled hidden>Pilih hari
                                                                     praktikum
                                                                 </option>
-                                                                <option value="Senin" {{ $classroom->schedule->day == "Senin" ? 'selected' : '' }}>Senin</option>
-                                                                <option value="Selasa" {{ $classroom->schedule->day == "Selasa" ? 'selected' : '' }}>Selasa</option>
-                                                                <option value="Rabu" {{ $classroom->schedule->day == "Rabu" ? 'selected' : '' }}>Rabu</option>
-                                                                <option value="Kamis" {{ $classroom->schedule->day == "Kamis" ? 'selected' : '' }}>Kamis</option>
-                                                                <option value="Jumat" {{ $classroom->schedule->day == "Jumat" ? 'selected' : '' }}>Jumat</option>
-                                                                <option value="Sabtu" {{ $classroom->schedule->day == "Sabtu" ? 'selected' : '' }}>Sabtu</option>
-                                                                <option value="Minggu" {{ $classroom->schedule->day == "Minggu" ? 'selected' : '' }}>Minggu</option>
+                                                                <option value="Senin" {{ $classroom->schedule->day ==
+                                                                    "Senin" ? 'selected' : '' }}>Senin</option>
+                                                                <option value="Selasa" {{ $classroom->schedule->day ==
+                                                                    "Selasa" ? 'selected' : '' }}>Selasa</option>
+                                                                <option value="Rabu" {{ $classroom->schedule->day ==
+                                                                    "Rabu" ? 'selected' : '' }}>Rabu</option>
+                                                                <option value="Kamis" {{ $classroom->schedule->day ==
+                                                                    "Kamis" ? 'selected' : '' }}>Kamis</option>
+                                                                <option value="Jumat" {{ $classroom->schedule->day ==
+                                                                    "Jumat" ? 'selected' : '' }}>Jumat</option>
+                                                                <option value="Sabtu" {{ $classroom->schedule->day ==
+                                                                    "Sabtu" ? 'selected' : '' }}>Sabtu</option>
+                                                                <option value="Minggu" {{ $classroom->schedule->day ==
+                                                                    "Minggu" ? 'selected' : '' }}>Minggu</option>
                                                             </select>
                                                         </div>
                                                         <div class="form-group">
@@ -213,7 +222,9 @@
                                                                 <option selected disabled hidden>Pilih ruangan
                                                                 </option>
                                                                 @forelse ($rooms as $room)
-                                                                <option value="{{ $room->id }}" {{ $classroom->schedule->room->id == $room->id ? 'selected' : '' }}>
+                                                                <option value="{{ $room->id }}" {{ $classroom->
+                                                                    schedule->room->id == $room->id ? 'selected' : ''
+                                                                    }}>
                                                                     {{ $room->building }},
                                                                     {{ $room->name }}
                                                                 </option>

@@ -23,6 +23,8 @@ class Period extends Model
         'is_file_selection_over_date',
         'is_exam_selection_over',
         'is_exam_selection_over_date',
+        'is_open_for_schedule_submission',
+        'is_open_for_schedule_submission_date',
         'selection_poster',
     ];
 

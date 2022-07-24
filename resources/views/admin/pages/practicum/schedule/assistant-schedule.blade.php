@@ -42,6 +42,7 @@
                                         {{ $schedule->day }},
                                         {{ $schedule->start_time }} -
                                         {{ $schedule->end_time }}
+                                        ({{ $schedule->classroom->name }} )
                                     </li>
                                     @empty
                                     @endforelse
@@ -52,20 +53,24 @@
                                 Jadwal </td>
                             @endisset
 
-                            @isset($psr->schedule->classroom)
-                            <td> {{ $psr->period_subject->subject->name }} -
-                                {{ $psr->schedule->classroom->name }}</td>
-                            @else
-                            <td class="text-center"> - </td>
-                            @endisset
-
-                            <td class="text-center">
-                                @isset($psr->schedule->room)
-                                {{ $psr->schedule->room->building }} - {{ $psr->schedule->room->name }}
-                                @else
-                                -
-                                @endisset
+                            <td> {{ $psr->period_subject->subject->name }}
                             </td>
+
+                            @isset($psr->schedules)
+                            <td>
+                                <ol>
+                                    @forelse ($psr->schedules as $schedule)
+                                    <li>
+                                        {{ $schedule->room->building }}, {{ $schedule->room->name }}
+                                    </li>
+                                    @empty
+                                    @endforelse
+                                </ol>
+                            </td>
+                            @else
+                            <td class="text-secondary font-italic text-warning"> Asisten ini belum memilih
+                                Jadwal </td>
+                            @endisset
                             <td>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <!-- Add/Edit Schedule Button -->
@@ -261,7 +266,8 @@
                         }
                     },
                     "colvis"
-                ]
+                ],
+                "orders"    :false
             }).buttons().container().appendTo('#assistant_schedule_table_wrapper .col-md-6:eq(0)');
         });
 </script>

@@ -29,12 +29,13 @@ class ScheduleController extends Controller
             ->whereRelation('period_subject', 'period_id', $this->period->id)
             ->with([
                 'schedule' => function ($query) {
-                    $query->withCount('psrs');
+                    $query->withCount('psrs')->with(
+                        [
+                            'room',
+                            'psrs',
+                        ],
+                    );
                 },
-                'schedule' => [
-                    'room',
-                    'psrs',
-                ],
                 'period_subject.subject'
             ])
             ->get();
@@ -45,20 +46,6 @@ class ScheduleController extends Controller
 
     public function assistantSchedule()
     {
-        // $classrooms = Classroom::query()
-        //     ->whereRelation('period_subject', 'period_id', $this->period->id)
-        //     ->with([
-        //         'schedule' => function ($query) {
-        //             $query->withCount('psrs');
-        //         },
-        //         'schedule' => [
-        //             'room',
-        //             'psrs',
-        //         ],
-        //         'period_subject.subject'
-        //     ])
-        //     ->get();
-        // $rooms = Room::all();
         $psrs = PeriodSubjectRegistrar::query()
             ->whereRelation('period_subject.period', 'is_active', true)
             ->whereRelation('period_subject', 'period_id', $this->period->id)
@@ -78,11 +65,7 @@ class ScheduleController extends Controller
                 ],
             )
             ->get()
-            ->sortBy('period_subject.subject.name')
-            // ->dd()
-            //
-        ;
-        // dd($psrs[0]->schedules);
+            ->sortBy('period_subject.subject.name');
         $schedules = Schedule::query()
             ->whereRelation('classroom.period_subject', 'period_id', $this->period->id)
             ->with(

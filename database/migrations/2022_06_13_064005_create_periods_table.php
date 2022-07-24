@@ -23,11 +23,13 @@ return new class extends Migration
             $table->dateTime('is_active_date')->nullable();
             $table->boolean('is_open_for_selection')->default(false);
             $table->dateTime('is_open_for_selection_date')->nullable();
-            $table->string('selection_poster')->nullable();
             $table->boolean('is_file_selection_over')->default(false);
             $table->dateTime('is_file_selection_over_date')->nullable();
             $table->boolean('is_exam_selection_over')->default(false);
             $table->dateTime('is_exam_selection_over_date')->nullable();
+            $table->boolean('is_open_for_schedule_submission')->default(false);
+            $table->dateTime('is_open_for_schedule_submission_date')->nullable();
+            $table->string('selection_poster')->nullable();
             $table->timestamps();
         });
     }

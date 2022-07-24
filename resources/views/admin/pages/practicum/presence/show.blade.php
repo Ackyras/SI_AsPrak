@@ -5,7 +5,8 @@
     <div class="card">
         <div class="card-header">
             <div class="d-flex align-items-center justify-content-between">
-                <h2 class="card-title font-weight-bold">Data Presensi Asisten Praktikum Mata Kuliah {{ $period_subject->subject->name }}</h2>
+                <h2 class="card-title font-weight-bold">Data Presensi Asisten Praktikum Mata Kuliah {{
+                    $period_subject->subject->name }}</h2>
             </div>
         </div>
 
@@ -25,38 +26,18 @@
                         </tr>
                     </thead>
                     <tbody>
+                        @forelse ($period_subject->classrooms as $classroom)
                         <tr>
-                            <td tabindex="0">RA</td>
-                            <td style="text-align: center;">{{ rand(1,2) }}</td>
+                            <td tabindex="0">Kelas {{ $classroom->name }}</td>
+                            <td style="text-align: center;">{{ $classroom->schedule->psrs_count }}</td>
                             <td>
-                                <a href="{{ route('admin.assistant.presence-show-assistant', [1, 1]) }}"
+                                <a href="{{ route('admin.assistant.presence-show-assistant', [$period_subject, $classroom]) }}"
                                     class="btn btn-sm btn-block btn-success">Lihat Detail</a>
                             </td>
                         </tr>
-                        <tr>
-                            <td tabindex="0">RB</td>
-                            <td style="text-align: center;">{{ rand(1,2) }}</td>
-                            <td>
-                                <a href="{{ route('admin.assistant.presence-show-assistant', [1, 1]) }}"
-                                    class="btn btn-sm btn-block btn-success">Lihat Detail</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0">RC</td>
-                            <td style="text-align: center;">{{ rand(1,2) }}</td>
-                            <td>
-                                <a href="{{ route('admin.assistant.presence-show-assistant', [1, 1]) }}"
-                                    class="btn btn-sm btn-block btn-success">Lihat Detail</a>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td tabindex="0">RD</td>
-                            <td style="text-align: center;">{{ rand(1,2) }}</td>
-                            <td>
-                                <a href="{{ route('admin.assistant.presence-show-assistant', [1, 1]) }}"
-                                    class="btn btn-sm btn-block btn-success">Lihat Detail</a>
-                            </td>
-                        </tr>
+                        @empty
+
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
