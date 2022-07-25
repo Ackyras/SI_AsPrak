@@ -393,6 +393,76 @@
                 </div>
             </div>
             {{-- BARIS 6 --}}
+            <div class="w-100 border-bottom p-2 pb-4 mb-2">
+                <div class="w-100 d-flex justify-content-between align-items-center">
+                    <div style="width: 45%" class="d-flex justify-content-between align-items-center">
+                        <p class="d-block w-50 m-0 font-weight-bold">Status Penentuan Jadwal</p>
+                        @if ($period->is_open_for_schedule_submission)
+                        <p class="d-block w-50 m-0"><span class="w-50 badge "
+                                style="background-color: #0d9488; color:white;">Terbuka</span></p>
+                        @else
+                        <p class="d-block w-50 m-0"><span class="w-50 badge badge-secondary">Ditutup</span></p>
+                        @endif
+                    </div>
+                    <div style="width: 45%" class="d-flex justify-content-between align-items-center">
+                        <p class="d-block w-50 m-0 font-weight-bold">Terakhir Diubah</p>
+                        <p class="d-block w-50 m-0">{{ $period->is_open_for_schedule_submission_date }}</p>
+                    </div>
+                    <div class="w-auto">
+                        <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
+                            data-target="#openForScheduleSubmission">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                    </div>
+                    <div class="modal fade" id="openForScheduleSubmission" tabindex="-1" data-backdrop="static"
+                        data-keyboard="false" aria-labelledby="openForScheduleSubmissionLabel" aria-hidden="true">
+                        <div class="modal-dialog">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h4 class="modal-title font-weight-bold" id="openForScheduleSubmissionLabel">
+                                        Ubah Status Penentuan Jadwal Periode</h4>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <form method="POST" action="{{ route('admin.period.update-status',$period) }}">
+                                    @csrf
+                                    @method('PUT')
+                                    <div class="modal-body">
+                                        @if ($period->is_open_for_schedule_submission)
+                                        <h5>
+                                            Anda akan mengubah Status Penentuan Jadwal Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Terbuka</span> menjadi
+                                            <span class="badge badge-secondary">Ditutup</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
+                                        @else
+                                        <h5>
+                                            Anda akan mengubah Status Penentuan Jadwal Periode
+                                            <span class="font-weight-bold">{{ $period->name }}</span>
+                                            dari <span class="badge badge-secondary">Ditutup</span> menjadi
+                                            <span class="badge "
+                                                style="background-color: #0d9488; color:white;">Terbuka</span>
+                                        </h5>
+                                        <h5>Simpan perubahan ini?</h5>
+                                        @endif
+                                    </div>
+
+                                    <div class="modal-footer">
+                                        <button type="submit" name="is_open_for_schedule_submission"
+                                            value="{{ $period->is_open_for_schedule_submission ? 0 :1 }}"
+                                            class="btn btn-primary">SIMPAN
+                                            PERUBAHAN</button>
+                                    </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {{-- BARIS 7 --}}
             <div class="w-100 p-2">
                 <div class="w-100 d-flex justify-content-between align-items-center">
                     <div style="width: 45%" class="d-flex justify-content-between align-items-center">

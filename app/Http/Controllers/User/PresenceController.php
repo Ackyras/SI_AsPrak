@@ -37,8 +37,23 @@ class PresenceController extends Controller
                                         $query->whereRelation('schedule.psrs', 'psr.registrar_id', $user->id)
                                             ->with(
                                                 [
-                                                    'schedule.qrs.presenceds' => function ($query) use ($id) {
-                                                        $query->where('psr_id', $id);
+                                                    'schedule.qrs' => function($query) use($id){
+                                                        $query->withCount(
+                                                            [
+                                                                'presenceds as valid_presence_count'=> function ($query) use ($id) {
+                                                                    $query->where('psr_id', $id)->where('is_valid', true);
+                                                                },
+                                                                'presenceds as invalid_presence_count'=> function ($query) use ($id) {
+                                                                    $query->where('psr_id', $id)->where('is_valid', false);
+                                                                }
+                                                            ]
+                                                        )->with(
+                                                        [
+                                                            'presenceds' => function ($query) use ($id) {
+                                                                $query->where('psr_id', $id);
+                                                            }
+                                                        ]
+                                                    );
                                                     }
                                                 ]
                                             );
@@ -51,6 +66,10 @@ class PresenceController extends Controller
                 )
                 //
             ;
+            $psr->period_subject->classrooms->map(function($classroom){
+                $classroom->total_valid_presence = $classroom->schedule->qrs->sum('valid_presence_count');
+                $classroom->total_invalid_presence = $classroom->schedule->qrs->sum('invalid_presence_count');
+            });
         });
 
         return Inertia::render('Presence/Index', [

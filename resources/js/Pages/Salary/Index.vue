@@ -7,7 +7,7 @@
                 Slip Honor Asisten Praktikum
             </p>
 
-            <div style="width: 100%; margin-bottom: 0.75rem" id="mainContent">
+            <div style="width: 100%; margin-bottom: 0.75rem" ref="mainContent">
                 <div
                     style="background-color: white; padding: 4px"
                     class="bg-white p-4"
@@ -20,9 +20,10 @@
                             text-align: center;
                             margin-bottom: 0.75rem;
                             color: #059669;
+                            text-transform: uppercase;
                         "
                     >
-                        SLIP HONOR : PERIODE SEMESTER 2XXX/2XXX
+                        SLIP HONOR : PERIODE {{ period.name }}
                     </p>
 
                     <div
@@ -45,7 +46,7 @@
                                 grid-column: span 2 / span 2;
                             "
                         >
-                            : Markus Togi Fedrian Rivaldi Sinaga
+                            : {{ user.name }}
                         </p>
                         <p style="display: block; margin: 0; font-weight: 600">
                             Nomor Induk Mahasiswa
@@ -57,7 +58,7 @@
                                 grid-column: span 2 / span 2;
                             "
                         >
-                            : 118140037
+                            : {{ user.nim }}
                         </p>
                         <p style="display: block; margin: 0; font-weight: 600">
                             Mata Kuliah
@@ -69,7 +70,7 @@
                                 grid-column: span 2 / span 2;
                             "
                         >
-                            : ASD, PBO, PWL
+                            : {{ concateNames }}
                         </p>
                     </div>
 
@@ -157,6 +158,7 @@
                                             229 231 235
                                         ) !important;
                                     "
+                                    v-for="psr in psrs"
                                 >
                                     <th
                                         scope="row"
@@ -170,7 +172,7 @@
                                             white-space: nowrap;
                                         "
                                     >
-                                        Algoritma dan Struktur Data
+                                        {{ psr.period_subject.subject.name }}
                                     </th>
                                     <td
                                         style="
@@ -181,7 +183,7 @@
                                             text-align: center;
                                         "
                                     >
-                                        6
+                                        {{ psr.presences_count }}
                                     </td>
                                     <td
                                         style="
@@ -192,7 +194,7 @@
                                             text-align: center;
                                         "
                                     >
-                                        18000
+                                        {{ period.honor }}
                                     </td>
                                     <td
                                         style="
@@ -203,121 +205,7 @@
                                             text-align: center;
                                         "
                                     >
-                                        108000
-                                    </td>
-                                </tr>
-                                <tr
-                                    style="
-                                        border-style: solid;
-                                        border-bottom-width: 1px;
-                                        border-color: rgb(
-                                            229 231 235
-                                        ) !important;
-                                    "
-                                >
-                                    <th
-                                        scope="row"
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            font-weight: 500;
-                                            color: #111827;
-                                            white-space: nowrap;
-                                        "
-                                    >
-                                        Pemrograman Berorientasi Objek
-                                    </th>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        10
-                                    </td>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        18000
-                                    </td>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        180000
-                                    </td>
-                                </tr>
-                                <tr
-                                    style="
-                                        border-style: solid;
-                                        border-bottom-width: 1px;
-                                        border-color: rgb(
-                                            229 231 235
-                                        ) !important;
-                                    "
-                                >
-                                    <th
-                                        scope="row"
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            font-weight: 500;
-                                            color: #111827;
-                                            white-space: nowrap;
-                                        "
-                                    >
-                                        Pemrograman Web Lanjut
-                                    </th>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        14
-                                    </td>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        18000
-                                    </td>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        252000
+                                        {{ psr.presences_count * period.honor }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -344,17 +232,18 @@
                             "
                         >
                             <span style="margin-right: 1rem"> Total</span>: Rp.
-                            540.000
+                            {{ totalSalary }}
                         </p>
                     </div>
                 </div>
             </div>
-            <div class="w-full mb-3" ref="mainContent">
+
+            <div class="w-full mb-3">
                 <div class="bg-white p-4">
                     <p
-                        class="text-base lg:text-lg font-bold text-center text-emerald-500 mb-3"
+                        class="text-base lg:text-lg font-bold text-center uppercase text-emerald-500 mb-3"
                     >
-                        SLIP HONOR : PERIODE SEMESTER 2XXX/2XXX
+                        SLIP HONOR : PERIODE {{ period.name }}
                     </p>
 
                     <div class="grid grid-cols-3 gap-2 mb-3">
@@ -377,7 +266,7 @@
                             Mata Kuliah
                         </p>
                         <p class="text-sm lg:text-base block m-0 col-span-2">
-                            : ASD, PBO, PWL
+                            : {{ concateNames }}
                         </p>
                     </div>
 
@@ -411,43 +300,24 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr class="bg-white border-b">
+                                <tr
+                                    class="bg-white border-b"
+                                    v-for="psr in psrs"
+                                >
                                     <th
                                         scope="row"
                                         class="py-3 px-4 font-medium text-gray-900 whitespace-nowrap"
                                     >
-                                        Algoritma dan Struktur Data
+                                        {{ psr.period_subject.subject.name }}
                                     </th>
-                                    <td class="py-3 px-4 text-center">6</td>
-                                    <td class="py-3 px-4 text-center">18000</td>
                                     <td class="py-3 px-4 text-center">
-                                        108000
+                                        {{ psr.presences_count }}
                                     </td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <th
-                                        scope="row"
-                                        class="py-3 px-4 font-medium text-gray-900 whitespace-nowrap"
-                                    >
-                                        Pemrograman Berorientasi Objek
-                                    </th>
-                                    <td class="py-3 px-4 text-center">10</td>
-                                    <td class="py-3 px-4 text-center">18000</td>
                                     <td class="py-3 px-4 text-center">
-                                        180000
+                                        {{ period.honor }}
                                     </td>
-                                </tr>
-                                <tr class="bg-white border-b">
-                                    <th
-                                        scope="row"
-                                        class="py-3 px-4 font-medium text-gray-900 whitespace-nowrap"
-                                    >
-                                        Pemrograman Web Lanjut
-                                    </th>
-                                    <td class="py-3 px-4 text-center">14</td>
-                                    <td class="py-3 px-4 text-center">18000</td>
                                     <td class="py-3 px-4 text-center">
-                                        252000
+                                        {{ psr.presences_count * period.honor }}
                                     </td>
                                 </tr>
                             </tbody>
@@ -458,7 +328,8 @@
                         <p
                             class="block w-fit p-2 bg-emerald-50 text-gray-500 text-lg"
                         >
-                            <span class="mr-4">Total</span>: Rp. 540.000
+                            <span class="mr-4">Total</span>: Rp.
+                            {{ totalSalary }}
                         </p>
                     </div>
                 </div>
@@ -479,7 +350,7 @@
                 JSON.stringify(user, null, "\t")
             }}</pre>
 
-            <p class="text-lg font-bold mb-2">REGISTRAR</p>
+            <p class="text-lg font-bold mb-2">PSRS</p>
             <pre class="mb-3 border border-black">{{
                 JSON.stringify(psrs, null, "\t")
             }}</pre>
@@ -494,6 +365,30 @@ export default {
     data() {
         return {};
     },
+    props: {
+        user: Object,
+        period: Object,
+        psrs: Object,
+    },
+    computed: {
+        totalSalary() {
+            let total = 0;
+            for (let i = 0; i < this.psrs.length; i++) {
+                total += this.psrs[i].presences_count * this.period.honor;
+            }
+            return total;
+        },
+        concateNames() {
+            let name = "";
+            for (let i = 0; i < this.psrs.length; i++) {
+                name += this.psrs[i].period_subject.subject.name;
+                if (i != this.psrs.length - 1) {
+                    name += ", ";
+                }
+            }
+            return name;
+        },
+    },
     methods: {
         printPdf() {
             let content = this.$refs.mainContent;
@@ -502,10 +397,6 @@ export default {
     },
     components: {
         Authenticated,
-    },
-    props: {
-        user: Object,
-        psrs: Object,
     },
 };
 </script>

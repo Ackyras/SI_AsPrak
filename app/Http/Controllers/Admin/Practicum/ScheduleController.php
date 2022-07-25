@@ -65,7 +65,9 @@ class ScheduleController extends Controller
                 ],
             )
             ->get()
+            // ->dd();
             ->sortBy('period_subject.subject.name');
+        // dd($psrs[0]->schedules);
         $schedules = Schedule::query()
             ->whereRelation('classroom.period_subject', 'period_id', $this->period->id)
             ->with(
