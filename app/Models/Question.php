@@ -32,8 +32,10 @@ class Question extends Model
         return $this->belongsToMany(PeriodSubjectRegistrar::class, 'answers')->withPivot(
             [
                 'score',
+                'extension',
                 'file',
-                'choice_id'
+                'choice_id',
+                'id'
             ]
         );
     }

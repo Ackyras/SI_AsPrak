@@ -54,15 +54,9 @@
                     {{ $question->text }}
                 </h6>
                 <!-- VIEW ANSWER MODAL BUTTON -->
-                @if ($psr->answers->where('question_id', $question->id)->first())
-                <button style="background-color: #10b981; color: #fff" type="button" class="mb-3 btn btn-sm"
-                    data-toggle="modal" data-target="#viewAnswerImageModal_{{ $question->id }}">
-                    <i class="mr-2 fas fa-eye"></i>
-                    Lihat Jawaban
-                </button>
-                @else
-                <button disabled style="background-color: #10b981; color: #fff" type="button" class="mb-3 btn btn-sm"
-                    data-toggle="modal" data-target="#viewAnswerImageModal_{{ $question->id }}">
+                @if ($psr->answers->contains($question)) <button style="background-color: #10b981; color: #fff"
+                    type="button" class="mb-3 btn btn-sm" data-toggle="modal"
+                    data-target="#viewAnswerImageModal_{{ $question->id }}">
                     <i class="mr-2 fas fa-eye"></i>
                     Lihat Jawaban
                 </button>
@@ -81,22 +75,35 @@
                                 </button>
                             </div>
                             <div class="modal-body">
+                                @if ($psr->answers->find($question)->pivot->extension == 'pdf')
+                                {{ $psr->answers->find($question)->pivot->extension }}
+                                <embed src="{{ asset('storage/'. $psr->answers->find($question)->pivot->file) }}"
+                                    type="application/pdf" width="640" height="720">
+                                @else
+                                {{ $psr->answers->find($question)->pivot->extension }}
                                 <img style="width: 87.5%" class="mx-auto d-block"
-                                    src="{{ asset('images/team-1-800x800.jpg') }}" alt="">
+                                    src="{{ asset('storage/'. $psr->answers->find($question)->pivot->file) }}" alt="">
+                                @endif
                             </div>
                         </div>
                     </div>
                 </div>
-                <small>
-                    Peserta tidak menjawab
-                </small>
-                @endif
+                @else
+                <button disabled style="background-color: #10b981; color: #fff" type="button" class="mb-3 btn btn-sm"
+                    data-toggle="modal" data-target="#viewAnswerImageModal_{{ $question->id }}">
+                    <i class="mr-2 fas fa-eye"></i>
+                    Lihat Jawaban
+                    <small>
+                        Peserta tidak menjawab
+                    </small>
+                    @endif
+                </button>
                 <div style="width: 25%; background-color: #f3f4f6"
                     class="p-2 d-flex justify-content-between align-items-center">
-                    @if ($psr->answers->where('question_id', $question->id)->first())
+                    @if ($psr->answers->contains($question))
                     <h6 class="m-0 d-block text-success">
                         <span style="font-weight: 600">Skor :
-                            {{ $psr->answers->where('question_id', $question->id)->first()->score }}
+                            {{ $psr->answers->find($question)->pivot->score }}
                             / {{ $question->score }}</span>
                     </h6>
                     @else
@@ -106,7 +113,7 @@
                                 0)</small></span>
                     </h6>
                     @endif
-                    <button @disabled(!$psr->answers->where('question_id', $question->id)->first()) type="button"
+                    <button @disabled(!$psr->answers->contains($question)) type="button"
                         class="btn btn-sm btn-primary"
                         data-toggle="modal" data-target="#scoreModal_{{ $question->id }}">
                         Ubah Skor
@@ -123,13 +130,15 @@
                                         <span aria-hidden="true">&times;</span>
                                     </button>
                                 </div>
-                                <form method="POST" action="">
+                                <form method="POST"
+                                    action="{{ route('admin.active-period.exam-selection.registrar.update-score', [$period_subject, $psr, $psr->answers->find($question)->pivot->id]) }}">
                                     @csrf
                                     <div class="modal-body">
                                         <div class="form-group">
                                             <label for="score">Skor</label>
                                             <input type="number" id="score" name="score" class="form-control" required
-                                                autocomplete="off" value="{{ rand(0, 5) }}" min="0" max="5">
+                                                autocomplete="off" value="{{ $psr->answers->contains($question) }}"
+                                                min="0" max="{{ $question->score }}">
                                         </div>
                                     </div>
                                     <div class="modal-footer">

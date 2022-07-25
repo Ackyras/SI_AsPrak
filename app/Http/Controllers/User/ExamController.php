@@ -55,7 +55,15 @@ class ExamController extends Controller
     public function exam(PeriodSubject $period_subject)
     {
         $user = auth()->user()->registrar;
-        $period_subject->load(['questions.choices', 'subject']);
+        $period_subject->load(
+            [
+                'questions.choices' => function ($query) {
+                    $query->inRandomOrder();
+                },
+                'subject'
+            ]
+        );
+        dd($period_subject);
 
         return Inertia::render(
             'Exam/TakeExam',
@@ -100,10 +108,12 @@ class ExamController extends Controller
             if ($question->type == 'essay') {
                 $tempRequest['file'] =   $request->answers[$key];
             } else {
-                $tempRequest['choice_id'] = $request->answers[$key];
-                $choice = Choice::find($tempRequest['choice_id']);
-                if ($choice->is_true) {
-                    $tempRequest['score'] = $question->score;
+                if ($tempRequest['choice_id']) {
+                    $tempRequest['choice_id'] = $request->answers[$key];
+                    $choice = Choice::find($tempRequest['choice_id']);
+                    if ($choice->is_true) {
+                        $tempRequest['score'] = $question->score;
+                    }
                 }
             }
             array_push($transformRequests, $tempRequest);
@@ -128,8 +138,8 @@ class ExamController extends Controller
                 $transformRequest
             );
         }
-        $registrar->is_take_exam_selection = true;
-        $registrar->save();
+        $period_subject_registrar->is_take_exam_selection = true;
+        $period_subject_registrar->save();
         return to_route('user.exam.index',);
     }
 }

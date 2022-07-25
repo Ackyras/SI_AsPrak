@@ -21,10 +21,11 @@ class ExamMiddleware
         $registrar->load(
             [
                 'period_subjects'   =>  function ($query) use ($period_subject) {
-                    $query->where('is_pass_file_selection', true)->where('is_take_exam_selection', false);
+                    $query->where('is_pass_file_selection', true)->where('is_take_exam_selection', false)->where('period_subject.id', $period_subject->id);
                 }
             ]
         );
+        // dd($registrar);
         if (!$registrar->period_subjects) {
             return back()->with(
                 [

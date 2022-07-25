@@ -127,6 +127,7 @@ Route::middleware(['auth', 'user_is_active', 'admin'])->as('admin.')->prefix('ad
             Route::get('/exam-data/subject/{period_subject}', [PeriodExamSelection::class, 'examDataDetail'])->name('exam-data-detail');
             Route::get('/exam-data/subject/{period_subject}/registrar/{psr}', [PeriodExamSelection::class, 'registrarExamData'])->name('registrar-exam-data');
             Route::post('/exam-data/subject/{period_subject}/registrar/{psr}', [PeriodExamSelection::class, 'updateExamSelection'])->name('registrar.update-status');
+            Route::post('/exam-data/subject/{period_subject}/registrar/{psr}/{answer}', [PeriodExamSelection::class, 'updateAnswerScore'])->name('registrar.update-score');
             Route::get('/pass-selection-registrar', [PeriodExamSelection::class, 'passSelection'])->name('pass-selection-registrar');
             Route::post('/pass-selection-registrar', [PeriodExamSelection::class, 'announceExamSelectionResult'])->name('pass-selection-registrar.announce');
         });

@@ -9,6 +9,7 @@ use App\Models\PeriodSubject;
 use App\Http\Controllers\Controller;
 use App\Models\PeriodSubjectRegistrar;
 use App\Jobs\Recruitment\AnnouncePassExamSelection;
+use App\Models\Answer;
 
 class ExamSelectionController extends Controller
 {
@@ -210,6 +211,32 @@ class ExamSelectionController extends Controller
         return back()->with(
             [
                 'success'   => 'gl'
+            ]
+        );
+    }
+
+    public function updateAnswerScore(Request $req, PeriodSubject $period_subject, PeriodSubjectRegistrar $psr, Answer $answer)
+    {
+        $validated = $req->validate(
+            [
+                'score' =>  'required',
+            ]
+        );
+        // dd($validated);
+        // dd($answer);
+        $answer->update(
+            $validated
+        );
+        if ($answer->wasChanged()) {
+            return back()->with(
+                [
+                    'success'   =>  'Nilai berhasil diperbarui'
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'   => 'Gagal memperbarui nilai'
             ]
         );
     }
