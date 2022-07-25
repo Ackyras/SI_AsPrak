@@ -28,7 +28,10 @@ class SalaryController extends Controller
         $period = Period::firstWhere('is_active', true);
         $psrs = PeriodSubjectRegistrar::query()
             ->where('registrar_id', $user->id)
-            ->whereRelation('period_subject', 'period_id', true)
+            // ->whereRelation('period_subject', 'period_id', true)
+            ->whereRelation('period_subject', 'period_id', $period->id)
+            ->where('is_pass_exam_selection', true)
+            ->where('is_pass_file_selection', true)
             ->with(
                 [
                     'period_subject.subject',
@@ -44,12 +47,12 @@ class SalaryController extends Controller
             ->get()
             //
         ;
-        $period = Period::firstWhere('is_active', true);
+        // $period = Period::firstWhere('is_active', true);
         // dd($psrs);
         return Inertia::render('Salary/Index', [
             'user'          =>  $user,
             'period'        =>  $period,
-            'psrs'           =>  $psrs
+            'psrs'          =>  $psrs
         ]);
     }
 }

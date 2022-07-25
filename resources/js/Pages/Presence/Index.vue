@@ -3,9 +3,18 @@
         <div class="min-h-screen">
             <p class="px-4 my-3 text-lg text-center uppercase tracking-wide text-emerald-600 font-bold">Data Presensi Saya</p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 items-start" v-for="psr in psrs">
-                <p class="mb-2 text-base lg:col-span-3 text-left uppercase tracking-wide text-emerald-600 font-bold">{{ psr.period_subject.subject.name }}</p>
-                <card-presence-info v-for="classroom in psr.period_subject.classrooms" :classroom-data="classroom"/>
+            <p class="my-3 text-lg text-left uppercase tracking-wide text-emerald-600 font-bold">Presensi Kelas Saya</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 items-start mb-2" v-for="psr in psrs">
+                <!-- <p class="mb-2 text-base lg:col-span-3 text-left tracking-wide text-emerald-600 font-bold">{{ psr.period_subject.subject.name }}</p> -->
+                <card-presence-info v-for="classroom in psr.period_subject.classrooms" :classroom-data="classroom" :subject-name="psr.period_subject.subject.name"/>
+            </div>
+
+            <p class="my-3 text-lg text-left uppercase tracking-wide text-emerald-600 font-bold">Presensi Luar Kelas Saya</p>
+
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 items-start mb-2" v-for="psr in psrs">
+                <!-- <p class="mb-2 text-base lg:col-span-3 text-left tracking-wide text-emerald-600 font-bold">{{ psr.period_subject.subject.name }}</p> -->
+                <card-presence-info v-for="classroom in psr.period_subject.classrooms" :classroom-data="classroom" :subject-name="psr.period_subject.subject.name"/>
             </div>
 
             <p class="text-lg font-bold mb-2">PERIOD SUBJECT REGISTRAR</p>

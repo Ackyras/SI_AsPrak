@@ -1,7 +1,7 @@
 <template>
     <div class="bg-white rounded-md drop-shadow mb-4 overflow-hidden">
         <div class="bg-emerald-600 text-white p-3">
-            <p class="text-sm uppercase font-bold">Kelas {{ classroomData.name }}</p>
+            <p class="text-sm uppercase font-bold">{{ subjectName }} - {{ classroomData.name }}</p>
         </div>
         <div class="px-3 py-4">
             <div class="grid grid-cols-3 gap-2 text-sm text-gray-600">
@@ -80,6 +80,7 @@ export default {
     },
     props: {
         classroomData: Object,
+        subjectName: String,
     },
 };
 </script>
