@@ -165,10 +165,11 @@ class PeriodController extends Controller
     {
 
         $validated = $req->validate([
-            'is_active'                 =>  'boolean',
-            'is_open_for_selection'     =>  'boolean',
-            'is_file_selection_over'    =>  'boolean',
-            'is_exam_selection_over'    =>  'boolean',
+            'is_active'                         =>  'boolean',
+            'is_open_for_selection'             =>  'boolean',
+            'is_file_selection_over'            =>  'boolean',
+            'is_exam_selection_over'            =>  'boolean',
+            'is_open_for_schedule_submission'   =>  'boolean',
         ]);
         if (!isset($validated['is_active'])) {
             if ((!$period->registration_start || !$period->registration_end)) {
