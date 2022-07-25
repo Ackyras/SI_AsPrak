@@ -32,7 +32,9 @@
                             @php $row = 0; @endphp
                             @forelse ($psrs as $psr)
                                 <tr>
-                                    <td tabindex="0">{{ $psr->registrar->name }}</td>
+                                    <td tabindex="0">
+                                        {{ $psr->registrar->name }}
+                                    </td>
                                     <td class="text-center">{{ $psr->registrar->nim }}</td>
                                     <td> {{ $psr->period_subject->subject->name }} </td>
 

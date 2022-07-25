@@ -45,7 +45,6 @@
                 </h6>
             </div>
 
-
             @forelse ($period_subject->questions as $question)
             @if ($question->type == 'essay')
             <div class="p-3 mb-3 bg-white rounded shadow-sm w-100">
