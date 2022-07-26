@@ -89,7 +89,7 @@
 
                 @if ($period->is_file_selection_over)
                     <div class="p-2 bg-white rounded mb-3">
-                        <a href="{{ route('website.news.exam_selection_over',$period) }}"
+                        <a href="{{ route('website.news.file_selection_over',$period) }}"
                             class="text-base font-semibold text-emerald-700 hover:text-emerald-600"
                         >
                             Hasil Seleksi Berkas Asisten Praktikum
@@ -114,7 +114,7 @@
 
                 @if ($period->is_open_for_selection)
                     <div class="p-2 bg-white rounded mb-3">
-                        <a href="{{ route('website.news.exam_selection_over',$period) }}"
+                        <a href="{{ route('website.news.open_for_selection',$period) }}"
                             class="text-base font-semibold text-emerald-700 hover:text-emerald-600"
                         >
                             Seleksi Penerimaan Asisten Praktikum

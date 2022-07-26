@@ -178,7 +178,7 @@
             </div>
             <!-- KHS -->
             <div class="mb-4">
-                <p class="block w-full text-gray-500 mb-2 text-lg font-semibold">Kartu Hasil Studi</p>
+                <p class="block w-full text-gray-500 mb-2 text-lg font-semibold">Kartu Tanda Mahasiswa</p>
                 <input type="file" name="khs" id="khs" class="hidden" required />
                 <p id="khsnamecontainer"
                     class="hidden w-fit border-2 py-1 px-2 gap-2 items-center bg-emerald-50 border-emerald-400 text-emerald-600">

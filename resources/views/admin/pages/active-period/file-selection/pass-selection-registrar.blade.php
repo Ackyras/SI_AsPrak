@@ -57,9 +57,9 @@
                                         CV
                                     </button>
                                     <button type="button" class="btn btn-info FileModalButton" data-toggle="modal"
-                                        data-target="#showFileModal" data-title="KHS {{ $psr->registrar->name }}"
+                                        data-target="#showFileModal" data-title="KTM {{ $psr->registrar->name }}"
                                         data-file="{{ $psr->registrar->khs }}">
-                                        KHS
+                                        KTM
                                     </button>
                                     <button type="button" class="btn btn-info FileModalButton" data-toggle="modal"
                                         data-target="#showFileModal" data-title="Transkrip {{ $psr->registrar->name }}"
