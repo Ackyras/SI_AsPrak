@@ -6,12 +6,16 @@
             </p>
 
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-                <card-subject-schedule v-for="(subject, key) in psrs" :subject-data="subject" />
+                <card-subject-schedule v-for="(subject, key) in psrs" :subject-data="subject" :open-submission="period.is_open_for_schedule_submission"/>
             </div>
             <!-- <p class="text-lg font-bold mb-2">PERIOD SUBJECT REGISTRAR</p>
             <pre class="mb-3 border border-black">{{ JSON.stringify(psrs, null, '\t') }}</pre> -->
             <!-- <p class="text-lg font-bold mb-2">PERIOD SUBJECT</p>
             <pre class="mb-3 border border-black">{{ JSON.stringify(period_subjects, null, '\t') }}</pre> -->
+            <!-- <p class="text-lg font-bold mb-2">PERIOD</p>
+            <pre class="mb-3 border border-black">{{
+                JSON.stringify(period, null, "\t")
+            }}</pre> -->
         </div>
     </Authenticated>
 </template>
@@ -56,6 +60,7 @@ export default {
         user: Object,
         period_subjects: Object,
         psrs: Object,
+        period: Object,
     },
 };
 </script>

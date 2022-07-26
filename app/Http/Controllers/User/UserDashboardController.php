@@ -81,7 +81,8 @@ class UserDashboardController extends Controller
         return Inertia::render('Schedule/Index', [
             'user'  =>  $user,
             'period_subjects'   =>  $period_subjects,
-            'psrs'  =>  $psrs
+            'psrs'  =>  $psrs,
+            'period'  =>  $period,
         ]);
     }
 

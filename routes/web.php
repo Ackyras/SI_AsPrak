@@ -67,7 +67,7 @@ Route::middleware(['auth', 'user_is_active', 'user'])->as('user.')->group(functi
     });
 
     Route::controller(UserDashboardController::class)
-        ->middleware(['is_open_for_schedule_submission'])
+        // ->middleware(['is_open_for_schedule_submission'])
         ->group(function () {
             Route::get('schedule', 'scheduleIndex')->name('schedule');
             Route::post('/schedule', 'scheduleStore')->name('schedule.store');

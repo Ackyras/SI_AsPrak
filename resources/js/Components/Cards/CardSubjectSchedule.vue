@@ -9,8 +9,11 @@
         >
             Anda belum memilih jadwal
         </p>
-        <div class="grid grid-cols-3 gap-2 text-sm text-gray-500 mb-3" v-else>
-            <p class="font-bold col-span-3">Jadwal terdaftar :</p>
+        <div v-else class="grid grid-cols-3 gap-2 text-sm text-gray-500"
+            :class="{
+                'mb-3' :  openSubmission === 1
+            }">
+            <p class="font-bold col-span-3" v-if="openSubmission === 1">Jadwal terdaftar :</p>
             <p class="col-span-1">Kelas</p>
             <p class="col-span-2 font-semibold">
                 {{ subjectData.schedules[0].classroom.name }}
@@ -28,7 +31,7 @@
             </p>
         </div>
 
-        <form @submit.prevent="submit">
+        <form @submit.prevent="submit" v-if="openSubmission === 1">
             <div class="mb-2">
                 <select
                     class="w-full text-sm text-gray-600 py-1 px-2 border-none bg-gray-50"
@@ -88,7 +91,7 @@
             </button>
         </form>
 
-        <p class="text-xs italic text-gray-500">
+        <p class="text-xs italic text-gray-500" v-if="openSubmission === 1">
             Note : Admin berhak menyesuaikan jadwal anda.
         </p>
     </div>
@@ -102,6 +105,7 @@ export default {
     name: "card-subject-schedule",
     props: {
         subjectData: Object,
+        openSubmission: Number,
     },
     setup(props) {
         const current_schedule = computed(() => {
