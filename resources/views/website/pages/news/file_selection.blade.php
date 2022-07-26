@@ -8,36 +8,6 @@
             Hasil Seleksi Berkas Penerimaan Asisten Praktikum <br class="hidden lg:block"> {{ $period->name }}
         </p>
     </div>
-    {{-- <div class="relative w-full p-2 mx-auto mb-4 bg-gray-200 lg:w-2/3 group">
-        <img src="{{ asset($period->selection_poster) }}" alt="" class="w-full">
-        <div class="hidden lg:group-hover:block absolute inset-0 bg-[#00000050]"></div>
-        <div class="absolute inset-0 items-center justify-center hidden lg:group-hover:flex">
-            <a href="{{ asset($period->selection_poster) }}"
-                class="flex items-center justify-center gap-3 py-2 pl-2 pr-4 text-white duration-300 ease-in-out rounded bg-emerald-600 hover:bg-emerald-500"
-                download>
-                <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
-                        <path fill-rule="evenodd"
-                            d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                            clip-rule="evenodd" />
-                    </svg>
-                </span>
-                <p class="text-xl font-semibold">Download Poster</p>
-            </a>
-        </div>
-        <a href="{{ asset($period->selection_poster) }}"
-            class="flex items-center justify-center gap-3 py-2 pl-2 pr-4 mt-2 text-white duration-300 ease-in-out rounded lg:hidden bg-emerald-600 hover:bg-emerald-500"
-            download>
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                        clip-rule="evenodd" />
-                </svg>
-            </span>
-            <p class="text-lg font-semibold">Download Poster</p>
-        </a>
-    </div> --}}
     <div class="w-full pb-2 mb-2 border-b-2 border-emerald-600">
         <p class="mb-2 text-lg font-bold text-emerald-600 lg:text-xl">
             Daftar Mahasiswa Lolos Seleksi Berkas

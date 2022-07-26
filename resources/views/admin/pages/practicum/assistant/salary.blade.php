@@ -27,6 +27,7 @@
                     "cost"          => 100000
                 ],
                 "presence_count"    => rand(1,12),
+                "is_honor_taken"    => rand(0,1),
             ]
         );
     }
@@ -45,8 +46,7 @@
 
         <div class="card-body">
             <div id="registrar_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <table id="registrar_table" class="table table-bordered table-hover dataTable dtr-inline collapsed"
-                    aria-describedby="registrar_table_info">
+                <table id="registrar_table" class="table table-bordered table-hover dataTable dtr-inline collapsed" aria-describedby="registrar_table_info">
                     <thead>
                         <tr>
                             <th style="text-align: center" tabindex="0" aria-controls="registrar_table" rowspan="1" colspan="1">
@@ -67,6 +67,9 @@
                             <th style="text-align: center" tabindex="0" aria-controls="registrar_table" rowspan="1" colspan="1">
                                 Total
                             </th>
+                            <th style="width: 120px; text-align: center" tabindex="0" aria-controls="registrar_table" rowspan="1" colspan="1">
+                                Status Pembayaran
+                            </th>
                         </tr>
                     </thead>
 
@@ -74,11 +77,60 @@
                         @foreach ($assistants as $assistant)
                             <tr class="">
                                 <td tabindex="0">{{ $assistant->name }}</td>
-                                <td>{{ $assistant->nim }}</td>
+                                <td style="text-align: center">{{ $assistant->nim }}</td>
                                 <td>{{ $assistant->subject->name }} - {{ $assistant->subject->classroom }}</td>
-                                <td>{{ $assistant->subject->cost }}</td>
-                                <td>{{ $assistant->presence_count }}</td>
-                                <td>{{ $assistant->subject->cost * $assistant->presence_count }}</td>
+                                <td style="text-align: center">{{ $assistant->subject->cost }}</td>
+                                <td style="text-align: center">{{ $assistant->presence_count }}</td>
+                                <td style="text-align: center">{{ $assistant->subject->cost * $assistant->presence_count }}</td>
+                                @if ($assistant->is_honor_taken)
+                                    <td>
+                                        <p style="background-color: #9ca3af; font-size: small" class="d-block m-0 w-100 text-center text-white py-2 rounded-sm">
+                                            Diserahkan
+                                        </p>
+                                    </td>
+                                @else
+                                    <td>
+                                        <button class="btn btn-sm btn-block btn-primary" type="button"
+                                            data-toggle="modal" data-target="#PaymentStatus{{ $loop->index }}">
+                                            Menunggu
+                                        </button>
+                                        <div class="modal fade" id="PaymentStatus{{ $loop->index }}" tabindex="-1" data-backdrop="static"
+                                            data-keyboard="false" aria-labelledby="PaymentStatusLabel{{ $loop->index }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h4 class="modal-title font-weight-bold"
+                                                            id="PaymentStatusLabel{{ $loop->index }}">
+                                                            Konfirmasi Pembayaran Honor Asisten
+                                                        </h4>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <form method="POST" action="">
+                                                        @csrf
+                                                        <div class="modal-body">
+                                                            <h5> Dengan menekan tombol <span class="text-primary font-weight-bold">KONFIRMASI</span>,
+                                                                anda menyatakan bahwa Honor Asisten Praktikum atas nama <span class="font-weight-bold">{{ $assistant->name }}</span>
+                                                                telah diserahkan kepada Asisten Praktikum terkait. 
+                                                            </h5>
+                                                            <h6 class="d-block m-0 my-2 font-italic text-danger">Catatan: Aksi ini tidak dapat dibatalkan.</h6>
+                                                            <h5>Konfirmasi Pembayaran?</h5>
+                                                        </div>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary" 
+                                                                name="is_honor_taken"
+                                                                value="1">
+                                                                KONFIRMASI
+                                                            </button>
+                                                        </div>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </td>
+                                @endif
                             </tr>
                         @endforeach
                     </tbody>
@@ -90,6 +142,7 @@
                             <th style="text-align: center" rowspan="1" colspan="1">Tarif Honor</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Jumlah Hadir</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Total</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Status Pembayaran</th>
                         </tr>
                     </tfoot>
                 </table>
@@ -112,31 +165,31 @@
             "buttons": [{
                     extend: "copy",
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5]
                     }
                 },
                 {
                     extend: "excel",
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5]
                     }
                 },
                 {
                     extend: "csv",
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5]
                     }
                 },
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5]
                     }
                 },
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2]
+                        columns: [0, 1, 2, 3, 4, 5]
                     }
                 },
                 "colvis"

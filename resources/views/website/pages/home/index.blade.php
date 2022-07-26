@@ -72,7 +72,8 @@
                             {{ $period->name }}
                         </a>
                         <p class="text-xs font-light text-gray-500 mb-2">{{ $period->is_exam_selection_over_date }}</p>
-                        <p class="truncate mb-2">Lorem ipsum dolor sit amet consectetur adipisicing elit. Cumque nulla rem, magni, ducimus reiciendis, magnam ut animi dolor autem laudantium distinctio repellendus laborum eveniet accusamus!
+                        <p class="truncate mb-2">
+                            Berikut adalah daftar mahasiswa yang dinyatakan lulus Seleksi Berkas Penerimaan Asisten Praktikum Laboratorium Multimedia ITERA Periode {{ $period->name }}
                         </p>
                         <a class="min-w-fit flex items-center gap-2 text-blue-600" 
                             href="{{ route('website.news.exam_selection_over',$period) }}">
@@ -96,7 +97,7 @@
                         </a>
                         <p class="text-xs font-light text-gray-500 mb-2">{{ $period->is_file_selection_over_date }}</p>
                         <p class="truncate mb-2">
-                            Lorem ipsum dolor, sit amet consectetur adipisicing elit. Fugiat doloribus sapiente, cum officia corrupti veniam ad, officiis accusantium sequi alias obcaecati eveniet dolore explicabo tenetur deleniti mollitia, dolorum odit rerum pariatur neque aut delectus quia quasi! Minima necessitatibus quos recusandae, deserunt impedit, error omnis eius cumque iusto doloremque maxime nemo accusamus perferendis id aspernatur fuga qui quam rerum iste quod itaque quasi alias! Sed vitae quis, pariatur quasi quo modi quia ducimus dolorem, odit minus doloremque non, delectus in perferendis similique commodi sit blanditiis obcaecati repellendus corrupti? Illum quia, maxime vitae fugiat velit laborum neque ratione? Dolor qui magni ullam.
+                            Berikut adalah daftar mahasiswa yang dinyatakan lulus Seleksi Tes Penerimaan Asisten Praktikum Laboratorium Multimedia ITERA Periode {{ $period->name }}
                         </p>
                         <a class="min-w-fit flex items-center gap-2 text-blue-600" 
                             href="{{ route('website.news.file_selection_over',$period) }}"
@@ -121,7 +122,7 @@
                             Telah Dibuka
                         </a>
                         <p class="text-xs font-light text-gray-500 mb-2">{{ $period->is_open_for_selection_date }}</p>
-                        <p class="truncate mb-2">Telah dibuka pendaftaran Asisten Praktikum Laboratorium Multimedia ITERA. Berikut adalah daftar Mata Kuliah dan jumlah Asisten Praktikum yang dibutuhkan pada saat ini.
+                        <p class="truncate mb-2">Telah dibuka pendaftaran Asisten Praktikum Laboratorium Multimedia ITERA Periode {{ $period->name }}. Berikut adalah daftar Mata Kuliah dan jumlah Asisten Praktikum yang dibutuhkan pada saat ini.
                         </p>
                         <a class="min-w-fit flex items-center gap-2 text-blue-600" 
                             href="{{ route('website.news.open_for_selection', $period) }}"
