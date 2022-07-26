@@ -26,7 +26,7 @@
                             <th style="text-align: center" tabindex="0" aria-controls="period_table" rowspan="1"
                                 colspan="1">Akhir Pendaftaran</th>
                             <th tabindex="0" aria-controls="period_table" rowspan="1" colspan="1"
-                                style="width: 165px; text-align: center">Aksi</th>
+                                style="width: 180px; text-align: center">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -39,86 +39,92 @@
                             </td>
                             <td>
                                 <div class="d-flex align-items-center justify-content-between">
-                                    <a class="btn btn-sm btn-success"
-                                        href="{{ route('admin.data-master.period.show', $period) }}">Detail</a>
-                                    <button type="button" class="btn btn-sm btn-primary" data-toggle="modal"
-                                        data-target="#periodEditFormModal{{ $period->id }}">Edit</button>
-                                    <!-- Edit Period Modal -->
-                                    <div class="modal fade" id="periodEditFormModal{{ $period->id }}" tabindex="-1"
-                                        data-backdrop="static" data-keyboard="false"
-                                        aria-labelledby="periodEditFormModalLabel{{ $period->id }}" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title font-weight-bold"
-                                                        id="periodEditFormModalLabel{{ $period->id }}">Ubah
-                                                        Periode</h3>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <form action="{{ route('admin.data-master.period.update', $period) }}"
-                                                    method="POST">
-                                                    @csrf
-                                                    @method('PUT')
-                                                    <div class="modal-body">
-                                                        <div class="form-group">
-                                                            <label for="name">Nama periode</label>
-                                                            <input type="text" id="name" name="name"
-                                                                class="form-control" required autocomplete="off"
-                                                                value="{{ $period->name }}"
-                                                                placeholder="Ganjil 20XX/20XX">
-                                                        </div>
-                                                        <div class="form-group">
-                                                            <label for="honor">Jumlah Honor/Pertemuan</label>
-                                                            <input type="text" id="honor" name="honor"
-                                                                class="form-control" required autocomplete="off"
-                                                                value="{{ $period->honor }}"
-                                                                placeholder="15000, 25000, ...">
-                                                        </div>
+                                    <div style="width: 32.95%">
+                                        <a class="btn btn-block btn-sm btn-success"
+                                            href="{{ route('admin.data-master.period.show', $period) }}">Detail</a>
+                                    </div>
+                                    <div style="width: 32.95%">
+                                        <button type="button" class="btn btn-block btn-sm btn-primary" data-toggle="modal"
+                                            data-target="#periodEditFormModal{{ $period->id }}">Edit</button>
+                                        <!-- Edit Period Modal -->
+                                        <div class="modal fade" id="periodEditFormModal{{ $period->id }}" tabindex="-1"
+                                            data-backdrop="static" data-keyboard="false"
+                                            aria-labelledby="periodEditFormModalLabel{{ $period->id }}" aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title font-weight-bold"
+                                                            id="periodEditFormModalLabel{{ $period->id }}">Ubah
+                                                            Periode</h3>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
                                                     </div>
+                                                    <form action="{{ route('admin.data-master.period.update', $period) }}"
+                                                        method="POST">
+                                                        @csrf
+                                                        @method('PUT')
+                                                        <div class="modal-body">
+                                                            <div class="form-group">
+                                                                <label for="name">Nama periode</label>
+                                                                <input type="text" id="name" name="name"
+                                                                    class="form-control" required autocomplete="off"
+                                                                    value="{{ $period->name }}"
+                                                                    placeholder="Ganjil 20XX/20XX">
+                                                            </div>
+                                                            <div class="form-group">
+                                                                <label for="honor">Jumlah Honor/Pertemuan</label>
+                                                                <input type="text" id="honor" name="honor"
+                                                                    class="form-control" required autocomplete="off"
+                                                                    value="{{ $period->honor }}"
+                                                                    placeholder="15000, 25000, ...">
+                                                            </div>
+                                                        </div>
 
-                                                    <div class="modal-footer">
-                                                        <button type="submit" class="btn btn-primary">SIMPAN
-                                                            PERUBAHAN</button>
-                                                    </div>
-                                                </form>
+                                                        <div class="modal-footer">
+                                                            <button type="submit" class="btn btn-primary">SIMPAN
+                                                                PERUBAHAN</button>
+                                                        </div>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <button type="button" class="btn btn-sm btn-danger" data-toggle="modal"
-                                        data-target="#confirmDeletePeriodModal{{ $period->id }}">Hapus</button>
-                                    <!-- Edit Period Modal -->
-                                    <div class="modal fade" id="confirmDeletePeriodModal{{ $period->id }}" tabindex="-1"
-                                        data-backdrop="static" data-keyboard="false"
-                                        aria-labelledby="confirmDeletePeriodModalLabel{{ $period->id }}"
-                                        aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h3 class="modal-title font-weight-bold"
-                                                        id="confirmDeletePeriodModalLabel{{ $period->id }}">Hapus
-                                                        Periode</h3>
-                                                    <button type="button" class="close" data-dismiss="modal"
-                                                        aria-label="Close">
-                                                        <span aria-hidden="true">&times;</span>
-                                                    </button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <h5>Yakin untuk menghapus periode '{{ $period->name }}'?</h5>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary"
-                                                        data-dismiss="modal">BATALKAN</button>
-                                                    <form
-                                                        action="{{ route('admin.data-master.period.destroy', $period) }}"
-                                                        method="post">
-                                                        @csrf
-                                                        @method('DELETE')
-                                                        <button type="submit" class="btn btn-danger">HAPUS
-                                                            DATA</button>
-                                                    </form>
+                                    <div style="width: 32.95%">
+                                        <button type="button" class="btn btn-block btn-sm btn-danger" data-toggle="modal"
+                                            data-target="#confirmDeletePeriodModal{{ $period->id }}">Hapus</button>
+                                        <!-- Edit Period Modal -->
+                                        <div class="modal fade" id="confirmDeletePeriodModal{{ $period->id }}" tabindex="-1"
+                                            data-backdrop="static" data-keyboard="false"
+                                            aria-labelledby="confirmDeletePeriodModalLabel{{ $period->id }}"
+                                            aria-hidden="true">
+                                            <div class="modal-dialog">
+                                                <div class="modal-content">
+                                                    <div class="modal-header">
+                                                        <h3 class="modal-title font-weight-bold"
+                                                            id="confirmDeletePeriodModalLabel{{ $period->id }}">Hapus
+                                                            Periode</h3>
+                                                        <button type="button" class="close" data-dismiss="modal"
+                                                            aria-label="Close">
+                                                            <span aria-hidden="true">&times;</span>
+                                                        </button>
+                                                    </div>
+                                                    <div class="modal-body">
+                                                        <h5>Yakin untuk menghapus periode '{{ $period->name }}'?</h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="button" class="btn btn-secondary"
+                                                            data-dismiss="modal">BATALKAN</button>
+                                                        <form
+                                                            action="{{ route('admin.data-master.period.destroy', $period) }}"
+                                                            method="post">
+                                                            @csrf
+                                                            @method('DELETE')
+                                                            <button type="submit" class="btn btn-danger">HAPUS
+                                                                DATA</button>
+                                                        </form>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

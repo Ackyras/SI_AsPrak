@@ -136,6 +136,9 @@ Route::middleware(['auth', 'user_is_active', 'admin'])->as('admin.')->prefix('ad
     Route::prefix('data-master')->as('data-master.')->group(function () {
         Route::resource('registrar',        RegistrarController::class);
         Route::resource('period',           PeriodController::class);
+        Route::get('period/{period}/subject/{period_subject}/assistant', 
+            [PeriodController::class, 'showAssistant'])
+            ->name('show-assistant');
         Route::resource('subject',          SubjectController::class)->only('index');
         Route::resource('room',             RoomController::class);
     });

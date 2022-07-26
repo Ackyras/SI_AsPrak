@@ -11,6 +11,8 @@ use App\Http\Requests\Period\StorePeriodRequest;
 use App\Http\Requests\Period\UpdatePeriodRequest;
 use App\Http\Requests\Period\StoreSubjectForPeriodRequest;
 use App\Http\Requests\Period\UpdateSubjectForPeriodRequest;
+use App\Models\PeriodSubject;
+use App\Models\PeriodSubjectRegistrar;
 
 class PeriodController extends Controller
 {
@@ -56,19 +58,13 @@ class PeriodController extends Controller
 
     public function show(Period $period)
     {
-        $period->load('subjects');
-        $allsubjects = Subject::whereDoesntHave('periods', function ($query) use ($period) {
-            $query->where('period_id', $period->id);
-        })->orderBy('name')->get();
-        return view('admin.pages.datamaster.periods.show', compact('period', 'allsubjects'));
+        $period_subjects = PeriodSubject::query()
+            ->with('subject')
+            ->where('period_id', $period->id)
+            ->get();
+        return view('admin.pages.datamaster.periods.show', compact('period', 'period_subjects'));
     }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Period  $period
-     * @return \Illuminate\Http\Response
-     */
+    
     public function edit(Period $period)
     {
         //
@@ -76,14 +72,7 @@ class PeriodController extends Controller
         $subjects = Subject::all();
         return view('admin.pages.datamaster.periods.edit', compact('period', 'subjects'));
     }
-
-    /**
-     * Update the specified resource in storage.
-     *
-     * @param  \App\Http\Requests\UpdatePeriodRequest  $request
-     * @param  \App\Models\Period  $period
-     * @return \Illuminate\Http\Response
-     */
+    
     public function update(UpdatePeriodRequest $request, Period $period)
     {
         //
@@ -117,13 +106,7 @@ class PeriodController extends Controller
             ]
         );
     }
-
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  \App\Models\Period  $period
-     * @return \Illuminate\Http\Response
-     */
+    
     public function destroy(Period $period)
     {
         //
@@ -201,5 +184,18 @@ class PeriodController extends Controller
                 'failed'    =>  'Status periode gagal dirubah',
             ]
         );
+    }
+
+    public function showAssistant(Period $period, PeriodSubject $period_subject)
+    {
+        $psrs = PeriodSubjectRegistrar::query()
+            ->with('registrar')
+            ->withCount('presences')
+            ->where('period_subject_id', $period_subject->id)
+            ->where('is_pass_file_selection', true)
+            ->where('is_pass_exam_selection', true)
+            ->get();
+        $period_subject->load('subject');
+        return view('admin.pages.datamaster.periods.show-assistant', compact('period', 'period_subject', 'psrs'));
     }
 }
