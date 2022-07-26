@@ -7,237 +7,6 @@
                 Slip Honor Asisten Praktikum
             </p>
 
-            <div style="width: 100%; margin-bottom: 0.75rem" ref="mainContent">
-                <div
-                    style="background-color: white; padding: 4px"
-                    class="bg-white p-4"
-                >
-                    <p
-                        style="
-                            font-size: 1rem;
-                            line-height: 1.5rem;
-                            font-weight: 700;
-                            text-align: center;
-                            margin-bottom: 0.75rem;
-                            color: #059669;
-                            text-transform: uppercase;
-                        "
-                    >
-                        SLIP HONOR : PERIODE {{ period.name }}
-                    </p>
-
-                    <div
-                        style="
-                            display: grid;
-                            grid-template-columns: repeat(3, minmax(0, 1fr));
-                            gap: 0.5rem;
-                            margin-bottom: 0.75rem;
-                            font-size: 0.875rem;
-                            line-height: 1.25rem;
-                        "
-                    >
-                        <p style="display: block; margin: 0; font-weight: 600">
-                            Nama Asisten
-                        </p>
-                        <p
-                            style="
-                                display: block;
-                                margin: 0;
-                                grid-column: span 2 / span 2;
-                            "
-                        >
-                            : {{ user.name }}
-                        </p>
-                        <p style="display: block; margin: 0; font-weight: 600">
-                            Nomor Induk Mahasiswa
-                        </p>
-                        <p
-                            style="
-                                display: block;
-                                margin: 0;
-                                grid-column: span 2 / span 2;
-                            "
-                        >
-                            : {{ user.nim }}
-                        </p>
-                        <p style="display: block; margin: 0; font-weight: 600">
-                            Mata Kuliah
-                        </p>
-                        <p
-                            style="
-                                display: block;
-                                margin: 0;
-                                grid-column: span 2 / span 2;
-                            "
-                        >
-                            : {{ concateNames }}
-                        </p>
-                    </div>
-
-                    <div style="position: relative; margin-bottom: 0.75rem">
-                        <table
-                            style="
-                                width: 100%;
-                                font-size: 0.875rem;
-                                line-height: 1.25rem;
-                                text-align: left;
-                                color: #6b7280;
-                            "
-                        >
-                            <thead
-                                style="
-                                    font-size: 0.75rem;
-                                    line-height: 1rem;
-                                    color: #047857;
-                                    background-color: #d1fae5 !important;
-                                    -webkit-print-color-adjust: exact;
-                                    text-transform: uppercase;
-                                "
-                            >
-                                <tr>
-                                    <th
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1.5rem;
-                                            padding-right: 1.5rem;
-                                            width: 40%;
-                                        "
-                                        scope="col"
-                                        class="py-3 px-6 w-2/5"
-                                    >
-                                        Nama Mata Kuliah
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1.5rem;
-                                            padding-right: 1.5rem;
-                                            width: 20%;
-                                            text-align: center;
-                                        "
-                                    >
-                                        Jumlah Presensi
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1.5rem;
-                                            padding-right: 1.5rem;
-                                            width: 20%;
-                                            text-align: center;
-                                        "
-                                    >
-                                        Tarif (RP)
-                                    </th>
-                                    <th
-                                        scope="col"
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1.5rem;
-                                            padding-right: 1.5rem;
-                                            width: 20%;
-                                            text-align: center;
-                                        "
-                                    >
-                                        Total (RP)
-                                    </th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr
-                                    style="
-                                        border-style: solid;
-                                        border-bottom-width: 1px;
-                                        border-color: rgb(
-                                            229 231 235
-                                        ) !important;
-                                    "
-                                    v-for="psr in psrs"
-                                >
-                                    <th
-                                        scope="row"
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            font-weight: 500;
-                                            color: #111827;
-                                            white-space: nowrap;
-                                        "
-                                    >
-                                        {{ psr.period_subject.subject.name }}
-                                    </th>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        {{ psr.presences_count }}
-                                    </td>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        {{ period.honor }}
-                                    </td>
-                                    <td
-                                        style="
-                                            padding-top: 0.75rem;
-                                            padding-bottom: 0.75rem;
-                                            padding-left: 1rem;
-                                            padding-right: 1rem;
-                                            text-align: center;
-                                        "
-                                    >
-                                        {{ psr.presences_count * period.honor }}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-
-                    <div
-                        style="
-                            display: flex;
-                            justify-content: flex-end;
-                            width: 100%;
-                        "
-                    >
-                        <p
-                            style="
-                                display: block;
-                                width: fit-content;
-                                padding: 0.5rem;
-                                background-color: #ecfdf5 !important;
-                                -webkit-print-color-adjust: exact;
-                                color: #10b981;
-                                font-size: 1.125rem;
-                                line-height: 1.75rem;
-                            "
-                        >
-                            <span style="margin-right: 1rem"> Total</span>: Rp.
-                            {{ totalSalary }}
-                        </p>
-                    </div>
-                </div>
-            </div>
-
             <div class="w-full mb-3">
                 <div class="bg-white p-4">
                     <p
@@ -339,13 +108,18 @@
                 <button
                     type="button"
                     v-on:click="printPdf"
-                    class="block py-2 px-3 text-white font-bold bg-emerald-600 hover:bg-emerald-500 uppercase"
+                    class="flex gap-2 items-center text-sm py-2 px-3 text-white font-bold bg-emerald-600 hover:bg-emerald-500 uppercase"
                 >
-                    CETAK SLIP HONOR
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z" clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    <p>CETAK SLIP HONOR</p>
                 </button>
             </div>
 
-            <p class="text-lg font-bold mb-2">USER</p>
+            <!-- <p class="text-lg font-bold mb-2">USER</p>
             <pre class="mb-3 border border-black">{{
                 JSON.stringify(user, null, "\t")
             }}</pre>
@@ -353,17 +127,22 @@
             <p class="text-lg font-bold mb-2">PSRS</p>
             <pre class="mb-3 border border-black">{{
                 JSON.stringify(psrs, null, "\t")
-            }}</pre>
+            }}</pre> -->
         </div>
     </Authenticated>
 </template>
 <script>
 import Authenticated from "@/Layouts/Authenticated";
+import pdfMake from "pdfmake/build/pdfmake";
+import pdfFonts from "pdfmake/build/vfs_fonts";
+pdfMake.vfs = pdfFonts.pdfMake.vfs;
 
 export default {
     name: "dashboard-page",
     data() {
-        return {};
+        return {
+            tblBorder : [false, false, false, true]
+        };
     },
     props: {
         user: Object,
@@ -388,11 +167,127 @@ export default {
             }
             return name;
         },
+        tableBody() {
+            let body = [
+                [
+                    {text: 'Mata Kuliah',       style: 'tableHeader', margin: [8,8], border: this.tblBorder}, 
+                    {text: 'Jumlah Presensi',   style: 'tableHeader', margin: [8,8], alignment: 'center', border: this.tblBorder}, 
+                    {text: 'Tarif (RP)',        style: 'tableHeader', margin: [8,8], alignment: 'center', border: this.tblBorder},
+                    {text: 'Total (RP)',        style: 'tableHeader', margin: [8,8], alignment: 'center', border: this.tblBorder}
+                ]
+            ];
+            for(let i = 0; i < this.psrs.length; i++) {
+                let row = [
+                    {text: this.psrs[i].period_subject.subject.name, margin: [4,6,0,6], border: this.tblBorder}, 
+                    {text: this.psrs[i].presences_count, style: 'tableContent', border: this.tblBorder},
+                    {text: this.period.honor, style: 'tableContent', border: this.tblBorder},
+                    {text: this.psrs[i].presences_count * this.period.honor, style: 'tableContent', border: this.tblBorder},
+                ];
+                body.push(row);
+            }
+            return body;
+        }
     },
     methods: {
         printPdf() {
-            let content = this.$refs.mainContent;
-            console.log(content);
+            let docDefinition = {
+                info: {
+                    title: 'Slip Honor ' + this.period.name,
+                },
+                content: [
+                    {text: 'Slip Honor '+this.period.name, style: 'title'},
+
+                    {
+                        style: 'personalInfo',
+                        table: {
+                            widths: [135, 5, '*'],
+                            body: [
+                                [
+                                    {text: 'Nama Asisten', margin: [0, 5], bold: true}, 
+                                    {text: ':', margin: [0, 5]}, 
+                                    {text: this.user.name, margin: [0, 5]}
+                                ],
+                                [
+                                    {text: 'Nomor Induk Mahasiswa', margin: [0, 5], bold: true}, 
+                                    {text: ':', margin: [0, 5]},
+                                    {text: this.user.nim, margin: [0, 5]}
+                                ],
+                                [
+                                    {text: 'Mata Kuliah', margin: [0, 5], bold: true}, 
+                                    {text: ':', margin: [0, 5]},
+                                    {text: this.concateNames, margin: [0, 5]}
+                                ],
+                            ],
+                        },
+                        layout: 'noBorders'
+                    },
+                    
+                    {
+                        style: 'tableStyle',
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', 110, 72, 72],
+                            body: this.tableBody
+                        },
+                    },
+
+                    {
+                        style: 'tableStyle',
+                        table: {
+                            headerRows: 1,
+                            widths: ['*', 'auto'],
+                            body:[
+                                [
+                                    {text: ' ',},
+                                    {text: 'Total : Rp.'+this.totalSalary, style: 'totalSalaryContainer', margin: [5,10,5,10]}
+                                ]
+                            ]
+                        },
+                        layout: 'noBorders'
+                    },
+                    
+                ],
+                styles: {
+                    title: {
+                        fontSize: 18,
+                        bold: true,
+                        margin: [0, 0, 0, 10],
+                        alignment: 'center',
+                        color: '#059669'
+                    },
+                    header: {
+                        fontSize: 18,
+                        bold: true,
+                        margin: [0, 0, 0, 10]
+                    },
+                    tableStyle: {
+                        margin: [0, 5, 0, 15]
+                    },
+                    personalInfo: {
+                        margin: [0, 5, 0, 15],
+                    },
+                    tableHeader: {
+                        bold: true,
+                        fontSize: 12,
+                        color: '#047857',
+                        fillColor : '#d1fae5'
+                    },
+                    totalSalaryContainer: {
+                        bold: true,
+                        fontSize: 14,
+                        color: '#047857',
+                        fillColor : '#d1fae5'
+                    },
+                    tableContent: {
+                        alignment: 'center', 
+                        margin: [6,6], 
+                    }
+                },
+            };
+
+            const pdf = pdfMake.createPdf(docDefinition)
+            pdf.download('Slip Honor Asisten Praktikum.pdf')
+
         },
     },
     components: {

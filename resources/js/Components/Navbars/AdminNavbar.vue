@@ -4,9 +4,6 @@
             <!-- User -->
             <ul class="hidden items-center md:flex gap-4 list-none">
                 <li class="inline-block relative">
-                    <notification-dropdown />
-                </li>
-                <li class="inline-block relative">
                     <user-dropdown />
                 </li>
             </ul>

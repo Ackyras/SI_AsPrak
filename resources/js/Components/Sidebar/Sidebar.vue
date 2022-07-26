@@ -26,9 +26,6 @@
             <!-- USER SECTION -->
             <ul class="flex items-center gap-2 list-none md:hidden">
                 <li class="relative inline-block">
-                    <notification-dropdown />
-                </li>
-                <li class="relative inline-block">
                     <user-dropdown />
                 </li>
             </ul>

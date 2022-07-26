@@ -68,7 +68,7 @@
                 </div>
             </div>
 
-            <div class="w-full px-4 mx-auto border-red-600 md:px-10 border-3">
+            <div class="w-full px-4 mx-auto md:px-10">
                 <!-- :class="{ 'md:mt-[4rem]': $page.url !== '/dashboard', }"> -->
                 <slot />
                 <footer-admin />
