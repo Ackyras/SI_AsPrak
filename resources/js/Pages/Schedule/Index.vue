@@ -12,10 +12,6 @@
             <pre class="mb-3 border border-black">{{ JSON.stringify(psrs, null, '\t') }}</pre> -->
             <!-- <p class="text-lg font-bold mb-2">PERIOD SUBJECT</p>
             <pre class="mb-3 border border-black">{{ JSON.stringify(period_subjects, null, '\t') }}</pre> -->
-            <!-- <p class="text-lg font-bold mb-2">PERIOD</p>
-            <pre class="mb-3 border border-black">{{
-                JSON.stringify(period, null, "\t")
-            }}</pre> -->
         </div>
     </Authenticated>
 </template>

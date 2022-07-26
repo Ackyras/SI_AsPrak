@@ -91,7 +91,7 @@
                         </Link>
                     </li>
                     <!-- UJIAN SELEKSI -->
-                    <li>
+                    <li v-if="$page.props.this_period.is_exam_selection_over === 0">
                         <Link
                             class="flex items-center w-full gap-2 px-2 py-2 mb-2 text-xs font-bold text-gray-700 uppercase hover:text-emerald-500 md:text-sm"
                             :href="route('user.exam.index')"
@@ -117,7 +117,7 @@
                         </Link>
                     </li>
                     <!-- JADWAL PRAKTIKUM -->
-                    <li>
+                    <li v-if="$page.props.this_period.is_exam_selection_over === 1">
                         <Link
                             class="flex items-center w-full gap-2 px-2 py-2 mb-2 text-xs font-bold text-gray-700 uppercase hover:text-emerald-500 md:text-sm"
                             :href="route('user.schedule')"
@@ -142,7 +142,7 @@
                         </Link>
                     </li>
                     <!-- DATA PRESENSI -->
-                    <li>
+                    <li v-if="$page.props.this_period.is_exam_selection_over === 1">
                         <Link
                             class="flex items-center w-full gap-2 px-2 py-2 mb-2 text-xs font-bold text-gray-700 uppercase hover:text-emerald-500 md:text-sm"
                             :href="route('user.presence.index')"
@@ -167,7 +167,7 @@
                         </Link>
                     </li>
                     <!-- DATA HONOR -->
-                    <li>
+                    <li v-if="$page.props.this_period.is_exam_selection_over === 1">
                         <Link
                             class="flex items-center w-full gap-2 px-2 py-2 mb-2 text-xs font-bold text-gray-700 uppercase hover:text-emerald-500 md:text-sm"
                             :href="route('user.salary.index')"
@@ -195,7 +195,7 @@
                         </Link>
                     </li>
                     <!-- SCAN QR CODE -->
-                    <li>
+                    <li v-if="$page.props.this_period.is_exam_selection_over === 1">
                         <button
                             type="button"
                             class="flex gap-2 justify-center items-center text-white bg-emerald-500 text-xs md:text-sm uppercase py-[6px] w-full font-bold hover:bg-emerald-600 drop-shadow-sm rounded"
