@@ -8,43 +8,45 @@
             Seleksi Penerimaan Asisten Praktikum <br class="hidden lg:block"> {{ $period->name }}
         </p>
     </div>
-    <div class="w-full lg:w-2/3 mx-auto p-2 bg-gray-200 relative group mb-4">
-        <img src="{{ asset('storage/'.$period->selection_poster) }}" alt="" class="w-full">
-        <div class="hidden lg:group-hover:block absolute inset-0 bg-[#00000050]"></div>
-        <div class="hidden lg:group-hover:flex absolute inset-0 items-center justify-center">
-            <a href="{{ asset($period->selection_poster) }}"
-                class="flex justify-center items-center gap-3 py-2 pl-2 pr-4 rounded bg-emerald-600 hover:bg-emerald-500 ease-in-out duration-300 text-white"
+    @if ($period->selection_poster)
+        <div class="w-full lg:w-2/3 mx-auto p-2 bg-gray-200 relative group mb-4">
+            <img src="{{ asset('storage/'.$period->selection_poster) }}" alt="" class="w-full">
+            <div class="hidden lg:group-hover:block absolute inset-0 bg-[#00000050]"></div>
+            <div class="hidden lg:group-hover:flex absolute inset-0 items-center justify-center">
+                <a href="{{ asset('storage/'.$period->selection_poster) }}"
+                    class="flex justify-center items-center gap-3 py-2 pl-2 pr-4 rounded bg-emerald-600 hover:bg-emerald-500 ease-in-out duration-300 text-white"
+                    download>
+                    <span>
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd"
+                                d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
+                                clip-rule="evenodd" />
+                        </svg>
+                    </span>
+                    <p class="text-xl font-semibold">Download Poster</p>
+                </a>
+            </div>
+            <a href="{{ asset('storage/'.$period->selection_poster) }}"
+                class="flex lg:hidden mt-2 justify-center items-center gap-3 py-2 pl-2 pr-4 rounded bg-emerald-600 hover:bg-emerald-500 ease-in-out duration-300 text-white"
                 download>
                 <span>
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
                             clip-rule="evenodd" />
                     </svg>
                 </span>
-                <p class="text-xl font-semibold">Download Poster</p>
+                <p class="text-lg font-semibold">Download Poster</p>
             </a>
         </div>
-        <a href="{{ asset($period->selection_poster) }}"
-            class="flex lg:hidden mt-2 justify-center items-center gap-3 py-2 pl-2 pr-4 rounded bg-emerald-600 hover:bg-emerald-500 ease-in-out duration-300 text-white"
-            download>
-            <span>
-                <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                    <path fill-rule="evenodd"
-                        d="M3 17a1 1 0 011-1h12a1 1 0 110 2H4a1 1 0 01-1-1zm3.293-7.707a1 1 0 011.414 0L9 10.586V3a1 1 0 112 0v7.586l1.293-1.293a1 1 0 111.414 1.414l-3 3a1 1 0 01-1.414 0l-3-3a1 1 0 010-1.414z"
-                        clip-rule="evenodd" />
-                </svg>
-            </span>
-            <p class="text-lg font-semibold">Download Poster</p>
-        </a>
-    </div>
+    @endif
     <div class="w-full mb-2 pb-2 border-b-2 border-emerald-600">
         <p class="font-bold text-emerald-600 text-lg lg:text-xl mb-2">
             Deskripsi Penerimaan
         </p>
         <p class="mb-2 lg:pl-2">
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ex maxime nam nisi aliquam alias, eos molestiae!
-            Libero, odit! At, reprehenderit. Accusamus iusto blanditiis velit aut ab dolor tenetur officiis in!
+            Telah dibuka pendaftaran Asisten Praktikum Laboratorium Multimedia ITERA.
+            Berikut adalah daftar Mata Kuliah dan jumlah Asisten Praktikum yang dibutuhkan pada saat ini.
         </p>
         @if ($period->subjects->count() > 0)
         <p class="font-bold text-emerald-600 text-lg lg:text-xl mb-2">Daftar Asisten Praktikum Dibutuhkan</p>
