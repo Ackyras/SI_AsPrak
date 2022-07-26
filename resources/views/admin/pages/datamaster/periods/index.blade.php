@@ -165,7 +165,7 @@
                     <div class="form-group">
                         <label for="honor">Jumlah Honor/Pertemuan</label>
                         <input type="text" id="honor" name="honor" class="form-control" required autocomplete="off"
-                            placeholder="Ganjil 20XX/20XX">
+                            placeholder="99000">
                     </div>
                 </div>
 

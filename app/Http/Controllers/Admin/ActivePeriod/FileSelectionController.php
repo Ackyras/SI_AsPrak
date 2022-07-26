@@ -108,7 +108,7 @@ class FileSelectionController extends Controller
         AnnouncePassFileSelection::dispatch($period);
         return back()->with(
             [
-                'success'   => 'gl'
+                'success'   => 'Informasi kelulusan seleksi berkas telah diumumkan kepada pendaftar'
             ]
         );
     }

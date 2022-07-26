@@ -63,7 +63,7 @@ class ExamController extends Controller
                 'subject'
             ]
         );
-        dd($period_subject);
+        // dd($period_subject);
 
         return Inertia::render(
             'Exam/TakeExam',

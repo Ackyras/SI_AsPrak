@@ -146,7 +146,6 @@
 
 @section('modals')
 
-<!-- Add Question Modal -->
 <div class="modal fade" id="announceResult" tabindex="-1" data-backdrop="static" data-keyboard="false"
     aria-labelledby="announceResultLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg" id="announceResultDialog">
