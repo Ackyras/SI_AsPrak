@@ -60,7 +60,16 @@
             <a href="{{ route('website.home') }}" class="brand-link">
                 <img src="{{ asset('images/ITR_FIX.png') }}" alt="Logo"
                     class="brand-image img-circle elevation-3" style="opacity: .8">
-                <span class="brand-text font-weight-light">SIAP Terpadu</span>
+                <span class="brand-text font-weight-light">
+                    <span class="d-flex flex-column">
+                        <span style="font-size: 8pt" class="d-block m-0">
+                            Laboratorium Multimedia
+                        </span>
+                        <span style="font-size: 8pt" class="d-block m-0">
+                            Institut Teknologi Sumatera
+                        </span>
+                    </span>
+                </span>
             </a>
             @include('admin.layouts.navigation')
         </aside>
@@ -121,10 +130,10 @@
         <footer class="main-footer">
             <!-- To the right -->
             <div class="float-right d-none d-sm-inline">
-                Teknik Informatika ITERA
+                Institut Teknologi Sumatera
             </div>
             <!-- Default to the left -->
-            <strong>Copyright &copy; 2022 <a href="https://adminlte.io">SIAP Terpadu</a></strong>
+            <strong>Copyright &copy; {{ date("Y") }} <a href="/">Laboratorium Multimedia</a></strong>
         </footer>
     </div>
     <!-- ./wrapper -->

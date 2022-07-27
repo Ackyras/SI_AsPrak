@@ -18,9 +18,10 @@
             <button
                 type="button"
                 v-on:click="RedirectToHome"
-                class="inline-block pt-2 mr-0 text-lg font-bold text-left text-gray-700 md:block md:pb-2 hover:text-green-600 whitespace-nowrap"
+                class="flex flex-col justify-center pt-2 mr-0 text-sm font-bold text-left text-gray-700 md:block md:pb-2 hover:text-green-600"
             >
-                SIAP Terpadu
+                <span class="block m-0">Laboratorium Multimedia</span>
+                <span class="block m-0">Institut Teknologi Sumatera</span>
             </button>
 
             <!-- USER SECTION -->
@@ -42,9 +43,10 @@
                             <button
                                 type="button"
                                 v-on:click="RedirectToHome"
-                                class="inline-block p-2 mr-0 text-lg font-bold text-left text-gray-700 md:block md:pb-2 hover:text-green-600 whitespace-nowrap"
+                                class="flex flex-col justify-center p-2 mr-0 text-xs font-bold text-left text-gray-700 md:pb-2 hover:text-green-600"
                             >
-                                SIAP Terpadu
+                                <span class="block m-0">Laboratorium Multimedia</span>
+                                <span class="block m-0">Institut Teknologi Sumatera</span>
                             </button>
                         </div>
                         <div class="flex justify-end w-6/12">
