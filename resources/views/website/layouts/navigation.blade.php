@@ -1,12 +1,15 @@
 <nav class="w-full fixed z-50 flex justify-between drop-shadow-md items-center bg-white p-2 lg:py-2 lg:px-3">
     <div class="flex items-center gap-4 ">
         <a href="{{ route('website.home') }}" class="flex gap-2 items-center group">
-            <img src="{{ asset('images/letter-s.png') }}" alt="SIAP Terpadu Logo"
-                class="w-8 lg:w-10 h-auto border-4 border-gray-600 rounded-full group-hover:border-emerald-600"
+            <img src="{{ asset('images/ITR_FIX.png') }}" alt="Logo"
+                class="w-8 lg:w-10 h-auto rounded-full group-hover:border-emerald-600"
                 style="opacity: .8">
-            <span class="text-lg lg:text-2xl text-gray-600 group-hover:text-emerald-600 font-black">SIAP Terpadu</span>
+            <p class="flex flex-col items-start text-xs lg:text-sm text-gray-600 group-hover:text-emerald-600 font-black">
+                <span class="block m-0">Laboratorium Multimedia</span>
+                <span class="block m-0">Institut Teknologi Sumatera</span>
+            </p>
         </a>
-        <div class="relative hidden lg:block" x-data="{ openPengumuman : false, openCD : true, openCU : false }">
+        {{-- <div class="relative hidden lg:block" x-data="{ openPengumuman : false, openCD : true, openCU : false }">
             <a role="button" @click="
                     openPengumuman = ! openPengumuman,
                     openCD =! openCD,
@@ -35,12 +38,7 @@
                     class="block font-semibold w-full uppercase py-1 px-2 text-gray-600 hover:text-white hover:bg-emerald-500">Hasil
                     Seleksi Tes</a>
             </div>
-        </div>
-        {{-- <a href="{{ route('website.registration.index') }}"
-            class="hidden lg:block text-gray-600 text-lg uppercase tracking-wider font-thin hover:text-emerald-600 duration-[375ms]">
-            --}}
-            {{-- <span>Pendaftaran</span> --}}
-            {{-- </a> --}}
+        </div> --}}
     </div>
     @auth
     <a href="{{ auth()->user()->is_admin ? route('admin.dashboard') : route('user.dashboard') }}"
@@ -106,7 +104,7 @@
             </a>
             @endauth
         </div>
-        <a role="button" @click="
+        {{-- <a role="button" @click="
                 openPengumuman = ! openPengumuman,
                 openCD =! openCD,
                 openCU =! openCU
@@ -133,12 +131,11 @@
             <a href=""
                 class="block font-semibold w-full uppercase py-1 px-7 text-emerald-500 hover:text-white hover:bg-emerald-500">Hasil
                 Seleksi Tes</a>
-        </div>
+        </div> --}}
         {{-- <a href="{{ route('website.registration.index') }}"
             class="block text-gray-600 text-lg uppercase tracking-wider px-4 mt-4 font-thin hover:text-emerald-600 duration-[375ms]">
             --}}
             {{-- <span>Pendaftaran</span> --}}
             {{-- </a> --}}
     </div>
-    <p>Copyright &copy; 2022 SIAP Terpadu</p>
 </div>

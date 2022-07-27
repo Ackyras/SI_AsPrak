@@ -36,7 +36,7 @@
 @extends('website.layouts.master')
 
 @section('content')
-<div class="w-full lg:w-3/5 m-auto bg-white drop-shadow-md py-4 px-3 lg:p-10 min-h-[calc(100vh-4.75rem)] lg:min-h-[calc(100vh-5.5rem)]">
+<div class="w-full lg:w-3/5 m-auto bg-white bg-opacity-75 drop-shadow-md py-4 px-3 lg:p-10 ">
     <div class="mb-4">
         <p class="text-2xl lg:text-3xl text-center text-emerald-600 font-serif font-bold tracking-wider">
             Berita dan Pengumuman

@@ -9,7 +9,7 @@
 
             <div class="input-group mb-3">
                 <input type="password" name="password" class="form-control @error('password') is-invalid @enderror"
-                       placeholder="{{ __('Password') }}" required autocomplete="current-password">
+                    placeholder="{{ __('Password') }}" required autocomplete="current-password">
                 <div class="input-group-append">
                     <div class="input-group-text">
                         <span class="fas fa-lock"></span>
