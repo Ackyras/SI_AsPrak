@@ -2,14 +2,17 @@
 
 namespace App\Http\Controllers\Admin\ActivePeriod;
 
+use App\Models\Answer;
 use App\Models\Period;
 use App\Models\Subject;
+use App\Models\Registrar;
 use Illuminate\Http\Request;
 use App\Models\PeriodSubject;
 use App\Http\Controllers\Controller;
 use App\Models\PeriodSubjectRegistrar;
+use Illuminate\Support\Facades\Notification;
+use App\Notifications\Registrar\PassExamSelection;
 use App\Jobs\Recruitment\AnnouncePassExamSelection;
-use App\Models\Answer;
 
 class ExamSelectionController extends Controller
 {
@@ -197,20 +200,17 @@ class ExamSelectionController extends Controller
     public function announceExamSelectionResult()
     {
         $period = $this->period;
-        if ($period->is_exam_selection_over) {
-            return back()->with(
-                [
-                    'failed'    =>  'Pengumuman sudah dibuat, tidak dapat lagi mengubah ataupun mengumumkan kelulusan asisten praktikum'
-                ]
-            );
-        }
+        // if ($period->is_exam_selection_over) {
+        //     return back()->with(
+        //         [
+        //             'failed'    =>  'Pengumuman sudah dibuat, tidak dapat lagi mengubah ataupun mengumumkan kelulusan asisten praktikum'
+        //         ]
+        //     );
+        // }
         AnnouncePassExamSelection::dispatch($period);
-        $period->is_exam_selection_over = true;
-        $period->is_exam_selection_over_date = now();
-        $period->save();
         return back()->with(
             [
-                'success'   => 'gl'
+                'success'   => 'Kelulusan berhasil diumumkan'
             ]
         );
     }

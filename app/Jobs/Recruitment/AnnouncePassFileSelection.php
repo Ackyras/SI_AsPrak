@@ -53,9 +53,9 @@ class AnnouncePassFileSelection implements ShouldQueue
                     'period_subjects.subject'
                 ]
             )->get();
-        foreach ($registrars as $registrar) {
+        foreach ($registrars as $key => $registrar) {
             $user = [];
-            $user['email'] = 'siap' . $this->period->id . '.' . $registrar->nim.'@siap.terpadu';
+            $user['email'] = 'siap' . $this->period->id . '.' . $registrar->nim . '@siap.terpadu';
             $user['password'] = Str::random(8);
             $period = $this->period;
             // $newUser = 'Sa';
@@ -71,7 +71,7 @@ class AnnouncePassFileSelection implements ShouldQueue
             $registrar->user_id = $newUser->id;
             $registrar->save();
             if ($newUser) {
-                Notification::send($registrar, new PassFileSelection($user, $registrar));
+                Notification::send($registrar, (new PassFileSelection($user, $registrar))->delay($key * 5));
                 // $registrar->notify(new PassFileSelection($user, $registrar));
                 // Mail::to($registrar->email)->send(new FileSelectionNotification($maildata));
             }

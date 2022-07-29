@@ -13,7 +13,7 @@ class PassExamSelection extends Notification implements ShouldQueue
 {
     use Queueable;
 
-    private $user, $registrar, $period;
+    private $registrar, $period;
 
     /**
      * Create a new notification instance.
@@ -51,8 +51,6 @@ class PassExamSelection extends Notification implements ShouldQueue
         $maildata['receiver']   = $this->registrar->name;
         $maildata['subject']    = 'Seleksi Asisten Praktikum';
         $maildata['period']     =   $this->period->name;
-        $maildata['subjects']   =   $this->registrar->period_subjects;
-        // dd($this->registrar);
         return (new ExamSelectionNotification($maildata, $this->registrar));
     }
 

@@ -10,15 +10,15 @@
 
 Selamat kepada saudara {{ $maildata['receiver'] }},
 telah dinyatakan lulus tahap Seleksi Tes pada Penerimaan Asisten Praktikum Mata Kuliah
-@foreach ($maildata['subjects'] as $subject)
-@if ($subject->pivot->is_pass_file_selection)
+@foreach ($registrar->period_subjects as $subject)
+@if ($subject->pivot->is_pass_exam_selection)
 - **{{ $subject->subject->name }}**
 @endif
 
 @endforeach
 
 Dengan ini anda telah resmi menjadi Asisten Praktikum Laboratorium Multimedia Institut Teknologi Sumatera Periode {{
-$period }}.
+$period->name }}.
 
 Diharapkan untuk dapat memberikan kontribusi terbaiknya dalam tanggung jawab sebagai asisten praktikum.
 

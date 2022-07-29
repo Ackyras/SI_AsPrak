@@ -43,24 +43,29 @@ class AnnouncePassExamSelection implements ShouldQueue
     {
         //
         $registrars = Registrar::query()
-            ->whereRelation('period_subjects', 'is_pass_file_selection', true)
-            ->whereRelation('period_subjects', 'is_pass_exam_selection', true)
+            ->whereRelation('period_subjects', 'psr.is_pass_file_selection', true)
+            // ->whereRelation('period_subjects', 'psr.is_pass_exam_selection', true)
             ->whereRelation('period_subjects', 'period_id', $this->period->id)
             ->with(
                 [
-                    'period_subjects' => function ($query) {
-                        $query->where('is_pass_file_selection', true)
-                            ->where('is_pass_exam_selection', true);
-                    },
-                    'period_subjects.subject',
-                    'user'
+                    'user',
+                    'period_subjects.subject'
                 ]
-            )->get();
-        foreach ($registrars as $registrar) {
+            )->get()
+            //
+        ;
+        foreach ($registrars as $key => $registrar) {
             $user = $registrar->user;
-            $user->is_asprak = true;
-            $user->save();
-            Notification::send($registrar, new PassExamSelection($user, $registrar));
+            if ($registrar->period_subjects()->where('is_pass_exam_selection', true)->exists()) {
+                $user->is_asprak = true;
+                $user->save();
+                $delay = $key + 5;
+                Notification::send($registrar, (new PassExamSelection($registrar))->delay($key * 5));
+                // $registrar->notify(new PassExamSelection($registrar));
+            } else {
+                $user->is_active = false;
+                $user->save();
+            }
         }
     }
 }

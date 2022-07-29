@@ -13,28 +13,29 @@ class ExamSelectionNotification extends Mailable
 {
     use Queueable, SerializesModels;
 
-    public $maildata, $period, $email;
+    public $maildata, $period, $email, $registrar;
 
     public function __construct($maildata, $registrar)
     {
         $this->maildata = $maildata;
+        $this->registrar = $registrar;
         $this->email    =   $registrar->email;
         $this->period = Period::firstWhere('is_active', true);
     }
 
     public function build()
     {
-        Log::emergency($this->email);
         return $this
             ->with(
                 [
                     'period'    =>  $this->period,
-                    'maildata'  =>  $this->maildata
+                    'maildata'  =>  $this->maildata,
+                    'registrar' =>  $this->registrar,
                 ]
             )
             ->to($this->email)
             ->subject('Pengumuman kelulusan seleksi berkas Asisten Praktikum')
-            ->markdown('emails.selection.file-selection.index')
+            ->markdown('emails.selection.exam-selection.index')
             // ->action('Login Sekarang', route('login'))
             //
         ;
