@@ -11,6 +11,7 @@ use App\Http\Requests\Period\StorePeriodRequest;
 use App\Http\Requests\Period\UpdatePeriodRequest;
 use App\Http\Requests\Period\StoreSubjectForPeriodRequest;
 use App\Http\Requests\Period\UpdateSubjectForPeriodRequest;
+use App\Jobs\Period\DisableAllUserJob;
 use App\Models\PeriodSubject;
 use App\Models\PeriodSubjectRegistrar;
 
@@ -64,7 +65,7 @@ class PeriodController extends Controller
             ->get();
         return view('admin.pages.datamaster.periods.show', compact('period', 'period_subjects'));
     }
-    
+
     public function edit(Period $period)
     {
         //
@@ -72,7 +73,7 @@ class PeriodController extends Controller
         $subjects = Subject::all();
         return view('admin.pages.datamaster.periods.edit', compact('period', 'subjects'));
     }
-    
+
     public function update(UpdatePeriodRequest $request, Period $period)
     {
         //
@@ -106,7 +107,7 @@ class PeriodController extends Controller
             ]
         );
     }
-    
+
     public function destroy(Period $period)
     {
         //
@@ -165,6 +166,9 @@ class PeriodController extends Controller
         };
 
         foreach ($validated as $key => $value) {
+            if (isset($validated['is_active']) && $validated['is_active'] == false) {
+                DisableAllUserJob::dispatch($period);
+            }
             $period->update(
                 [
                     $key            =>  $value,
