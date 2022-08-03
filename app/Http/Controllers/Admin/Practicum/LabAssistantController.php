@@ -86,7 +86,60 @@ class LabAssistantController extends Controller
 
     public function salaryIndex()
     {
-        return view('admin.pages.practicum.assistant.salary');
+        $registrars = Registrar::query()
+            ->whereRelation('period_subjects.period', 'is_active', true)
+            ->whereRelation('period_subjects', 'psr.is_pass_file_selection', true)
+            ->whereRelation('period_subjects', 'psr.is_pass_exam_selection', true)
+            ->with(
+                [
+                    'period_subjects'   =>  function ($query) {
+                        $query->where('psr.is_pass_file_selection', true)
+                            ->where('psr.is_pass_exam_selection', true)
+                            ->with(
+                                [
+                                    'classrooms.schedule.qrs',
+                                    'subject'
+                                ]
+                            )
+                            //
+                        ;
+                    }
+                ]
+            )
+            ->get()
+            ->map(function ($registrar) {
+                foreach ($registrar->period_subjects as $period_subject) {
+                    $total_presences = 0;
+                    foreach ($period_subject->classrooms as $classroom) {
+                        // $total_presences = $classroom->schedule->qrs
+                        $classroom_presences = 0;
+                        foreach ($classroom->schedule->qrs as $qr) {
+                            $qr->loadCount(
+                                [
+                                    'presenceds as presence_count'    => function ($query) use ($period_subject) {
+                                        $query->where('psr_id', $period_subject->pivot->id);
+                                    }
+                                ]
+                            );
+                        }
+                        $classroom->total_presences = $classroom->schedule->qrs->sum('presence_count');
+                    }
+                    $period_subject->pivot->total_presences = $period_subject->classrooms->sum('total_presences');
+                }
+                $registrar->total_presences = $registrar->period_subjects->sum('pivot.total_presences');
+                return $registrar;
+            })
+            // ->dd()
+            //
+        ;
+        // dd($registrars[3]);
+        $period = Period::firstWhere('is_active', true);
+        return view('admin.pages.practicum.assistant.salary', compact('registrars', 'period'));
+    }
+
+    public function salaryPost()
+    {
+        
     }
 
     public function presenceShow(PeriodSubject $period_subject)
@@ -123,7 +176,7 @@ class LabAssistantController extends Controller
         );
         $psrs = PeriodSubjectRegistrar::query()
             ->whereRelation('period_subject', 'period_subject.id', $period_subject->id)
-            ->whereRelation('registrar.user', 'is_active', true)
+            // ->whereRelation('registrar.user', 'is_active', true)
             ->whereRelation('schedules', 'classroom_id', $classroom->id)
             ->where('is_pass_file_selection', true)
             ->where('is_pass_exam_selection', true)
