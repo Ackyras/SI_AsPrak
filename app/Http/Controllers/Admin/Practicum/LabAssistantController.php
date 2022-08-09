@@ -97,7 +97,20 @@ class LabAssistantController extends Controller
                             ->where('psr.is_pass_exam_selection', true)
                             ->with(
                                 [
-                                    'classrooms.schedule.qrs',
+                                    'classrooms.schedule.qrs'
+                                    // =>  function ($query) {
+                                    //     $query->withCount(
+                                    //         [
+                                    //             'presenceds as presence_count'  =>  function ($query) {
+                                    //                 $query->where('psr_id', 'psr.id');
+                                    //             }
+                                    //         ]
+                                    //     )
+                                    //         //
+                                    //     ;
+                                    // }
+                                    // //
+                                    ,
                                     'subject'
                                 ]
                             )
@@ -107,21 +120,21 @@ class LabAssistantController extends Controller
                 ]
             )
             ->get()
-            ->map(function ($registrar) {
+            ->each(function ($registrar) {
+                // $psrId = $registrar->period_subjects->pluck('pivot.id');
+                // dd($psrId);
                 foreach ($registrar->period_subjects as $period_subject) {
                     $total_presences = 0;
                     foreach ($period_subject->classrooms as $classroom) {
                         // $total_presences = $classroom->schedule->qrs
                         $classroom_presences = 0;
-                        foreach ($classroom->schedule->qrs as $qr) {
-                            $qr->loadCount(
-                                [
-                                    'presenceds as presence_count'    => function ($query) use ($period_subject) {
-                                        $query->where('psr_id', $period_subject->pivot->id);
-                                    }
-                                ]
-                            );
-                        }
+                        $classroom->schedule->qrs->loadCount(
+                            [
+                                'presenceds as presence_count'    => function ($query) use ($period_subject) {
+                                    $query->where('psr_id', $period_subject->pivot->id);
+                                }
+                            ]
+                        );
                         $classroom->total_presences = $classroom->schedule->qrs->sum('presence_count');
                     }
                     $period_subject->pivot->total_presences = $period_subject->classrooms->sum('total_presences');
@@ -130,16 +143,14 @@ class LabAssistantController extends Controller
                 return $registrar;
             })
             // ->dd()
-            //
         ;
-        // dd($registrars[3]);
-        $period = Period::firstWhere('is_active', true);
+        // dd($registrars[0]);
+        $period = $this->period;
         return view('admin.pages.practicum.assistant.salary', compact('registrars', 'period'));
     }
 
     public function salaryPost()
     {
-        
     }
 
     public function presenceShow(PeriodSubject $period_subject)
