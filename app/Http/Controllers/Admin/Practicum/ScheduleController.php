@@ -197,6 +197,7 @@ class ScheduleController extends Controller
             ]
         );
         // dd($validated['schedule']);
+        $psr = PeriodSubjectRegistrar::find($validated['psr_id']);
         if (isset($validated['schedule'])) {
             $errMsg = '';
             $status = 'success';
@@ -204,14 +205,14 @@ class ScheduleController extends Controller
                 $schedule = Schedule::find($schedule_id);
                 $schedule->loadCount('psrs')
                     ->load('classroom.period_subject.subject');
-                if ($schedule->number_of_lab_assistant >= $schedule->psrs_count) {
+                if ($schedule->number_of_lab_assistant >= $schedule->psrs_count && !$schedule->psrs->contains($validated['psr_id'])) {
                     $errMsg = 'Jumlah asisten praktikum untuk mata kuliah ' .
                         $schedule->classroom->period_subject->subject->name .
                         ' kelas ' . $schedule->classroom->name . ' sudah penuh.
                         ';
                 }
-                $schedule->psrs()->attach($validated['psr_id']);
             }
+            $psr->schedules()->sync($validated['schedule']);
             if ($errMsg != '') {
                 return back()->with(
                     [
@@ -221,7 +222,6 @@ class ScheduleController extends Controller
                 );
             }
         } else {
-            $psr = PeriodSubjectRegistrar::find($validated['psr_id']);
             $psr->schedules()->detach();
         }
 
