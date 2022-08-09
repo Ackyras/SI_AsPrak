@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Period;
 use App\Models\PeriodSubject;
 use App\Models\PeriodSubjectRegistrar;
+use App\Models\PeriodSubjectRegistrarSchedule;
 use App\Models\Presence;
 use App\Models\Qr;
 use App\Models\Schedule;
@@ -88,13 +89,13 @@ class UserDashboardController extends Controller
 
     public function scheduleStore(Request $request)
     {
-        dd($request->all());
         $validated = $request->validate(
             [
                 'schedule_id'   =>  'required',
                 'psr_id'        =>  'required'
             ]
         );
+        $psr = PeriodSubjectRegistrar::find($validated['psr_id']);
         $schedule = Schedule::withCount('psrs')->find($validated['schedule_id']);
         if ($schedule->psrs_count >= $schedule->number_of_lab_assistant) {
             return back()
@@ -106,11 +107,50 @@ class UserDashboardController extends Controller
                     ]
                 );
         }
-        $psr = PeriodSubjectRegistrar::find($validated['psr_id']);
-        if ($schedule->psrs->contains($psr)) {
+        if ($psr->schedules()->contains($schedule)) {
+            return back()
+                ->with(
+                    'alert',
+                    [
+                        'msg' => 'Jadwal ini sudah anda pilih',
+                        'status' => 'failed'
+                    ]
+                );
         }
         $schedule->psrs()->attach($validated['psr_id']);
         return to_route('user.schedule')
-            ->with('alert', ['msg' => 'Welcome back, ', 'status' => 'success']);
+            ->with('alert', ['msg' => 'Jadwal berhasil diperbarui', 'status' => 'success']);
+    }
+
+    public function scheduleDestroy(Request $request)
+    {
+        $validated = $request->validate(
+            [
+                'schedule_id'   =>  'required',
+                'psr_id'        =>  'required',
+            ]
+        );
+        $psr_schedule = PeriodSubjectRegistrarSchedule::query()
+            ->where('psr_id', $validated['psr_id'])
+            ->where('schedule_id', $validated['schedule_id'])
+            ->first();
+        if ($psr_schedule->deleteOrFail()) {
+            return back()
+                ->with(
+                    'alert',
+                    [
+                        'msg' => 'Jadwal berhasil dihapus',
+                        'status' => 'warning'
+                    ]
+                );
+        }
+        return back()
+            ->with(
+                'alert',
+                [
+                    'msg' => 'Jadwal gagal dihapus',
+                    'status' => 'failed'
+                ]
+            );
     }
 }

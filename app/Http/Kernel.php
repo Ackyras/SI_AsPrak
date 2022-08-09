@@ -2,6 +2,7 @@
 
 namespace App\Http;
 
+use App\Http\Middleware\AsprakMiddleware;
 use App\Http\Middleware\UserMiddleware;
 use App\Http\Middleware\AuthGatesMiddleware;
 use App\Http\Middleware\Exam\IsExamInProgressMiddleware;
@@ -80,6 +81,7 @@ class Kernel extends HttpKernel
 
         'admin' => AuthGatesMiddleware::class,
         'user' => UserMiddleware::class,
+        'asprak' => AsprakMiddleware::class,
         'user_is_active'    =>  UserIsActiveMiddleware::class,
         'news_open_for_registration'    =>  OpenForSelection::class,
         'news_file_selection_is_over'   =>  FileSelectionOver::class,

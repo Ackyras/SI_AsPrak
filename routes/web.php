@@ -31,9 +31,9 @@ use App\Mail\ExamSelectionNotification;
 use App\Mail\FileSelectionNotification;
 use Illuminate\Http\Request;
 
-Route::post('/schedule', function (Request $request) {
-    dd($request);
-})->name('test-post');
+// Route::post('/schedule', function (Request $request) {
+//     dd($request);
+// })->name('test-post');
 
 Route::as('website.')->group(function () {
     // Route::get('/', function () {
@@ -57,7 +57,7 @@ Route::as('website.')->group(function () {
     });
 });
 
-Route::middleware(['auth', 'user_is_active', 'user'])->as('user.')->group(function () {
+Route::middleware(['auth', 'user_is_active', 'user'])->prefix('user')->as('user.')->group(function () {
     Route::get('dashboard', [UserDashboardController::class, 'index'])->name('dashboard');
     Route::get('ujian-seleksi', [ExamController::class, 'index'])->name('exam.index');
     Route::middleware(['is_eligible_for_exam', 'is_exam_in_progress'])->group(function () {
@@ -66,19 +66,21 @@ Route::middleware(['auth', 'user_is_active', 'user'])->as('user.')->group(functi
         Route::post('ujian-seleksi/{period_subject}', [ExamController::class, 'storeAll'])->name('take-exam.store-all');
     });
 
-    Route::controller(UserDashboardController::class)
-        // ->middleware(['is_open_for_schedule_submission'])
-        ->group(function () {
-            Route::get('schedule', 'scheduleIndex')->name('schedule');
-            Route::post('/schedule', 'scheduleStore')->name('schedule.store');
-        });
+    Route::middleware(['asprak'])->group(function () {
+        Route::controller(UserDashboardController::class)
+            // ->middleware(['is_open_for_schedule_submission'])
+            ->group(function () {
+                Route::get('schedule', 'scheduleIndex')->name('schedule');
+                Route::post('/schedule', 'scheduleStore')->name('schedule.store');
+            });
 
-    Route::controller(SalaryController::class)->prefix('salary')->as('salary.')->group(function () {
-        Route::get('/', 'index')->name('index');
-    });
-    Route::controller(UserPresenceController::class)->prefix('presence')->as('presence.')->group(function () {
-        Route::get('/', 'index')->name('index');
-        Route::post('presence', 'store')->name('store');
+        Route::controller(SalaryController::class)->prefix('salary')->as('salary.')->group(function () {
+            Route::get('/', 'index')->name('index');
+        });
+        Route::controller(UserPresenceController::class)->prefix('presence')->as('presence.')->group(function () {
+            Route::get('/', 'index')->name('index');
+            Route::post('presence', 'store')->name('store');
+        });
     });
 });
 
@@ -136,10 +138,12 @@ Route::middleware(['auth', 'user_is_active', 'admin'])->as('admin.')->prefix('ad
     Route::prefix('data-master')->as('data-master.')->group(function () {
         Route::resource('registrar',        RegistrarController::class);
         Route::resource('period',           PeriodController::class);
-        Route::get('period/{period}/subject/{period_subject}/assistant', 
-            [PeriodController::class, 'showAssistant'])
+        Route::get(
+            'period/{period}/subject/{period_subject}/assistant',
+            [PeriodController::class, 'showAssistant']
+        )
             ->name('show-assistant');
-        Route::resource('subject',          SubjectController::class)->only('index');
+        Route::resource('subject',          SubjectController::class);
         Route::resource('room',             RoomController::class);
     });
     Route::as('practicum.')->group(function () {
