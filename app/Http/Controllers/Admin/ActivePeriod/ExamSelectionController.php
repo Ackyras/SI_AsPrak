@@ -200,13 +200,16 @@ class ExamSelectionController extends Controller
     public function announceExamSelectionResult()
     {
         $period = $this->period;
-        // if ($period->is_exam_selection_over) {
-        //     return back()->with(
-        //         [
-        //             'failed'    =>  'Pengumuman sudah dibuat, tidak dapat lagi mengubah ataupun mengumumkan kelulusan asisten praktikum'
-        //         ]
-        //     );
-        // }
+        if ($period->is_exam_selection_over) {
+            return back()->with(
+                [
+                    'failed'    =>  'Pengumuman sudah dibuat, tidak dapat lagi mengubah ataupun mengumumkan kelulusan asisten praktikum'
+                ]
+            );
+        }
+        $period->is_exam_selection_over = true;
+        $period->is_exam_selection_over_date = now();
+        $period->save();
         AnnouncePassExamSelection::dispatch($period);
         return back()->with(
             [
