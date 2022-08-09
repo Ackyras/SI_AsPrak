@@ -41,6 +41,7 @@
                                 @else
                                 <span class="badge badge-secondary">{{ $period_subject->subject->name }}</span>
                                 @endif
+                                @empty
                                 @endforelse
                             </td>
                             <td>
@@ -50,9 +51,11 @@
                                 @else
                                 <span class="badge badge-secondary">{{ $period_subject->subject->name }}</span>
                                 @endif
+                                @empty
                                 @endforelse
                             </td>
                         </tr>
+                        @empty
                         @endforelse
                     </tbody>
                     <tfoot>

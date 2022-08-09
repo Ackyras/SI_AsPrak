@@ -11,6 +11,7 @@
         <ul>
             @forelse ($errors->all() as $error)
             <li>{{ $error }}</li>
+            @empty
             @endforelse
         </ul>
     </div>
@@ -125,6 +126,7 @@
                             {{ $subject->name }}
                         </p>
                     </label>
+                    @empty
                     @endforelse
                 </div>
                 <p id="subjectErrorMsg"

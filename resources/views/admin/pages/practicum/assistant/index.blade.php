@@ -58,10 +58,12 @@
                                     <li>
                                         {{ $period_subject->subject->name }}
                                     </li>
+                                    @empty
                                     @endforelse
                                 </ul>
                             </td>
                         </tr>
+                        @empty
                         @endforelse
                     </tbody>
                     <tfoot>

@@ -57,6 +57,7 @@
                                         {{ $schedule->end_time }}
                                     </p>
                                     @php array_push($current_row_schedules,$schedule->id); @endphp
+                                    @empty
                                     @endforelse
                                 </div>
                                 @else
@@ -67,6 +68,7 @@
                                     {{ $schedule->start_time }} -
                                     {{ $schedule->end_time }}
                                 </p>
+                                @empty
                                 @endforelse
                                 @endif
                             </td>
@@ -87,6 +89,7 @@
                                         <span class="font-weight-bold">{{ $loop->index + 1 }})</span>
                                         {{ $schedule->room->building }}, {{ $schedule->room->name }}
                                     </p>
+                                    @empty
                                     @endforelse
                                 </div>
                                 @else
@@ -94,6 +97,7 @@
                                 <p class="m-0 d-block">
                                     {{ $schedule->room->building }}, {{ $schedule->room->name }}
                                 </p>
+                                @empty
                                 @endforelse
                                 @endif
                             </td>

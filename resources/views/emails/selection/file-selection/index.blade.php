@@ -15,6 +15,7 @@ Selamat kepada saudara {{ $maildata['receiver'] }}, telah dinyatakan lulus tahap
 - **{{ $subject->subject->name }}**
 @endif
 
+@empty
 @endforelse
 
 Berikut merupakan informasi akun anda :

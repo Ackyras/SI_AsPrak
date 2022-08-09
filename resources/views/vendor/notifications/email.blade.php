@@ -14,6 +14,7 @@
 @forelse ($introLines as $line)
 {{ $line }}
 
+@empty
 @endforelse
 
 {{-- Action Button --}}
@@ -33,6 +34,7 @@
 @forelse ($outroLines as $line)
 {{ $line }}
 
+@empty
 @endforelse
 
 {{-- Salutation --}}

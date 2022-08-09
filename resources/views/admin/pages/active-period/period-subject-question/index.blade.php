@@ -13,7 +13,7 @@
                         <i class="mr-2 fas fa-plus"></i>
                         Tambah Soal Essay
                     </button>
-                    <button type="button" class="btn btn-success ml-3" data-toggle="modal"
+                    <button type="button" class="ml-3 btn btn-success" data-toggle="modal"
                         data-target="#addChoiceQuestionFormModal">
                         <i class="mr-2 fas fa-plus"></i>
                         Tambah Soal Pilihan Ganda
@@ -81,6 +81,7 @@
                                         </div>
                                         @endif
                                     </li>
+                                    @empty
                                     @endforelse
                                 </ul>
                             </div>
@@ -234,6 +235,7 @@
                                                 </div>
                                                 <p style="padding-left: 38px;" class="m-0 my-3 d-block text-danger"
                                                     id="choice_{{ $question->id }}_{{ $choice->id }}_file_error"></p>
+                                                @empty
                                                 @endforelse
                                             </div>
                                             @endif
@@ -332,6 +334,7 @@
                                                         </div>
                                                         @endif
                                                     </li>
+                                                    @empty
                                                     @endforelse
                                                 </ul>
                                             </div>

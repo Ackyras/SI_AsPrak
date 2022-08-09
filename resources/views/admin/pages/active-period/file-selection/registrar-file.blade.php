@@ -17,6 +17,7 @@
                         <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
                         @forelse ($subjects as $subject)
                         <option value="'{{ $subject->name }}'">{{ $subject->name }}</option>
+                        @empty
                         @endforelse
                     </select>
                 </div>
@@ -130,6 +131,7 @@
                                 </div>
                             </td>
                         </tr>
+                        @empty
                         @endforelse
                     </tbody>
                     <tfoot>

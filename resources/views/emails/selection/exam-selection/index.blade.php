@@ -15,6 +15,7 @@ telah dinyatakan lulus tahap Seleksi Tes pada Penerimaan Asisten Praktikum Mata 
 - **{{ $subject->subject->name }}**
 @endif
 
+@empty
 @endforelse
 
 Dengan ini anda telah resmi menjadi Asisten Praktikum Laboratorium Multimedia Institut Teknologi Sumatera Periode {{

@@ -134,11 +134,13 @@
                                 <i class="fas fa-times-circle text-danger"></i>
                                 @endif
                             </td>
+                            @empty
                             @endforelse
                             <td class="text-center font-weight-bold">
                                 {{ number_format( ($valid_count / $classroom->schedule->qrs->count()) * 100, 2) }}%
                             </td>
                         </tr>
+                        @empty
                         @endforelse
 
                         @forelse ($extrapsrs as $psr)
@@ -213,6 +215,7 @@
                                 <i class="fas fa-times-circle text-secondary"></i>
                                 @endif
                             </td>
+                            @empty
                             @endforelse
                             <td class="text-center font-weight-bold">
                                 @if ($waiting_count>0)
@@ -226,6 +229,7 @@
                                 @endif
                             </td>
                         </tr>
+                        @empty
                         @endforelse
                     </tbody>
                 </table>

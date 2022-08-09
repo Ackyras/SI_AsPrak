@@ -36,6 +36,7 @@
     <ul>
         @forelse ($errors->all() as $error)
         <li>{{ $error }}</li>
+        @empty
         @endforelse
     </ul>
 </div>

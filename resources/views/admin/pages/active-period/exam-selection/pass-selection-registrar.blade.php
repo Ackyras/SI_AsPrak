@@ -21,6 +21,7 @@
                         <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
                         @forelse ($subjects as $subject)
                         <option value="'{{ $subject->name }}'">{{ $subject->name }}</option>
+                        @empty
                         @endforelse
                     </select>
                 </div>
@@ -108,8 +109,10 @@
                     <p style="margin-left: -32px">
                         Belum ada calon asisten yang dinyatakan lulus untuk mata kuliah {{ $subject->name }}
                     </p>
+                    @empty
                     @endforelse
                 </ul>
+                @empty
                 @endforelse
             </div>
 
