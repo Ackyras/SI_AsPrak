@@ -27,7 +27,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($subjects as $subject)
+                        @forelse ($subjects as $subject)
                         <tr>
                             <td tabindex="0" style="text-align: center">{{ $loop->index+1 }}</td>
                             <td>{{ $subject->name }}</td>
@@ -121,7 +121,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>

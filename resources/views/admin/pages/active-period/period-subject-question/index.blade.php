@@ -7,16 +7,18 @@
             <div class="mb-4 d-flex align-items-center justify-content-between">
                 <h2 class="card-title font-weight-bold">Soal Ujian Seleksi Mata Kuliah
                     "{{ $period_subject->subject->name }}"</h2>
-                <button type="button" class="btn btn-success" data-toggle="modal"
-                    data-target="#addEssayQuestionFormModal">
-                    <i class="mr-2 fas fa-plus"></i>
-                    Tambah Soal Essay
-                </button>
-                <button type="button" class="btn btn-success" data-toggle="modal"
-                    data-target="#addChoiceQuestionFormModal">
-                    <i class="mr-2 fas fa-plus"></i>
-                    Tambah Soal Pilihan Ganda
-                </button>
+                <div class="d-flex align-items-center">
+                    <button type="button" class="btn btn-success" data-toggle="modal"
+                        data-target="#addEssayQuestionFormModal">
+                        <i class="mr-2 fas fa-plus"></i>
+                        Tambah Soal Essay
+                    </button>
+                    <button type="button" class="btn btn-success ml-3" data-toggle="modal"
+                        data-target="#addChoiceQuestionFormModal">
+                        <i class="mr-2 fas fa-plus"></i>
+                        Tambah Soal Pilihan Ganda
+                    </button>
+                </div>
             </div>
             <div id="questions_container">
                 @forelse ($period_subject->questions as $question)
@@ -61,7 +63,7 @@
                             <p class="m-0 d-block">:</p>
                             <div style="width: 88%" class="">
                                 <ul class="pl-4">
-                                    @foreach ($question->choices as $choice)
+                                    @forelse ($question->choices as $choice)
                                     <li class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
                                         <p class="m-0 mb-1 d-block">{{ $choice->text }}</p>
                                         @if (!$choice->image)
@@ -79,7 +81,7 @@
                                         </div>
                                         @endif
                                     </li>
-                                    @endforeach
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>
@@ -180,7 +182,7 @@
                                             @if ($question->choices->count() > 0)
                                             <p class="m-0 mb-2 d-block font-weight-bold">Pilihan Jawaban</p>
                                             <div id="question_{{ $question->id }}_choices_container">
-                                                @foreach ($question->choices as $choice)
+                                                @forelse ($question->choices as $choice)
                                                 <div class="mb-2 input-group">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -232,7 +234,7 @@
                                                 </div>
                                                 <p style="padding-left: 38px;" class="m-0 my-3 d-block text-danger"
                                                     id="choice_{{ $question->id }}_{{ $choice->id }}_file_error"></p>
-                                                @endforeach
+                                                @endforelse
                                             </div>
                                             @endif
                                             <div class="form-group">
@@ -311,7 +313,7 @@
                                             <p class="m-0 d-block">:</p>
                                             <div style="width: 78%" class="">
                                                 <ul class="pl-4">
-                                                    @foreach ($question->choices as $choice)
+                                                    @forelse ($question->choices as $choice)
                                                     <li
                                                         class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
                                                         <p class="m-0 mb-1 d-block">{{ $choice->text }}</p>
@@ -330,7 +332,7 @@
                                                         </div>
                                                         @endif
                                                     </li>
-                                                    @endforeach
+                                                    @endforelse
                                                 </ul>
                                             </div>
                                         </div>
@@ -402,8 +404,8 @@
                     <div class="form-group">
                         <label for="form-label">Gambar Soal</label>
                         <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="customFile">
-                            <label class="custom-file-label" for="customFile">Choose file</label>
+                            <input type="file" name="image" class="custom-file-input" id="ChoiceQuestionFile">
+                            <label class="custom-file-label" for="ChoiceQuestionFile">Choose file</label>
                         </div>
                     </div>
                     <div class="form-group">
@@ -425,8 +427,8 @@
                                     <label for="form-label">Gambar opsi A</label>
                                     <div class="custom-file">
                                         <input type="file" name="choice[image][0]" class="custom-file-input"
-                                            id="customFile.0">
-                                        <label class="custom-file-label" for="customFile.0">Choose file</label>
+                                            id="choiceFileA">
+                                        <label class="custom-file-label" for="choiceFileA">Choose file</label>
                                     </div>
                                 </div>
                             </div>
@@ -451,8 +453,8 @@
                                     <label for="form-label">Gambar opsi B</label>
                                     <div class="custom-file">
                                         <input type="file" name="choice[image][1]" class="custom-file-input"
-                                            id="customFile.1">
-                                        <label class="custom-file-label" for="customFile.1">Choose file</label>
+                                            id="choiceFileB">
+                                        <label class="custom-file-label" for="choiceFileB">Choose file</label>
                                     </div>
                                 </div>
                             </div>
@@ -477,8 +479,8 @@
                                     <label for="form-label">Gambar opsi C</label>
                                     <div class="custom-file">
                                         <input type="file" name="choice[image][2]" class="custom-file-input"
-                                            id="customFile.2">
-                                        <label class="custom-file-label" for="customFile.2">Choose file</label>
+                                            id="choiceFileC">
+                                        <label class="custom-file-label" for="choiceFileC">Choose file</label>
                                     </div>
                                 </div>
                             </div>
@@ -503,8 +505,8 @@
                                     <label for="form-label">Gambar opsi D</label>
                                     <div class="custom-file">
                                         <input type="file" name="choice[image][3]" class="custom-file-input"
-                                            id="customFile.3">
-                                        <label class="custom-file-label" for="customFile.3">Choose file</label>
+                                            id="choiceFileD">
+                                        <label class="custom-file-label" for="choiceFileD">Choose file</label>
                                     </div>
                                 </div>
                             </div>
@@ -529,8 +531,8 @@
                                     <label for="form-label">Gambar opsi E</label>
                                     <div class="custom-file">
                                         <input type="file" name="choice[image][4]" class="custom-file-input"
-                                            id="customFile.4">
-                                        <label class="custom-file-label" for="customFile.4">Choose file</label>
+                                            id="choiceFileE">
+                                        <label class="custom-file-label" for="choiceFileE">Choose file</label>
                                     </div>
                                 </div>
                             </div>
@@ -574,7 +576,7 @@
                     <div class="form-group">
                         <label for="form-label">Gambar Soal</label>
                         <div class="custom-file">
-                            <input type="file" name="image" class="custom-file-input" id="customFile">
+                            <input type="file" name="image" class="custom-file-input" id="EssayQuestionFileInput">
                             <label class="custom-file-label" for="customFile">Choose file</label>
                         </div>
                     </div>
@@ -778,101 +780,101 @@
                 $("#choice_"+choice_id+"_container").remove();
             }
         );
-        // INPUT FILE VALIDATION ON "ADD QUESTION MODAL"
-        $("#questionDetail").on(
-            "change",
-            "input[type=file]",
-            function (event) {
-                let fileError;
-                if($(this).attr("id").includes("_")) {
-                    let id = $(this).attr("id").split("_")[1];
-                    fileError = document.getElementById("choice_"+id+"_file_error");
-                }else{
-                    fileError = document.getElementById("questionFileError");
-                }
-                let inputField     = document.getElementById($(this).attr("id"));
-                let inputFieldFile = inputField.files[0];
-                let label          = $(this).siblings()[0];
-                if(inputFieldFile){
-                    let allowedExtension = ["image/jpeg", "image/png", "image/jpg"];
-                    if( allowedExtension.includes(inputFieldFile.type) ){
-                        if( inputFieldFile.size < 2097152 ){
-                            fileError.innerText = "";
-                            label.innerText = inputFieldFile.name;
-                        }else{
-                            fileError.innerText = "";
-                            label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
-                            fileError.innerText = "Mohon pilih file berukuran maks. 2MB";
-                            inputField.value = null;
-                        }
-                    }else{
-                        fileError.innerText = "";
-                        label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
-                        fileError.innerText = "Mohon pilih file gambar (JPG, JPEG, atau PNG)";
-                        inputField.value = null;
-                    }
-                }
-            }
-        );
-        // INPUT FILE VALIDATION FOR QUESTION ON "EDIT QUESTION MODAL"
-        $(".edit-question-file-input").on("change", function (event) {
-            let id          = $(this).attr("id").split("_")[1];
-            let fileError   = document.getElementById("editQuestionFileError_"+id);
+        // // INPUT FILE VALIDATION ON "ADD QUESTION MODAL"
+        // $("#questionDetail").on(
+        //     "change",
+        //     "input[type=file]",
+        //     function (event) {
+        //         let fileError;
+        //         if($(this).attr("id").includes("_")) {
+        //             let id = $(this).attr("id").split("_")[1];
+        //             fileError = document.getElementById("choice_"+id+"_file_error");
+        //         }else{
+        //             fileError = document.getElementById("questionFileError");
+        //         }
+        //         let inputField     = document.getElementById($(this).attr("id"));
+        //         let inputFieldFile = inputField.files[0];
+        //         let label          = $(this).siblings()[0];
+        //         if(inputFieldFile){
+        //             let allowedExtension = ["image/jpeg", "image/png", "image/jpg"];
+        //             if( allowedExtension.includes(inputFieldFile.type) ){
+        //                 if( inputFieldFile.size < 2097152 ){
+        //                     fileError.innerText = "";
+        //                     label.innerText = inputFieldFile.name;
+        //                 }else{
+        //                     fileError.innerText = "";
+        //                     label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+        //                     fileError.innerText = "Mohon pilih file berukuran maks. 2MB";
+        //                     inputField.value = null;
+        //                 }
+        //             }else{
+        //                 fileError.innerText = "";
+        //                 label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+        //                 fileError.innerText = "Mohon pilih file gambar (JPG, JPEG, atau PNG)";
+        //                 inputField.value = null;
+        //             }
+        //         }
+        //     }
+        // );
+        // // INPUT FILE VALIDATION FOR QUESTION ON "EDIT QUESTION MODAL"
+        // $(".edit-question-file-input").on("change", function (event) {
+        //     let id          = $(this).attr("id").split("_")[1];
+        //     let fileError   = document.getElementById("editQuestionFileError_"+id);
 
-            let inputField     = document.getElementById($(this).attr("id"));
-            let inputFieldFile = inputField.files[0];
-            let label          = $(this).siblings()[0];
+        //     let inputField     = document.getElementById($(this).attr("id"));
+        //     let inputFieldFile = inputField.files[0];
+        //     let label          = $(this).siblings()[0];
 
-            if(inputFieldFile){
-                let allowedExtension = ["image/jpeg", "image/png", "image/jpg"];
-                if( allowedExtension.includes(inputFieldFile.type) ){
-                    if( inputFieldFile.size < 2097152 ){
-                        fileError.innerText = "";
-                        label.innerText = inputFieldFile.name;
-                    }else{
-                        fileError.innerText = "";
-                        label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
-                        fileError.innerText = "Mohon pilih file berukuran maks. 2MB";
-                        inputField.value = null;
-                    }
-                }else{
-                    fileError.innerText = "";
-                    label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
-                    fileError.innerText = "Mohon pilih file gambar (JPG, JPEG, atau PNG)";
-                    inputField.value = null;
-                }
-            }
-        });
-        // INPUT FILE VALIDATION FOR CHOICES ON "EDIT QUESTION MODAL"
-        $(".edit-question-choice-file").on("change", function (event) {
-            let question_id = $(this).attr("id").split("_")[1];
-            let id          = $(this).attr("id").split("_")[2];
-            let fileError   = document.getElementById("choice_"+question_id+"_"+id+"_file_error");
+        //     if(inputFieldFile){
+        //         let allowedExtension = ["image/jpeg", "image/png", "image/jpg"];
+        //         if( allowedExtension.includes(inputFieldFile.type) ){
+        //             if( inputFieldFile.size < 2097152 ){
+        //                 fileError.innerText = "";
+        //                 label.innerText = inputFieldFile.name;
+        //             }else{
+        //                 fileError.innerText = "";
+        //                 label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+        //                 fileError.innerText = "Mohon pilih file berukuran maks. 2MB";
+        //                 inputField.value = null;
+        //             }
+        //         }else{
+        //             fileError.innerText = "";
+        //             label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+        //             fileError.innerText = "Mohon pilih file gambar (JPG, JPEG, atau PNG)";
+        //             inputField.value = null;
+        //         }
+        //     }
+        // });
+        // // INPUT FILE VALIDATION FOR CHOICES ON "EDIT QUESTION MODAL"
+        // $(".edit-question-choice-file").on("change", function (event) {
+        //     let question_id = $(this).attr("id").split("_")[1];
+        //     let id          = $(this).attr("id").split("_")[2];
+        //     let fileError   = document.getElementById("choice_"+question_id+"_"+id+"_file_error");
 
-            let inputField     = document.getElementById($(this).attr("id"));
-            let inputFieldFile = inputField.files[0];
-            let label          = $(this).siblings()[0];
+        //     let inputField     = document.getElementById($(this).attr("id"));
+        //     let inputFieldFile = inputField.files[0];
+        //     let label          = $(this).siblings()[0];
 
-            if(inputFieldFile){
-                let allowedExtension = ["image/jpeg", "image/png", "image/jpg"];
-                if( allowedExtension.includes(inputFieldFile.type) ){
-                    if( inputFieldFile.size < 2097152 ){
-                        fileError.innerText = "";
-                        label.innerText = inputFieldFile.name;
-                    }else{
-                        fileError.innerText = "";
-                        label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
-                        fileError.innerText = "Mohon pilih file berukuran maks. 2MB";
-                        inputField.value = null;
-                    }
-                }else{
-                    fileError.innerText = "";
-                    label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
-                    fileError.innerText = "Mohon pilih file gambar (JPG, JPEG, atau PNG)";
-                    inputField.value = null;
-                }
-            }
-        });
+        //     if(inputFieldFile){
+        //         let allowedExtension = ["image/jpeg", "image/png", "image/jpg"];
+        //         if( allowedExtension.includes(inputFieldFile.type) ){
+        //             if( inputFieldFile.size < 2097152 ){
+        //                 fileError.innerText = "";
+        //                 label.innerText = inputFieldFile.name;
+        //             }else{
+        //                 fileError.innerText = "";
+        //                 label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+        //                 fileError.innerText = "Mohon pilih file berukuran maks. 2MB";
+        //                 inputField.value = null;
+        //             }
+        //         }else{
+        //             fileError.innerText = "";
+        //             label.innerText = "Pilih file gambar (JPG, JPEG, PNG) maks. 2MB";
+        //             fileError.innerText = "Mohon pilih file gambar (JPG, JPEG, atau PNG)";
+        //             inputField.value = null;
+        //         }
+        //     }
+        // });
         // CHANGE CHECKED TRUE CHOICE ON "ADD QUESTION MODAL"
         $("#questionDetail").on(
             "change",
@@ -995,6 +997,24 @@
                 let modal = $("#showStaticDataImageModal");
                 let img_element = `<div style="width: 87.5%" class="mx-auto"> <img src="{{ asset('storage/`+file+`') }}" class="h-auto w-100"></div>`;
                 modal.find('.modal-body').html(img_element);
+            }
+        });
+
+        $(".custom-file-input").change(function () {
+            let inputField     = document.getElementById($(this).attr("id"));
+            let inputFieldFile = inputField.files[0];
+            let label          = $(this).siblings()[0];
+            if(inputFieldFile){
+                label.innerText = inputFieldFile.name;
+            }
+        });
+
+        $("#EssayQuestionFileInput").change(function () {
+            let inputField     = document.getElementById($(this).attr("id"));
+            let inputFieldFile = inputField.files[0];
+            let label          = $(this).siblings()[0];
+            if(inputFieldFile){
+                label.innerText = inputFieldFile.name;
             }
         });
     });

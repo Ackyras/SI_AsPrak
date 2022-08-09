@@ -48,8 +48,8 @@
                             <td>
                                 @if ($psr->schedules->count() > 1)
                                 <div style="display:flex; flex-direction:column; gap:2px;">
-                                    @foreach ($psr->schedules as $schedule)
-                                    <p class="d-block m-0">
+                                    @forelse ($psr->schedules as $schedule)
+                                    <p class="m-0 d-block">
                                         <span class="font-weight-bold">{{ $loop->index + 1 }})</span>
                                         Kelas {{ $schedule->classroom->name }} -
                                         {{ $schedule->day }},
@@ -57,17 +57,17 @@
                                         {{ $schedule->end_time }}
                                     </p>
                                     @php array_push($current_row_schedules,$schedule->id); @endphp
-                                    @endforeach
+                                    @endforelse
                                 </div>
                                 @else
-                                @foreach ($psr->schedules as $schedule)
-                                <p class="d-block m-0">
+                                @forelse ($psr->schedules as $schedule)
+                                <p class="m-0 d-block">
                                     Kelas {{ $schedule->classroom->name }} -
                                     {{ $schedule->day }},
                                     {{ $schedule->start_time }} -
                                     {{ $schedule->end_time }}
                                 </p>
-                                @endforeach
+                                @endforelse
                                 @endif
                             </td>
                             @else
@@ -82,19 +82,19 @@
                             <td>
                                 @if ($psr->schedules->count() > 1)
                                 <div style="display:flex; flex-direction:column; gap:2px;">
-                                    @foreach ($psr->schedules as $schedule)
-                                    <p class="d-block m-0">
+                                    @forelse ($psr->schedules as $schedule)
+                                    <p class="m-0 d-block">
                                         <span class="font-weight-bold">{{ $loop->index + 1 }})</span>
                                         {{ $schedule->room->building }}, {{ $schedule->room->name }}
                                     </p>
-                                    @endforeach
+                                    @endforelse
                                 </div>
                                 @else
-                                @foreach ($psr->schedules as $schedule)
-                                <p class="d-block m-0">
+                                @forelse ($psr->schedules as $schedule)
+                                <p class="m-0 d-block">
                                     {{ $schedule->room->building }}, {{ $schedule->room->name }}
                                 </p>
-                                @endforeach
+                                @endforelse
                                 @endif
                             </td>
                             @else
@@ -136,14 +136,15 @@
                                                 <form method="POST"
                                                     action="{{ route('admin.assistant.schedule.store') }}">
                                                     @csrf
+                                                    <input type="hidden" name="psr_id" value="{{ $psr->id }}">
                                                     <div class="modal-body">
-                                                        <h6 class="d-block m-0 mb-2">
+                                                        <h6 class="m-0 mb-2 d-block">
                                                             Mata Kuliah :
                                                             <span class="font-weight-bold">
                                                                 {{ $psr->period_subject->subject->name }}
                                                             </span>
                                                         </h6>
-                                                        <p class="d-block m-0 mb-1 font-weight-bold">
+                                                        <p class="m-0 mb-1 d-block font-weight-bold">
                                                             Pilih Jadwal
                                                         </p>
                                                         <div style="max-height: 50vh; overflow-y:auto;"
@@ -151,13 +152,11 @@
                                                             @forelse ($schedules->where('classroom.period_subject.id',
                                                             $psr->period_subject->id) as $schedule)
                                                             <div
-                                                                class="d-flex align-items-center mb-2 border p-1 bg-white rounded-sm">
-                                                                <input type="checkbox" name="schedule_id[]"
-                                                                    value="{{ $schedule->id }}" class="d-block mx-3"
-                                                                    id="schedule_{{ $row }}_{{ $schedule->id }}" {{--
-                                                                    @isset($psr->schedule) @checked($psr->schedule->id
-                                                                == $schedule->id) @endisset --}}
-                                                                {{ in_array($schedule->id, $current_row_schedules) ?
+                                                                class="p-1 mb-2 bg-white border rounded-sm d-flex align-items-center">
+                                                                <input type="checkbox" name="schedule[]"
+                                                                    value="{{ $schedule->id }}" class="mx-3 d-block"
+                                                                    id="schedule_{{ $row }}_{{ $schedule->id }}" {{
+                                                                    in_array($schedule->id, $current_row_schedules) ?
                                                                 'checked' : '' }}
                                                                 {{
                                                                 ($schedule->psrs_count >=
@@ -166,15 +165,15 @@
                                                                 (!in_array($schedule->id, $current_row_schedules))
                                                                 ? 'disabled' : ''
                                                                 }}>
-                                                                <label class="d-block m-0 w-100"
+                                                                <label class="m-0 d-block w-100"
                                                                     for="schedule_{{ $row }}_{{ $schedule->id }}">
-                                                                    <p class="d-flex m-0 mb-1">
+                                                                    <p class="m-0 mb-1 d-flex">
                                                                         <span class="font-weight-normal w-25">Kelas
                                                                         </span>
                                                                         <span>{{ $schedule->classroom->name }}
                                                                         </span>
                                                                     </p>
-                                                                    <p class="d-flex m-0 mb-1">
+                                                                    <p class="m-0 mb-1 d-flex">
                                                                         <span class="font-weight-normal w-25">Jadwal
                                                                         </span>
                                                                         <span>{{ $schedule->day }},
@@ -182,14 +181,14 @@
                                                                             {{ $schedule->end_time }}
                                                                         </span>
                                                                     </p>
-                                                                    <p class="d-flex m-0 mb-1">
+                                                                    <p class="m-0 mb-1 d-flex">
                                                                         <span class="font-weight-normal w-25">Ruangan
                                                                         </span>
                                                                         <span>{{ $schedule->room->building }},
                                                                             {{ $schedule->room->name }}
                                                                         </span>
                                                                     </p>
-                                                                    <p class="d-flex m-0">
+                                                                    <p class="m-0 d-flex">
                                                                         <span class="font-weight-normal w-25">Asisten
                                                                         </span>
                                                                         <span>
@@ -201,12 +200,12 @@
                                                                     $schedule->number_of_lab_assistant)
                                                                     @if (in_array($schedule->id,
                                                                     $current_row_schedules))
-                                                                    <small class="text-warning font-italic mt-1">
+                                                                    <small class="mt-1 text-warning font-italic">
                                                                         Menghapus centang akan mengeluarkan asisten
                                                                         praktikum ini dari jadwal.
                                                                     </small>
                                                                     @else
-                                                                    <small class="text-danger font-italic mt-1">
+                                                                    <small class="mt-1 text-danger font-italic">
                                                                         Jumlah asisten untuk jadwal ini sudah penuh.
                                                                     </small>
                                                                     @endif

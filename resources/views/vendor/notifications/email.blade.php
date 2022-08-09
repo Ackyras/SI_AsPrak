@@ -11,10 +11,10 @@
 @endif
 
 {{-- Intro Lines --}}
-@foreach ($introLines as $line)
+@forelse ($introLines as $line)
 {{ $line }}
 
-@endforeach
+@endforelse
 
 {{-- Action Button --}}
 @isset($actionText)
@@ -30,10 +30,10 @@
 @endisset
 
 {{-- Outro Lines --}}
-@foreach ($outroLines as $line)
+@forelse ($outroLines as $line)
 {{ $line }}
 
-@endforeach
+@endforelse
 
 {{-- Salutation --}}
 @if (! empty($salutation))
@@ -47,11 +47,11 @@
 @isset($actionText)
 @slot('subcopy')
 @lang(
-    "If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
-    'into your web browser:',
-    [
-        'actionText' => $actionText,
-    ]
+"If you're having trouble clicking the \":actionText\" button, copy and paste the URL below\n".
+'into your web browser:',
+[
+'actionText' => $actionText,
+]
 ) <span class="break-all">[{{ $displayableActionUrl }}]({{ $actionUrl }})</span>
 @endslot
 @endisset

@@ -12,12 +12,12 @@
 
         <div class="card-body">
             <div id="period_subject_registrar_table_wrapper" class="dataTables_wrapper dt-bootstrap4">
-                <div class="w-25 mb-3">
+                <div class="mb-3 w-25">
                     <select class="custom-select" id="subjectFilter">
                         <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
-                        @foreach ($subjects as $subject)
+                        @forelse ($subjects as $subject)
                         <option value="'{{ $subject->name }}'">{{ $subject->name }}</option>
-                        @endforeach
+                        @endforelse
                     </select>
                 </div>
                 <table id="period_subject_registrar_table"
@@ -39,7 +39,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($period_subject_registrars as $psr)
+                        @forelse ($period_subject_registrars as $psr)
                         <tr>
                             <td tabindex="0"> {{ $psr->registrar->name }} </td>
                             <td style="text-align: center;"> {{ $psr->registrar->nim }} </td>
@@ -65,16 +65,18 @@
                                 </div>
                             </td>
                             <td class="text-align: center;">
-                                <button type="button" class="btn btn-sm btn-block {{ $psr->is_pass_file_selection ? 'btn-success' : 'btn-danger' }} "
+                                <button type="button"
+                                    class="btn btn-sm btn-block {{ $psr->is_pass_file_selection ? 'btn-success' : 'btn-danger' }} "
                                     data-toggle="modal" data-target="#IPFSEFM{{ $psr->id }}">
                                     @if ($psr->is_pass_file_selection)
-                                        Lulus
+                                    Lulus
                                     @else
-                                        Tidak Lulus
+                                    Tidak Lulus
                                     @endif
                                 </button>
                                 <div class="modal fade" id="IPFSEFM{{ $psr->id }}" tabindex="-1" data-backdrop="static"
-                                    data-keyboard="false" aria-labelledby="IPFSEFMLabel{{ $psr->id }}" aria-hidden="true">
+                                    data-keyboard="false" aria-labelledby="IPFSEFMLabel{{ $psr->id }}"
+                                    aria-hidden="true">
                                     <div class="modal-dialog">
                                         <div class="modal-content">
                                             <div class="modal-header">
@@ -87,29 +89,33 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form method="POST" action="{{ route('admin.active-period.file-selection.registrar-file.update', $psr) }}">
+                                            <form method="POST"
+                                                action="{{ route('admin.active-period.file-selection.registrar-file.update', $psr) }}">
                                                 @csrf
                                                 @method('PUT')
                                                 <div class="modal-body">
-                                                    <input name="is_pass_file_selection" type="hidden" value="{{ $psr->is_pass_file_selection ? 0 : 1 }}">
+                                                    <input name="is_pass_file_selection" type="hidden"
+                                                        value="{{ $psr->is_pass_file_selection ? 0 : 1 }}">
                                                     @if ($psr->is_pass_file_selection)
-                                                        <h5>
-                                                            Anda akan mengubah status Kelululusan
-                                                            <span class="font-weight-bold">{{ $psr->registrar->name }}</span>
-                                                            dari
-                                                            <span class="badge badge-success">Lulus</span>
-                                                            menjadi
-                                                            <span class="badge badge-danger">Tidak Lulus</span>.
-                                                        </h5>
+                                                    <h5>
+                                                        Anda akan mengubah status Kelululusan
+                                                        <span class="font-weight-bold">{{ $psr->registrar->name
+                                                            }}</span>
+                                                        dari
+                                                        <span class="badge badge-success">Lulus</span>
+                                                        menjadi
+                                                        <span class="badge badge-danger">Tidak Lulus</span>.
+                                                    </h5>
                                                     @else
-                                                        <h5>
-                                                            Anda akan mengubah status Kelululusan
-                                                            <span class="font-weight-bold">{{ $psr->registrar->name }}</span>
-                                                            dari
-                                                            <span class="badge badge-danger">Tidak Lulus</span>
-                                                            menjadi
-                                                            <span class="badge badge-success">Lulus</span>.
-                                                        </h5>
+                                                    <h5>
+                                                        Anda akan mengubah status Kelululusan
+                                                        <span class="font-weight-bold">{{ $psr->registrar->name
+                                                            }}</span>
+                                                        dari
+                                                        <span class="badge badge-danger">Tidak Lulus</span>
+                                                        menjadi
+                                                        <span class="badge badge-success">Lulus</span>.
+                                                    </h5>
                                                     @endif
                                                     <h5>Simpan perubahan ini?</h5>
                                                 </div>
@@ -124,7 +130,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
@@ -155,7 +161,7 @@
                 </button>
             </div>
             <div class="modal-body d-flex justify-content-center" id="showFileModalContent">
-                
+
             </div>
         </div>
     </div>

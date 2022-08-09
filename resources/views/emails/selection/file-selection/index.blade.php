@@ -10,12 +10,12 @@
 
 Selamat kepada saudara {{ $maildata['receiver'] }}, telah dinyatakan lulus tahap Seleksi Berkas pada mata kuliah
 
-@foreach ($maildata['subjects'] as $subject)
+@forelse ($maildata['subjects'] as $subject)
 @if ($subject->pivot->is_pass_file_selection)
 - **{{ $subject->subject->name }}**
 @endif
 
-@endforeach
+@endforelse
 
 Berikut merupakan informasi akun anda :
 

@@ -100,6 +100,7 @@
                 <div style="width: 25%; background-color: #f3f4f6"
                     class="p-2 d-flex justify-content-between align-items-center">
                     @if ($psr->answers->contains($question))
+                    @if($question->)
                     <h6 class="m-0 d-block text-success">
                         <span style="font-weight: 600">Skor :
                             {{ $psr->answers->find($question)->pivot->score }}

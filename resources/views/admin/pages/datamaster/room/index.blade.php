@@ -28,7 +28,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($rooms as $room)
+                        @forelse ($rooms as $room)
                         <tr>
                             <td tabindex="0" style="text-align: center">{{ $loop->index +1 }}</td>
                             <td>{{ $room->building }}</td>
@@ -131,7 +131,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
