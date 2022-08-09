@@ -7,7 +7,7 @@
             <div class="d-flex align-items-center justify-content-between">
                 <h2 class="card-title font-weight-bold">Data Seluruh Mata Kuliah</h2>
                 <button type="button" class="btn btn-success" data-toggle="modal" data-target="#subjectFormModal">
-                    <i class="fas fa-plus mr-2"></i>
+                    <i class="mr-2 fas fa-plus"></i>
                     Mata Kuliah Baru
                 </button>
             </div>
@@ -22,7 +22,8 @@
                             <th tabindex="0" aria-controls="subject_table" rowspan="1" colspan="1"
                                 style="width: 20px; text-align: center">#</th>
                             <th tabindex="0" aria-controls="subject_table" rowspan="1" colspan="1">Nama Mata Kuliah</th>
-                            <th style="width: 150px; text-align: center" tabindex="0" aria-controls="subject_table" rowspan="1" colspan="1">Aksi</th>
+                            <th style="width: 150px; text-align: center" tabindex="0" aria-controls="subject_table"
+                                rowspan="1" colspan="1">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -38,8 +39,9 @@
                                             Edit
                                         </button>
                                         <!-- Edit Subject Modal -->
-                                        <div class="modal fade" id="EditSubject{{ $loop->index }}" tabindex="-1" data-backdrop="static"
-                                            data-keyboard="false" aria-labelledby="EditSubjectLabel{{ $loop->index }}" aria-hidden="true">
+                                        <div class="modal fade" id="EditSubject{{ $loop->index }}" tabindex="-1"
+                                            data-backdrop="static" data-keyboard="false"
+                                            aria-labelledby="EditSubjectLabel{{ $loop->index }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -52,8 +54,10 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.data-master.subject.update', $subject) }}">
                                                         @csrf
+                                                        @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="name">Nama mata kuliah</label>
@@ -73,15 +77,14 @@
                                         </div>
                                     </div>
                                     <div style="width: 49.5%">
-                                        <button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal"
-                                        data-target="#DeleteSubject{{ $loop->index }}">
+                                        <button type="button" class="btn btn-sm btn-block btn-danger"
+                                            data-toggle="modal" data-target="#DeleteSubject{{ $loop->index }}">
                                             Hapus
                                         </button>
                                         <!-- Delete Subject Modal -->
-                                        <div class="modal fade" id="DeleteSubject{{ $loop->index }}"
-                                            tabindex="-1" data-backdrop="static" data-keyboard="false"
-                                            aria-labelledby="DeleteSubjectLabel{{ $loop->index }}"
-                                            aria-hidden="true">
+                                        <div class="modal fade" id="DeleteSubject{{ $loop->index }}" tabindex="-1"
+                                            data-backdrop="static" data-keyboard="false"
+                                            aria-labelledby="DeleteSubjectLabel{{ $loop->index }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -102,9 +105,10 @@
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">BATALKAN</button>
                                                         <form
-                                                            action=""
+                                                            action="{{ route('admin.data-master.subject.destroy', $subject) }}"
                                                             method="POST">
                                                             @csrf
+                                                            @method('DELETE')
                                                             <button type="submit" class="btn btn-danger">
                                                                 HAPUS
                                                                 DATA</button>
@@ -144,7 +148,7 @@
                 </button>
             </div>
 
-            <form action="">
+            <form action="{{ route('admin.data-master.subject.store') }}" method="POST">
                 @csrf
                 <div class="modal-body">
                     <div class="form-group">

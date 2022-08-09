@@ -23,7 +23,8 @@
                                 style="width: 20px; text-align: center">#</th>
                             <th tabindex="0" aria-controls="room_table" rowspan="1" colspan="1">Gedung</th>
                             <th tabindex="0" aria-controls="room_table" rowspan="1" colspan="1">Nama Ruangan</th>
-                            <th style="width: 150px; text-align: center" tabindex="0" aria-controls="room_table" rowspan="1" colspan="1">Aksi</th>
+                            <th style="width: 150px; text-align: center" tabindex="0" aria-controls="room_table"
+                                rowspan="1" colspan="1">Aksi</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -40,8 +41,9 @@
                                             Edit
                                         </button>
                                         <!-- Edit Room Modal -->
-                                        <div class="modal fade" id="EditRoom{{ $loop->index }}" tabindex="-1" data-backdrop="static"
-                                            data-keyboard="false" aria-labelledby="EditRoom{{ $loop->index }}" aria-hidden="true">
+                                        <div class="modal fade" id="EditRoom{{ $loop->index }}" tabindex="-1"
+                                            data-backdrop="static" data-keyboard="false"
+                                            aria-labelledby="EditRoom{{ $loop->index }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -54,8 +56,10 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form method="POST" action="">
+                                                    <form method="POST"
+                                                        action="{{ route('admin.data-master.room.update', $room) }}">
                                                         @csrf
+                                                        @method('PUT')
                                                         <div class="modal-body">
                                                             <div class="form-group">
                                                                 <label for="building">Gedung</label>
@@ -81,15 +85,14 @@
                                         </div>
                                     </div>
                                     <div style="width: 49.5%">
-                                        <button type="button" class="btn btn-sm btn-block btn-danger" data-toggle="modal"
-                                        data-target="#DeleteRoom{{ $loop->index }}">
+                                        <button type="button" class="btn btn-sm btn-block btn-danger"
+                                            data-toggle="modal" data-target="#DeleteRoom{{ $loop->index }}">
                                             Hapus
                                         </button>
                                         <!-- Delete Room Modal -->
-                                        <div class="modal fade" id="DeleteRoom{{ $loop->index }}"
-                                            tabindex="-1" data-backdrop="static" data-keyboard="false"
-                                            aria-labelledby="DeleteRoom{{ $loop->index }}"
-                                            aria-hidden="true">
+                                        <div class="modal fade" id="DeleteRoom{{ $loop->index }}" tabindex="-1"
+                                            data-backdrop="static" data-keyboard="false"
+                                            aria-labelledby="DeleteRoom{{ $loop->index }}" aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -103,15 +106,18 @@
                                                         </button>
                                                     </div>
                                                     <div class="modal-body">
-                                                        <h6>Yakin untuk menghapus ruangan '<span class="font-weight-bold">{{ $room->building }} - {{ $room->name }}</span>'?
+                                                        <h6>Yakin untuk menghapus ruangan '<span
+                                                                class="font-weight-bold">{{ $room->building }} - {{
+                                                                $room->name }}</span>'?
                                                         </h6>
                                                     </div>
                                                     <div class="modal-footer">
                                                         <button type="button" class="btn btn-secondary"
                                                             data-dismiss="modal">BATALKAN</button>
                                                         <form
-                                                            action=""
+                                                            action="{{ route('admin.data-master.room.destroy', $room) }}"
                                                             method="POST">
+                                                            @method('DELETE')
                                                             @csrf
                                                             <button type="submit" class="btn btn-danger">
                                                                 HAPUS

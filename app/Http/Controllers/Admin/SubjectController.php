@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Subject\StoreSubjectRequest;
+use App\Http\Requests\Subject\UpdateSubjectRequest;
 use App\Models\Subject;
 use Illuminate\Http\Request;
 
@@ -81,14 +82,21 @@ class SubjectController extends Controller
      * @param  int  Subject $subject
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Subject $subject)
+    public function update(UpdateSubjectRequest $request, Subject $subject)
     {
         //
         $validated = $request->validated();
-        Subject::create($validated);
-        return to_route('admin.data-master.subject.index')->with(
+        $subject->update($validated);
+        if ($subject->wasChanged()) {
+            return back()->with(
+                [
+                    'success'   =>  'Mata Kuliah berhasil diperbarui'
+                ]
+            );
+        }
+        return back()->with(
             [
-                'success'   =>  'Mata Kuliah baru berhasil dibuat'
+                'failed'   =>  'Mata Kuliah gagal diperbarui'
             ]
         );
     }
