@@ -19,9 +19,9 @@
                 <div class="mb-3 w-25">
                     <select class="custom-select" id="subjectFilter">
                         <option value="" class="font-weight-bold">Filter Mata Kuliah</option>
-                        @foreach ($subjects as $subject)
+                        @forelse ($subjects as $subject)
                         <option value="'{{ $subject->name }}'">{{ $subject->name }}</option>
-                        @endforeach
+                        @endforelse
                     </select>
                 </div>
                 <table id="period_subject_registrar_table"
@@ -43,7 +43,7 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($period_subject_registrars as $psr)
+                        @forelse ($period_subject_registrars as $psr)
                         <tr>
                             <td tabindex="0"> {{ $psr->registrar->name }} </td>
                             <td style="text-align: center;"> {{ $psr->registrar->nim }} </td>
@@ -126,7 +126,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
@@ -160,7 +160,7 @@
                 <h5 class="m-0 mb-2 d-block font-weight-bold">
                     Berikut adalah Data Lulus Seleksi Berkas
                 </h5>
-                @foreach ($subjects as $subject)
+                @forelse ($subjects as $subject)
                 <p class="m-0 mb-2 d-block font-weight-bold">
                     {{ $subject->name }}
                     @if ($subject->pass_selection_count > $subject->pivot->number_of_lab_assistant)
@@ -182,12 +182,12 @@
                     <li>{{ $psr->registrar->name }}</li>
                     @endif
                     @empty
-                        <p style="margin-left: -32px">
-                            Belum ada calon asisten yang dinyatakan lulus untuk mata kuliah {{ $subject->name }}
-                        </p>
+                    <p style="margin-left: -32px">
+                        Belum ada calon asisten yang dinyatakan lulus untuk mata kuliah {{ $subject->name }}
+                    </p>
                     @endforelse
                 </ul>
-                @endforeach
+                @endforelse
             </div>
 
             <div class="modal-footer">

@@ -61,7 +61,7 @@
                             <p class="m-0 d-block">:</p>
                             <div style="width: 88%" class="">
                                 <ul class="pl-4">
-                                    @foreach ($question->choices as $choice)
+                                    @forelse ($question->choices as $choice)
                                     <li class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
                                         <p class="m-0 mb-1 d-block">{{ $choice->text }}</p>
                                         @if (!$choice->image)
@@ -79,7 +79,7 @@
                                         </div>
                                         @endif
                                     </li>
-                                    @endforeach
+                                    @endforelse
                                 </ul>
                             </div>
                         </div>
@@ -180,7 +180,7 @@
                                             @if ($question->choices->count() > 0)
                                             <p class="m-0 mb-2 d-block font-weight-bold">Pilihan Jawaban</p>
                                             <div id="question_{{ $question->id }}_choices_container">
-                                                @foreach ($question->choices as $choice)
+                                                @forelse ($question->choices as $choice)
                                                 <div class="mb-2 input-group">
                                                     <div class="input-group-prepend">
                                                         <div class="input-group-text">
@@ -232,7 +232,7 @@
                                                 </div>
                                                 <p style="padding-left: 38px;" class="m-0 my-3 d-block text-danger"
                                                     id="choice_{{ $question->id }}_{{ $choice->id }}_file_error"></p>
-                                                @endforeach
+                                                @endforelse
                                             </div>
                                             @endif
                                             <div class="form-group">
@@ -311,7 +311,7 @@
                                             <p class="m-0 d-block">:</p>
                                             <div style="width: 78%" class="">
                                                 <ul class="pl-4">
-                                                    @foreach ($question->choices as $choice)
+                                                    @forelse ($question->choices as $choice)
                                                     <li
                                                         class="mb-2 {{ $choice->is_true ? 'text-success font-weight-bold' : '' }} ">
                                                         <p class="m-0 mb-1 d-block">{{ $choice->text }}</p>
@@ -330,7 +330,7 @@
                                                         </div>
                                                         @endif
                                                     </li>
-                                                    @endforeach
+                                                    @endforelse
                                                 </ul>
                                             </div>
                                         </div>

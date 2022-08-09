@@ -29,31 +29,31 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($registrars as $registrar)
+                        @forelse ($registrars as $registrar)
                         <tr class="">
                             <td tabindex="0">{{ $registrar->name }}</td>
                             <td>{{ $registrar->nim }}
                             </td>
                             <td>
-                                @foreach ($registrar->period_subjects as $period_subject)
+                                @forelse ($registrar->period_subjects as $period_subject)
                                 @if ($period_subject->pivot->is_pass_file_selection)
                                 <span class="badge badge-success">{{ $period_subject->subject->name }}</span>
                                 @else
                                 <span class="badge badge-secondary">{{ $period_subject->subject->name }}</span>
                                 @endif
-                                @endforeach
+                                @endforelse
                             </td>
                             <td>
-                                @foreach ($registrar->period_subjects as $period_subject)
+                                @forelse ($registrar->period_subjects as $period_subject)
                                 @if ($period_subject->pivot->is_pass_exam_selection)
                                 <span class="badge badge-success">{{ $period_subject->subject->name }}</span>
                                 @else
                                 <span class="badge badge-secondary">{{ $period_subject->subject->name }}</span>
                                 @endif
-                                @endforeach
+                                @endforelse
                             </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>

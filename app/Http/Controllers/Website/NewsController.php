@@ -41,6 +41,22 @@ class NewsController extends Controller
     public function exam_selection_over(Period $period)
     {
         $period->load('subjects');
-        return view('website.pages.news.exam_selection', ['period' => $period]);
+        $period->load('subjects');
+        $psrs = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_id', $period->id)
+            ->where('is_pass_file_selection', true)
+            ->where('is_pass_exam_selection', true)
+            ->with(
+                [
+                    'period_subject'   => function ($query) use ($period) {
+                        $query->where('period_id', $period->id);
+                    },
+                    'registrar',
+                    'period_subject.subject'
+                ]
+            )->get()
+            //
+        ;
+        return view('website.pages.news.exam_selection', compact('psrs'), ['period' => $period]);
     }
 }

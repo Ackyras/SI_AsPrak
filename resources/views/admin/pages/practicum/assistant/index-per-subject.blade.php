@@ -4,61 +4,61 @@
             "nama"          => "Charles Xavier",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
         ],
@@ -66,757 +66,757 @@
             "nama"          => "Kipas Angin Arang Sate Madura",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Tupperware Merah",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Togi Si Paling Ganteng",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => true   
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => true  
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => true  
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => true  
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => true  
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => true  
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => true  
+                    "hadir"       => true
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => true  
+                    "hadir"       => true
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
         (object)[
             "nama"          => "Ackyra Baumem",
             "nim"           => "10118140001",
             "kehadiran"     => array(
-                (object)[ 
+                (object)[
                     "pertemuan"   => 1,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 2,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 3,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 4,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 5,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 6,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 7,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 8,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 9,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 10,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 11,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 12,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 13,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
-                (object)[ 
+                (object)[
                     "pertemuan"   => 14,
-                    "hadir"       => false  
+                    "hadir"       => false
                 ],
             ),
-            
+
         ],
     );
 
@@ -862,8 +862,8 @@
                     aria-describedby="subject_assistant_table_info">
                     <thead>
                         <tr>
-                            <th style="text-align:center; padding:none; vertical-align:center;" tabindex="0" aria-controls="subject_assistant_table"
-                                rowspan="2" colspan="1">
+                            <th style="text-align:center; padding:none; vertical-align:center;" tabindex="0"
+                                aria-controls="subject_assistant_table" rowspan="2" colspan="1">
                                 <p>Nama</p>
                             </th>
                             <th style="text-align: center" tabindex="0" aria-controls="subject_assistant_table"
@@ -880,57 +880,57 @@
                             </th>
                         </tr>
                         <tr>
-                            @for ($i = 1; $i <= $jumlah_pertemuan; $i++)
-                                <th style="padding:none; text-align:center;">{{ $i }}</th>
-                            @endfor
+                            @for ($i = 1; $i <= $jumlah_pertemuan; $i++) <th style="padding:none; text-align:center;">{{
+                                $i }}</th>
+                                @endfor
                         </tr>
                     </thead>
 
                     <tbody>
                         {{-- @forelse ($lab_assistants as $lab_assistant)
-                            <tr class="">
-                                <td tabindex="0">{{ $lab_assistant->name }}</td>
-                                <td>{{ $lab_assistant->nim }}</td>
-                                <td>
-                                    @if ($lab_assistant->schedules_count > 0)
-                                    {{ $lab_assistant->presences_count /
-                                    $lab_assistant->schedules_count * 100}}%
-                                    @else
-                                    Belum ada jadwal ditentukan
-                                    @endif
-                                </td>
-                                <td>
-                                    <div class="d-flex align-items-center justify-content-center">
-                                        <a role="button" href="" class="btn btn-sm btn-success">Lihat Detail</a>
-                                    </div>
-                                </td>
-                            </tr>
+                        <tr class="">
+                            <td tabindex="0">{{ $lab_assistant->name }}</td>
+                            <td>{{ $lab_assistant->nim }}</td>
+                            <td>
+                                @if ($lab_assistant->schedules_count > 0)
+                                {{ $lab_assistant->presences_count /
+                                $lab_assistant->schedules_count * 100}}%
+                                @else
+                                Belum ada jadwal ditentukan
+                                @endif
+                            </td>
+                            <td>
+                                <div class="d-flex align-items-center justify-content-center">
+                                    <a role="button" href="" class="btn btn-sm btn-success">Lihat Detail</a>
+                                </div>
+                            </td>
+                        </tr>
                         @empty
                         @endforelse --}}
-                        @foreach ($data_kehadiran as $data)
-                            <tr>
-                                <td tabindex="0">{{ $data->nama }}</td>
-                                <td class="text-center">{{ $data->nim }}</td>
+                        @forelse ($data_kehadiran as $data)
+                        <tr>
+                            <td tabindex="0">{{ $data->nama }}</td>
+                            <td class="text-center">{{ $data->nim }}</td>
+                            @php
+                            $jumlah_hadir = 0;
+                            @endphp
+                            @forelse ($data->kehadiran as $khdrn)
+                            <td class="text-center">
+                                @if ($khdrn->hadir)
                                 @php
-                                    $jumlah_hadir = 0;
+                                $jumlah_hadir++;
                                 @endphp
-                                @foreach ($data->kehadiran as $khdrn)
-                                    <td class="text-center">
-                                        @if ($khdrn->hadir)
-                                            @php
-                                                $jumlah_hadir++;
-                                            @endphp
-                                            <i class="fas fa-check-circle text-success"></i>
-                                        @else
-                                            <i class="fas fa-times-circle text-danger"></i>
-                                        @endif
-                                    </td>
-                                @endforeach
-                                <td class="font-weight-bold text-center">
-                                    {{ number_format(($jumlah_hadir/$jumlah_pertemuan) * 100, 2) }}%
-                                </td>
-                            </tr>
-                        @endforeach
+                                <i class="fas fa-check-circle text-success"></i>
+                                @else
+                                <i class="fas fa-times-circle text-danger"></i>
+                                @endif
+                            </td>
+                            @endforelse
+                            <td class="text-center font-weight-bold">
+                                {{ number_format(($jumlah_hadir/$jumlah_pertemuan) * 100, 2) }}%
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                     {{-- <tfoot>
                         <tr>

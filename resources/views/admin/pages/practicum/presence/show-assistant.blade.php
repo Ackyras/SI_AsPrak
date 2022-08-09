@@ -1,151 +1,21 @@
-<?php
-    $data_kehadiran = array(
-        (object)[
-            "nama"          => "Charles Xavier",
-            "nim"           => "10118140001",
-            "kehadiran"     => array(
-                (object)[
-                    "pertemuan"   => 1,
-                    "hadir"       => true
-                ],
-                (object)[
-                    "pertemuan"   => 2,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 3,
-                    "hadir"       => true
-                ],
-                (object)[
-                    "pertemuan"   => 4,
-                    "hadir"       => true
-                ],
-                (object)[
-                    "pertemuan"   => 5,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 6,
-                    "hadir"       => true
-                ],
-                (object)[
-                    "pertemuan"   => 7,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 8,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 9,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 10,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 11,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 12,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 13,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 14,
-                    "hadir"       => false
-                ],
-            ),
-        ],
-        (object)[
-            "nama"          => "Kipas Angin Arang Sate Madura",
-            "nim"           => "10118140001",
-            "kehadiran"     => array(
-                (object)[
-                    "pertemuan"   => 1,
-                    "hadir"       => true
-                ],
-                (object)[
-                    "pertemuan"   => 2,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 3,
-                    "hadir"       => true
-                ],
-                (object)[
-                    "pertemuan"   => 4,
-                    "hadir"       => true
-                ],
-                (object)[
-                    "pertemuan"   => 5,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 6,
-                    "hadir"       => true
-                ],
-                (object)[
-                    "pertemuan"   => 7,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 8,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 9,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 10,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 11,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 12,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 13,
-                    "hadir"       => false
-                ],
-                (object)[
-                    "pertemuan"   => 14,
-                    "hadir"       => false
-                ],
-            ),
-
-        ],
-    );
-
-    $jumlah_pertemuan = 14;
-?>
-
 @extends('admin.layouts.app')
 
 @section('styles')
-    <style>
-        .warning-button{
-            width: fit-content; 
-            background-color: transparent; 
-            border: none;
-        }
-        .warning-button-icon{
-            color:#FFC107;
-        }
-        .warning-button:hover .warning-button-icon{
-            color: #f59e0b;
-        }
-    </style>
+<style>
+    .warning-button {
+        width: fit-content;
+        background-color: transparent;
+        border: none;
+    }
+
+    .warning-button-icon {
+        color: #FFC107;
+    }
+
+    .warning-button:hover .warning-button-icon {
+        color: #f59e0b;
+    }
+</style>
 @endsection
 @section('content')
 <div class="p-2">
@@ -195,170 +65,183 @@
                     <tbody>
                         <!-- JANGAN DIHAPUS YAA :) -->
                         @php $row = 0; @endphp
-                        @foreach ($psrs as $psr)
-                            @php $row++; @endphp
-                            <tr>
-                                <td tabindex="0">
-                                    {{ $psr->registrar->name }}
-                                    <small>
-                                        psr_id: {{ $psr->id }}
-                                    </small>
-                                </td>
-                                <td class="text-center">{{ $psr->registrar->nim }}</td>
-                                    @php $valid_count = 0; @endphp
-                                    @foreach ($classroom->schedule->qrs as $qr)
-                                        <td class="text-center">
-                                            @if ($psr->presences->contains($qr))
-                                                @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
-                                                    <i class="fas fa-check-circle text-success"></i>
-                                                    @php $valid_count++; @endphp
-                                                @else
-                                                    <button type="button" class="warning-button" data-toggle="modal"
-                                                    data-target="#validatePresence_{{ $row }}_{{ $loop->index }}">
-                                                        <span class="warning-button-icon">
-                                                            <i class="fas fa-exclamation-circle"></i>
-                                                        </span>
-                                                    </button>
-                                                    <div class="modal fade" id="validatePresence_{{ $row }}_{{ $loop->index }}" tabindex="-1" data-backdrop="static"
-                                                        data-keyboard="false" aria-labelledby="validatePresence_{{ $row }}_{{ $loop->index }}Label" aria-hidden="true">
-                                                        <div class="modal-dialog">
-                                                            <div class="modal-content">
-                                                                <div class="modal-header">
-                                                                    <h4 class="modal-title font-weight-bold" id="validatePresence_{{ $row }}_{{ $loop->index }}Label">
-                                                                        Validasi Presensi</h4>
-                                                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                        <span aria-hidden="true">&times;</span>
-                                                                    </button>
-                                                                </div>
-                                                                <form method="POST" action="">
-                                                                    @csrf
-                                                                    @method('PUT')
-                                                                    <div class="modal-body">
-                                                                        <h5 class="text-left">
-                                                                            Asisten praktikum ini terdaftar pada Mata Kuliah 
-                                                                            <span class="font-weight-bold">
-                                                                                {{ $period_subject->subject->name }}
-                                                                                Kelas {{ $classroom->name }}</span>,
-                                                                            namun melakukan presensi di luar jadwal praktikum.
-                                                                        </h5>
-                                                                        <h5 class="text-left mt-2">
-                                                                            Apakah anda ingin memvalidasi presensi ini ?
-                                                                        </h5>
-                                                                    </div>
-                                                                    <div class="modal-footer">
-                                                                        <button type="submit" name="is_valid"
-                                                                            value="1"
-                                                                            class="btn btn-success">
-                                                                            Validasi Presensi
-                                                                        </button>
-                                                                    </div>
-                                                                </form>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                @endif
-                                            @else
-                                                <i class="fas fa-times-circle text-danger"></i>
-                                            @endif
-                                        </td>
-                                    @endforeach
-                                <td class="font-weight-bold text-center">
-                                    {{ number_format( ($valid_count / $classroom->schedule->qrs->count()) * 100, 2) }}%
-                                </td>
-                            </tr>
-                        @endforeach
-
-                        @foreach ($extrapsrs as $psr)
-                            @php $row++; @endphp
-                            <tr>
-                                <td tabindex="0">
-                                    {{ $psr->registrar->name }}
-                                    <small> psr_id: {{ $psr->id }} </small>
-                                </td>
-                                <td class="text-center">{{ $psr->registrar->nim }}</td>
-                                @php 
-                                    $waiting_count = 0;
-                                    $valid_count   = 0;
-                                @endphp
-                                @foreach ($classroom->schedule->qrs as $qr)
-                                    <td class="text-center">
-                                        @if ($psr->presences->contains($qr))
-                                            @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
-                                                <i class="fas fa-check-circle text-primary"></i>
-                                                @php $valid_count++; @endphp
-                                            @else
-                                                <button type="button" class="warning-button" data-toggle="modal"
-                                                    data-target="#validatePresence_{{ $row }}_{{ $loop->index }}">
-                                                    <span class="warning-button-icon">
-                                                        <i class="fas fa-exclamation-circle"></i>
-                                                    </span>
+                        @forelse ($psrs as $psr)
+                        @php $row++; @endphp
+                        <tr>
+                            <td tabindex="0">
+                                {{ $psr->registrar->name }}
+                                <small>
+                                    psr_id: {{ $psr->id }}
+                                </small>
+                            </td>
+                            <td class="text-center">{{ $psr->registrar->nim }}</td>
+                            @php $valid_count = 0; @endphp
+                            @forelse ($classroom->schedule->qrs as $qr)
+                            <td class="text-center">
+                                @if ($psr->presences->contains($qr))
+                                @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
+                                <i class="fas fa-check-circle text-success"></i>
+                                @php $valid_count++; @endphp
+                                @else
+                                <button type="button" class="warning-button" data-toggle="modal"
+                                    data-target="#validatePresence_{{ $row }}_{{ $loop->index }}">
+                                    <span class="warning-button-icon">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </span>
+                                </button>
+                                <div class="modal fade" id="validatePresence_{{ $row }}_{{ $loop->index }}"
+                                    tabindex="-1" data-backdrop="static" data-keyboard="false"
+                                    aria-labelledby="validatePresence_{{ $row }}_{{ $loop->index }}Label"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title font-weight-bold"
+                                                    id="validatePresence_{{ $row }}_{{ $loop->index }}Label">
+                                                    Validasi Presensi</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
                                                 </button>
-                                                <div class="modal fade" id="validatePresence_{{ $row }}_{{ $loop->index }}" tabindex="-1" data-backdrop="static"
-                                                    data-keyboard="false" aria-labelledby="validatePresence_{{ $row }}_{{ $loop->index }}Label" aria-hidden="true">
-                                                    <div class="modal-dialog">
-                                                        <div class="modal-content">
-                                                            <div class="modal-header">
-                                                                <h4 class="modal-title font-weight-bold" id="validatePresence_{{ $row }}_{{ $loop->index }}Label">
-                                                                    Validasi Presensi</h4>
-                                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                                                    <span aria-hidden="true">&times;</span>
-                                                                </button>
-                                                            </div>
-                                                            <form method="POST" action="">
-                                                                @csrf
-                                                                @method('PUT')
-                                                                <div class="modal-body">
-                                                                    <h5 class="text-left">
-                                                                        Asisten praktikum ini terdaftar pada Mata Kuliah 
-                                                                        <span class="font-weight-bold">{{ $period_subject->subject->name }}</span>,
-                                                                        namun tidak di  
-                                                                        <span class="font-weight-bold">Kelas {{ $classroom->name }}</span>.
-                                                                    </h5>
-                                                                    <h5 class="text-left mt-2">
-                                                                        Apakah anda ingin memvalidasi presensi ini ?
-                                                                    </h5>
-                                                                </div>
-                                                                <div class="modal-footer">
-                                                                    <button type="submit" name="is_valid"
-                                                                        value="1"
-                                                                        class="btn btn-success">
-                                                                        Validasi Presensi
-                                                                    </button>
-                                                                </div>
-                                                            </form>
-                                                        </div>
-                                                    </div>
+                                            </div>
+                                            <form method="POST" action="">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body">
+                                                    <h5 class="text-left">
+                                                        Asisten praktikum ini terdaftar pada Mata Kuliah
+                                                        <span class="font-weight-bold">
+                                                            {{ $period_subject->subject->name }}
+                                                            Kelas {{ $classroom->name }}</span>,
+                                                        namun melakukan presensi di luar jadwal praktikum.
+                                                    </h5>
+                                                    <h5 class="mt-2 text-left">
+                                                        Apakah anda ingin memvalidasi presensi ini ?
+                                                    </h5>
                                                 </div>
-                                                @php $waiting_count++; @endphp
-                                            @endif
-                                        @else
-                                            <i class="fas fa-times-circle text-secondary"></i>
-                                        @endif
-                                    </td>
-                                @endforeach
-                                <td class="font-weight-bold text-center">
-                                    @if ($waiting_count>0)
-                                        <small class="text-warning">
-                                            {{ $waiting_count }} MENUNGGU VALIDASI
-                                        </small>
-                                    @else
-                                        <small class="text-primary">
-                                            {{ $valid_count }} PERTEMUAN
-                                        </small>
-                                    @endif
-                                </td>
-                            </tr>
-                        @endforeach
+                                                <div class="modal-footer">
+                                                    <button type="submit" name="is_valid" value="1"
+                                                        class="btn btn-success">
+                                                        Validasi Presensi
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                @endif
+                                @else
+                                <i class="fas fa-times-circle text-danger"></i>
+                                @endif
+                            </td>
+                            @endforelse
+                            <td class="text-center font-weight-bold">
+                                {{ number_format( ($valid_count / $classroom->schedule->qrs->count()) * 100, 2) }}%
+                            </td>
+                        </tr>
+                        @endforelse
+
+                        @forelse ($extrapsrs as $psr)
+                        @php $row++; @endphp
+                        <tr>
+                            <td tabindex="0">
+                                {{ $psr->registrar->name }}
+                                <small> psr_id: {{ $psr->id }} </small>
+                            </td>
+                            <td class="text-center">{{ $psr->registrar->nim }}</td>
+                            @php
+                            $waiting_count = 0;
+                            $valid_count = 0;
+                            @endphp
+                            @forelse ($classroom->schedule->qrs as $qr)
+                            <td class="text-center">
+                                @if ($psr->presences->contains($qr))
+                                @if ($psr->presences->where( 'id' ,$qr->id )->first()->pivot->is_valid)
+                                <i class="fas fa-check-circle text-primary"></i>
+                                @php $valid_count++; @endphp
+                                @else
+                                <button type="button" class="warning-button" data-toggle="modal"
+                                    data-target="#validatePresence_{{ $row }}_{{ $loop->index }}">
+                                    <span class="warning-button-icon">
+                                        <i class="fas fa-exclamation-circle"></i>
+                                    </span>
+                                </button>
+                                <div class="modal fade" id="validatePresence_{{ $row }}_{{ $loop->index }}"
+                                    tabindex="-1" data-backdrop="static" data-keyboard="false"
+                                    aria-labelledby="validatePresence_{{ $row }}_{{ $loop->index }}Label"
+                                    aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h4 class="modal-title font-weight-bold"
+                                                    id="validatePresence_{{ $row }}_{{ $loop->index }}Label">
+                                                    Validasi Presensi</h4>
+                                                <button type="button" class="close" data-dismiss="modal"
+                                                    aria-label="Close">
+                                                    <span aria-hidden="true">&times;</span>
+                                                </button>
+                                            </div>
+                                            <form method="POST" action="">
+                                                @csrf
+                                                @method('PUT')
+                                                <div class="modal-body">
+                                                    <h5 class="text-left">
+                                                        Asisten praktikum ini terdaftar pada Mata Kuliah
+                                                        <span class="font-weight-bold">{{ $period_subject->subject->name
+                                                            }}</span>,
+                                                        namun tidak di
+                                                        <span class="font-weight-bold">Kelas {{ $classroom->name
+                                                            }}</span>.
+                                                    </h5>
+                                                    <h5 class="mt-2 text-left">
+                                                        Apakah anda ingin memvalidasi presensi ini ?
+                                                    </h5>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="submit" name="is_valid" value="1"
+                                                        class="btn btn-success">
+                                                        Validasi Presensi
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                                @php $waiting_count++; @endphp
+                                @endif
+                                @else
+                                <i class="fas fa-times-circle text-secondary"></i>
+                                @endif
+                            </td>
+                            @endforelse
+                            <td class="text-center font-weight-bold">
+                                @if ($waiting_count>0)
+                                <small class="text-warning">
+                                    {{ $waiting_count }} MENUNGGU VALIDASI
+                                </small>
+                                @else
+                                <small class="text-primary">
+                                    {{ $valid_count }} PERTEMUAN
+                                </small>
+                                @endif
+                            </td>
+                        </tr>
+                        @endforelse
                     </tbody>
                 </table>
                 <div class="mt-2">
-                    <small class="font-weight-bold d-block m-0 mb-1">Keterangan : </small>
+                    <small class="m-0 mb-1 font-weight-bold d-block">Keterangan : </small>
                     <div class="d-flex justify-content-between">
-                        <small class="d-block m-0"><i class="fas fa-check-circle text-success"></i> Presensi Valid</small>
-                        <small class="d-block m-0"><i class="fas fa-times-circle text-danger"></i> Tidak Presensi</small>
-                        <small class="d-block m-0"><i class="fas fa-check-circle text-primary"></i> Presensi Valid (<span class="font-italic text-secondary">Asisten Praktikum Kelas Luar</span>)</small>
-                        <small class="d-block m-0"><i class="fas fa-times-circle text-secondary"></i> Tidak Presensi (<span class="font-italic text-secondary">Asisten Praktikum Kelas Luar</span>)</small>
-                        <small class="d-block m-0"><i class="fas fa-exclamation-circle text-warning"></i> Menunggu Validasi (<span class="font-weight-bold text-secondary">Dapat diklik</span>)</small>
+                        <small class="m-0 d-block"><i class="fas fa-check-circle text-success"></i> Presensi
+                            Valid</small>
+                        <small class="m-0 d-block"><i class="fas fa-times-circle text-danger"></i> Tidak
+                            Presensi</small>
+                        <small class="m-0 d-block"><i class="fas fa-check-circle text-primary"></i> Presensi Valid
+                            (<span class="font-italic text-secondary">Asisten Praktikum Kelas Luar</span>)</small>
+                        <small class="m-0 d-block"><i class="fas fa-times-circle text-secondary"></i> Tidak Presensi
+                            (<span class="font-italic text-secondary">Asisten Praktikum Kelas Luar</span>)</small>
+                        <small class="m-0 d-block"><i class="fas fa-exclamation-circle text-warning"></i> Menunggu
+                            Validasi (<span class="font-weight-bold text-secondary">Dapat diklik</span>)</small>
                     </div>
                 </div>
             </div>

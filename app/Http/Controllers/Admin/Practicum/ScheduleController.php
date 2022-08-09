@@ -192,16 +192,43 @@ class ScheduleController extends Controller
     {
         $validated = $req->validate(
             [
-                'schedule_id'   =>  'required'
+                'psr_id'        =>  'required',
+                'schedule.*'    =>  'nullable'
             ]
         );
-        $schedule = Schedule::find($validated['schedule_id']);
-        $schedule->loadCount('psrs')
-            ->load('classroom.period_subject.subject');
-        if ($schedule->psrs_count < $schedule->number_of_lab_assistant) {
-            dd($schedule);
+        // dd($validated['schedule']);
+        if (isset($validated['schedule'])) {
+            $errMsg = '';
+            $status = 'success';
+            foreach ($validated['schedule'] as $schedule_id) {
+                $schedule = Schedule::find($schedule_id);
+                $schedule->loadCount('psrs')
+                    ->load('classroom.period_subject.subject');
+                if ($schedule->number_of_lab_assistant >= $schedule->psrs_count) {
+                    $errMsg = 'Jumlah asisten praktikum untuk mata kuliah ' .
+                        $schedule->classroom->period_subject->subject->name .
+                        ' kelas ' . $schedule->classroom->name . ' sudah penuh.
+                        ';
+                }
+                $schedule->psrs()->attach($validated['psr_id']);
+            }
+            if ($errMsg != '') {
+                return back()->with(
+                    [
+                        'warning'   =>  'Sebagian pembaruan gagal dilakukan.
+                        ' . $errMsg
+                    ]
+                );
+            }
         } else {
-            dd('OD');
+            $psr = PeriodSubjectRegistrar::find($validated['psr_id']);
+            $psr->schedules()->detach();
         }
+
+        return back()->with(
+            [
+                'success'   =>  'Berhasil memperbarui jadwal'
+            ]
+        );
     }
 }

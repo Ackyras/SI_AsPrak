@@ -1,17 +1,17 @@
 @extends('website.layouts.master')
 
 @section('content')
-<div class="w-full lg:w-3/5 m-auto bg-white drop-shadow-md p-4 lg:p-10">
+<div class="w-full p-4 m-auto bg-white lg:w-3/5 drop-shadow-md lg:p-10">
     <div class="mb-4">
-        <p class="text-2xl lg:text-3xl text-center text-emerald-600 font-serif font-bold tracking-wider">Form
+        <p class="font-serif text-2xl font-bold tracking-wider text-center lg:text-3xl text-emerald-600">Form
             Pendaftaran <br class="lg:hidden">Asisten Praktikum</p>
     </div>
     @if ($errors->any())
     <div class="alert alert-danger" role="alert">
         <ul>
-            @foreach ($errors->all() as $error)
+            @forelse ($errors->all() as $error)
             <li>{{ $error }}</li>
-            @endforeach
+            @endforelse
         </ul>
     </div>
     @endif
@@ -21,20 +21,20 @@
                 }">
             <!-- NAMA -->
             <div class="mb-4">
-                <label class="block w-full text-gray-500 mb-2 text-lg font-semibold" for="name">Nama Lengkap</label>
+                <label class="block w-full mb-2 text-lg font-semibold text-gray-500" for="name">Nama Lengkap</label>
                 <div class="relative">
                     <input
-                        class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
+                        class="w-full px-2 py-1 font-semibold border border-white lg:py-2 lg:px-3 text-emerald-800 bg-emerald-50 focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
                         type="text" name="name" id="name" autocomplete="off" required />
-                    <div id="nameAllowed" class="hidden absolute top-0 right-0 text-emerald-400 m-1 bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <div id="nameAllowed" class="absolute top-0 right-0 hidden m-1 text-emerald-400 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <div id="nameError" class="hidden absolute top-0 right-0 text-red-400 m-1 bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <div id="nameError" class="absolute top-0 right-0 hidden m-1 text-red-400 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                                 clip-rule="evenodd" />
@@ -47,21 +47,21 @@
             </div>
             <!-- NIM -->
             <div class="mb-4">
-                <label class="block w-full text-gray-500 mb-2 text-lg font-semibold" for="nim">Nomor Induk
+                <label class="block w-full mb-2 text-lg font-semibold text-gray-500" for="nim">Nomor Induk
                     Mahasiswa</label>
                 <div class="relative">
                     <input
-                        class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
+                        class="w-full px-2 py-1 font-semibold border border-white lg:py-2 lg:px-3 text-emerald-800 bg-emerald-50 focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
                         type="text" name="nim" id="nim" autocomplete="off" required />
-                    <div id="nimAllowed" class="hidden absolute top-0 right-0 text-emerald-400 m-1 bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <div id="nimAllowed" class="absolute top-0 right-0 hidden m-1 text-emerald-400 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <div id="nimError" class="hidden absolute top-0 right-0 text-red-400 m-1 bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <div id="nimError" class="absolute top-0 right-0 hidden m-1 text-red-400 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                                 clip-rule="evenodd" />
@@ -74,24 +74,24 @@
             </div>
             <!-- EMAIL -->
             <div class="mb-4">
-                <label class="block w-full text-gray-500 mb-2" for="email">
+                <label class="block w-full mb-2 text-gray-500" for="email">
                     <p class="text-lg font-semibold">Alamat Email</p>
-                    <p class="text-xs lg:text-sm font-thin">Gunakan alamat email ITERA untuk memudahkan kami mengirim
+                    <p class="text-xs font-thin lg:text-sm">Gunakan alamat email ITERA untuk memudahkan kami mengirim
                         informasi kepada anda</p>
                 </label>
                 <div class="relative">
                     <input
-                        class="w-full py-1 px-2 lg:py-2 lg:px-3 text-emerald-800 font-semibold bg-emerald-50 border border-white focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
+                        class="w-full px-2 py-1 font-semibold border border-white lg:py-2 lg:px-3 text-emerald-800 bg-emerald-50 focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
                         type="email" name="email" id="email" autocomplete="off" required />
-                    <div id="emailAllowed" class="hidden absolute top-0 right-0 text-emerald-400 m-1 bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <div id="emailAllowed" class="absolute top-0 right-0 hidden m-1 text-emerald-400 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z"
                                 clip-rule="evenodd" />
                         </svg>
                     </div>
-                    <div id="emailError" class="hidden absolute top-0 right-0 text-red-400 m-1 bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" viewBox="0 0 20 20" fill="currentColor">
+                    <div id="emailError" class="absolute top-0 right-0 hidden m-1 text-red-400 bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
                                 d="M10 18a8 8 0 100-16 8 8 0 000 16zM8.707 7.293a1 1 0 00-1.414 1.414L8.586 10l-1.293 1.293a1 1 0 101.414 1.414L10 11.414l1.293 1.293a1 1 0 001.414-1.414L11.414 10l1.293-1.293a1 1 0 00-1.414-1.414L10 8.586 8.707 7.293z"
                                 clip-rule="evenodd" />
@@ -104,16 +104,16 @@
             </div>
             <!-- SUBJECT -->
             <div class="mb-4">
-                <p class="block w-full text-gray-500 text-lg font-semibold">Pilihan Mata Kuliah</p>
+                <p class="block w-full text-lg font-semibold text-gray-500">Pilihan Mata Kuliah</p>
                 <div class="px-2 mt-2">
-                    @foreach ($period->subjects as $subject)
+                    @forelse ($period->subjects as $subject)
                     <input type="checkbox" id="subject_{{ $subject->pivot->id }}" name="subject[]"
-                        value="{{ $subject->pivot->id }}" class="subject-checkbox hidden">
+                        value="{{ $subject->pivot->id }}" class="hidden subject-checkbox">
                     <label for="subject_{{ $subject->pivot->id }}" class="flex items-center gap-2 mb-2">
                         <div id="cbcontainer_{{ $subject->pivot->id }}" class="p-0.5 border-2 border-white">
                             <div id="cbchecklist_{{ $subject->pivot->id }}"
-                                class="text-white border-2 border-emerald-600 bg-white">
-                                <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20"
+                                class="text-white bg-white border-2 border-emerald-600">
+                                <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20"
                                     fill="currentColor">
                                     <path fill-rule="evenodd"
                                         d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
@@ -125,7 +125,7 @@
                             {{ $subject->name }}
                         </p>
                     </label>
-                    @endforeach
+                    @endforelse
                 </div>
                 <p id="subjectErrorMsg"
                     class="hidden mt-1 w-fit py-1 px-2 rounded-sm text-xs font-thin border-[1px] text-red-600 bg-red-50 border-red-400">
@@ -134,11 +134,11 @@
             </div>
             <!-- CV -->
             <div class="mb-4">
-                <p class="block w-full text-gray-500 mb-2 text-lg font-semibold">Curriculum Vitae</p>
+                <p class="block w-full mb-2 text-lg font-semibold text-gray-500">Curriculum Vitae</p>
                 <input type="file" name="cv" id="cv" class="hidden" required />
                 <p id="cvnamecontainer"
-                    class="hidden w-fit border-2 py-1 px-2 gap-2 items-center bg-emerald-50 border-emerald-400 text-emerald-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    class="items-center hidden gap-2 px-2 py-1 border-2 w-fit bg-emerald-50 border-emerald-400 text-emerald-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
                             clip-rule="evenodd" />
@@ -148,8 +148,8 @@
                     </span>
                 </p>
                 <p id="cverrorcontainer"
-                    class="hidden w-fit mb-2 border-2 py-1 px-2 gap-2 items-center bg-red-50 border-red-400 text-red-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    class="items-center hidden gap-2 px-2 py-1 mb-2 text-red-600 border-2 border-red-400 w-fit bg-red-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                             clip-rule="evenodd" />
@@ -158,14 +158,14 @@
                         Pesan Error
                     </span>
                 </p>
-                <label class="w-fit block" for="cv">
+                <label class="block w-fit" for="cv">
                     <p id="ganticv"
-                        class="hidden cursor-pointer mt-2 px-1 italic font-bold tracking-wider text-sm text-gray-400 hover:text-gray-500">
+                        class="hidden px-1 mt-2 text-sm italic font-bold tracking-wider text-gray-400 cursor-pointer hover:text-gray-500">
                         Ganti File
                     </p>
                     <div id="pilihcv"
-                        class="flex border cursor-pointer items-center py-1 pl-3 pr-5 gap-3 text-emerald-600 hover:bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        class="flex items-center gap-3 py-1 pl-3 pr-5 border cursor-pointer text-emerald-600 hover:bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -178,11 +178,11 @@
             </div>
             <!-- KHS -->
             <div class="mb-4">
-                <p class="block w-full text-gray-500 mb-2 text-lg font-semibold">Kartu Tanda Mahasiswa</p>
+                <p class="block w-full mb-2 text-lg font-semibold text-gray-500">Kartu Tanda Mahasiswa</p>
                 <input type="file" name="khs" id="khs" class="hidden" required />
                 <p id="khsnamecontainer"
-                    class="hidden w-fit border-2 py-1 px-2 gap-2 items-center bg-emerald-50 border-emerald-400 text-emerald-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    class="items-center hidden gap-2 px-2 py-1 border-2 w-fit bg-emerald-50 border-emerald-400 text-emerald-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
                             clip-rule="evenodd" />
@@ -192,8 +192,8 @@
                     </span>
                 </p>
                 <p id="khserrorcontainer"
-                    class="hidden w-fit mb-2 border-2 py-1 px-2 gap-2 items-center bg-red-50 border-red-400 text-red-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    class="items-center hidden gap-2 px-2 py-1 mb-2 text-red-600 border-2 border-red-400 w-fit bg-red-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                             clip-rule="evenodd" />
@@ -202,14 +202,14 @@
                         Pesan Error
                     </span>
                 </p>
-                <label class="w-fit block" for="khs">
+                <label class="block w-fit" for="khs">
                     <p id="gantikhs"
-                        class="hidden cursor-pointer mt-2 px-1 italic font-bold tracking-wider text-sm text-gray-400 hover:text-gray-500">
+                        class="hidden px-1 mt-2 text-sm italic font-bold tracking-wider text-gray-400 cursor-pointer hover:text-gray-500">
                         Ganti File
                     </p>
                     <div id="pilihkhs"
-                        class="flex border cursor-pointer items-center py-1 pl-3 pr-5 gap-3 text-emerald-600 hover:bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        class="flex items-center gap-3 py-1 pl-3 pr-5 border cursor-pointer text-emerald-600 hover:bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -222,11 +222,11 @@
             </div>
             <!-- TRANSKRIP -->
             <div class="mb-4">
-                <p class="block w-full text-gray-500 mb-2 text-lg font-semibold">Transkrip Nilai Terbaru</p>
+                <p class="block w-full mb-2 text-lg font-semibold text-gray-500">Transkrip Nilai Terbaru</p>
                 <input type="file" name="transkrip" id="transkrip" class="hidden" required />
                 <p id="transkripnamecontainer"
-                    class="hidden w-fit border-2 py-1 px-2 gap-2 items-center bg-emerald-50 border-emerald-400 text-emerald-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    class="items-center hidden gap-2 px-2 py-1 border-2 w-fit bg-emerald-50 border-emerald-400 text-emerald-600">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M4 4a2 2 0 012-2h4.586A2 2 0 0112 2.586L15.414 6A2 2 0 0116 7.414V16a2 2 0 01-2 2H6a2 2 0 01-2-2V4z"
                             clip-rule="evenodd" />
@@ -236,8 +236,8 @@
                     </span>
                 </p>
                 <p id="transkriperrorcontainer"
-                    class="hidden w-fit mb-2 border-2 py-1 px-2 gap-2 items-center bg-red-50 border-red-400 text-red-600">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" viewBox="0 0 20 20" fill="currentColor">
+                    class="items-center hidden gap-2 px-2 py-1 mb-2 text-red-600 border-2 border-red-400 w-fit bg-red-50">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" viewBox="0 0 20 20" fill="currentColor">
                         <path fill-rule="evenodd"
                             d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z"
                             clip-rule="evenodd" />
@@ -246,14 +246,14 @@
                         Pesan Error
                     </span>
                 </p>
-                <label class="w-fit block" for="transkrip">
+                <label class="block w-fit" for="transkrip">
                     <p id="gantitranskrip"
-                        class="hidden cursor-pointer mt-2 px-1 italic font-bold tracking-wider text-sm text-gray-400 hover:text-gray-500">
+                        class="hidden px-1 mt-2 text-sm italic font-bold tracking-wider text-gray-400 cursor-pointer hover:text-gray-500">
                         Ganti File
                     </p>
                     <div id="pilihtranskrip"
-                        class="flex border cursor-pointer items-center py-1 pl-3 pr-5 gap-3 text-emerald-600 hover:bg-emerald-50">
-                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24"
+                        class="flex items-center gap-3 py-1 pl-3 pr-5 border cursor-pointer text-emerald-600 hover:bg-emerald-50">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24"
                             stroke="currentColor" stroke-width="2">
                             <path stroke-linecap="round" stroke-linejoin="round"
                                 d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12" />
@@ -267,7 +267,7 @@
         </div>
         <div class="border">
             <button type="submit"
-                class="text-2xl py-2 block w-full text-center bg-emerald-500 hover:bg-emerald-600 text-white font-extrabold font-serif tracking-wider uppercase">
+                class="block w-full py-2 font-serif text-2xl font-extrabold tracking-wider text-center text-white uppercase bg-emerald-500 hover:bg-emerald-600">
                 Daftar
             </button>
         </div>

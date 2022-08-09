@@ -1,9 +1,14 @@
 <template>
-    <nav class="fixed bg-emerald-700 top-0 left-0 w-full z-10 hidden md:flex md:flex-row md:flex-nowrap md:justify-start items-center p-2">
-        <div class="w-full mx-autp items-center flex justify-end md:flex-nowrap flex-wrap md:px-10 px-4">
+    <nav
+        class="fixed top-0 left-0 z-10 items-center hidden w-full p-2 bg-emerald-700 md:flex md:flex-row md:flex-nowrap md:justify-start"
+    >
+        <div
+            class="flex flex-wrap items-center justify-end w-full px-4 mx-autp md:flex-nowrap md:px-10"
+        >
             <!-- User -->
-            <ul class="hidden items-center md:flex gap-4 list-none">
-                <li class="inline-block relative">
+
+            <ul class="items-center hidden gap-4 list-none md:flex">
+                <li class="relative inline-block">
                     <user-dropdown />
                 </li>
             </ul>
@@ -20,7 +25,7 @@ export default {
     components: {
         UserDropdown,
         NotificationDropdown,
-        Link
+        Link,
     },
 };
 </script>

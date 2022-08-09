@@ -30,7 +30,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($periods as $period)
+                        @forelse ($periods as $period)
                         <tr class="{{ $loop->index % 2 == 0 ? 'even' : 'odd' }}">
                             <td tabindex="0">{{ $period->name }}</td>
                             <td>{{ \Carbon\Carbon::parse($period->registration_start)->format('j F, Y (H:i)') }}
@@ -44,12 +44,14 @@
                                             href="{{ route('admin.data-master.period.show', $period) }}">Detail</a>
                                     </div>
                                     <div style="width: 32.95%">
-                                        <button type="button" class="btn btn-block btn-sm btn-primary" data-toggle="modal"
+                                        <button type="button" class="btn btn-block btn-sm btn-primary"
+                                            data-toggle="modal"
                                             data-target="#periodEditFormModal{{ $period->id }}">Edit</button>
                                         <!-- Edit Period Modal -->
                                         <div class="modal fade" id="periodEditFormModal{{ $period->id }}" tabindex="-1"
                                             data-backdrop="static" data-keyboard="false"
-                                            aria-labelledby="periodEditFormModalLabel{{ $period->id }}" aria-hidden="true">
+                                            aria-labelledby="periodEditFormModalLabel{{ $period->id }}"
+                                            aria-hidden="true">
                                             <div class="modal-dialog">
                                                 <div class="modal-content">
                                                     <div class="modal-header">
@@ -61,7 +63,8 @@
                                                             <span aria-hidden="true">&times;</span>
                                                         </button>
                                                     </div>
-                                                    <form action="{{ route('admin.data-master.period.update', $period) }}"
+                                                    <form
+                                                        action="{{ route('admin.data-master.period.update', $period) }}"
                                                         method="POST">
                                                         @csrf
                                                         @method('PUT')
@@ -92,11 +95,12 @@
                                         </div>
                                     </div>
                                     <div style="width: 32.95%">
-                                        <button type="button" class="btn btn-block btn-sm btn-danger" data-toggle="modal"
+                                        <button type="button" class="btn btn-block btn-sm btn-danger"
+                                            data-toggle="modal"
                                             data-target="#confirmDeletePeriodModal{{ $period->id }}">Hapus</button>
                                         <!-- Edit Period Modal -->
-                                        <div class="modal fade" id="confirmDeletePeriodModal{{ $period->id }}" tabindex="-1"
-                                            data-backdrop="static" data-keyboard="false"
+                                        <div class="modal fade" id="confirmDeletePeriodModal{{ $period->id }}"
+                                            tabindex="-1" data-backdrop="static" data-keyboard="false"
                                             aria-labelledby="confirmDeletePeriodModalLabel{{ $period->id }}"
                                             aria-hidden="true">
                                             <div class="modal-dialog">
@@ -132,7 +136,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>

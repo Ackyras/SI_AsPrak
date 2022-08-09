@@ -25,7 +25,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                        @foreach ($period->subjects as $subject)
+                        @forelse ($period->subjects as $subject)
                         <tr>
                             <td tabindex="0">{{ $subject->name }}</td>
                             <td style="text-align: center;">{{ $subject->pivot->number_of_lab_assistant }}</td>
@@ -38,7 +38,7 @@
                                 </div>
                             </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>

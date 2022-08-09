@@ -48,21 +48,21 @@
                     </thead>
 
                     <tbody>
-                        @foreach ($lab_assistants as $lab_assistant)
+                        @forelse ($lab_assistants as $lab_assistant)
                         <tr class="">
                             <td tabindex="0">{{ $lab_assistant->name }}</td>
                             <td>{{ $lab_assistant->nim }}</td>
                             <td>
                                 <ul>
-                                    @foreach ($lab_assistant->period_subjects as $period_subject)
+                                    @forelse ($lab_assistant->period_subjects as $period_subject)
                                     <li>
                                         {{ $period_subject->subject->name }}
                                     </li>
-                                    @endforeach
+                                    @endforelse
                                 </ul>
                             </td>
                         </tr>
-                        @endforeach
+                        @endforelse
                     </tbody>
                     <tfoot>
                         <tr>
