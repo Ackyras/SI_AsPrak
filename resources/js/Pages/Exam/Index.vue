@@ -5,7 +5,7 @@
             <p class="px-4 my-3 text-lg text-center md:text-left uppercase tracking-wide text-emerald-600 font-bold">Semua Ujian Saya</p>
             <!-- SUBJECTS' EXAM STATUS -->
             <div class="grid grid-cols-1 md:grid-cols-3 px-4 gap-4 mb-4">
-                <card-exams-info v-for="data in user.period_subjects" :subject-data="data" />
+                <card-exams-info v-for="data in user.period_subjects" :subject-data="data" :key="data.id" />
             </div>
         </div>
     </Authenticated>

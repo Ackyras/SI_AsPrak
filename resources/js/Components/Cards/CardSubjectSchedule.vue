@@ -1,99 +1,36 @@
 <template>
-    <div class="bg-white p-4 rounded-md drop-shadow">
-        <p class="text-base font-semibold text-emerald-600 mb-2">
-            {{ subjectData.period_subject.subject.name }}
-        </p>
-        <p
-            class="text-sm text-gray-400 mb-2"
-            v-if="subjectData.schedules.length <= 0"
-        >
-            Anda belum memilih jadwal
-        </p>
-        <div v-else class="grid grid-cols-3 gap-2 text-sm text-gray-500"
-            :class="{
-                'mb-3' :  openSubmission === 1
-            }">
-            <p class="font-bold col-span-3" v-if="openSubmission === 1">Jadwal terdaftar :</p>
-            <p class="col-span-1">Kelas</p>
-            <p class="col-span-2 font-semibold">
-                {{ subjectData.schedules[0].classroom.name }}
-            </p>
-            <p class="col-span-1">Jadwal</p>
-            <p class="col-span-2 font-semibold">
-                {{ subjectData.schedules[0].day }},
-                {{ subjectData.schedules[0].start_time }} -
-                {{ subjectData.schedules[0].end_time }}
-            </p>
-            <p class="col-span-1">Ruangan</p>
-            <p class="col-span-2 font-semibold">
-                {{ subjectData.schedules[0].room.building }},
-                {{ subjectData.schedules[0].room.name }}
+    <div class="bg-white p-3 rounded-md drop-shadow flex gap-3 items-center">
+        <div class="w-full">
+            <div class="grid grid-cols-3 gap-2 text-sm text-gray-500" :class="{ 'mb-3' :  openSubmission === 1 }">
+                <p class="text-emerald-600 text-base col-span-3 font-semibold">Kelas
+                    {{ scheduleData.classroom.name }}
+                </p>
+                <p class="col-span-1">Jadwal</p>
+                <p class="col-span-2 font-semibold">
+                    {{ scheduleData.day }},
+                    {{ scheduleData.start_time }} -
+                    {{ scheduleData.end_time }}
+                </p>
+                <p class="col-span-1">Ruangan</p>
+                <p class="col-span-2 font-semibold">
+                    {{ scheduleData.room.building }},
+                    {{ scheduleData.room.name }}
+                </p>
+            </div>
+
+            <p class="text-xs italic text-gray-500" v-if="openSubmission === 1">
+                Note : Admin berhak menyesuaikan jadwal anda.
             </p>
         </div>
-
-        <form @submit.prevent="submit" v-if="openSubmission === 1">
-            <div class="mb-2">
-                <select
-                    class="w-full text-sm text-gray-600 py-1 px-2 border-none bg-gray-50"
-                    v-model="form.schedule_id"
-                >
-                    <option selected disabled hidden value="-1">
-                        Pilih Jadwal
-                    </option>
-
-                    <option
-                        v-for="classroom in subjectData.period_subject
-                            .classrooms"
-                        :value="classroom.schedule.id"
-                        :selected="
-                            subjectData.schedules.length > 0 &&
-                            subjectData.schedules[0].id ===
-                                classroom.schedule.id
-                        "
-                    >
-                        {{ classroom.name }} - {{ classroom.schedule.day }},
-                        {{ classroom.schedule.start_time }} -
-                        {{ classroom.schedule.end_time }}
-                        ({{ classroom.schedule.room.building }},
-                        {{ classroom.schedule.room.name }})
-                        <small
-                            >({{ classroom.schedule.psrs_count }}/{{
-                                classroom.schedule.number_of_lab_assistant
-                            }})
-                        </small>
-                    </option>
-                </select>
-            </div>
-            <button
-                type="submit"
-                :disabled="current_schedule === form.schedule_id"
-                class="py-1 px-2 rounded text-white font-bold text-sm mb-2"
-                :class="{
-                    'bg-sky-400 hover:bg-sky-500':
-                        subjectData.schedules.length > 0 &&
-                        current_schedule !== form.schedule_id,
-                    'bg-sky-200':
-                        subjectData.schedules.length > 0 &&
-                        current_schedule === form.schedule_id,
-                    'bg-emerald-400 hover:bg-emerald-500':
-                        subjectData.schedules.length <= 0 &&
-                        current_schedule !== form.schedule_id,
-                    'bg-emerald-200':
-                        subjectData.schedules.length <= 0 &&
-                        current_schedule === form.schedule_id,
-                }"
-            >
-                {{
-                    subjectData.schedules.length > 0
-                        ? "Ajukan Perubahan Jadwal"
-                        : "Ajukan Jadwal"
-                }}
+        <div class="w-10 flex-col justify-start gap-2 items-end">
+            <button class="block w-fit p-1 rounded-full bg-red-600 text-white">
+                <span>
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clip-rule="evenodd" />
+                    </svg>
+                </span>
             </button>
-        </form>
-
-        <p class="text-xs italic text-gray-500" v-if="openSubmission === 1">
-            Note : Admin berhak menyesuaikan jadwal anda.
-        </p>
+        </div>
     </div>
 </template>
 <script>
@@ -104,29 +41,15 @@ import { Inertia } from "@inertiajs/inertia";
 export default {
     name: "card-subject-schedule",
     props: {
-        subjectData: Object,
+        scheduleData: Object,
         openSubmission: Number,
     },
     setup(props) {
         const current_schedule = computed(() => {
-            if (props.subjectData.schedules.length <= 0) {
-                return "-1";
-            } else {
-                return props.subjectData.schedules[0].id;
-            }
+            return "-1";
         });
-        const form = useForm({
-            schedule_id: current_schedule.value,
-            psr_id: props.subjectData.id,
-        });
-
-        const submit = () => {
-            Inertia.post(route("user.schedule.store"), form);
-        };
         return {
             current_schedule,
-            form,
-            submit,
         };
     },
 };

@@ -5,6 +5,7 @@
         <div
             v-for="choice in questionData.choices"
             class="mb-2 flex gap-3 items-center"
+            :key="choice.id"
         >
             <input
                 class="w-5 h-5 text-emerald-600 bg-emerald-50 border-gray-300 focus:ring-emerald-500"
