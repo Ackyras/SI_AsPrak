@@ -118,6 +118,7 @@
                         data-toggle="modal" data-target="#scoreModal_{{ $question->id }}">
                         Ubah Skor
                     </button>
+                    @if(!$psr->answers->contains($question))
                     <div class="modal fade" id="scoreModal_{{ $question->id }}" tabindex="-1" data-backdrop="static"
                         data-keyboard="false" aria-labelledby="scoreModalLabel_{{ $question->id }}" aria-hidden="true">
                         <div class="modal-dialog">
@@ -149,6 +150,7 @@
                             </div>
                         </div>
                     </div>
+                    @endif
                 </div>
             </div>
             @else
