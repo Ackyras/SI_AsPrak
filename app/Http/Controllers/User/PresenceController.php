@@ -71,10 +71,65 @@ class PresenceController extends Controller
                 $classroom->total_invalid_presence = $classroom->schedule->qrs->sum('invalid_presence_count');
             });
         });
-
+        $extrapsrs = PeriodSubjectRegistrar::query()
+            ->whereRelation('period_subject', 'period_id', $period->id)
+            ->where('registrar_id', $user->id)
+            ->where('is_pass_exam_selection', true)
+            ->where('is_pass_file_selection', true)
+            ->get();
+        $extrapsrs->map(function ($psr) use ($user, $period) {
+            $id = $psr->id;
+            // dd($id);
+            $psr
+                ->load(
+                    [
+                        'period_subject'    =>  function ($query) use ($user, $period, $id) {
+                            $query->where('period_id', $period->id)->with(
+                                [
+                                    'classrooms'    =>  function ($query) use ($user, $id) {
+                                        $query
+                                            ->whereRelation('schedule.qrs.presenceds', 'presences.psr_id', $id)
+                                            ->with(
+                                                [
+                                                    'schedule.qrs' => function ($query) use ($id) {
+                                                        $query->withCount(
+                                                            [
+                                                                'presenceds as valid_presence_count' => function ($query) use ($id) {
+                                                                    $query->where('psr_id', $id)->where('is_valid', true);
+                                                                },
+                                                                'presenceds as invalid_presence_count' => function ($query) use ($id) {
+                                                                    $query->where('psr_id', $id)->where('is_valid', false);
+                                                                }
+                                                            ]
+                                                        )->with(
+                                                            [
+                                                                'presenceds' => function ($query) use ($id) {
+                                                                    $query->where('psr_id', $id);
+                                                                }
+                                                            ]
+                                                        );
+                                                    }
+                                                ]
+                                            );
+                                    },
+                                    'subject'
+                                ]
+                            );
+                        },
+                    ]
+                )
+                //
+            ;
+            $psr->period_subject->classrooms->map(function ($classroom) {
+                $classroom->total_valid_presence = $classroom->schedule->qrs->sum('valid_presence_count');
+                $classroom->total_invalid_presence = $classroom->schedule->qrs->sum('invalid_presence_count');
+            });
+        });
+        dd($psrs, $extrapsrs);
         return Inertia::render('Presence/Index', [
             'user'  =>  $user,
             'psrs'  =>  $psrs,
+            'extrapsrs'  =>  $extrapsrs,
         ]);
     }
 

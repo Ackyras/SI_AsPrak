@@ -96,20 +96,20 @@ class UserDashboardController extends Controller
                 'psr_id'        =>  'required'
             ]
         );
-        $psr = PeriodSubjectRegistrar::find($validated['psr_id']);
+        $psr = PeriodSubjectRegistrar::with('schedules')->find($validated['psr_id']);
         $schedule = Schedule::withCount('psrs')->find($validated['schedule_id']);
-        
+
         // dd($psr->schedules(), $psr->schedules()->exists($schedule));
-        // if ($psr->schedules()->exists($schedule)) {
-        //     return back()
-        //         ->with(
-        //             'alert',
-        //             [
-        //                 'msg' => 'Anda sudah tergabung dalam jadwal praktikum ini!',
-        //                 'status' => 'failed'
-        //             ]
-        //         );
-        // }
+        if ($psr->schedules->contains($schedule)) {
+            return back()
+                ->with(
+                    'alert',
+                    [
+                        'msg' => 'Anda sudah tergabung dalam jadwal praktikum ini!',
+                        'status' => 'failed'
+                    ]
+                );
+        }
         if ($schedule->psrs_count >= $schedule->number_of_lab_assistant) {
             return back()
                 ->with(
