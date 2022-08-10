@@ -89,6 +89,8 @@ class UserDashboardController extends Controller
 
     public function scheduleStore(Request $request)
     {
+
+        dd($request->all());
         $validated = $request->validate(
             [
                 'schedule_id'   =>  'required',

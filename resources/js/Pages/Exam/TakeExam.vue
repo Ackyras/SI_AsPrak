@@ -9,7 +9,7 @@
                         :class="{
                             'bg-white text-emerald-600' : answer === null,
                             'bg-emerald-600 text-white' : answer !== null,
-                        }">
+                        }" :key="'answerBtn_'+index">
                         {{ index + 1 }}
                     </p>
                 </div>
@@ -28,7 +28,7 @@
                         :class="{
                             'bg-white text-emerald-600' : answer === null,
                             'bg-emerald-600 text-white' : answer !== null,
-                        }">
+                        }" :key="'answer_btn_'+index">
                         {{ index + 1 }}
                     </p>
                 </div>
@@ -55,7 +55,7 @@
                                 }})</span>
                             </p>
                             <div class="w-full mb-3 border p-4" v-if="question.image">
-                                <img :src="'../storage/'+question.image" alt="" class="w-full h-auto">
+                                <img :src="'/storage/'+question.image" alt="" class="w-full h-auto">
                             </div>
                             <p class="mb-3">
                                 {{ question.text }}
@@ -71,10 +71,10 @@
                                 }})</span>
                             </p>
                             <div class="w-full mb-3 border p-4" v-if="question.image">
-                                <img :src="'../storage/'+question.image" alt="" class="w-full h-auto">
+                                <img :src="'/storage/'+question.image" alt="" class="w-full h-auto">
                             </div>
                             <p class="mb-3">{{ question.text }}</p>
-                            <div v-for="choice in question.choices" class="mb-2 flex gap-3 items-start">
+                            <div v-for="choice in question.choices" class="mb-2 flex gap-3 items-start" :key="'choice_'+choice.id">
                                 <input
                                     class="w-5 h-5 text-emerald-600 bg-emerald-50 border-gray-300 focus:ring-emerald-500"
                                     type="radio" :value="choice.id" :id="'answer_' + question.id + '_' + choice.id " 
@@ -82,7 +82,7 @@
 
                                 <label :for=" 'answer_' + question.id + '_' +  choice.id  ">
                                     <div class="w-full mb-2 border p-4" v-if="choice.image">
-                                        <img :src="'../storage/'+choice.image" alt="" class="w-full h-auto">
+                                        <img :src="'/storage/'+choice.image" alt="" class="w-full h-auto">
                                     </div>
                                     {{ choice.text }}
                                 </label>
@@ -113,7 +113,7 @@
 </template>
 <script>
 import Authenticated from "@/Layouts/Authenticated";
-import CardQuestion from "@/components/Cards/CardQuestion.vue";
+import CardQuestion from "@/Components/Cards/CardQuestion.vue";
 import { useForm } from "@inertiajs/inertia-vue3";
 import { ref, computed } from "vue";
 import { Inertia } from "@inertiajs/inertia";
