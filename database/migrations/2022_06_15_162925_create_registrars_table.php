@@ -23,6 +23,7 @@ return new class extends Migration
             $table->string('khs');
             $table->string('transkrip');
             $table->foreignIdFor(User::class)->nullable()->constrained()->cascadeOnDelete();
+            $table->boolean('is_honor_taken')->default(false);
             $table->timestamps();
         });
     }

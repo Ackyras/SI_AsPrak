@@ -140,7 +140,8 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form method="POST" action="">
+                                            <form method="POST"
+                                                action="{{ route('admin.assistant.salary-post', $registrar) }}">
                                                 @csrf
                                                 <div class="modal-body">
                                                     <h5> Dengan menekan tombol <span
@@ -155,8 +156,7 @@
                                                     <h5>Konfirmasi Pembayaran?</h5>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary" name="is_honor_taken"
-                                                        value="1">
+                                                    <button type="submit" class="btn btn-primary">
                                                         KONFIRMASI
                                                     </button>
                                                 </div>
