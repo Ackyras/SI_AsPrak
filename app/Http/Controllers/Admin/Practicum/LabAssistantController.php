@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 use App\Models\PeriodSubject;
 use App\Http\Controllers\Controller;
 use App\Models\PeriodSubjectRegistrar;
+use App\Models\Presence;
 
 class LabAssistantController extends Controller
 {
@@ -149,8 +150,25 @@ class LabAssistantController extends Controller
         return view('admin.pages.practicum.assistant.salary', compact('registrars', 'period'));
     }
 
-    public function salaryPost()
+    public function salaryPost(Registrar $registrar)
     {
+        $registrar->update(
+            [
+                'is_honor_taken'    =>  true,
+            ]
+        );
+        if ($registrar->wasChanged()) {
+            return back()->with(
+                [
+                    'success'   =>  'Status honor asprak berhasil diubah'
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'   =>  'Status honor asprak gagal diubah'
+            ]
+        );
     }
 
     public function presenceShow(PeriodSubject $period_subject)
@@ -220,5 +238,34 @@ class LabAssistantController extends Controller
             //
         ;
         return view('admin.pages.practicum.presence.show-assistant', compact('period_subject', 'classroom', 'psrs', 'extrapsrs'));
+    }
+
+    public function presenceUpdate(Request $req)
+    {
+        // dd($req->all());
+        $validated = $req->validate(
+            [
+                'psr_id'        =>  'required',
+                'qr_id'   =>  'required'
+            ]
+        );
+        $presence = Presence::where('psr_id', $validated['psr_id'])->where('qr_id', $validated['qr_id'])->first();
+        $presence->update(
+            [
+                'is_valid'  =>  true,
+            ]
+        );
+        if ($presence->wasChanged()) {
+            return back()->with(
+                [
+                    'success'   =>  'Status presensi berhasil diubah'
+                ]
+            );
+        }
+        return back()->with(
+            [
+                'failed'   =>  'Status presensi gagal diubah'
+            ]
+        );
     }
 }

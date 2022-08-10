@@ -166,7 +166,9 @@ Route::middleware(['auth', 'user_is_active', 'admin'])->as('admin.')->prefix('ad
             Route::get('presence', 'presenceIndex')->name('presence-index');
             Route::get('presence/subject/{period_subject}', 'presenceShow')->name('presence-show');
             Route::get('presence/subject/{period_subject}/class/{classroom}', 'presenceShowAssistant')->name('presence-show-assistant');
+            Route::post('presence/update-status', 'presenceUpdate')->name('presence-update-status');
             Route::get('salary', 'salaryIndex')->name('salary-index');
+            Route::post('salary/{registrar}', 'salaryPost')->name('salary-post');
         });
         Route::controller(ScheduleController::class)->as('schedule.')->group(function () {
             Route::get('/schedule', 'assistantSchedule')->name('index');

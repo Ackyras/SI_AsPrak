@@ -104,9 +104,12 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form method="POST" action="">
+                                            <form method="POST"
+                                                action="{{ route('admin.assistant.presence-update-status') }}">
                                                 @csrf
-                                                @method('PUT')
+                                                {{-- @method('PUT') --}}
+                                                <input type="hidden" name="psr_id" value="{{ $psr->id }}">
+                                                <input type="hidden" name="qr_id" value="{{ $qr->id }}">
                                                 <div class="modal-body">
                                                     <h5 class="text-left">
                                                         Asisten praktikum ini terdaftar pada Mata Kuliah
@@ -120,8 +123,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" name="is_valid" value="1"
-                                                        class="btn btn-success">
+                                                    <button type="submit" class="btn btn-success">
                                                         Validasi Presensi
                                                     </button>
                                                 </div>
@@ -183,9 +185,12 @@
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
-                                            <form method="POST" action="">
+                                            <form method="POST"
+                                                action="{{ route('admin.assistant.presence-update-status') }}">
                                                 @csrf
-                                                @method('PUT')
+                                                {{-- @method('PUT') --}}
+                                                <input type="hidden" name="psr_id" value="{{ $psr->id }}">
+                                                <input type="hidden" name="qr_id" value="{{ $qr->id }}">
                                                 <div class="modal-body">
                                                     <h5 class="text-left">
                                                         Asisten praktikum ini terdaftar pada Mata Kuliah
@@ -200,8 +205,7 @@
                                                     </h5>
                                                 </div>
                                                 <div class="modal-footer">
-                                                    <button type="submit" name="is_valid" value="1"
-                                                        class="btn btn-success">
+                                                    <button type="submit" class="btn btn-success">
                                                         Validasi Presensi
                                                     </button>
                                                 </div>

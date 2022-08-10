@@ -109,7 +109,7 @@ class UserDashboardController extends Controller
                     ]
                 );
         }
-        if ($psr->schedules()->contains($schedule)) {
+        if ($psr->schedules()->exists($schedule)) {
             return back()
                 ->with(
                     'alert',

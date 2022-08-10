@@ -19,6 +19,7 @@ class Registrar extends Model
         'khs',
         'transkrip',
         'period_id',
+        'is_honor_taken'
     ];
 
     public function user()
