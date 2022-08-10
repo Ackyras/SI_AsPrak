@@ -89,8 +89,7 @@ class UserDashboardController extends Controller
 
     public function scheduleStore(Request $request)
     {
-
-        dd($request->all());
+        // dd($request->all());
         $validated = $request->validate(
             [
                 'schedule_id'   =>  'required',
@@ -99,6 +98,18 @@ class UserDashboardController extends Controller
         );
         $psr = PeriodSubjectRegistrar::find($validated['psr_id']);
         $schedule = Schedule::withCount('psrs')->find($validated['schedule_id']);
+        
+        // dd($psr->schedules(), $psr->schedules()->exists($schedule));
+        // if ($psr->schedules()->exists($schedule)) {
+        //     return back()
+        //         ->with(
+        //             'alert',
+        //             [
+        //                 'msg' => 'Anda sudah tergabung dalam jadwal praktikum ini!',
+        //                 'status' => 'failed'
+        //             ]
+        //         );
+        // }
         if ($schedule->psrs_count >= $schedule->number_of_lab_assistant) {
             return back()
                 ->with(
@@ -109,23 +120,14 @@ class UserDashboardController extends Controller
                     ]
                 );
         }
-        if ($psr->schedules()->exists($schedule)) {
-            return back()
-                ->with(
-                    'alert',
-                    [
-                        'msg' => 'Jadwal ini sudah anda pilih',
-                        'status' => 'failed'
-                    ]
-                );
-        }
         $schedule->psrs()->attach($validated['psr_id']);
         return to_route('user.schedule')
-            ->with('alert', ['msg' => 'Jadwal berhasil diperbarui', 'status' => 'success']);
+            ->with('alert', ['msg' => 'Jadwal berhasil disimpan', 'status' => 'success']);
     }
 
     public function scheduleDestroy(Request $request)
     {
+        // dd($request->all());
         $validated = $request->validate(
             [
                 'schedule_id'   =>  'required',
@@ -137,7 +139,7 @@ class UserDashboardController extends Controller
             ->where('schedule_id', $validated['schedule_id'])
             ->first();
         if ($psr_schedule->deleteOrFail()) {
-            return back()
+            return to_route('user.schedule')
                 ->with(
                     'alert',
                     [
@@ -146,7 +148,7 @@ class UserDashboardController extends Controller
                     ]
                 );
         }
-        return back()
+        return to_route('user.schedule')
             ->with(
                 'alert',
                 [

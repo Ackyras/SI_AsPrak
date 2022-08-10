@@ -11,7 +11,7 @@
                         Pilih Jadwal
                     </option>
 
-                    <option v-for="classroom in subjectData.period_subject.classrooms"
+                    <option v-for="classroom in subjectData.period_subject.classrooms" v-show="!currentSchedules.includes(classroom.id)"
                         :value="classroom.schedule.id" :key="classroom.id">
                         {{ classroom.name }} - {{ classroom.schedule.day }},
                         {{ classroom.schedule.start_time }} -
@@ -51,13 +51,13 @@ export default {
     props: {
         subjectData: Object,
         openSubmission: Number,
+        currentSchedules: Array,
     },
     setup(props) {
         const current_schedule = computed(() => {
             return "-1";
         });
-
-
+        
         const form = useForm({
             schedule_id: current_schedule.value,
             psr_id: props.subjectData.id,

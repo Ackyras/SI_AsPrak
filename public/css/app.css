@@ -11254,6 +11254,9 @@ input[type="range"]::-ms-fill-lower {
 .pointer-events-none {
   pointer-events: none;
 }
+.visible {
+  visibility: visible;
+}
 .static {
   position: static;
 }
@@ -11672,6 +11675,9 @@ input[type="range"]::-ms-fill-lower {
 }
 .w-1\/5 {
   width: 20%;
+}
+.w-36 {
+  width: 9rem;
 }
 .min-w-fit {
   min-width: -webkit-fit-content;
@@ -12165,8 +12171,15 @@ input[type="range"]::-ms-fill-lower {
   --tw-bg-opacity: 1;
   background-color: rgb(224 36 36 / var(--tw-bg-opacity));
 }
+.bg-amber-500 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(245 158 11 / var(--tw-bg-opacity));
+}
 .bg-opacity-75 {
   --tw-bg-opacity: 0.75;
+}
+.bg-opacity-50 {
+  --tw-bg-opacity: 0.5;
 }
 .bg-\[url\(\'\/images\/CPS\.png\'\)\] {
   background-image: url('/images/CPS.png');

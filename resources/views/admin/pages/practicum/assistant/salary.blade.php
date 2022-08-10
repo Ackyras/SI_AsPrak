@@ -74,6 +74,10 @@
                                 colspan="1">
                                 Total
                             </th>
+                            <th style="text-align: center" tabindex="0" aria-controls="registrar_table" rowspan="1"
+                                colspan="1">
+                                Tanda Terima
+                            </th>
                             <th style="width: 120px; text-align: center" tabindex="0" aria-controls="registrar_table"
                                 rowspan="1" colspan="1">
                                 Status Pembayaran
@@ -112,59 +116,61 @@
                             <td style="text-align: center">
                                 {{ $period->honor * $registrar->total_presences }}
                             </td>
-                            @if ($registrar->is_honor_taken)
-                            <td>
-                                <p style="background-color: #9ca3af; font-size: small"
-                                    class="py-2 m-0 text-center text-white rounded-sm d-block w-100">
-                                    Diserahkan
-                                </p>
+                            <td style="text-align: center">
                             </td>
+                            @if ($registrar->is_honor_taken)
+                                <td>
+                                    <p style="background-color: #9ca3af; font-size: small"
+                                        class="py-2 m-0 text-center text-white rounded-sm d-block w-100">
+                                        Diserahkan
+                                    </p>
+                                </td>
                             @else
-                            <td>
-                                <button class="btn btn-sm btn-block btn-primary" type="button" data-toggle="modal"
-                                    data-target="#PaymentStatus{{ $loop->index }}">
-                                    Menunggu
-                                </button>
-                                <div class="modal fade" id="PaymentStatus{{ $loop->index }}" tabindex="-1"
-                                    data-backdrop="static" data-keyboard="false"
-                                    aria-labelledby="PaymentStatusLabel{{ $loop->index }}" aria-hidden="true">
-                                    <div class="modal-dialog">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <h4 class="modal-title font-weight-bold"
-                                                    id="PaymentStatusLabel{{ $loop->index }}">
-                                                    Konfirmasi Pembayaran Honor Asisten
-                                                </h4>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
-                                                    <span aria-hidden="true">&times;</span>
-                                                </button>
-                                            </div>
-                                            <form method="POST"
-                                                action="{{ route('admin.assistant.salary-post', $registrar) }}">
-                                                @csrf
-                                                <div class="modal-body">
-                                                    <h5> Dengan menekan tombol <span
-                                                            class="text-primary font-weight-bold">KONFIRMASI</span>,
-                                                        anda menyatakan bahwa Honor Asisten Praktikum atas nama <span
-                                                            class="font-weight-bold">{{ $registrar->name }}</span>
-                                                        telah diserahkan kepada Asisten Praktikum terkait.
-                                                    </h5>
-                                                    <h6 class="m-0 my-2 d-block font-italic text-danger">Catatan: Aksi
-                                                        ini tidak dapat
-                                                        dibatalkan.</h6>
-                                                    <h5>Konfirmasi Pembayaran?</h5>
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="submit" class="btn btn-primary">
-                                                        KONFIRMASI
+                                <td>
+                                    <button class="btn btn-sm btn-block btn-primary" type="button" data-toggle="modal"
+                                        data-target="#PaymentStatus{{ $loop->index }}">
+                                        Menunggu
+                                    </button>
+                                    <div class="modal fade" id="PaymentStatus{{ $loop->index }}" tabindex="-1"
+                                        data-backdrop="static" data-keyboard="false"
+                                        aria-labelledby="PaymentStatusLabel{{ $loop->index }}" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h4 class="modal-title font-weight-bold"
+                                                        id="PaymentStatusLabel{{ $loop->index }}">
+                                                        Konfirmasi Pembayaran Honor Asisten
+                                                    </h4>
+                                                    <button type="button" class="close" data-dismiss="modal"
+                                                        aria-label="Close">
+                                                        <span aria-hidden="true">&times;</span>
                                                     </button>
                                                 </div>
-                                            </form>
+                                                <form method="POST"
+                                                    action="{{ route('admin.assistant.salary-post', $registrar) }}">
+                                                    @csrf
+                                                    <div class="modal-body">
+                                                        <h5> Dengan menekan tombol <span
+                                                                class="text-primary font-weight-bold">KONFIRMASI</span>,
+                                                            anda menyatakan bahwa Honor Asisten Praktikum atas nama <span
+                                                                class="font-weight-bold">{{ $registrar->name }}</span>
+                                                            telah diserahkan kepada Asisten Praktikum terkait.
+                                                        </h5>
+                                                        <h6 class="m-0 my-2 d-block font-italic text-danger">Catatan: Aksi
+                                                            ini tidak dapat
+                                                            dibatalkan.</h6>
+                                                        <h5>Konfirmasi Pembayaran?</h5>
+                                                    </div>
+                                                    <div class="modal-footer">
+                                                        <button type="submit" class="btn btn-primary">
+                                                            KONFIRMASI
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                            </td>
+                                </td>
                             @endif
                         </tr>
                         @empty
@@ -179,6 +185,7 @@
                             <th style="text-align: center" rowspan="1" colspan="1">Tarif Honor</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Jumlah Hadir</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Total</th>
+                            <th style="text-align: center" rowspan="1" colspan="1">Tanda Terima</th>
                             <th style="text-align: center" rowspan="1" colspan="1">Status Pembayaran</th>
                         </tr>
                     </tfoot>
@@ -202,36 +209,37 @@
             "buttons": [{
                     extend: "copy",
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     }
                 },
                 {
                     extend: "excel",
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     }
                 },
                 {
                     extend: "csv",
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     }
                 },
                 {
                     extend: 'pdf',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     }
                 },
                 {
                     extend: 'print',
                     exportOptions: {
-                        columns: [0, 1, 2, 3, 4, 5]
+                        columns: [0, 1, 2, 3, 4, 5, 6]
                     }
                 },
                 "colvis"
-            ]
+            ],
         }).buttons().container().appendTo('#registrar_table_wrapper .col-md-6:eq(0)');
+        $('#registrar_table').dataTable().fnSetColumnVis( 6, false );
     });
 </script>
 @endsection

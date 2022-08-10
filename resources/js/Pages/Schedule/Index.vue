@@ -5,17 +5,20 @@
                 Jadwal Praktikum Saya
             </p>
                 
-            <div v-for="psr in psrs" class="w-full border border-black mb-4" :key="psr.id">
+            <div v-for="(psr, index) in psrs" class="w-full mb-4" :key="psr.id">
                 <div class="w-full flex justify-between items-center mb-2">
                     <p class="block m-0 text-base font-semibold text-emerald-600">
                         {{ psr.period_subject.subject.name }}
                     </p>
                 </div>
                 <div class="grid grid-cols-1 lg:grid-cols-2 gap-4 items-start">
-                    <card-subject-schedule v-for="schedule in psr.schedules" :schedule-data="schedule" :open-submission="period.is_open_for_schedule_submission" :key="schedule.id"/>
-                    <card-add-schedule :subject-data="psr" :open-submission="period.is_open_for_schedule_submission "/>
+                    <card-subject-schedule v-for="schedule in psr.schedules" :schedule-data="schedule" :subject-name="psr.period_subject.subject.name" :psr-id="psr.id" :open-submission="period.is_open_for_schedule_submission" :key="schedule.id"/>
+                    <card-add-schedule :subject-data="psr" :open-submission="period.is_open_for_schedule_submission" :current-schedules="schedules_ids[index]" v-if="psr.schedules.length<psr.period_subject.classrooms.length"/>
                 </div>
             </div>
+
+            <p class="text-lg font-bold mb-2">SCHEDULES IDS</p>
+            <pre class="mb-3 border border-black">{{ JSON.stringify(schedules_ids, null, '\t') }}</pre>
             <p class="text-lg font-bold mb-2">PERIOD SUBJECT REGISTRAR</p>
             <pre class="mb-3 border border-black">{{ JSON.stringify(psrs, null, '\t') }}</pre>
             <p class="text-lg font-bold mb-2">PERIOD SUBJECT</p>
@@ -45,6 +48,20 @@ export default {
         Authenticated,
         CardSubjectSchedule,
         CardAddSchedule,
+    },
+    computed: {
+        schedules_ids() {
+            let data = [];
+            for (let i=0; i<this.psrs.length; i++){
+                let ids = [];
+                let schedules = this.psrs[i].schedules;
+                for (let j=0; j<schedules.length; j++){
+                    ids.push(schedules[j].classroom.id);
+                }
+                data.push(ids);
+            }
+            return data; 
+        }
     },
     methods:{
         addSchedule(index){

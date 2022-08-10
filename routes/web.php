@@ -72,6 +72,7 @@ Route::middleware(['auth', 'user_is_active', 'user'])->prefix('user')->as('user.
             ->group(function () {
                 Route::get('schedule', 'scheduleIndex')->name('schedule');
                 Route::post('/schedule', 'scheduleStore')->name('schedule.store');
+                Route::post('/schedule-destroy', 'scheduleDestroy')->name('schedule.destroy');
             });
 
         Route::controller(SalaryController::class)->prefix('salary')->as('salary.')->group(function () {
