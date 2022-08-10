@@ -187,7 +187,6 @@
                     <p style="margin-left: -32px">
                         Belum ada calon asisten yang dinyatakan lulus untuk mata kuliah {{ $subject->name }}
                     </p>
-                    @empty
                     @endforelse
                 </ul>
                 @empty
