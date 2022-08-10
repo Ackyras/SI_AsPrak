@@ -100,7 +100,7 @@
                 <div style="width: 25%; background-color: #f3f4f6"
                     class="p-2 d-flex justify-content-between align-items-center">
                     @if ($psr->answers->contains($question))
-                    @if($question->)
+                    {{-- @if($psr->answers) --}}
                     <h6 class="m-0 d-block text-success">
                         <span style="font-weight: 600">Skor :
                             {{ $psr->answers->find($question)->pivot->score }}
@@ -190,22 +190,22 @@
                 </ul>
                 <div style="width: 25%; background-color: #fee2e215"
                     class="p-2 d-flex justify-content-between align-items-center">
-                    @if ($psr->answers->where('id', $question->id)->first()->score = $question->score)
+                    @if(!$psr->answers->contains($question))
+                    <h6 class="m-0 d-block text-danger">
+                        <span style="font-weight: 600">Skor : </span>0 / {{ $question->score }}
+                    </h6>
+                    @else
+                    @if($psr->answers->where('id',$question->id)->first()->pivot->score == $question->score)
                     <h6 class="m-0 d-block text-success">
                         <span style="font-weight: 600">Skor : </span>{{ $psr->answers->where('id',
                         $question->id)->first()->score }} / {{ $question->score }}
                     </h6>
-                    @elseif ($psr->answers->where('id', $question->id)->first()->score < $question->score)
-                        <h6 class="m-0 d-block text-warning">
-                            <span style="font-weight: 600">Skor : </span>{{ $psr->answers->where('id',
-                            $question->id)->first()->score }} / {{ $question->score }}
-                        </h6>
-                        @elseif($psr->answers->where('id', $question->id)->first()->score == 0)
-                        <h6 class="m-0 d-block text-danger">
-                            <span style="font-weight: 600">Skor : </span>{{ $psr->answers->where('id',
-                            $question->id)->first()->score }} / {{ $question->score }}
-                        </h6>
-                        @endif
+                    @else
+                    <h6 class="m-0 d-block text-danger">
+                        <span style="font-weight: 600">Skor : </span>0 / {{ $question->score }}
+                    </h6>
+                    @endif
+                    @endif
                 </div>
             </div>
             @endif

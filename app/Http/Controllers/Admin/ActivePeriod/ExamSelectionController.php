@@ -146,14 +146,12 @@ class ExamSelectionController extends Controller
             ],
         );
         $psr->essay_score = 0;
-        $psr->total_essay_score = 0;
         $psr->choice_score = 0;
-        $psr->total_choice_score = 0;
         foreach ($psr->answers as $answer) {
             if ($answer->type == 'essay') {
-                $psr->essay_score += $answer->score;
+                $psr->essay_score += $answer->pivot->score;
             } else {
-                $psr->choice_score += $answer->score;
+                $psr->choice_score += $answer->pivot->score;
             }
         }
         // dd($psr);
@@ -225,11 +223,10 @@ class ExamSelectionController extends Controller
                 'score' =>  'required',
             ]
         );
-        // dd($validated);
-        // dd($answer);
         $answer->update(
             $validated
         );
+        // dd($answer->wasChanged());
         if ($answer->wasChanged()) {
             return back()->with(
                 [
