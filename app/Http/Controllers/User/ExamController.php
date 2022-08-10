@@ -108,11 +108,13 @@ class ExamController extends Controller
             if ($question->type == 'essay') {
                 $tempRequest['file'] =   $request->answers[$key];
             } else {
-                if ($tempRequest['choice_id']) {
-                    $tempRequest['choice_id'] = $request->answers[$key];
-                    $choice = Choice::find($tempRequest['choice_id']);
+                $tempRequest['choice_id'] = $request->answers[$key];
+                $choice = Choice::find($tempRequest['choice_id']);
+                if ($choice) {
                     if ($choice->is_true) {
                         $tempRequest['score'] = $question->score;
+                    } else {
+                        $tempRequest['score'] = 0;
                     }
                 }
             }

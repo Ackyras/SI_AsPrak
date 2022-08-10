@@ -145,6 +145,13 @@ class ExamSelectionController extends Controller
                 'answers'
             ],
         );
+        if (!$psr->is_take_exam_selection) {
+            return back()->with(
+                [
+                    'failed'    =>  'Peserta belum memberikan jawaban'
+                ]
+            );
+        }
         $psr->essay_score = 0;
         $psr->choice_score = 0;
         foreach ($psr->answers as $answer) {
