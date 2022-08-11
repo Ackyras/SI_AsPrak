@@ -276,11 +276,11 @@
                     exportOptions: {
                         columns: [0, 1, 2, 3, 4, 5, 6]
                     },
-                    customize: function(win) {
-                        totalSalaryNum = parseInt($("#totalAssistantSalary").text());
-                        totalSalary = totalSalaryNum.toLocaleString("id-ID", {style:"currency", currency:"IDR"}); 
-                        $(win.document.body).append("<h3 style=\"display:block; width:100%; text-align:right; margin-top:20px; font-weight:bold;\">Total honor: "+totalSalary+"</h3>"); 
-                    }
+                    // customize: function(win) {
+                    //     totalSalaryNum = parseInt($("#totalAssistantSalary").text());
+                    //     totalSalary = totalSalaryNum.toLocaleString("id-ID", {style:"currency", currency:"IDR"}); 
+                    //     $(win.document.body).append("<h3 style=\"display:block; width:100%; text-align:right; margin-top:20px; font-weight:bold;\">Total honor: "+totalSalary+"</h3>"); 
+                    // }
                 },
                 "colvis"
             ],
