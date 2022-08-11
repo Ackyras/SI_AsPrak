@@ -39,72 +39,71 @@
                             <td> {{ $psr->period_subject->subject->name }} </td>
 
                             @php
-                            $current_row_schedules = array();
-                            $row++;
+                                $current_row_schedules = array();
+                                $row++;
                             @endphp
-
-                            {{-- @isset($psr->schedules->count() > 0) --}}
+                            
                             @if($psr->schedules->count() > 0)
-                            <td>
-                                @if ($psr->schedules->count() > 1)
-                                <div style="display:flex; flex-direction:column; gap:2px;">
-                                    @forelse ($psr->schedules as $schedule)
-                                    <p class="m-0 d-block">
-                                        <span class="font-weight-bold">{{ $loop->index + 1 }})</span>
-                                        Kelas {{ $schedule->classroom->name }} -
-                                        {{ $schedule->day }},
-                                        {{ $schedule->start_time }} -
-                                        {{ $schedule->end_time }}
-                                    </p>
-                                    @php array_push($current_row_schedules,$schedule->id); @endphp
-                                    @empty
-                                    @endforelse
-                                </div>
-                                @else
-                                @forelse ($psr->schedules as $schedule)
-                                <p class="m-0 d-block">
-                                    Kelas {{ $schedule->classroom->name }} -
-                                    {{ $schedule->day }},
-                                    {{ $schedule->start_time }} -
-                                    {{ $schedule->end_time }}
-                                </p>
-                                @empty
-                                @endforelse
-                                @endif
-                            </td>
+                                <td>
+                                    @if ($psr->schedules->count() > 1)
+                                        <div style="display:flex; flex-direction:column; gap:2px;">
+                                            @forelse ($psr->schedules as $schedule)
+                                                <p class="m-0 d-block">
+                                                    <span class="font-weight-bold">{{ $loop->index + 1 }})</span>
+                                                    Kelas {{ $schedule->classroom->name }} -
+                                                    {{ $schedule->day }},
+                                                    {{ $schedule->start_time }} -
+                                                    {{ $schedule->end_time }}
+                                                </p>
+                                                @php array_push($current_row_schedules,$schedule->id); @endphp
+                                            @empty
+                                            @endforelse
+                                        </div>
+                                    @else
+                                        @forelse ($psr->schedules as $schedule)
+                                            <p class="m-0 d-block">
+                                                Kelas {{ $schedule->classroom->name }} -
+                                                {{ $schedule->day }},
+                                                {{ $schedule->start_time }} -
+                                                {{ $schedule->end_time }}
+                                            </p>
+                                            @php array_push($current_row_schedules,$schedule->id); @endphp
+                                        @empty
+                                        @endforelse
+                                    @endif
+                                </td>
                             @else
-                            <td class="text-secondary font-italic text-warning">
-                                Asisten ini belum memilih Jadwal
-                            </td>
+                                <td class="text-secondary font-italic text-warning">
+                                    Asisten ini belum memilih Jadwal
+                                </td>
                             @endif
-                            {{-- @endisset --}}
 
-                            {{-- @isset($psr->schedules->count() > 0) --}}
+                            
                             @if($psr->schedules->count() > 0)
-                            <td>
-                                @if ($psr->schedules->count() > 1)
-                                <div style="display:flex; flex-direction:column; gap:2px;">
-                                    @forelse ($psr->schedules as $schedule)
-                                    <p class="m-0 d-block">
-                                        <span class="font-weight-bold">{{ $loop->index + 1 }})</span>
-                                        {{ $schedule->room->building }}, {{ $schedule->room->name }}
-                                    </p>
-                                    @empty
-                                    @endforelse
-                                </div>
-                                @else
-                                @forelse ($psr->schedules as $schedule)
-                                <p class="m-0 d-block">
-                                    {{ $schedule->room->building }}, {{ $schedule->room->name }}
-                                </p>
-                                @empty
-                                @endforelse
-                                @endif
-                            </td>
+                                <td>
+                                    @if ($psr->schedules->count() > 1)
+                                        <div style="display:flex; flex-direction:column; gap:2px;">
+                                            @forelse ($psr->schedules as $schedule)
+                                                <p class="m-0 d-block">
+                                                    <span class="font-weight-bold">{{ $loop->index + 1 }})</span>
+                                                    {{ $schedule->room->building }}, {{ $schedule->room->name }}
+                                                </p>
+                                            @empty
+                                            @endforelse
+                                        </div>
+                                    @else
+                                        @forelse ($psr->schedules as $schedule)
+                                            <p class="m-0 d-block">
+                                                {{ $schedule->room->building }}, {{ $schedule->room->name }}
+                                            </p>
+                                        @empty
+                                        @endforelse
+                                    @endif
+                                </td>
                             @else
-                            <td class="text-secondary font-italic text-warning"> - </td>
-                            {{-- @endisset --}}
+                                <td class="text-secondary font-italic text-warning"> - </td>
                             @endif
+
                             <td>
                                 <div class="d-flex align-items-center justify-content-between">
                                     <!-- Add/Edit Schedule Button -->
@@ -153,69 +152,62 @@
                                                         </p>
                                                         <div style="max-height: 50vh; overflow-y:auto;"
                                                             class="p-1 bg-light">
-                                                            @forelse ($schedules->where('classroom.period_subject.id',
-                                                            $psr->period_subject->id) as $schedule)
-                                                            <div
-                                                                class="p-1 mb-2 bg-white border rounded-sm d-flex align-items-center">
-                                                                <input type="checkbox" name="schedule[]"
-                                                                    value="{{ $schedule->id }}" class="mx-3 d-block"
-                                                                    id="schedule_{{ $row }}_{{ $schedule->id }}" {{
-                                                                    in_array($schedule->id, $current_row_schedules) ?
-                                                                'checked' : '' }}
-                                                                {{
-                                                                ($schedule->psrs_count >=
-                                                                $schedule->number_of_lab_assistant)
-                                                                &&
-                                                                (!in_array($schedule->id, $current_row_schedules))
-                                                                ? 'disabled' : ''
-                                                                }}>
-                                                                <label class="m-0 d-block w-100"
-                                                                    for="schedule_{{ $row }}_{{ $schedule->id }}">
-                                                                    <p class="m-0 mb-1 d-flex">
-                                                                        <span class="font-weight-normal w-25">Kelas
-                                                                        </span>
-                                                                        <span>{{ $schedule->classroom->name }}
-                                                                        </span>
-                                                                    </p>
-                                                                    <p class="m-0 mb-1 d-flex">
-                                                                        <span class="font-weight-normal w-25">Jadwal
-                                                                        </span>
-                                                                        <span>{{ $schedule->day }},
-                                                                            {{ $schedule->start_time }} -
-                                                                            {{ $schedule->end_time }}
-                                                                        </span>
-                                                                    </p>
-                                                                    <p class="m-0 mb-1 d-flex">
-                                                                        <span class="font-weight-normal w-25">Ruangan
-                                                                        </span>
-                                                                        <span>{{ $schedule->room->building }},
-                                                                            {{ $schedule->room->name }}
-                                                                        </span>
-                                                                    </p>
-                                                                    <p class="m-0 d-flex">
-                                                                        <span class="font-weight-normal w-25">Asisten
-                                                                        </span>
-                                                                        <span>
-                                                                            {{ $schedule->psrs_count }}/{{
-                                                                            $schedule->number_of_lab_assistant }}
-                                                                        </span>
-                                                                    </p>
-                                                                    @if ($schedule->psrs_count >=
-                                                                    $schedule->number_of_lab_assistant)
-                                                                    @if (in_array($schedule->id,
-                                                                    $current_row_schedules))
-                                                                    <small class="mt-1 text-warning font-italic">
-                                                                        Menghapus centang akan mengeluarkan asisten
-                                                                        praktikum ini dari jadwal.
-                                                                    </small>
-                                                                    @else
-                                                                    <small class="mt-1 text-danger font-italic">
-                                                                        Jumlah asisten untuk jadwal ini sudah penuh.
-                                                                    </small>
-                                                                    @endif
-                                                                    @endif
-                                                                </label>
-                                                            </div>
+                                                            @forelse ($schedules->where('classroom.period_subject.id', $psr->period_subject->id) as $schedule)
+                                                                <div class="p-1 mb-2 bg-white border rounded-sm d-flex align-items-center">
+                                                                    <input type="checkbox" name="schedule[]"
+                                                                        value="{{ $schedule->id }}" class="mx-3 d-block"
+                                                                        id="schedule_{{ $row }}_{{ $schedule->id }}" 
+                                                                        @checked(in_array($schedule->id, $current_row_schedules)) 
+                                                                        @disabled(
+                                                                            ($schedule->psrs_count >= $schedule->number_of_lab_assistant)
+                                                                            &&
+                                                                            (!in_array($schedule->id, $current_row_schedules))
+                                                                        )>
+                                                                    <label class="m-0 d-block w-100"
+                                                                        for="schedule_{{ $row }}_{{ $schedule->id }}">
+                                                                        <p class="m-0 mb-1 d-flex">
+                                                                            <span class="font-weight-normal w-25">Kelas
+                                                                            </span>
+                                                                            <span>{{ $schedule->classroom->name }}
+                                                                            </span>
+                                                                        </p>
+                                                                        <p class="m-0 mb-1 d-flex">
+                                                                            <span class="font-weight-normal w-25">Jadwal
+                                                                            </span>
+                                                                            <span>{{ $schedule->day }},
+                                                                                {{ $schedule->start_time }} -
+                                                                                {{ $schedule->end_time }}
+                                                                            </span>
+                                                                        </p>
+                                                                        <p class="m-0 mb-1 d-flex">
+                                                                            <span class="font-weight-normal w-25">Ruangan
+                                                                            </span>
+                                                                            <span>{{ $schedule->room->building }},
+                                                                                {{ $schedule->room->name }}
+                                                                            </span>
+                                                                        </p>
+                                                                        <p class="m-0 d-flex">
+                                                                            <span class="font-weight-normal w-25">Asisten
+                                                                            </span>
+                                                                            <span>
+                                                                                {{ $schedule->psrs_count }}/{{
+                                                                                $schedule->number_of_lab_assistant }}
+                                                                            </span>
+                                                                        </p>
+                                                                        @if ($schedule->psrs_count >= $schedule->number_of_lab_assistant)
+                                                                            @if (in_array($schedule->id, $current_row_schedules))
+                                                                                <small class="mt-1 text-warning font-italic">
+                                                                                    Menghapus centang akan mengeluarkan asisten
+                                                                                    praktikum ini dari jadwal.
+                                                                                </small>
+                                                                            @else
+                                                                                <small class="mt-1 text-danger font-italic">
+                                                                                    Jumlah asisten untuk jadwal ini sudah penuh.
+                                                                                </small>
+                                                                            @endif
+                                                                        @endif
+                                                                    </label>
+                                                                </div>
                                                             @empty
                                                             @endforelse
                                                         </div>
