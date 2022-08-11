@@ -5,27 +5,39 @@
 
             <p class="my-3 text-lg text-left uppercase tracking-wide text-emerald-600 font-bold">Presensi Kelas Saya</p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 items-start mb-2" v-for="psr in psrs">
-                <!-- <p class="mb-2 text-base lg:col-span-3 text-left tracking-wide text-emerald-600 font-bold">{{ psr.period_subject.subject.name }}</p> -->
-                <card-presence-info v-for="classroom in psr.period_subject.classrooms" :classroom-data="classroom" :subject-name="psr.period_subject.subject.name"/>
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 items-start mb-2" v-for="psr in psrs" :key="'psr_'+psr.id">
+                <card-presence-info 
+                    v-for="classroom in psr.period_subject.classrooms" 
+                    :classroom-data="classroom" 
+                    :subject-name="psr.period_subject.subject.name" 
+                    :key="'psr_classroom_'+classroom.id"/>
             </div>
 
-            <p class="my-3 text-lg text-left uppercase tracking-wide text-emerald-600 font-bold">Presensi Luar Kelas Saya</p>
+            <p class="my-3 text-lg text-left uppercase tracking-wide text-emerald-600 font-bold" v-show="outClassCount>0">Presensi Luar Kelas Saya</p>
 
-            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 items-start mb-2" v-for="psr in psrs">
-                <!-- <p class="mb-2 text-base lg:col-span-3 text-left tracking-wide text-emerald-600 font-bold">{{ psr.period_subject.subject.name }}</p> -->
-                <card-presence-info v-for="classroom in psr.period_subject.classrooms" :classroom-data="classroom" :subject-name="psr.period_subject.subject.name"/>
+            <div class="grid grid-cols-1 lg:grid-cols-3 lg:gap-3 items-start mb-2" v-for="(psr, index) in extraPsrs" :key="'extraPsr_'+psr.id">
+                <card-presence-info 
+                    v-for="classroom in psr.period_subject.classrooms" 
+                    :classroom-data="classroom" 
+                    :subject-name="psr.period_subject.subject.name" 
+                    :key="'psr_classroom_'+classroom.id"
+                    v-show="!ownClassIds[index].includes(classroom.id)"
+                    />
             </div>
 
+            <!-- <p class="text-lg font-bold mb-2">OWN CLASS IDS</p>
+            <pre class="mb-3 border border-black">{{ JSON.stringify(ownClassIds, null, '\t') }}</pre>
+            <p class="text-lg font-bold mb-2">EXTRA PERIOD SUBJECT REGISTRAR</p>
+            <pre class="mb-3 border border-black">{{ JSON.stringify(extraPsrs, null, '\t') }}</pre>
             <p class="text-lg font-bold mb-2">PERIOD SUBJECT REGISTRAR</p>
-            <pre class="mb-3 border border-black">{{ JSON.stringify(psrs, null, '\t') }}</pre>
+            <pre class="mb-3 border border-black">{{ JSON.stringify(psrs, null, '\t') }}</pre> -->
 
         </div>
     </Authenticated>
 </template>
 <script>
 import Authenticated from "@/Layouts/Authenticated";
-import CardPresenceInfo from "@/components/Cards/CardPresenceInfo.vue";
+import CardPresenceInfo from "@/Components/Cards/CardPresenceInfo.vue";
 
 export default {
     name: "presence-index",
@@ -81,9 +93,38 @@ export default {
         CardPresenceInfo,
         Authenticated,
     },
+    computed : {
+        ownClassIds() {
+            let data = [];
+            for (let i=0; i<this.psrs.length; i++){
+                let ids = [];
+                let classrooms = this.psrs[i].period_subject.classrooms;
+                for(let j=0; j<classrooms.length; j++){
+                    ids.push(classrooms[j].id);
+                }
+                data.push(ids);
+            }
+            return data;
+        },
+        outClassCount() {
+            let data = 0;
+            for (let i=0; i<this.extraPsrs.length; i++){
+                let classrooms = this.extraPsrs[i].period_subject.classrooms;
+                for(let j=0; j<classrooms.length; j++){
+                    if(!(this.ownClassIds[i].includes(classrooms[j].id))){
+                        console.log(classrooms[j].id);
+                        data = 1;
+                        return data;
+                    }
+                }
+            }
+            return data;
+        },
+    },
     props: {
         user: Object,
         psrs: Object,
+        extraPsrs: Object,
     },
 };
 </script>

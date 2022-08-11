@@ -17,12 +17,12 @@
                 </div>
             </div>
 
-            <p class="text-lg font-bold mb-2">SCHEDULES IDS</p>
+            <!-- <p class="text-lg font-bold mb-2">SCHEDULES IDS</p>
             <pre class="mb-3 border border-black">{{ JSON.stringify(schedules_ids, null, '\t') }}</pre>
             <p class="text-lg font-bold mb-2">PERIOD SUBJECT REGISTRAR</p>
             <pre class="mb-3 border border-black">{{ JSON.stringify(psrs, null, '\t') }}</pre>
             <p class="text-lg font-bold mb-2">PERIOD SUBJECT</p>
-            <pre class="mb-3 border border-black">{{ JSON.stringify(period_subjects, null, '\t') }}</pre>
+            <pre class="mb-3 border border-black">{{ JSON.stringify(period_subjects, null, '\t') }}</pre> -->
         </div>
     </Authenticated>
 </template>

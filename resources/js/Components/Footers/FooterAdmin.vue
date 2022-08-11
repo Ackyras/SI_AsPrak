@@ -5,7 +5,7 @@
       <div class="flex flex-wrap items-center justify-center">
         <div class="w-full md:w-4/12 px-4">
           <div class="text-sm text-blueGray-500 font-semibold py-1 text-center md:text-left">
-            Copyright © {{ date }} SIAP Terpadu
+            Copyright © {{ date }} Lab. MM ITERA
           </div>
         </div>
       </div>

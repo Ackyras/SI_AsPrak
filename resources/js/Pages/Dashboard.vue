@@ -1,12 +1,7 @@
 <template>
     <Authenticated :psr_data="user.period_subjects">
-        <div class="min-h-screen border-3 border-purple-500">
-            <p>{{ user.name }}</p>
-            <ul>
-                <!-- <li v-for="period_subject in user.period_subjects">
-                    {{ period_subject.subject.name }}
-                </li> -->
-            </ul>
+        <div class="min-h-screen">
+            <p class="text-lg text block w-full m-0 text-emerald-600 tracking-wide py-4 font-semibold">Halo, {{ user.name }}.</p>
         </div>
     </Authenticated>
 </template>

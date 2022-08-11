@@ -6,12 +6,9 @@
         <div class="px-3 py-4">
             <div class="grid grid-cols-3 gap-2 text-sm text-gray-600">
                 <p class="col-span-2">Jumlah Pertemuan Diadakan</p>
-                <p class="font-bold text-emerald-600 text-right">{{ classroomData.schedule.qrs.length }}</p>
+                <p class="font-bold text-gray-600 text-right">{{ classroomData.schedule.qrs.length }}</p>
                 <p class="col-span-2">Jumlah Kehadiran Saya</p>
-                <p class="font-bold text-right" :class="{
-                    'text-red-600' : classroomData.schedule.qrs.length > classroomData.total_valid_presence,
-                    'text-emerald-600' : classroomData.schedule.qrs.length == classroomData.schedule.qrs.length,
-                }">
+                <p class="font-bold text-right text-emerald-600">
                     {{ classroomData.total_valid_presence }}
                 </p>
                 <p class="col-span-2">Menunggu Validasi</p>

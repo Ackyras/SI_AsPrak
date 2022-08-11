@@ -74,7 +74,7 @@
                             :href="route('user.dashboard')"
                             :class="{
                                 'text-emerald-500':
-                                    $page.url.startsWith('/dashboard'),
+                                    $page.url.startsWith('/user/dashboard'),
                             }"
                         >
                             <svg
@@ -99,7 +99,7 @@
                             :href="route('user.exam.index')"
                             :class="{
                                 'text-emerald-500':
-                                    $page.url.startsWith('/ujian-seleksi'),
+                                    $page.url.startsWith('/user/ujian-seleksi'),
                             }"
                         >
                             <svg
@@ -125,7 +125,7 @@
                             :href="route('user.schedule')"
                             :class="{
                                 'text-emerald-500':
-                                    $page.url.startsWith('/schedule'),
+                                    $page.url.startsWith('/user/schedule'),
                             }"
                         >
                             <svg
@@ -150,7 +150,7 @@
                             :href="route('user.presence.index')"
                             :class="{
                                 'text-emerald-500':
-                                    $page.url.startsWith('/presence'),
+                                    $page.url.startsWith('/user/presence'),
                             }"
                         >
                             <svg
@@ -175,7 +175,7 @@
                             :href="route('user.salary.index')"
                             :class="{
                                 'text-emerald-500':
-                                    $page.url.startsWith('/salary'),
+                                    $page.url.startsWith('/user/salary'),
                             }"
                         >
                             <svg
@@ -346,34 +346,10 @@ export default {
             camera_status.value = "off";
         };
         const onDecode = (token) => {
-            // EDIT LAH INI SESUKA HATIMU DAN HAPUS KOMENTAR INI KALAU SUDAH SELESAI YA MANIEEZ...
-            // if(token.length % 2 != 0){
-            //     console.log(token);
-
-            //     show_reader.value    = false;
-            //     camera_status.value  = "off";
-
-            //     result.value         = "Yippie Berhasil";
-            //     is_success.value     = true
-            //     setTimeout(() => is_success.value = false, 2000);
-            // }else{
-            //     show_reader.value    = false;
-            //     camera_status.value  = "off";
-
-            //     result.value         = "Yahhh Gagal";
-            //     is_failed.value      = true;
-            //     setTimeout(() => is_failed.value = false, 2000);
-            // }
             form.token = token;
             camera_status.value = "off";
             show_reader.value = false;
-            // is_loading.value = true;
             Inertia.post(route("user.presence.store"), form);
-            // show_reader.value    = true;
-            // setTimeout(() => {
-            //     is_loading.value = false;
-            //     show_reader.value = false;
-            // }, 5000);
         };
 
         const onInit = async (promise) => {

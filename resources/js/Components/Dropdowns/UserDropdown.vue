@@ -36,7 +36,7 @@
 import {Link} from '@inertiajs/inertia-vue3';
 import axios from 'axios';
 
-import image from "@/assets/img/team-1-800x800.jpg";
+import image from "@/assets/img/user-avatar.jpg";
 
 export default {
   components: {Link},

@@ -125,11 +125,11 @@ class PresenceController extends Controller
                 $classroom->total_invalid_presence = $classroom->schedule->qrs->sum('invalid_presence_count');
             });
         });
-        dd($psrs, $extrapsrs);
+        // dd($psrs, $extrapsrs);
         return Inertia::render('Presence/Index', [
             'user'  =>  $user,
             'psrs'  =>  $psrs,
-            'extrapsrs'  =>  $extrapsrs,
+            'extraPsrs'  =>  $extrapsrs,
         ]);
     }
 
