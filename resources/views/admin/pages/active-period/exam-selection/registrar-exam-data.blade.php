@@ -113,20 +113,21 @@
                                 0)</small></span>
                     </h6>
                     @endif
-                    <button @disabled(!$psr->answers->contains($question)) type="button"
+                    <button type="button"
+                    {{-- <button @disabled(!$psr->answers->contains($question)) type="button" --}}
                         class="btn btn-sm btn-primary"
                         data-toggle="modal" data-target="#scoreModal_{{ $question->id }}">
                         Ubah Skor
                     </button>
-                    @if(!$psr->answers->contains($question))
+                    @if($psr->answers->contains($question))
                     <div class="modal fade" id="scoreModal_{{ $question->id }}" tabindex="-1" data-backdrop="static"
                         data-keyboard="false" aria-labelledby="scoreModalLabel_{{ $question->id }}" aria-hidden="true">
                         <div class="modal-dialog">
                             <div class="modal-content">
                                 <div class="modal-header">
                                     <h3 class="modal-title font-weight-bold" id="scoreModalLabel_{{ $question->id }}">
-                                        Skor Jawaban Soal
-                                        No.1</h3>
+                                        Skor Jawaban Soal No.1
+                                    </h3>
                                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                         <span aria-hidden="true">&times;</span>
                                     </button>
@@ -138,7 +139,7 @@
                                         <div class="form-group">
                                             <label for="score">Skor</label>
                                             <input type="number" id="score" name="score" class="form-control" required
-                                                autocomplete="off" value="{{ $psr->answers->contains($question) }}"
+                                                autocomplete="off" value="{{ $psr->answers->find($question->id)->pivot->score }}"
                                                 min="0" max="{{ $question->score }}">
                                         </div>
                                     </div>
