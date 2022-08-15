@@ -115,6 +115,7 @@
                     @endif
                     <button type="button"
                     {{-- <button @disabled(!$psr->answers->contains($question)) type="button" --}}
+                        
                         class="btn btn-sm btn-primary"
                         data-toggle="modal" data-target="#scoreModal_{{ $question->id }}">
                         Ubah Skor
