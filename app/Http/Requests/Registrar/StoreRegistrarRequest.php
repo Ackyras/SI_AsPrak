@@ -31,7 +31,7 @@ class StoreRegistrarRequest extends FormRequest
             'cv'            =>  'required|file',
             'khs'           =>  'required|file',
             'transkrip'     =>  'required|file',
-            'subject.*'     =>  'required|max:3'
+            'subject'     =>  'required|max:3|min:1'
         ];
     }
 }

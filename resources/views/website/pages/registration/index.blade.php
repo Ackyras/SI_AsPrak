@@ -26,7 +26,7 @@
                 <div class="relative">
                     <input
                         class="w-full px-2 py-1 font-semibold border border-white lg:py-2 lg:px-3 text-emerald-800 bg-emerald-50 focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
-                        type="text" name="name" id="name" autocomplete="off" required />
+                        type="text" name="name" value="{{ old('name') }}" id="name" autocomplete="off" required />
                     <div id="nameAllowed" class="absolute top-0 right-0 hidden m-1 text-emerald-400 bg-emerald-50">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
@@ -53,7 +53,7 @@
                 <div class="relative">
                     <input
                         class="w-full px-2 py-1 font-semibold border border-white lg:py-2 lg:px-3 text-emerald-800 bg-emerald-50 focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
-                        type="text" name="nim" id="nim" autocomplete="off" required />
+                        type="text" name="nim" value="{{ old('nim') }}" id="nim" autocomplete="off" required />
                     <div id="nimAllowed" class="absolute top-0 right-0 hidden m-1 text-emerald-400 bg-emerald-50">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
@@ -83,7 +83,7 @@
                 <div class="relative">
                     <input
                         class="w-full px-2 py-1 font-semibold border border-white lg:py-2 lg:px-3 text-emerald-800 bg-emerald-50 focus:ring-1 lg:focus:ring-2 focus:border-white focus:ring-emerald-600 focus:ring-opacity-50-emerald-200"
-                        type="email" name="email" id="email" autocomplete="off" required />
+                        type="email" name="email" value="{{ old('email') }}" id="email" autocomplete="off" required />
                     <div id="emailAllowed" class="absolute top-0 right-0 hidden m-1 text-emerald-400 bg-emerald-50">
                         <svg xmlns="http://www.w3.org/2000/svg" class="w-6 h-6" viewBox="0 0 20 20" fill="currentColor">
                             <path fill-rule="evenodd"
