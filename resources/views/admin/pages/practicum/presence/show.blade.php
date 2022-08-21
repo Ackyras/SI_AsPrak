@@ -32,8 +32,13 @@
                             <td style="text-align: center;">{{ $classroom->schedule ?
                                 $classroom->schedule->psrs_count : 0}}</td>
                             <td>
+                                @if ($classroom->schedule)
                                 <a href="{{ route('admin.assistant.presence-show-assistant', [$period_subject, $classroom]) }}"
                                     class="btn btn-sm btn-block btn-success">Lihat Detail</a>
+                                @else
+                                <button disabled="disabled" class="btn btn-sm btn-block btn-secondary">Belum ada
+                                    asisten</button>
+                                @endif
                             </td>
                         </tr>
                         @empty
