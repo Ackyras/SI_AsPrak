@@ -54,7 +54,7 @@
                                 Soal {{ index + 1 }}. <span class="text-gray-500 uppercase font-medium">({{ question.type
                                 }})</span>
                             </p>
-                            <div class="w-full mb-3 border p-4" v-if="question.image">
+                            <div class="w-full lg:w-2/3 lg:m-auto mb-3 border p-4" v-if="question.image">
                                 <img :src="'/storage/'+question.image" alt="" class="w-full h-auto">
                             </div>
                             <p class="mb-3">
@@ -70,18 +70,18 @@
                                 Soal {{ index + 1 }}. <span class="text-gray-500 uppercase font-medium">({{ question.type
                                 }})</span>
                             </p>
-                            <div class="w-full mb-3 border p-4" v-if="question.image">
+                            <div class="w-full lg:w-2/3 lg:m-auto mb-3 border p-4" v-if="question.image">
                                 <img :src="'/storage/'+question.image" alt="" class="w-full h-auto">
                             </div>
                             <p class="mb-3">{{ question.text }}</p>
-                            <div v-for="choice in question.choices" class="mb-2 flex gap-3 items-start" :key="'choice_'+choice.id">
+                            <div v-for="choice in question.choices" class="mb-2 w-full flex gap-3 items-start" :key="'choice_'+choice.id">
                                 <input
                                     class="w-5 h-5 text-emerald-600 bg-emerald-50 border-gray-300 focus:ring-emerald-500"
                                     type="radio" :value="choice.id" :id="'answer_' + question.id + '_' + choice.id " 
                                     :name="'question_' + question.id" @input="choiceSelected($event, index)" />
 
                                 <label :for=" 'answer_' + question.id + '_' +  choice.id  ">
-                                    <div class="w-full mb-2 border p-4" v-if="choice.image">
+                                    <div class="w-full lg:w-2/3 mb-2 border p-4" v-if="choice.image">
                                         <img :src="'/storage/'+choice.image" alt="" class="w-full h-auto">
                                     </div>
                                     {{ choice.text }}
@@ -102,10 +102,42 @@
                         </p>
                     </div>
 
-                    <button type="submit"
+                    <button type="button" v-on:click="showModal"
                         class="block bg-emerald-600 hover:bg-emerald-500 text-white text-base font-bold tracking-wide uppercase py-1 px-2 rounded">
                         SUBMIT
                     </button>
+
+                    <div v-if="show_modal" class="fixed z-[1000] inset-0 bg-gray-600 bg-opacity-50 flex justify-center items-center">
+                        <div class="bg-white p-6 w-[22.5rem] md:w-[23rem] lg:w-[25rem] xl:w-[27.5rem]">
+                            <div class="w-full flex items-center justify-between mb-4">
+                                <p class="text-xl font-bold tracking-wide text-green-600 md:text-2xl">
+                                    Akhiri Ujian
+                                </p>
+                                <button type="button" class="px-3 py-1 text-xl text-gray-600 border rounded" v-on:click="closeModal">
+                                    <i class="fas fa-times"></i>
+                                </button>
+                            </div>
+                            <div class="w-full">
+                                <div class="w-fit m-auto mb-4 text-yellow-300">
+                                    <svg xmlns="http://www.w3.org/2000/svg" class="h-28 w-28" viewBox="0 0 20 20" fill="currentColor">
+                                        <path fill-rule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clip-rule="evenodd" />
+                                    </svg>
+                                </div>
+                                <div class="w-full mb-4 text-center">
+                                    <p class="text-base font-semibold text-gray-600 block m-0 mb-2">Anda yakin untuk menyimpan jawaban anda?</p>
+                                </div>
+
+                                <div class="flex justify-between items-center">
+                                    <button type="button" v-on:click="closeModal" class="py-1 w-36 text-center rounded text-white font-bold text-sm mb-2 bg-gray-400">
+                                        Kembali
+                                    </button>
+                                    <button type="submit" class="py-1 w-36 text-center rounded text-white font-bold text-sm mb-2 bg-emerald-600">
+                                        Submit
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -132,6 +164,15 @@ export default {
         const db_questions = ref(props.period_subject.questions);
 
         const question_id_arr = ref([]);
+
+        const show_modal = ref(false);
+
+        const showModal = () => {
+            show_modal.value = true;
+        };
+        const closeModal = () => {
+            show_modal.value = false;
+        };
 
         const question_errors_stat = ref([]);
         const question_errors_mssg = ref([]);
@@ -245,6 +286,9 @@ export default {
             hours,
             minutes,
             seconds,
+            show_modal,
+            showModal,
+            closeModal
         };
     },
 };
@@ -263,22 +307,3 @@ input[type="file"]::file-selector-button:hover {
     color: white;
 }
 </style>
-
-<!-- PILIHAN BERGANDA -->
-<!-- <card-question v-if="question.type === 'pilihan berganda'" :question-data="question"
-    v-model="form.answers[index]" /> -->
-
-<!-- <div class="flex gap-2">
-    <div>
-        <p>ID Pertanyaan</p>
-        <p v-for="(id, index) in form.questions">
-            {{ index + 1 }}. {{ id }}
-        </p>
-    </div>
-    <div>
-        <p>Jawaban Saat ini</p>
-        <p v-for="(answer, index) in form.answers">
-            {{ index + 1 }}. {{ answer }}
-        </p>
-    </div>
-</div> -->

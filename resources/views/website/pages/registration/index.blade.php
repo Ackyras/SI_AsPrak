@@ -8,14 +8,10 @@
     </div>
     @if ($errors->any())
     <div class="alert alert-danger" role="alert">
-        <ul>
-            @forelse ($errors->all() as $error)
-            <li>{{ $error }}</li>
-            @empty
-            @endforelse
-        </ul>
+        <ul> @foreach ($errors->all() as $error) <li class="text-sm font-bold">{{ $error }}</li> @endforeach </ul>
     </div>
     @endif
+    @include('website.layouts.website-alert')
     <form action="{{ route('website.registration.store', [$period]) }}" enctype="multipart/form-data" method="POST">
         @csrf
         <div class="mb-6" x-data="{
@@ -136,7 +132,8 @@
             </div>
             <!-- CV -->
             <div class="mb-4">
-                <p class="block w-full mb-2 text-lg font-semibold text-gray-500">Curriculum Vitae</p>
+                <p class="block w-full text-lg font-semibold text-gray-500">Curriculum Vitae</p>
+                <small class="block w-full mb-2 font-bold text-gray-400">File PDF, max. 1MB</small>
                 <input type="file" name="cv" id="cv" class="hidden" required />
                 <p id="cvnamecontainer"
                     class="items-center hidden gap-2 px-2 py-1 border-2 w-fit bg-emerald-50 border-emerald-400 text-emerald-600">
@@ -180,7 +177,8 @@
             </div>
             <!-- KHS -->
             <div class="mb-4">
-                <p class="block w-full mb-2 text-lg font-semibold text-gray-500">Kartu Tanda Mahasiswa</p>
+                <p class="block w-full text-lg font-semibold text-gray-500">Kartu Tanda Mahasiswa</p>
+                <small class="block w-full mb-2 font-bold text-gray-400">File PDF, max. 1MB</small>
                 <input type="file" name="khs" id="khs" class="hidden" required />
                 <p id="khsnamecontainer"
                     class="items-center hidden gap-2 px-2 py-1 border-2 w-fit bg-emerald-50 border-emerald-400 text-emerald-600">
@@ -224,7 +222,8 @@
             </div>
             <!-- TRANSKRIP -->
             <div class="mb-4">
-                <p class="block w-full mb-2 text-lg font-semibold text-gray-500">Transkrip Nilai Terbaru</p>
+                <p class="block w-full text-lg font-semibold text-gray-500">Transkrip Nilai Terbaru</p>
+                <small class="block w-full mb-2 font-bold text-gray-400">File PDF, max. 1MB</small>
                 <input type="file" name="transkrip" id="transkrip" class="hidden" required />
                 <p id="transkripnamecontainer"
                     class="items-center hidden gap-2 px-2 py-1 border-2 w-fit bg-emerald-50 border-emerald-400 text-emerald-600">

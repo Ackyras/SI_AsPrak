@@ -23,6 +23,8 @@ $period->name }}.
 
 Diharapkan untuk dapat memberikan kontribusi terbaiknya dalam tanggung jawab sebagai asisten praktikum.
 
+Sekarang anda sudah dapat mendaftarkan jadwal pada website, karena Form Pemilihan Jadwal sudah dibuka.
+
 Pastikan anda selalu memantau perkembangan Jadwal Praktikum yang akan anda ampu, dan menggunakan fitur presensi yang
 tersedia pada website [Laboratorium Multimedia ITERA]({{ route('login') }})
 

@@ -79,7 +79,7 @@ class LabAssistantController extends Controller
                 $period_subject->lab_assistant_count = $total_lab_assistant;
                 return $period_subject;
             })
-            // ->dd()
+            ->dd()
             //
         ;
         return view('admin.pages.practicum.presence.index', compact('period', 'period_subjects'));

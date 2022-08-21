@@ -54,7 +54,8 @@
                                         </p>
                                     @else
                                     <p class="d-block m-0">
-                                        {{ $classroom->schedule->psrs_count }} /  {{ $classroom->schedule->number_of_lab_assistant }}
+                                        {{ $classroom->schedule->psrs_count }} / {{ $classroom->schedule->number_of_lab_assistant }}
+                                        @dump($classroom)
                                         @if ($classroom->schedule->psrs_count > $classroom->schedule->number_of_lab_assistant)
                                             <span class="ml-2 text-danger"><i class="fas fa-times-circle"></i></span>
                                         @elseif ($classroom->schedule->psrs_count < $classroom->schedule->number_of_lab_assistant)

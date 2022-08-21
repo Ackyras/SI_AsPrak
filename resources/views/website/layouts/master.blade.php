@@ -36,14 +36,14 @@
 
     @include('website.layouts.navigation')
 
-    <div class="absolute top-12 lg:top-14 w-full min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-3.5rem)] relative p-[10px] lg:py-[16px]">
+    <div class="absolute top-12 lg:top-14 w-full min-h-[calc(100vh-3rem)] lg:min-h-[calc(100vh-3.5rem)] p-[10px] lg:py-[16px]">
         <div class="fixed w-full h-screen bg-[url('/images/CPS.png')] bg-cover bg-center top-0 left-0"></div>
-        @include('website.layouts.alert')
+        
         @yield('content')
     </div>
 
-    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js"
-        integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.6.0.slim.min.js" integrity="sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=" crossorigin="anonymous"></script>
+    <script src="{{ asset('js/flowbite.js') }}"></script>
 
 
     @yield('scripts')
