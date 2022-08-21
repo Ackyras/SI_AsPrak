@@ -29,7 +29,8 @@
                         @forelse ($period_subject->classrooms as $classroom)
                         <tr>
                             <td tabindex="0">Kelas {{ $classroom->name }}</td>
-                            <td style="text-align: center;">{{ $classroom->schedule->psrs_count }}</td>
+                            <td style="text-align: center;">{{ $classroom->schedule ?
+                                $classroom->schedule->psrs_count : 0}}</td>
                             <td>
                                 <a href="{{ route('admin.assistant.presence-show-assistant', [$period_subject, $classroom]) }}"
                                     class="btn btn-sm btn-block btn-success">Lihat Detail</a>
