@@ -74,12 +74,12 @@ class LabAssistantController extends Controller
                 $total_lab_assistant = 0;
                 // $total_lab_assistant = $period_subject->classrooms->sum('schedule.psrs_count');
                 foreach ($period_subject->classrooms as $classroom) {
-                    $total_lab_assistant += $classroom->schedule->psrs_count;
+                    if ($classroom->schedule)
+                        $total_lab_assistant += $classroom->schedule->psrs_count;
                 }
                 $period_subject->lab_assistant_count = $total_lab_assistant;
                 return $period_subject;
             })
-            // ->dd()
             //
         ;
         return view('admin.pages.practicum.presence.index', compact('period', 'period_subjects'));
@@ -175,9 +175,11 @@ class LabAssistantController extends Controller
     {
         $period_subject->load(
             [
-                'classrooms.schedule' => function ($query) {
-                    $query->withCount('psrs');
-                },
+                'classrooms' => [
+                    'schedule' => function ($query) {
+                        $query->withCount('psrs');
+                    },
+                ]
             ]
         );
         return view('admin.pages.practicum.presence.show', compact('period_subject'));

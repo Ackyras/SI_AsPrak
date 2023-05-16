@@ -412,7 +412,7 @@
                         </div>
                     </div>
                     <div class="form-group">
-                        <label for="choice.text.0">Opsi A(jawaban benar)</label>
+                        <label for="choice.text.0">Opsi A (<span class="font-weight-bold text-success">INI AKAN MENJADI JAWABAN BENAR</span>)</label>
                         <div class="form-group">
                             <div class="mb-3 input-group">
                                 <input type="hidden" name="choice[option][0]" value="a">

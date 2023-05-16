@@ -131,6 +131,7 @@ class ScheduleController extends Controller
             ]
         );
         $validated['classroom_id'] = $classroom->id;
+        // dd($validated);
         $schedule = Schedule::create($validated);
         if ($schedule) {
             return back()->with(

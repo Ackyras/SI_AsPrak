@@ -30,6 +30,7 @@ class RegistrationController extends Controller
     public function store(StoreRegistrarRequest $request, Period $period)
     {
         $validated = $request->validated();
+        // dd($request->all());
         // dd($validated);
         $oldRegistrar = Registrar::query()
             ->whereRelation('period_subjects', 'period_id', $period->id)
@@ -50,7 +51,6 @@ class RegistrationController extends Controller
         );
         $transkrip = $request->file('transkrip');
         $transkripFileName = $validated['nim'] . '_transkrip_' . $transkrip->hashName() . $transkrip->extension();
-        // dd($transkripFileName);
 
         $storetranskrip = Storage::disk('public')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
@@ -59,21 +59,11 @@ class RegistrationController extends Controller
         );
         $khs = $request->file('khs');
         $khsFileName = $validated['nim'] . '_khs_' . $khs->hashName() . $cv->extension();
-        // dd($khsFileName);
 
         $storekhs = Storage::disk('public')->putFileAs(
             'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
             $khs,
             $khsFileName
-        );
-        $transkrip = $request->file('transkrip');
-        $transkripFileName = $validated['nim'] . '_transkrip_' . $transkrip->hashName() . $cv->extension();
-        // dd($transkripFileName);
-
-        $storetranskrip = Storage::disk('public')->putFileAs(
-            'period/' . $period->id . '/registrar/' . $validated['nim'] . '/',
-            $transkrip,
-            $transkripFileName
         );
         $validated['cv'] = $storecv;
         $validated['khs'] = $storekhs;
@@ -81,8 +71,10 @@ class RegistrationController extends Controller
 
 
         $registrar = Registrar::create($validated);
-        foreach ($validated['subject'] as $subject) {
-            $registrar->period_subjects()->attach($subject);
+        if (isset($validated['subject'])) {
+            foreach ($validated['subject'] as $subject) {
+                $registrar->period_subjects()->attach($subject);
+            }
         }
         return to_route('website.registration.index', $period)->with(['success' => 'Anda berhasil mendaftar']);
         // return view('website.registration.register', compact('period'));

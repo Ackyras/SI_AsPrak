@@ -23,9 +23,12 @@ class UserDashboardController extends Controller
         // dd($user);
         $user->load(['period_subjects']);
         // dd(Session::all());
+        
+        $period = Period::firstWhere('is_active', true);
         return Inertia::render('Dashboard', [
-            'user'  =>  $user
-        ])->with('alert', ['msg' => 'Welcome back,' . $user->name, 'status' => 'success']);
+            'user'  =>  $user,
+            'period' => $period
+        ]);
     }
 
     public function scheduleIndex()
